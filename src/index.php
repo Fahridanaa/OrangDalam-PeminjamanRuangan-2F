@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-header('login.php');
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+
+include 'login.php';
+?>
