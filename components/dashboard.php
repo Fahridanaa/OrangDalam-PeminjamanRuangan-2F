@@ -9,6 +9,7 @@
   <link rel="icon" type="image/x-icon" href="../icon/favicon.ico" />
   <style>
   #option select {
+    appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
   }
