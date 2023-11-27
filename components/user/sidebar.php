@@ -86,7 +86,7 @@
           </a>
         </li>
         <li class="p-5 flex items-center justify-center">
-          <a class="rounded-md group cursor-pointer">
+          <a class="rounded-md group cursor-pointer" href="../../function/logout.php">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="w-6 h-6 fill-white hover:fill-fourth-color">
               <path fill-rule="evenodd"

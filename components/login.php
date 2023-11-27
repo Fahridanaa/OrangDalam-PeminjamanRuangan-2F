@@ -26,7 +26,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
       style="background-color: #2e4374">
       <div class="w-11/12 py-6 md:px-4 lg:w-full z-20 bg-white rounded-2xl flex gap-5 flex-col">
         <h1 class="mt-14 text-4xl text-text-color">Login</h1>
-        <form action="cek_login.php" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+        <form action="../function/cek_login.php" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
           <div class="pb-2 pt-4 text-left">
             <label class="text-text-color"> NIM/NIP </label>
             <input type="text" name="id" id="id" placeholder="Masukkan NIM/NIP..."

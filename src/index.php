@@ -2,5 +2,5 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 
-include 'login.php';
+include '../components/login.php';
 ?>

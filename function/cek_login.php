@@ -1,4 +1,4 @@
 <?php
-header("location: ../components/dashboard.php")
+header("location: ../components/user/dashboard.php")
 
 ?>
