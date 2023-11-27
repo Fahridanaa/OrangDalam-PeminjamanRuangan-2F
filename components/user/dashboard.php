@@ -8,15 +8,15 @@
   <link href="../../dist/output.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="../icon/favicon.ico" />
   <style>
-  #option select {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-  }
+    #option select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+    }
 
-  #option select::-ms-expand {
-    display: none;
-  }
+    #option select::-ms-expand {
+      display: none;
+    }
   </style>
   <title>Dashboard</title>
 </head>
@@ -42,8 +42,7 @@
           <input type="date" name="tanggal" id="tanggal" class="py-3 pl-8 pr-5 rounded-lg border border-primary-color">
         </div>
       </div>
-      <div id="denah"
-        class="bg-[#E3E3E3] flex justify-between mx-auto gap-8 px-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025]">
+      <div id="denah" class="bg-[#E3E3E3] flex justify-between mx-auto gap-8 px-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025]">
         <?php
         $lantai7 = array(
           array(
