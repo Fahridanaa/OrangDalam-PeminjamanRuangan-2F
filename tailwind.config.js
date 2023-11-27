@@ -16,6 +16,10 @@ module.exports = {
 				'disable-color': 'var(--disable-color)',
 				'noFocus-color': 'var(--noFocus-color)',
 			},
+			backgroundImage: {
+				grapol: 'url(../assets/img/grapol.png)',
+				gedung: 'url(../assets/img/gedung.png)',
+			},
 		},
 	},
 	plugins: [],
