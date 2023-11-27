@@ -23,7 +23,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 
 <body>
   <div id="container" class="min-h-screen bg-grapol bg-cover bg-no-repeat flex flex-col justify-center">
-    <section class="flex text-white w-3/5 rounded-2xl overflow-hidden mx-auto">
+    <section class="flex text-white w-3/5 rounded-3xl overflow-hidden mx-auto">
       <div class="lg:flex lg:w-3/4 bg-gedung bg-no-repeat bg-center bg-cover relative items-center">
       </div>
       <div class="lg:w-1/2 flex-auto w-1/4 px-4 py-44 flex z-0 bg-neutral-color flex-col justify-center">
