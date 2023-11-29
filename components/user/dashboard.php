@@ -8,15 +8,15 @@
   <link href="../../dist/output.css" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="../icon/favicon.ico" />
   <style>
-    #option select {
-      appearance: none;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-    }
+  #option select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 
-    #option select::-ms-expand {
-      display: none;
-    }
+  #option select::-ms-expand {
+    display: none;
+  }
   </style>
   <title>Dashboard</title>
 </head>
@@ -42,7 +42,8 @@
           <input type="date" name="tanggal" id="tanggal" class="py-3 pl-8 pr-5 rounded-lg border border-primary-color">
         </div>
       </div>
-      <div id="denah" class="bg-[#E3E3E3] flex justify-between mx-auto gap-8 px-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025]">
+      <div id="denah"
+        class="bg-[#E3E3E3] flex justify-between mx-auto gap-8 px-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border-2 border-fourth-color">
         <?php
         $lantai7 = array(
           array(
@@ -104,7 +105,20 @@
         }
         ?>
       </div>
-      <div id="indikator"></div>
+      <div id="indikator" class="flex mx-auto mt-10 w-4/5 gap-8">
+        <div id="kosong" class="flex items-center gap-2">
+          <div class="rounded-full bg-disable-color w-5 h-5"></div>
+          <span class="font-bold">Kosong</span>
+        </div>
+        <div id="digunakan" class="flex items-center gap-2">
+          <div class="rounded-full bg-danger-color w-5 h-5"></div>
+          <span class="font-bold">Digunakan</span>
+        </div>
+        <div id="terbooking" class="flex items-center gap-2">
+          <div class="rounded-full bg-warn-color w-5 h-5"></div>
+          <span class="font-bold">Terbooking</span>
+        </div>
+      </div>
     </div>
 </body>
 
