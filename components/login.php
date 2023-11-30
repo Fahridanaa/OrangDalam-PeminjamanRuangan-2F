@@ -30,7 +30,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
         <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
         <div class=" py-6 lg:w-full z-20 bg-neutral-color rounded-2xl flex gap-2 flex-col">
           <h1 class="font-semibold text-2xl text-text-color">Login</h1>
-          <form action="cek_login.php" class="w-full ">
+          <form action="../function/cek_login.php" class="w-full ">
             <div class="pb-2 text-left">
               <label class="text-text-color"> NIM/NIP </label>
               <input type="text" name="id" id="id" placeholder="Masukkan NIM/NIP..."
