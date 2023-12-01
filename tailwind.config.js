@@ -20,6 +20,9 @@ module.exports = {
 				grapol: 'url(../assets/img/grapol.png)',
 				gedung: 'url(../assets/img/gedung.png)',
 			},
+			fontFamily: {
+				'Plus Jakarta Sans': ['Plus Jakarta Sans','sans-serif'],
+			},
 		},
 	},
 	plugins: [],
