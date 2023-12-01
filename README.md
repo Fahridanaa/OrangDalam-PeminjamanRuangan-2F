@@ -24,6 +24,15 @@ Sebelum menggunakan projek ini, diperlukanya:
    ```sh
    composer install
    ```
+4. Install komponen yang diperlukan menggunakan npm
+   ```sh
+   npm install
+   ```
+
+### Beberapa shortcut pada terminal
+
+- `composer run-script serve` untuk menjalankan server
+- `npm run tailwind` untuk menjalankan tailwind
 
 ### Don't
 
