@@ -8,11 +8,11 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="../dist/output.css" rel="stylesheet" />
-  <link rel="icon" type="image/x-icon" href="../icon/favicon.ico" />
+  <link href="../../../public/css/output.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="../../../public/icon/favicon.ico" />
   <style>
   #container {
-    background-image: url("../assets/img/grapol.png");
+    background-image: url("../../../public/img/grapol.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -30,7 +30,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
         <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
         <div class=" py-6 lg:w-full z-20 bg-neutral-color rounded-2xl flex gap-2 flex-col">
           <h1 class="font-semibold text-2xl text-text-color">Login</h1>
-          <form action="../function/cek_login.php" class="w-full ">
+          <form action="../../../function/cek_login.php" class="w-full ">
             <div class="pb-2 text-left">
               <label class="text-text-color"> NIM/NIP </label>
               <input type="text" name="id" id="id" placeholder="Masukkan NIM/NIP..."
