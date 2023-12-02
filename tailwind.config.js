@@ -17,11 +17,11 @@ module.exports = {
 				'noFocus-color': 'var(--noFocus-color)',
 			},
 			backgroundImage: {
-				grapol: 'url(../assets/img/grapol.png)',
-				gedung: 'url(../assets/img/gedung.png)',
+				grapol: 'url(/public/img/grapol.png)',
+				gedung: 'url(/public/img/gedung.png)',
 			},
 			fontFamily: {
-				'Plus Jakarta Sans': ['Plus Jakarta Sans','sans-serif'],
+				'Plus Jakarta Sans': ['Plus Jakarta Sans', 'sans-serif'],
 			},
 		},
 	},

@@ -18,24 +18,14 @@ class AuthController {
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $level = $_POST['level'];
 
         $status = $this->authModel->cekLogin($username, $password);
 
         if ($status) {
-            $_SESSION['level'] = $level;
-
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit();
         } else {
-            $this->setPesan("Otentikasi gagal. Coba lagi.");
-
             $this->showLoginForm();
         }
-    }
-
-    private function setPesan($pesan): void
-    {
-        $_SESSION['pesan'] = $pesan;
     }
 }

@@ -1335,7 +1335,7 @@ video {
 }
 
 .bg-gedung {
-  background-image: url(../assets/img/gedung.png);
+  background-image: url(/public/img/gedung.png);
 }
 
 .bg-gradient-to-r {
@@ -1343,7 +1343,7 @@ video {
 }
 
 .bg-grapol {
-  background-image: url(../assets/img/grapol.png);
+  background-image: url(/public/img/grapol.png);
 }
 
 .from-cyan-400 {
