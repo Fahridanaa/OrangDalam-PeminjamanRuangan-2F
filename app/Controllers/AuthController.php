@@ -1,31 +1,37 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
-use OrangDalam\PeminjamanRuangan\Models\AuthModel;
-class AuthController {
-    private AuthModel $authModel;
+use OrangDalam\PeminjamanRuangan\Core\Controller;
+
+class AuthController extends Controller {
+    private $authModel;
 
     public function __construct() {
-        $this->authModel = new AuthModel();
+        $this->authModel = $this->model('AuthModel');
     }
 
     public function showLoginForm(): void
     {
-        include '../Views/shared/login.php';
+        $this->view('shared/login');
     }
 
     public function processLogin(): void
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
 
         $status = $this->authModel->cekLogin($username, $password);
 
         if ($status) {
-            header('Location: dashboard.php');
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $status['role'];
+
+            header('Location: /');
             exit();
         } else {
             $this->showLoginForm();
         }
+
     }
+
 }

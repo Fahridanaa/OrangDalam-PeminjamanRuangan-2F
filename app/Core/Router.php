@@ -1,6 +1,6 @@
 <?php
 
-namespace OrangDalam\PeminjamanRuangan\App;
+namespace OrangDalam\PeminjamanRuangan\Core;
 
 class Router
 {
