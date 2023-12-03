@@ -1,16 +1,9 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Core;
 
+use OrangDalam\PeminjamanRuangan\Models\AuthModel;
+
 class Controller {
-    protected function model($model) {
-        $modelPath = __DIR__ . '/../Models/' . $model . '.php';
-
-        if (file_exists($modelPath)) {
-            require_once $modelPath;
-
-            return new $model;
-        }
-    }
 
     protected function view($view, $data = []) {
         $viewPath = __DIR__ . '/../Views/' . $view . '.php';

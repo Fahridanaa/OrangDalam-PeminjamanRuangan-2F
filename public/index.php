@@ -10,7 +10,7 @@ session_start();
 Router::add("GET", "/", DashboardController::class, "showDashboard");
 Router::add("GET", "/login", AuthController::class, "showLoginForm");
 Router::add("POST", "/login", AuthController::class, "processLogin");
-
+Router::add("GET", "/logout", AuthController::class, "logout");
 Router::run();
 
 ?>
