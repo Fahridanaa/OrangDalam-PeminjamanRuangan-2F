@@ -30,7 +30,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
         <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
         <div class=" py-6 lg:w-full z-20 bg-neutral-color rounded-2xl flex gap-2 flex-col">
           <h1 class="font-semibold text-2xl text-text-color">Login</h1>
-          <form method="POST" action="" class="w-full ">
+          <form method="POST" class="w-full ">
             <div class="pb-2 text-left">
               <label class="text-text-color"> NIM/NIP </label>
               <input type="text" name="username" id="username" placeholder="Masukkan NIM/NIP..." class="block w-full p-4 text-lg rounded-xl text-text-color border border-fourth-color mt-2" required/>

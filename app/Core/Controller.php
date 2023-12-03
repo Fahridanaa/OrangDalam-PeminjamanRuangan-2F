@@ -2,14 +2,11 @@
 namespace OrangDalam\PeminjamanRuangan\Core;
 
 class Controller {
-    protected function model($model)
-    {
+    protected function model($model) {
         $modelPath = __DIR__ . '/../Models/' . $model . '.php';
 
         if (file_exists($modelPath)) {
             require_once $modelPath;
-
-            $model = 'OrangDalam\PeminjamanRuangan\Models\\' . $model;
 
             return new $model;
         }

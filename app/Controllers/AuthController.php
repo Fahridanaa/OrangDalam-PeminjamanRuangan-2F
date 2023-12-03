@@ -6,8 +6,9 @@ use OrangDalam\PeminjamanRuangan\Core\Controller;
 class AuthController extends Controller {
     private $authModel;
 
-    public function __construct() {
-        $this->authModel = $this->model('AuthModel');
+    public function __construct()
+    {
+        $this->authModel = new \OrangDalam\PeminjamanRuangan\Models\AuthModel();
     }
 
     public function showLoginForm(): void
@@ -19,14 +20,14 @@ class AuthController extends Controller {
     {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
-
         $status = $this->authModel->cekLogin($username, $password);
+
 
         if ($status) {
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $status['role'];
+            $_SESSION['role'] = 'user';
 
-            header('Location: /');
+            header('Location: /public/');
             exit();
         } else {
             $this->showLoginForm();
