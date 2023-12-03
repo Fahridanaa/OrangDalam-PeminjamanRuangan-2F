@@ -2,12 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href='/css/output.css' rel="stylesheet"/>
-    <link rel="icon" type="image/x-icon" href="/icon/favicon.ico"/>
-    <title>Inbox</title>
+    <?php include __DIR__ . '/../shared/head.php'; ?>
 </head>
-
+<body>
+<div id="Inbox" class="h-screen flex flex-row">
+    <?php include 'sidebar.php'; ?>
+    <div id="Inbox-content" class="h-screen w-screen py-20">
+        <div id="header" class="px-8">
+            <h1 class="text-4xl font-semibold mb-6">Inbox Pesan</h1>
+            <hr class="border border-black">
+        </div>
+    </div>
+</div>
+</body>
 </html>

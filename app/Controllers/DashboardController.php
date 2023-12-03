@@ -42,7 +42,7 @@ class DashboardController extends Controller
             exit();
         }
 
-        echo "MASIH PROGRESS KAK :D";
+        $this->view('user/inbox');
     }
 
     public function ShowHistoryPage(): void
@@ -52,6 +52,6 @@ class DashboardController extends Controller
             exit();
         }
 
-        echo "MASIH PROGRESS KAK :D";
+        $this->view('user/history');
     }
 }

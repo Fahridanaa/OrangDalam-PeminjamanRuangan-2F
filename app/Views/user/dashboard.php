@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body class="h-screen overflow-hidden" style="background: #edf2f7;">
+<body class="h-screen overflow-hidden">
 <div id="dashboard" class="h-screen flex flex-row">
     <?php include 'sidebar.php'; ?>
     <div id="dashboard-content" class="h-screen w-screen py-20">

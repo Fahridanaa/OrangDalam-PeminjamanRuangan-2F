@@ -1,17 +1,17 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Core;
 
 use OrangDalam\PeminjamanRuangan\Models\AuthModel;
 
-class Controller {
+class Controller
+{
 
-    protected function view($view, $data = []) {
+    protected function view($view, $data = [])
+    {
         $viewPath = __DIR__ . '/../Views/' . $view . '.php';
+        extract($data);
+        include $viewPath;
 
-        if (file_exists($viewPath)) {
-            extract($data);
-
-            include $viewPath;
-        }
     }
 }
