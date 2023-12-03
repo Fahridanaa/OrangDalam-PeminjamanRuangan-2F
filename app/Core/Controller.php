@@ -12,6 +12,5 @@ class Controller
         $viewPath = __DIR__ . '/../Views/' . $view . '.php';
         extract($data);
         include $viewPath;
-
     }
 }

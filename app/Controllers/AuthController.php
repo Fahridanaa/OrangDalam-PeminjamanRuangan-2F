@@ -12,6 +12,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->authModel = new AuthModel();
+
     }
 
     public function showLoginForm(): void
@@ -31,6 +32,7 @@ class AuthController extends Controller
             $_SESSION['role'] = 'user';
 
             header('Location: /dashboard');
+
             exit();
         } else {
             $this->showLoginForm();
