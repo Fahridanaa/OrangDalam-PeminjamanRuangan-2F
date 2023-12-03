@@ -27,7 +27,7 @@ class AuthController extends Controller {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = 'user';
 
-            header('Location: /public/');
+            header('Location: /');
             exit();
         } else {
             $this->showLoginForm();

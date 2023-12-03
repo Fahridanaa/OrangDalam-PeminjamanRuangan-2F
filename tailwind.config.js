@@ -16,10 +16,6 @@ module.exports = {
 				'disable-color': 'var(--disable-color)',
 				'noFocus-color': 'var(--noFocus-color)',
 			},
-			backgroundImage: {
-				grapol: 'url(/public/img/grapol.png)',
-				gedung: 'url(/public/img/gedung.png)',
-			},
 			fontFamily: {
 				'Plus Jakarta Sans': ['Plus Jakarta Sans', 'sans-serif'],
 			},
