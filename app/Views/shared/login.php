@@ -44,7 +44,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
                                required/>
                     </div>
                     <div class="pb-2 pt-4">
-                        <button class="block w-full p-4 text-lg rounded-md bg-primary-color hover:bg-[#263861]"
+                        <button class="block w-full p-4 text-lg rounded-md bg-third-color hover:bg-[#263861]"
                                 type="submit">
                             Login
                         </button>

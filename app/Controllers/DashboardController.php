@@ -31,6 +31,7 @@ class DashboardController extends Controller
             header('Location: /login');
             exit();
         }
+        $category = $_GET['category'] ?? 'default';
 
         $this->view('user/pinjam');
     }
@@ -53,5 +54,15 @@ class DashboardController extends Controller
         }
 
         $this->view('user/history');
+    }
+
+    public function ShowRequestPage(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        $this->view('user/konfirmasiRuangan');
     }
 }
