@@ -9,7 +9,11 @@ class AuthModel {
 
     private function verifikasiKredensial($username, $password): bool
     {
-        $dataPengguna = []; //data dari database
+        $dataPengguna = [
+            'username' => 'user',
+            'password' => 'user',
+            'role' => 'user'
+        ];
 
         return ($username === $dataPengguna['username'] && $password === $dataPengguna['password']);
     }

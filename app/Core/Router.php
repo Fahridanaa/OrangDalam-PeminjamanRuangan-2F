@@ -1,6 +1,6 @@
 <?php
 
-namespace OrangDalam\PeminjamanRuangan\App;
+namespace OrangDalam\PeminjamanRuangan\Core;
 
 class Router
 {
@@ -16,7 +16,7 @@ class Router
     }
 
     public static function run():void {
-        $path = "/login";
+        $path = "/";
 
         if(isset($_SERVER["PATH_INFO"])) $path = $_SERVER["PATH_INFO"];
         $method = $_SERVER["REQUEST_METHOD"];
