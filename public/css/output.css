@@ -1334,16 +1334,8 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
-.bg-gedung {
-  background-image: url(/public/img/gedung.png);
-}
-
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-grapol {
-  background-image: url(/public/img/grapol.png);
 }
 
 .from-cyan-400 {

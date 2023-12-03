@@ -1,13 +1,18 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
-class DashboardController extends Controller {
-    private function loginCheck() :bool {
+
+class DashboardController extends Controller
+{
+    private function loginCheck(): bool
+    {
         return isset($_SESSION['username']);
     }
 
-    public function showDashboard () :void {
+    public function showDashboard(): void
+    {
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();
@@ -20,7 +25,8 @@ class DashboardController extends Controller {
         }
     }
 
-    public function showPinjamPage() :void {
+    public function showPinjamPage(): void
+    {
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();
@@ -29,5 +35,23 @@ class DashboardController extends Controller {
         $this->view('user/pinjam');
     }
 
+    public function showInboxPage(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
 
+        echo "MASIH PROGRESS KAK :D";
+    }
+
+    public function ShowHistoryPage(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        echo "MASIH PROGRESS KAK :D";
+    }
 }

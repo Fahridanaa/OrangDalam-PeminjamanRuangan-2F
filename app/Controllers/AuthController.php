@@ -1,10 +1,12 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\AuthModel;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
     private AuthModel $authModel;
 
     public function __construct()
@@ -28,7 +30,7 @@ class AuthController extends Controller {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = 'user';
 
-            header('Location: /');
+            header('Location: /dashboard');
             exit();
         } else {
             $this->showLoginForm();
@@ -36,7 +38,8 @@ class AuthController extends Controller {
 
     }
 
-    public function logout(): void {
+    public function logout(): void
+    {
         session_destroy();
         session_start();
         header("Location: /login");
