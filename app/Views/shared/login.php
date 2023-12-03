@@ -6,16 +6,21 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 <html lang="en" class="h-full bg-white">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="../../../public/css/output.css" rel="stylesheet" />
-  <link rel="icon" type="image/x-icon" href="../../../public/icon/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='/css/output.css' rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/icon/favicon.ico" />
   <style>
     #container {
-      background-image: url("../../../public/img/grapol.png");
+      background-image: url("/img/grapol.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
+    }
+
+    #gedung {
+        background-image: url("/img/gedung.png");
     }
   </style>
   <title>Login</title>
@@ -24,7 +29,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 <body>
   <div id="container" class="min-h-screen bg-grapol bg-cover bg-no-repeat flex flex-col justify-center">
     <section class="flex text-white w-3/5 rounded-3xl overflow-hidden mx-auto">
-      <div class="lg:flex lg:w-3/4 bg-gedung bg-no-repeat bg-center bg-cover relative items-center">
+      <div class="lg:flex lg:w-3/4 bg-gedung bg-no-repeat bg-center bg-cover relative items-center" id="gedung">
       </div>
       <div class="lg:w-1/2 flex-auto w-1/4 px-4 py-44 flex z-0 bg-neutral-color flex-col justify-center">
         <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
