@@ -17,5 +17,3 @@ class Jurusan
         return $this->db->resultSet();
     }
 }
-
-$jurusan = new Jurusan();
