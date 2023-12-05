@@ -20,6 +20,12 @@ module.exports = {
                 'Plus Jakarta Sans': ['Plus Jakarta Sans', 'sans-serif'],
             },
         },
+        screens: {
+            'md': {'min': '768px', 'max': '1023px'},
+            'lg': {'min': '1024px', 'max': '1439px'},
+            'xl': {'min': '1440px', 'max': '2559px'},
+            '2xl': {'min': '2560px'},
+        },
     },
     plugins: [],
 };
