@@ -22,11 +22,13 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 </head>
 
 <body>
-<div id="container" class="min-h-screen bg-cover bg-no-repeat flex flex-col justify-center md:p-16">
-    <section class="flex text-white sm:w-4/5 2xl:w-3/5 rounded-3xl overflow-hidden sm:mx-auto">
-        <div class="lg:flex lg:w-3/4 bg-no-repeat bg-center bg-cover relative items-center" id="gedung">
+<div class="bg-black h-screen w-screen absolute opacity-30"></div>
+<div id="container" class="min-h-screen bg-cover bg-no-repeat flex flex-col justify-center p-16 2xl:px-64 xl:px-32">
+    <section class="flex text-white rounded-3xl overflow-hidden z-20 justify-center">
+        <div class="xl:flex xl:w-6/12 2xl:flex 2xl:w-6/12 bg-no-repeat bg-center bg-cover relative items-center"
+             id="gedung">
         </div>
-        <div class="lg:w-1/2 flex-auto w-1/4 px-4 py-44 flex z-0 bg-neutral-color flex-col justify-center">
+        <div class="2xl:w-3/12 xl:w-3/12 py-64 px-4 flex bg-neutral-color flex-col justify-center">
             <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
             <div class=" py-6 lg:w-full z-20 bg-neutral-color rounded-2xl flex gap-2 flex-col">
                 <h1 class="font-semibold text-2xl text-text-color">Login</h1>
