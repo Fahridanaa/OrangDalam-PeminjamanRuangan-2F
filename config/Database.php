@@ -21,17 +21,13 @@ class Database {
 
     public function __construct()
     {
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->name;
-
-        $option = [
-            PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ];
+        $dsn = "mysql:host=$this->host;dbname=$this->name";
 
         try {
-            $this->conn = new PDO($dsn, $this->user, $this->pass, $option);
+            $this->conn = new PDO($dsn, $this->user, $this->pass);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $err) {
-            die($err->getMessage());
+            echo "Connection failed: " . $err->getMessage();
         }
     }
 

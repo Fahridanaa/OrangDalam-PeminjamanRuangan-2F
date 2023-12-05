@@ -15,7 +15,7 @@ class Jurusan
     }
 
     public function getJurusan() {
-        $this->db->query("SELECT * FROM " . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 }
