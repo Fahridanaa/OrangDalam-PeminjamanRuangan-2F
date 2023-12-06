@@ -12,7 +12,6 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->authModel = new AuthModel();
-
     }
 
     public function showLoginForm(): void
