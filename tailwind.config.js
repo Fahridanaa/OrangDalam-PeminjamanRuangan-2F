@@ -17,7 +17,7 @@ module.exports = {
                 'noFocus-color': 'var(--noFocus-color)',
             },
             fontFamily: {
-                'Plus Jakarta Sans': ['Plus Jakarta Sans', 'sans-serif'],
+                'plus-jakarta-sans': ['Plus Jakarta Sans', 'sans-serif'],
             },
         },
         screens: {

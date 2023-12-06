@@ -1,19 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@font-face {
+    font-family: plus-jakarta-sans;
+    src: local(''),
+    url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap') format('woff2'),
+    url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap') format('woff');
+}
 
 :root {
-  --primary-color: #2E4374;
-  --secondary-color: #E5C3A6;
-  --third-color: #4B527E;
-  --fourth-color: #7C81AD;
-  --select-color: #20F035;
-  --warn-color: #FFCC00;
-  --danger-color: #B91C1C;
-  --text-color: #090D17;
-  --neutral-color: #F8F8F8;
-  --disable-color: #333333;
-  --noFocus-color: #4B527E;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+    --primary-color: #2E4374;
+    --secondary-color: #E5C3A6;
+    --third-color: #4B527E;
+    --fourth-color: #7C81AD;
+    --select-color: #20F035;
+    --warn-color: #FFCC00;
+    --danger-color: #B91C1C;
+    --text-color: #090D17;
+    --neutral-color: #F8F8F8;
+    --disable-color: #333333;
+    --noFocus-color: #4B527E;
+    font-family: plus-jakarta-sans, sans-serif;
 }
