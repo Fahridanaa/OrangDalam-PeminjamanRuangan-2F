@@ -23,9 +23,13 @@ class Database {
     {
         $dsn = "mysql:host=$this->host;dbname=$this->name";
 
+        $option = [
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ];
+
         try {
-            $this->conn = new PDO($dsn, $this->user, $this->pass);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn = new PDO($dsn, $this->user, $this->pass, $option);
         } catch (PDOException $err) {
             echo "Connection failed: " . $err->getMessage();
         }
