@@ -12,6 +12,7 @@
             <h1 class="text-4xl font-semibold mb-6">Inbox Pesan</h1>
             <hr class="border border-black">
         </div>
+
     </div>
 </div>
 </body>

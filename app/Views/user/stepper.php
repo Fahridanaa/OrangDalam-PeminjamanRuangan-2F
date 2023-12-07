@@ -1,8 +1,8 @@
 <div class="container mx-auto p-16">
     <div class="w-11/12 lg:w-2/6 mx-auto">
         <div class="bg-gray-200 h-1 flex items-center justify-between">
-            <div class="w-1/3 bg-fourth-color h-1 flex items-center justify-start group">
-                <div class="bg-third-color rounded-full shadow flex items-center justify-center p-4">
+            <div class="w-1/3 bg-fourth-color h-1 flex items-center justify-start">
+                <div class="bg-third-color rounded-full shadow flex items-center justify-center p-4 group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-6 h-6 text-neutral-color">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -20,8 +20,8 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/3 bg-fourth-color h-1 flex items-center group">
-                <div class="bg-fourth-color rounded-full shadow flex items-center justify-center p-4">
+            <div class="w-1/3 bg-fourth-color h-1 flex items-center">
+                <div class="bg-fourth-color rounded-full shadow flex items-center justify-center p-4 group">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-neutral-color" fill="none"
                          viewBox="0 0 24 24"
                          stroke="currentColor" stroke-width="2">
