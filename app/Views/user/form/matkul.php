@@ -22,19 +22,45 @@
             </div>
             <div class="flex gap-24">
                 <div class="flex flex-col gap-2">
-                    <span>Jam Mulai</span>
-                    <input type="number" placeholder="Input jam mulai acara.."
-                           class="px-4 py-2 rounded-lg border border-primary-color" required>
+                    <span>Jam Mulai Matkul</span>
+                    <select name="lantai" id="lantai"
+                            class="pr-24 pl-8 py-3 rounded-lg border border-primary-color"
+                            title="Lantai" required>
+                        <option selected disabled hidden>Jam Matkul</option>
+                        <option value="1">Jam ke-1</option>
+                        <option value="2">Jam ke-2</option>
+                        <option value="3">Jam ke-3</option>
+                        <option value="4">Jam ke-4</option>
+                        <option value="5">Jam ke-5</option>
+                        <option value="6">Jam ke-6</option>
+                        <option value="7">Jam ke-7</option>
+                        <option value="8">Jam ke-8</option>
+                        <option value="9">Jam ke-9</option>
+                        <option value="10">Jam ke-10</option>
+                        <option value="11">Jam ke-11</option>
+                        <option value="12">Jam ke-12</option>
+                    </select>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <span>Jam Selesai</span>
-                    <input type="number" placeholder="Input jam berakhir acara.."
-                           class="px-5 py-2 rounded-lg border border-primary-color" required>
+                    <span>Jam Selesai Matkul</span>
+                    <select name="lantai" id="lantai"
+                            class="pr-24 pl-8 py-3 rounded-lg border border-primary-color"
+                            title="Lantai" required>
+                        <option selected disabled hidden>Jam Matkul</option>
+                        <option value="1">Jam ke-1</option>
+                        <option value="2">Jam ke-2</option>
+                        <option value="3">Jam ke-3</option>
+                        <option value="4">Jam ke-4</option>
+                        <option value="5">Jam ke-5</option>
+                        <option value="6">Jam ke-6</option>
+                        <option value="7">Jam ke-7</option>
+                        <option value="8">Jam ke-8</option>
+                        <option value="9">Jam ke-9</option>
+                        <option value="10">Jam ke-10</option>
+                        <option value="11">Jam ke-11</option>
+                        <option value="12">Jam ke-12</option>
+                    </select>
                 </div>
-            </div>
-            <div class="flex gap-2 items-center">
-                <input id="urgent" type="checkbox" class="w-4 h-4" required>
-                <span>Urgent</span>
             </div>
         </div>
         <div class="flex flex-col gap-2">
@@ -46,10 +72,6 @@
             <span>Upload Tanda Pengenal</span>
             <input type="file" class="px-5 py-2 rounded-lg border border-primary-color" required>
         </div>
-        <div id="bukti" class="flex flex-col gap-2">
-            <span>Upload Surat Bukti Urgent</span>
-            <input type="file" class="px-5 py-2 rounded-lg border border-primary-color" required>
-        </div>
         <div id="buttons" class="flex justify-around">
             <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer">Kembali</a>
             <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
@@ -58,15 +80,3 @@
         </div>
     </form>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let checkbox = document.getElementById("urgent");
-        let uploadSection = document.getElementById("bukti");
-
-        checkbox.addEventListener("change", () => {
-            uploadSection.style.display = checkbox.checked ? "flex" : "none";
-        });
-
-        uploadSection.style.display = checkbox.checked ? "flex" : "none";
-    });
-</script>
