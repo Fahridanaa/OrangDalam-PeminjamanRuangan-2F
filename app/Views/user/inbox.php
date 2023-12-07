@@ -13,7 +13,7 @@
             <hr class="border border-black">
         </div>
         <div class="flex-auto flex justify-center">
-            <span class="text-xl font-medium">Belum ada Konfirmasi</span>
+            <span class="text-xl font-medium">Belum ada Notifikasi</span>
         </div>
     </div>
 </div>

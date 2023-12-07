@@ -7,10 +7,13 @@
 <body>
 <div id="Konfirmasi" class="h-screen flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div id="Konfirmasi-content" class="h-screen w-screen py-20">
-        <div id="header" class="px-8">
+    <div id="Konfirmasi-content" class="h-screen w-screen py-20 px-8 flex flex-col gap-12">
+        <div id="header">
             <h1 class="text-4xl font-semibold mb-6">Konfirmasi Ruangan Mata Kuliah</h1>
             <hr class="border border-black">
+        </div>
+        <div class="flex-auto flex justify-center">
+            <span class="text-xl font-medium">Belum ada Permintaan</span>
         </div>
     </div>
 </div>
