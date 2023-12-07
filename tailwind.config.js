@@ -15,6 +15,7 @@ module.exports = {
                 'neutral-color': 'var(--neutral-color)',
                 'disable-color': 'var(--disable-color)',
                 'noFocus-color': 'var(--noFocus-color)',
+                'locked-color': 'var(--locked-color)',
             },
             fontFamily: {
                 'plus-jakarta-sans': ['Plus Jakarta Sans', 'sans-serif'],
