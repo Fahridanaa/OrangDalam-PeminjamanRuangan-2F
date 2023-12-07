@@ -7,11 +7,9 @@
 <body class="font-plus-jakarta-sans">
 <div id="Multi-form" class="h-screen flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div class="h-screen w-screen flex flex-col gap-4">
+    <div class="h-screen w-screen flex flex-col gap-12">
         <?php include 'stepper.php'; ?>
-
     </div>
-</div>
 </body>
 
 </html>
