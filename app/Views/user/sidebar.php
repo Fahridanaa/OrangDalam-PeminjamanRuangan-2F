@@ -5,8 +5,8 @@ $isActive = function ($path) {
 
 ?>
 
-<div class="bg-primary-color h-screen">
-    <div class="flex w-32 flex-col items-center justify-around h-screen">
+<div class="bg-primary-color h-full fixed z-20">
+    <div class="flex w-32 flex-col items-center justify-around h-full">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
              class="w-14 h-14 fill-white">
             <path d="M16.5 7.5h-9v9h9v-9z"/>
@@ -48,7 +48,6 @@ $isActive = function ($path) {
                        href="/pesan">
                         <?php
                         $activeClass = $isActive('/pesan');
-
 
                         echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="' . $activeClass . ' w-6 h-6 group-hover:fill-neutral-color">';
                         echo '<path fill-rule="evenodd" d="M6.912 3a3 3 0 00-2.868 2.118l-2.411 7.838a3 3 0 00-.133.882V18a3 3 0 003 3h15a3 3 0 003-3v-4.162c0-.299-.045-.596-.133-.882l-2.412-7.838A3 3 0 0017.088 3H6.912zm13.823 9.75l-2.213-7.191A1.5 1.5 0 0017.088 4.5H6.912a1.5 1.5 0 00-1.434 1.059L3.265 12.75H6.11a3 3 0 012.684 1.658l.256.513a1.5 1.5 0 001.342.829h3.218a1.5 1.5 0 001.342-.83l.256-.512a3 3 0 012.684-1.658h2.844z" clip-rule="evenodd"/>

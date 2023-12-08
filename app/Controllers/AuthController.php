@@ -23,6 +23,7 @@ class AuthController extends Controller
     {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+
         $data = $this->authModel->get($username);
         session_start();
 
@@ -56,5 +57,4 @@ class AuthController extends Controller
         session_start();
         header("Location: /login");
     }
-
 }

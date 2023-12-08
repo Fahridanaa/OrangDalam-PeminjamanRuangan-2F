@@ -31,6 +31,7 @@ class DashboardController extends Controller
             $this->view('user/dashboard');
         }
     }
+  
     public function showPinjamPage(): void
     {
         if (!($this->loginCheck())) {

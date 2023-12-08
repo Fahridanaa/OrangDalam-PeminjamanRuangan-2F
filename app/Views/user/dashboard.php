@@ -3,44 +3,43 @@
 
 <head>
     <?php include __DIR__ . '/../shared/head.php'; ?>
-    <style>
-        #option select {
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-        }
-
-        #option select::-ms-expand {
-            display: none;
-        }
-    </style>
 </head>
 
-<body class="h-screen overflow-hidden">
-<div id="dashboard" class="h-screen flex flex-row">
-    <?php include 'sidebar.php'; ?>
-    <div id="dashboard-content" class="h-screen w-screen py-20">
-        <div id="header" class="px-8">
+<body class="h-screen flex">
+<?php include 'sidebar.php'; ?>
+<div id="dashboard" class="h-screen flex-auto flex flex-row overflow-x-hidden ml-32">
+    <div id="dashboard-content" class="flex-auto px-8 py-20 flex flex-col w-full">
+        <div id="header">
             <h1 class="mb-6 text-4xl font-semibold">Denah Ruangan</h1>
             <hr class="border border-black">
         </div>
-        <div id="option" class="flex gap-8 px-8 py-5">
-            <div id="lantai">
-                <select name="lantai" id="lantai" class="py-3 px-16 rounded-lg border border-primary-color"
+        <div id="option" class="flex gap-8 py-5">
+            <div id="dashboard-lantai-option">
+                <select name="lantai" id="lantai" class="py-4 px-16 rounded-lg border border-primary-color"
                         title="Lantai">
+                    <option selected disabled hidden>Lantai Ruangan</option>
                     <option value="Lantai 5">Lantai 5</option>
                     <option value="Lantai 6">Lantai 6</option>
                     <option value="Lantai 7">Lantai 7</option>
                     <option value="Lantai 8">Lantai 8</option>
                 </select>
             </div>
-            <div id="tanggal">
+            <div id="dashboard-tanggal-option">
                 <input type="date" name="tanggal" id="tanggal"
                        class="py-3 pl-8 pr-5 rounded-lg border border-primary-color">
             </div>
+            <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color">
+                <span class="font-bold text-sm text-neutral-color">CARI RUANGAN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="w-4 h-4 text-neutral-color">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                </svg>
+
+            </button>
         </div>
         <div id="denah"
-             class="bg-[#E3E3E3] flex justify-between mx-auto gap-8 px-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border-2 border-fourth-color">
+             class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
             <?php
             $lantai7 = array(
                 array(
@@ -61,10 +60,10 @@
 
             function renderAreaRuangan(array $areaRuangan): string
             {
-                $html = '<div class="flex flex-col justify-between gap-32 py-20 content-between">';
+                $html = '<div class="flex flex-col gap-12 justify-between py-20">';
 
                 foreach ($areaRuangan as $ruangan) {
-                    $html .= '<div class="flex gap-8 flex-wrap justify-center">';
+                    $html .= '<div class="flex gap-8 px-8 flex-auto">';
                     $html .= renderRuangan($ruangan);
                     $html .= '</div>';
                 }
@@ -80,7 +79,7 @@
 
                 foreach ($ruangan as $ruang => $background) {
                     $html .= '
-            <a class="flex flex-col items-center justify-center bg-' . $background . '-color rounded-lg py-5 px-7 cursor-pointer">
+            <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273
@@ -95,7 +94,7 @@
                         19.0893C23.5506 18.8885 23.9041 18.7812 24.2656 18.7812C24.7505 18.7812 25.2155 18.9739 25.5583
                         19.3167C25.9011 19.6595 26.0938 20.1245 26.0938 20.6094Z" fill="white" />
                 </svg>
-                <span class="text-neutral-color font-semibold">' . $ruang . '</span>
+                <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
                 }
 
@@ -104,7 +103,8 @@
 
             ?>
         </div>
-        <div id="indikator" class="flex mx-auto mt-10 w-4/5 gap-8">
+        <div id="indikator" class="flex mt-10 w-4/5 gap-8">
+
             <div id="kosong" class="flex items-center gap-2">
                 <div class="rounded-full bg-disable-color w-5 h-5"></div>
                 <span class="font-bold">Kosong</span>
@@ -119,6 +119,7 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>
