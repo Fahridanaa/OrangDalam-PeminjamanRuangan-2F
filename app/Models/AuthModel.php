@@ -1,20 +1,20 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Models;
 
+use config\Database;
+
 class AuthModel {
-    public function cekLogin($username, $password): bool
+    private $table = "user";
+    private $db;
+
+    public function __construct()
     {
-        return $this->verifikasiKredensial($username, $password);
+        $this->db = new Database();
     }
 
-    private function verifikasiKredensial($username, $password): bool
-    {
-        $dataPengguna = [
-            'username' => 'user',
-            'password' => 'user',
-            'role' => 'user'
-        ];
-
-        return ($username === $dataPengguna['username'] && $password === $dataPengguna['password']);
+    public function get($username) {
+        $this->db->query("SELECT username, password, level FROM user WHERE username = :user");
+        $this->db->bind(":user", $username);
+        return $this->db->single();
     }
 }

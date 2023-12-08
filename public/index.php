@@ -21,8 +21,5 @@ Router::add("GET", "/konfirmasi-ruangan", DashboardController::class, "showReque
 
 Router::add("GET", "/pinjam/form", MultiStepFormController::class, "showForm");
 
-Router::add("GET", "/jurusan", JurusanController::class, "showJurusan");
-
-
 Router::run();
 ?>
