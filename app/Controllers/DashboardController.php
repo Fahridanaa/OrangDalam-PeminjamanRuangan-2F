@@ -1,5 +1,4 @@
 <?php
-
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
@@ -24,7 +23,7 @@ class DashboardController extends Controller
             $this->view('user/dashboard');
         }
     }
-
+  
     public function showPinjamPage(): void
     {
         if (!($this->loginCheck())) {

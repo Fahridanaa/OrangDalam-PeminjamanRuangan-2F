@@ -3,7 +3,6 @@
 
 <head>
     <?php include __DIR__ . '/../shared/head.php'; ?>
-
 </head>
 
 <body class="h-screen flex">
@@ -105,6 +104,7 @@
             ?>
         </div>
         <div id="indikator" class="flex mt-10 w-4/5 gap-8">
+
             <div id="kosong" class="flex items-center gap-2">
                 <div class="rounded-full bg-disable-color w-5 h-5"></div>
                 <span class="font-bold">Kosong</span>
@@ -119,8 +119,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 </body>
 
