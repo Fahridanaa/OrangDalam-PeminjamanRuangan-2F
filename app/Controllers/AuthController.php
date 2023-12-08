@@ -31,12 +31,10 @@ class AuthController extends Controller
             $_SESSION['role'] = 'user';
 
             header('Location: /dashboard');
-
             exit();
         } else {
             $this->showLoginForm();
         }
-
     }
 
     public function logout(): void
@@ -45,5 +43,4 @@ class AuthController extends Controller
         session_start();
         header("Location: /login");
     }
-
 }
