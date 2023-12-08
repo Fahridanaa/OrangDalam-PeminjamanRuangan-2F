@@ -39,7 +39,7 @@
             </button>
         </div>
         <div id="denah"
-             class="bg-[#E3E3E3] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border-2 border-fourth-color overflow-x-auto">
+             class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
             <?php
             $lantai7 = array(
                 array(

@@ -24,10 +24,11 @@
                         <span class="font-normal text-xl">Ruangan Perangkat Lunak 1</span>
                     </div>
                     <div class="items-center flex gap-5">
-                        <button id="cek" class="font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff]">
+                        <button id="cek"
+                                class="font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">
                             Tolak Perubahan
                         </button>
-                        <button class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color">
+                        <button class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">
                             Konfirmasi
                         </button>
                     </div>

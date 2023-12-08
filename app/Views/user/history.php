@@ -23,7 +23,7 @@
                     <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
                 </div>
                 <div class="self-end flex gap-5">
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>
@@ -38,7 +38,7 @@
                     <span class="font-normal text-xl">Digunakan Tanggal 24 Maret 2023</span>
                 </div>
                 <div class="self-end flex gap-5">
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>

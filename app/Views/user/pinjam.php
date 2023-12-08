@@ -12,7 +12,7 @@
         <div id="header">
             <div id="head" class="flex justify-between mb-6">
                 <h1 class="text-4xl font-semibold">Pinjam Ruangan</h1>
-                <a class="bg-third-color rounded-full px-10 text-neutral-color align-middle flex items-center cursor-pointer"
+                <a class="bg-third-color rounded-full px-10 text-neutral-color align-middle flex items-center cursor-pointer hover:bg-primary-color"
                    href="/pinjam/form">
                     <span>Pinjam</span>
                 </a>
@@ -30,7 +30,7 @@
                     <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
                 </div>
                 <div class="self-end flex gap-5">
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>
@@ -47,10 +47,10 @@
                 </div>
                 <div class="self-end flex gap-5">
                     <button id="upload-surat-izin"
-                            class="font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff]">
+                            class="font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">
                         Upload Surat Izin
                     </button>
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>
@@ -65,7 +65,7 @@
                     <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
                 </div>
                 <div class="self-end flex gap-5">
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>
@@ -80,7 +80,7 @@
                     <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
                 </div>
                 <div class="self-end flex gap-5">
-                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color">
+                    <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
                     </button>
