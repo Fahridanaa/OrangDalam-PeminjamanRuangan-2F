@@ -5,8 +5,8 @@ $isActive = function ($path) {
 
 ?>
 
-<div class="bg-primary-color h-screen">
-    <div class="flex w-32 flex-col items-center justify-around h-screen">
+<div class="bg-primary-color h-full">
+    <div class="flex w-32 flex-col items-center justify-around h-full">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
              class="w-14 h-14 fill-white">
             <path d="M16.5 7.5h-9v9h9v-9z"/>

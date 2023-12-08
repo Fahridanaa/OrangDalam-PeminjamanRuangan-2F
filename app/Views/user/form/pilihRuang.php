@@ -1,4 +1,4 @@
-<div class="bg-[#EAEAEA] flex flex-col gap-4 mx-auto p-16 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border-2 border-fourth-color">
+<div class="bg-[#E3E3E3] flex flex-col px-12 py-6 w-4/5 mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border-2 border-fourth-color overflow-x-auto">
     <div id="indikator" class="flex w-4/5 gap-8">
         <div id="kosong" class="flex items-center gap-2">
             <div class="rounded-full bg-disable-color w-5 h-5"></div>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div id="denah"
-         class="flex justify-between">
+         class="flex justify-between overflow-x-auto">
         <?php
         $lantai7 = array(
             array(
@@ -31,10 +31,10 @@
 
         function renderAreaRuangan(array $areaRuangan): string
         {
-            $html = '<div class="flex flex-col justify-between gap-32 py-8 content-between">';
+            $html = '<div class="flex flex-col gap-12 justify-between py-20">';
 
             foreach ($areaRuangan as $ruangan) {
-                $html .= '<div class="flex gap-8 flex-wrap justify-center">';
+                $html .= '<div class="flex gap-8 px-8 flex-auto">';
                 $html .= renderRuangan($ruangan);
                 $html .= '</div>';
             }
@@ -47,7 +47,7 @@
         function locked(string $background): string
         {
             if ($background !== "locked") {
-                return 'cursor-pointer hover:scale-105 ease-in-out transition';
+                return 'cursor-pointer hover:scale-105';
             }
             return '';
         }
@@ -58,7 +58,7 @@
 
             foreach ($ruangan as $ruang => $background) {
                 $html .= '
-            <a class="flex flex-col items-center justify-center bg-' . $background . '-color rounded-lg py-5 px-7 ' . locked($background) . '">
+            <a class="flex flex-col items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 ' . locked($background) . '">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273
@@ -73,7 +73,7 @@
                         19.0893C23.5506 18.8885 23.9041 18.7812 24.2656 18.7812C24.7505 18.7812 25.2155 18.9739 25.5583
                         19.3167C25.9011 19.6595 26.0938 20.1245 26.0938 20.6094Z" fill="white" />
                 </svg>
-                <span class="text-neutral-color font-semibold">' . $ruang . '</span>
+                <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
             }
 

@@ -730,6 +730,10 @@ video {
   margin-top: 2rem;
 }
 
+.mb-32 {
+  margin-bottom: 8rem;
+}
+
 .box-content {
   box-sizing: content-box;
 }
@@ -1672,6 +1676,16 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.px-20 {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1702,6 +1716,22 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
+.pb-64 {
+  padding-bottom: 16rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.pl-0 {
+  padding-left: 0px;
 }
 
 .text-left {

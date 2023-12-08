@@ -1,5 +1,5 @@
 <div class="container mx-auto p-16">
-    <div class="w-11/12 lg:w-2/6 mx-auto">
+    <div class="w-11/12 mx-auto">
         <div class="bg-gray-200 h-1 flex items-center justify-between">
             <div class="w-1/3 bg-fourth-color h-1 flex items-center justify-start">
                 <div class="bg-third-color rounded-full shadow flex items-center justify-center p-4 group">
