@@ -8,7 +8,7 @@
 
 <body class="h-screen flex">
 <?php include 'sidebar.php'; ?>
-<div id="dashboard" class="h-screen flex-auto flex flex-row overflow-x-hidden">
+<div id="dashboard" class="h-screen flex-auto flex flex-row overflow-x-hidden ml-32">
     <div id="dashboard-content" class="flex-auto px-8 py-20 flex flex-col w-full">
         <div id="header">
             <h1 class="mb-6 text-4xl font-semibold">Denah Ruangan</h1>

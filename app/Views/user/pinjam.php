@@ -8,7 +8,7 @@
 <body class="h-screen overflow-hidden">
 <div id="Peminjaman" class="h-screen flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div id="Peminjaman-content" class="h-screen w-screen px-8 py-20 flex flex-col gap-12">
+    <div id="Peminjaman-content" class="h-screen w-screen px-8 py-20 flex flex-col gap-12 ml-32">
         <div id="header">
             <div id="head" class="flex justify-between mb-6">
                 <h1 class="text-4xl font-semibold">Pinjam Ruangan</h1>
