@@ -18,10 +18,10 @@
                 <select name="lantai" id="lantai" class="py-4 px-16 rounded-lg border border-primary-color"
                         title="Lantai">
                     <option selected disabled hidden>Lantai Ruangan</option>
-                    <option value="5">Lantai 5</option>
-                    <option value="6">Lantai 6</option>
-                    <option value="7">Lantai 7</option>
-                    <option value="8">Lantai 8</option>
+                    <option value="Lantai 5">Lantai 5</option>
+                    <option value="Lantai 6">Lantai 6</option>
+                    <option value="Lantai 7">Lantai 7</option>
+                    <option value="Lantai 8">Lantai 8</option>
                 </select>
             </div>
             <div id="dashboard-tanggal-option">

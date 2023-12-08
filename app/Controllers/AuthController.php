@@ -23,17 +23,31 @@ class AuthController extends Controller
     {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
-        $status = $this->authModel->cekLogin($username, $password);
 
+        $data = $this->authModel->get($username);
+        session_start();
 
-        if ($status) {
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = 'user';
-
-            header('Location: /dashboard');
-            exit();
-        } else {
+        if ($data == NULL) {
             $this->showLoginForm();
+        }
+        else {
+            if ($data['password'] === md5($password)) {
+                $_SESSION['username'] = $data['username'];
+                $_SESSION['level'] = $data['level'];
+                $_SESSION['id'] = $data['id'];
+                if ($data['level'] === "Mahasiswa") {
+                    header('Location: /dashboard');
+                }
+                else if ($data['level'] === "Admin") {
+                    header('Location: /dashboard');
+                }
+                else {
+                    $this->showLoginForm();
+                }
+            }
+            else {
+                $this->showLoginForm();
+            }
         }
     }
 
