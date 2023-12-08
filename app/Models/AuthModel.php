@@ -13,7 +13,7 @@ class AuthModel {
     }
 
     public function get($username) {
-        $this->db->query("SELECT username, password, level FROM user WHERE username = :user");
+        $this->db->query("SELECT id, username, password, level FROM " . $this->table . " WHERE username = :user");
         $this->db->bind(":user", $username);
         return $this->db->single();
     }

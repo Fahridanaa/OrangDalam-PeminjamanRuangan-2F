@@ -33,6 +33,7 @@ class AuthController extends Controller
             if ($data['password'] === md5($password)) {
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['level'] = $data['level'];
+                $_SESSION['id'] = $data['id'];
                 if ($data['level'] === "Mahasiswa") {
                     header('Location: /dashboard');
                 }
