@@ -130,5 +130,25 @@
     <!--        </div>-->
     <!--    </div>-->
 </div>
+<!--<script>-->
+<!--    const modal = document.querySelector('.modal');-->
+<!--    const openModalBtn = document.getElementById('cek');-->
+<!--    const overlay = document.querySelectorAll('.modal-overlay');-->
+<!---->
+<!--    const openModal = () => modal.classList.remove('hidden');-->
+<!--    const closeModal = () => modal.classList.add('hidden');-->
+<!---->
+<!--    openModalBtn.onclick = openModal;-->
+<!--    overlay.forEach((e) => {-->
+<!--        e.onclick = closeModal;-->
+<!--    });-->
+<!---->
+<!--    window.onclick = (e) => {-->
+<!--        if (e.target === modal) {-->
+<!--            closeModal();-->
+<!--        }-->
+<!--    };-->
+<!---->
+<!--</script>-->
 </body>
 </html>
