@@ -39,9 +39,19 @@ $peminjamanDosen = array(
 );
 // Menggabungkan data mahasiswa dan dosen menjadi satu array
 $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
+
+// Menentukan tab yang aktif
+$tabSemua = isset($_GET['tab']) && $_GET['tab'] === 'semua';
+$tabMahasiswa = isset($_GET['tab']) && $_GET['tab'] === 'mahasiswa';
+$tabDosen = isset($_GET['tab']) && $_GET['tab'] === 'dosen';
+
+// Jika tidak ada parameter tab, maka tab "Semua" yang aktif
+if (!isset($_GET['tab'])) {
+    $tabSemua = true;
+}
 ?>
 
-<body class="overflow-hidden font-jakarta" style="background: #edf2f7;">
+<body class="overflow-hidden font-jakarta">
     <div class="flex flex-row">
         <?php include 'sidebar.php'; ?>
         <div class="min-h-screen">
@@ -52,27 +62,28 @@ $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
                     </h4>
                 </div>
                 <div class="mx-8 mb-4 border-b border-gray-200">
-                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" role="tablist">
                         <li class="me-2" role="presentation">
-                            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="semua-tab" data-tabs-target="#semua" type="button" role="tab" aria-controls="semua" aria-selected="false">
+                            <a class="inline-block p-4 border-b-2 rounded-t-lg <?php echo $tabSemua ? 'active-tab' : ''; ?>" href="?tab=semua" role="tab" aria-controls="semua" aria-selected="false">
                                 Semua
-                            </button>
+                            </a>
                         </li>
                         <li class="me-2" role="presentation">
-                            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="mahasiswa-tab" data-tabs-target="#mahasiswa" type="button" role="tab" aria-controls="mahasiswa" aria-selected="false">
+                            <a class="inline-block p-4 border-b-2 rounded-t-lg <?php echo $tabMahasiswa ? 'active-tab' : ''; ?>" href="?tab=mahasiswa" role="tab" aria-controls="mahasiswa" aria-selected="false">
                                 Mahasiswa
-                            </button>
+                            </a>
                         </li>
                         <li class="me-2" role="presentation">
-                            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dosen-tab" data-tabs-target="#dosen" type="button" role="tab" aria-controls="dosen" aria-selected="false">
+                            <a class="inline-block p-4 border-b-2 rounded-t-lg <?php echo $tabDosen ? 'active-tab' : ''; ?>" href="?tab=dosen" role="tab" aria-controls="dosen" aria-selected="false">
                                 Dosen
-                            </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
-                <div id="default-tab-content" class="px-10" >
-                    <div class="tab-content" id="semua" role="tabpanel" aria-labelledby="semua-tab">
+                <div id="default-tab-content" class="px-10">
+                    <div class="tab-content" id="semua" role="tabpanel" aria-labelledby="semua-tab" style="display: <?php echo $tabSemua ? 'block' : 'none'; ?>">
                         <table class="w-full text-base rtl:text-right font-jakarta">
+                            <!-- Isikan kode untuk menampilkan semua riwayat data peminjaman -->
                             <thead class="text-white bg-gray-600">
                                 <tr>
                                     <th scope="col" class="px-1 py-3">Peminjam</th>
@@ -98,8 +109,9 @@ $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-content" id="mahasiswa" role="tabpanel" aria-labelledby="mahasiswa-tab">
+                    <div class="tab-content" id="mahasiswa" role="tabpanel" aria-labelledby="mahasiswa-tab" style="display: <?php echo $tabMahasiswa ? 'block' : 'none'; ?>">
                         <table class="w-full text-base rtl:text-right font-jakarta">
+                            <!-- Isikan kode untuk menampilkan data mahasiswa -->
                             <thead class="text-white bg-gray-600">
                                 <tr>
                                     <th scope="col" class="px-1 py-3">Peminjam</th>
@@ -125,14 +137,15 @@ $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-content" id="dosen" role="tabpanel" aria-labelledby="dosen-tab">
+                    <div class="tab-content" id="dosen" role="tabpanel" aria-labelledby="dosen-tab" style="display: <?php echo $tabDosen ? 'block' : 'none'; ?>">
                         <table class="w-full text-base rtl:text-right font-jakarta">
+                            <!-- Isikan kode untuk menampilkan data dosen -->
                             <thead class="text-white bg-gray-600">
                                 <tr>
                                     <th scope="col" class="px-1 py-3">Peminjam</th>
                                     <th scope="col" class="px-6 py-3">Jurusan</th>
                                     <th scope="col" class="px-6 py-3">Ruangan</th>
-                                    <th scope="col" class="px-6 py-3">Keterangan</th>
+                                    <th scope="col" class="px-8 py-3">Keterangan</th>
                                     <th scope="col" class="px-2 py-3">Tanggal Pinjam</th>
                                     <th scope="col" class="px-2 py-3">Tanggal Acara</th>
                                     <th scope="col" class="px-1 py-3">Surat Peminjaman</th>
@@ -144,7 +157,7 @@ $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
                                 foreach ($peminjamanDosen as $data) {
                                     echo "<tr>";
                                     foreach ($data as $value) {
-                                        echo "<td class=\"px-6 py-4\">$value</td>";
+                                        echo "<td class=\"px-6 py-6\">$value</td>";
                                     }
                                     echo "</tr>";
                                 }
@@ -156,34 +169,35 @@ $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
             </section>
         </div>
     </div>
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Tambahkan event listener untuk setiap tombol tab
             document.querySelectorAll("[data-tabs-target]").forEach(function(button) {
                 button.addEventListener("click", function() {
-                    // Hilangkan kelas 'active-tab' dari semua tombol tab
+                    // Hapus kelas 'active-tab' dari semua tombol tab
                     document.querySelectorAll("[data-tabs-target]").forEach(function(tabButton) {
                         tabButton.classList.remove("active-tab");
+                    });
+
+                    // Hapus kelas 'active-tab' dari semua konten tab
+                    document.querySelectorAll(".tab-content").forEach(function(tabContent) {
+                        tabContent.style.display = "none";
                     });
 
                     // Tambahkan kelas 'active-tab' pada tombol yang diklik
                     button.classList.add("active-tab");
 
-                    // Sembunyikan semua konten tab
-                    document.querySelectorAll(".tab-content").forEach(function(tabContent) {
-                        tabContent.style.display = "none";
-                    });
-
                     // Tampilkan konten tab yang sesuai dengan tombol yang diklik
                     var targetId = button.getAttribute("data-tabs-target");
                     var targetTab = document.getElementById(targetId);
                     if (targetTab) {
-                        targetTab.style.display = "block";
+                        targetTab.style.display = "table";
                     }
                 });
             });
         });
-    </script>
+    </script> -->
+
 </body>
 
 </html>

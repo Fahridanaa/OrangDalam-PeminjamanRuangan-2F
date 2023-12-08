@@ -31,11 +31,10 @@
     <?php include 'sidebar.php'; ?>
     <div class="min-h-screen">
         <section class="flex flex-col items-stretch justify-start">
-            <div class="flex pb-1 mx-10 my-10 border-b-[3px] flex-nowrap">
+            <div class="flex pb-1 mx-10 my-10 border-b-2 border-black flex-nowrap">
                 <h4 class="pl-2 text-3xl font-bold">
                     Dashboard
                 </h4>
-                <hr>
             </div>
             <div class="flex px-8 space-x-20">
                 <div class="w-64 h-64 p-3 py-2 border-[3px] border-noFocus-color rounded-3xl text-noFocus-color">
@@ -71,7 +70,7 @@
             </div>
         </section>
         <section class="flex flex-col mt-4">
-            <div class="flex pb-1 mx-10 my-10 border-b-[3px] flex-nowrap">
+            <div class="flex pb-1 mx-10 my-10 border-b-2 border-black flex-nowrap">
                 <h4 class="pl-2 text-3xl font-bold ">
                     Peminjaman Terbaru
                 </h4>
