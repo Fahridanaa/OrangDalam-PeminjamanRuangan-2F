@@ -35,7 +35,6 @@ class AuthController extends Controller
         } else {
             $this->showLoginForm();
         }
-
     }
 
     public function logout(): void
@@ -44,5 +43,4 @@ class AuthController extends Controller
         session_start();
         header("Location: /login");
     }
-
 }

@@ -30,6 +30,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
              id="gedung">
         </div>
         <div class="w-4/12 md:w-full py-48 2xl:py-64 px-8 flex bg-neutral-color flex-col justify-center">
+
             <h2 class="text-text-color text-4xl font-medium">Welcome Back!</h2>
             <div class=" py-6 lg:w-full z-20 bg-neutral-color rounded-2xl flex gap-2 flex-col">
                 <h1 class="font-semibold text-2xl text-text-color">Login</h1>
