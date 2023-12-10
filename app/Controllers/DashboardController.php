@@ -2,9 +2,17 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\Jadwal;
 
 class DashboardController extends Controller
 {
+    private Jadwal $jadwal;
+
+    public function __construct()
+    {
+        $this->jadwal = new Jadwal();
+    }
+
     private function loginCheck(): bool
     {
         return isset($_SESSION['username']);
@@ -17,7 +25,7 @@ class DashboardController extends Controller
             exit();
         }
 
-        if ($_SESSION['role'] == 'admin') {
+        if ($_SESSION['level'] == 'Admin') {
             $this->view('admin/dashboard');
         } else {
             $this->view('user/dashboard');
@@ -63,5 +71,14 @@ class DashboardController extends Controller
         }
 
         $this->view('user/konfirmasiRuangan');
+    }
+
+    public function showJadwalByRuangan($kodeRuang, $namaHari) {
+        foreach ($this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari) as $value) {
+            /*
+             * value:
+             * mulai, selesai, namaMK, namaDosen, namaKelas
+             */
+        }
     }
 }
