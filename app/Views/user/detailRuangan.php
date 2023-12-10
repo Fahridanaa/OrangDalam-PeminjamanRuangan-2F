@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <?php include __DIR__ . '/../shared/head.php'; ?>
+    <style>
+        input[type="date"]:focus {
+            outline: none !important; /* Menghilangkan garis fokus bawaan */
+            box-shadow: none !important; /* Menghilangkan efek bayangan bawaan */
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            order: -1;
+            margin-right: 10px;
+            filter: invert(1);
+            color: red;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        input[type="date"]::-webkit-datetime-edit-day-field, input[type="date"]::-webkit-datetime-edit-month-field, input[type="date"]::-webkit-datetime-edit-year-field {
+            display: none;
+        }
+    </style>
 </head>
 <body class="antialiased">
-<div class="h-screen flex">
+<div class="flex">
     <?php include 'sidebar.php'; ?>
     <div class="h-screen w-screen py-20 ml-32 px-8 flex flex-col gap-12">
         <div id="header">
@@ -70,15 +89,150 @@
                 </div>
                 <div class="flex justify-center items-center self-start">
                     <button type="button"
-                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color border-[3px]">
+                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color border-[3px] hover:bg-third-color hover:text-neutral-color">
                         Pinjam Sekarang
                     </button>
                 </div>
             </div>
         </div>
+        <div class="rounded-3xl">
+            <table class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl">
+                <tr class="bg-primary-color text-neutral-color">
+                    <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 focus:outline-none focus:shadow-none!">
+                        <div class="flex items-center relative">
+                            <input type="date" id="tanggalInput"
+                                   class="bg-primary-color text-sm w-10">
+                            <span id="tanggalFormatted"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>1</td>
+                    <td>7:00 - 7:50</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full bg-danger-color w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>2</td>
+                    <td>7:50 - 8:40</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>3</td>
+                    <td>8:40 - 9:30</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>4</td>
+                    <td>9:40 - 10:30</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>5</td>
+                    <td>10:30 - 11:20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>6</td>
+                    <td>11:20 - 12:10</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>7</td>
+                    <td>12:50 - 13:40</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>8</td>
+                    <td>13:40 - 14:30</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>9</td>
+                    <td>14:30 - 15:20</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>10</td>
+                    <td>15:30 - 16:20</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>11</td>
+                    <td>16:20 - 17:10</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
+<script>
+    function formatDate() {
+        let tanggalInput = document.getElementById("tanggalInput").value;
+
+        let tanggal = new Date(tanggalInput);
+        let options = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+        let tanggalFormatted = tanggal.toLocaleDateString('id-ID', options);
+
+        document.getElementById("tanggalFormatted").textContent = tanggalFormatted;
+    }
+
+    document.getElementById("tanggalInput").addEventListener("change", formatDate);
+</script>
 </body>
-<!-- partial -->
 <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
 </html>
