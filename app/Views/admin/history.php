@@ -29,12 +29,12 @@
 <?php
 // Data peminjaman untuk mahasiswa
 $peminjamanMahasiswa = array(
-    array("Fahridana Ahmad", "Teknologi Informasi", "LIG 1, LSI 1", "Dipinjam Untuk Kegiatan Event Hacktober WRI", "20 November 2023", "10 Desember 2023"),
+    array("Fahridana Ahmad", "Teknologi Informasi", "LIG 1, LSI 1", "Dipinjam Untuk Kegiatan Event Hacktober WRI", "20 November 2023", "10 Desember 2023","[File Surat Peminjaman]"),
     // Tambahkan data mahasiswa lain jika ada
 );
 // Data peminjaman untuk Dosen
 $peminjamanDosen = array(
-    array("Mungki Astiningrum", "Teknologi Informasi", "LIG 3", "Dipinjam Untuk Sempro", "20 November 2023", "06 Desember 2023"),
+    array("Mungki Astiningrum", "Teknologi Informasi", "LIG 3", "Dipinjam Untuk Sempro", "20 November 2023", "06 Desember 2023","[File Surat Peminjaman]"),
     // Tambahkan data Dosen lain jika ada
 );
 // Menggabungkan data mahasiswa dan dosen menjadi satu array
