@@ -94,8 +94,6 @@ class DashboardController extends Controller
         $this->view('user/detailRuangan');
     }
 
-
-
     public function showJadwalByRuangan($kodeRuang, $namaHari)
     {
         foreach ($this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari) as $value) {

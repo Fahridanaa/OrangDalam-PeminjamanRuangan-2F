@@ -13,10 +13,10 @@
             <h1 class="mb-6 text-4xl font-semibold">Denah Ruangan</h1>
             <hr class="border border-black">
         </div>
-        <div id="option" class="flex gap-8 py-5">
+        <form method="post" id="option" class="flex gap-8 py-5">
             <div id="dashboard-lantai-option">
                 <select name="lantai" id="lantai" class="py-4 px-16 rounded-lg border border-primary-color"
-                        title="Lantai">
+                        title="Lantai" required>
                     <option selected disabled hidden>Lantai Ruangan</option>
                     <option value="Lantai 5">Lantai 5</option>
                     <option value="Lantai 6">Lantai 6</option>
@@ -26,7 +26,7 @@
             </div>
             <div id="dashboard-tanggal-option">
                 <input type="date" name="tanggal" id="tanggal"
-                       class="py-3 pl-8 pr-5 rounded-lg border border-primary-color">
+                       class="py-3 pl-8 pr-5 rounded-lg border border-primary-color" required>
             </div>
             <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color">
                 <span class="font-bold text-sm text-neutral-color">CARI RUANGAN</span>
@@ -37,27 +37,23 @@
                 </svg>
 
             </button>
-        </div>
+        </form>
         <div class="overflow-y-visible">
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
-                $lantai7 = array(
-                    array(
-                        array(
-                            "LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"
-                        ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
-                    ),
-                    array(
-                        array(
-                            "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"
-                        ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
-                    )
+                $lantai7Barat = array(
+                    array("LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"),
+                    array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
                 );
 
-                foreach ($lantai7 as $areaRuangan) {
-                    echo renderAreaRuangan($areaRuangan);
-                }
+                $lantai7Timur = array(
+                    array("LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"),
+                    array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
+                );
+
+                echo renderAreaRuangan($lantai7Barat);
+                echo renderAreaRuangan($lantai7Timur);
 
                 function renderAreaRuangan(array $areaRuangan): string
                 {
@@ -98,7 +94,6 @@
                 <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
                     }
-
                     return $html;
                 }
 

@@ -48,7 +48,7 @@
                 <hr class="border border-black">
             </div>
             <div id="user-ganti-password-card"
-                 class="self-center bg-neutral-color border-2 border[#C8C1C1] py-12 px-10 rounded-3xl w-1/2">
+                 class="self-center bg-neutral-color border-2 border[#C8C1C1] py-12 px-10 rounded-3xl w-3/4 mb-6">
                 <form class="flex flex-col gap-8">
                     <div class="flex gap-2 justify-between items-center">
                         <label>Password Sekarang</label>
