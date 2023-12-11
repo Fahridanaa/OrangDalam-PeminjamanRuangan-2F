@@ -15,7 +15,7 @@ class Ruang
     }
 
     public function show($lantai) {
-        $this->db->query("SELECT kode, nama, kapasitas FROM " . $this->table . "WHERE lantai= :lantai");
+        $this->db->query("SELECT kode, nama, kapasitas, nomor_urut FROM ruang WHERE lantai= :lantai ORDER BY nomor_urut ASC");
         $this->db->bind(":lantai", $lantai);
         return $this->db->resultSet();
     }

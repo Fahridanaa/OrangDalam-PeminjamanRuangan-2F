@@ -24,6 +24,7 @@ Router::add("GET", "/konfirmasi-ruangan", DashboardController::class, "showReque
 
 Router::add("GET", "/pinjam/form", MultiStepFormController::class, "showForm");
 
+Router::add("GET", "/test", DashboardController::class, "showTest");
 
 Router::run();
 ?>

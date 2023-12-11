@@ -27,13 +27,21 @@ class Peminjaman
         $this->db->bind(":tandaPengenal", $data['pengenal']);
     }
 
-    public function pinjam($data) {
+    public function pinjam() {
         $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(tanggalAcara) AS tanggalAcara
             FROM peminjaman
             INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
-            WHERE status IN (:data)
-            GROUP BY id, status;");
-        $this->db->bind(":data", $data);
+            WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')
+            GROUP BY id, status");
+        return $this->db->resultSet();
+    }
+
+    public function history() {
+        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(tanggalAcara) AS tanggalAcara
+            FROM peminjaman
+            INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+            WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')
+            GROUP BY id, status");
         return $this->db->resultSet();
     }
 

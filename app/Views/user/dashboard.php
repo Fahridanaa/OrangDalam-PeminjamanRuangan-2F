@@ -7,9 +7,9 @@
 
 <body class="h-screen flex">
 <?php include 'sidebar.php'; ?>
-<div id="dashboard" class="h-screen flex-auto flex flex-row overflow-x-hidden ml-32">
-    <div id="dashboard-content" class="flex-auto px-8 py-20 flex flex-col w-full">
-        <div id="header">
+<div id="dashboard" class="h-screen flex-auto flex flex-row overflow-x-hidden overflow-y-auto ml-32">
+    <div id="dashboard-content" class="flex-auto px-8 flex flex-col w-full">
+        <div id="header" class="mt-16">
             <h1 class="mb-6 text-4xl font-semibold">Denah Ruangan</h1>
             <hr class="border border-black">
         </div>
@@ -38,47 +38,48 @@
 
             </button>
         </div>
-        <div id="denah"
-             class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
-            <?php
-            $lantai7 = array(
-                array(
+        <div class="overflow-y-visible">
+            <div id="denah"
+                 class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
+                <?php
+                $lantai7 = array(
                     array(
-                        "LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"
-                    ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
-                ),
-                array(
+                        array(
+                            "LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"
+                        ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
+                    ),
                     array(
-                        "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"
-                    ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
-                )
-            );
+                        array(
+                            "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"
+                        ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
+                    )
+                );
 
-            foreach ($lantai7 as $areaRuangan) {
-                echo renderAreaRuangan($areaRuangan);
-            }
-
-            function renderAreaRuangan(array $areaRuangan): string
-            {
-                $html = '<div class="flex flex-col gap-12 justify-between py-20">';
-
-                foreach ($areaRuangan as $ruangan) {
-                    $html .= '<div class="flex gap-8 px-8 flex-auto">';
-                    $html .= renderRuangan($ruangan);
-                    $html .= '</div>';
+                foreach ($lantai7 as $areaRuangan) {
+                    echo renderAreaRuangan($areaRuangan);
                 }
 
-                $html .= '</div>';
+                function renderAreaRuangan(array $areaRuangan): string
+                {
+                    $html = '<div class="flex flex-col gap-12 justify-between py-20">';
 
-                return $html;
-            }
+                    foreach ($areaRuangan as $ruangan) {
+                        $html .= '<div class="flex gap-8 px-8 flex-auto">';
+                        $html .= renderRuangan($ruangan);
+                        $html .= '</div>';
+                    }
 
-            function renderRuangan(array $ruangan): string
-            {
-                $html = '';
+                    $html .= '</div>';
 
-                foreach ($ruangan as $ruang => $background) {
-                    $html .= '
+                    return $html;
+                }
+
+                function renderRuangan(array $ruangan): string
+                {
+                    $html = '';
+
+                    foreach ($ruangan as $ruang => $background) {
+                        $html .= '
             <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
@@ -96,14 +97,15 @@
                 </svg>
                 <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
+                    }
+
+                    return $html;
                 }
 
-                return $html;
-            }
-
-            ?>
+                ?>
+            </div>
         </div>
-        <div id="indikator" class="flex mt-10 w-4/5 gap-8">
+        <div id="indikator" class="flex my-6 w-4/5 gap-8">
 
             <div id="kosong" class="flex items-center gap-2">
                 <div class="rounded-full bg-disable-color w-5 h-5"></div>
