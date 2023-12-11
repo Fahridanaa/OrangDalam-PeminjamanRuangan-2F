@@ -20,7 +20,7 @@ class MultiFormController extends Controller
             case 2:
                 if (isset($_GET['category'])) {
                     $category = $_GET['category'];
-                    $contentFile = __DIR__ . '/../Views/user/form/' . $category . '.php';
+                $contentFile = __DIR__ . '/../Views/user/form/' . $category . '.php';
                 } else {
                     header('Location: /pinjam/form?step=1');
                     exit();
