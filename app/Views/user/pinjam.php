@@ -13,7 +13,7 @@
             <div id="head" class="flex justify-between mb-6">
                 <h1 class="text-4xl font-semibold">Pinjam Ruangan</h1>
                 <a class="bg-third-color rounded-full px-10 text-neutral-color align-middle flex items-center cursor-pointer hover:bg-primary-color"
-                   href="/pinjam/form">
+                   href="/pinjam/form?step=1">
                     <span>Pinjam</span>
                 </a>
             </div>
