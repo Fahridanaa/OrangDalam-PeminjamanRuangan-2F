@@ -33,6 +33,7 @@ Router::add("GET", "/konfirmasiPinjam", AdminDashboardController::class, "showKo
 Router::add("GET", "/inbox", AdminDashboardController::class, "showInbox");
 Router::add("GET", "/history", AdminDashboardController::class, "showHistory");
 
+Router::add("GET", "/test", DashboardController::class, "showTest");
 
 Router::run();
 ?>

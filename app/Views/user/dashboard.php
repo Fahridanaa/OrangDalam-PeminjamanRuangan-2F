@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php
+    include __DIR__ . '/../shared/head.php';
+    use OrangDalam\PeminjamanRuangan\Controllers\DashboardController;
+    ?>
 </head>
 
 <body class="h-screen flex">
@@ -42,14 +45,15 @@
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
+                $dashboard = new DashboardController();
                 $lantai7Barat = array(
-                    array("LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"),
-                    array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
+                    $dashboard->denah("Lantai 7", "Barat", "Atas"),
+                    $dashboard->denah("Lantai 7", "Barat", "Bawah"),
                 );
 
                 $lantai7Timur = array(
-                    array("LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"),
-                    array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
+                    $dashboard->denah("Lantai 7", "Timur", "Atas"),
+                    $dashboard->denah("Lantai 7", "Timur", "Bawah"),
                 );
 
                 echo renderAreaRuangan($lantai7Barat);

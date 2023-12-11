@@ -4,14 +4,18 @@ namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\Jadwal;
+use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
+use OrangDalam\PeminjamanRuangan\Models\Ruang;
 
 class DashboardController extends Controller
 {
     private Jadwal $jadwal;
+    private Ruang $ruang;
 
     public function __construct()
     {
         $this->jadwal = new Jadwal();
+        $this->ruang = new Ruang();
     }
 
     private function loginCheck(): bool
@@ -73,6 +77,22 @@ class DashboardController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
+    public function showJadwalByRuangan($kodeRuang, $namaHari) {
+        return $this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari);
+    }
+
+    public function showTest() {
+        $this->view('shared/test');
+    }
+  
+    public function denah($lantai, $bagian, $posisi, $status = "disable") {
+        $data = array();
+        foreach ($this->ruang->show($lantai, $bagian, $posisi) as $item) {
+            $data[$item['kode']] = $status;
+          }
+        return $data;
+    }
+
     public function showRequestProfile(): void
     {
         if (!($this->loginCheck())) {
@@ -93,14 +113,5 @@ class DashboardController extends Controller
 
         $this->view('user/detailRuangan');
     }
-
-    public function showJadwalByRuangan($kodeRuang, $namaHari)
-    {
-        foreach ($this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari) as $value) {
-            /*
-             * value:
-             * mulai, selesai, namaMK, namaDosen, namaKelas
-             */
-        }
-    }
+        
 }
