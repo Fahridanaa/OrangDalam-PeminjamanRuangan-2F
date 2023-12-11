@@ -1,4 +1,5 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
@@ -31,14 +32,13 @@ class DashboardController extends Controller
             $this->view('user/dashboard');
         }
     }
-  
+
     public function showPinjamPage(): void
     {
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();
         }
-        $category = $_GET['category'] ?? 'default';
 
         $this->view('user/pinjam');
     }
@@ -73,7 +73,8 @@ class DashboardController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
-    public function showJadwalByRuangan($kodeRuang, $namaHari) {
+    public function showJadwalByRuangan($kodeRuang, $namaHari)
+    {
         foreach ($this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari) as $value) {
             /*
              * value:

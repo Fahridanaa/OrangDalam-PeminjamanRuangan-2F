@@ -2,7 +2,7 @@
     <h1 class="text-center font-semibold text-2xl font-plus-jakarta-sans">Pilih Kategori Peminjaman</h1>
     <div class="flex justify-center gap-16">
         <a class="flex flex-col justify-center items-center bg-primary-color rounded-xl p-10 cursor-pointer hover:scale-105 ease-in-out transition"
-           href="/pinjam?category=acara">
+           href="/pinjam/form?step=2&category=acara">
             <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width=".5"
                  stroke="#2E4374" class="w-32 h-32">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,7 +12,7 @@
             <span class="text-neutral-color font-medium text-xl">Acara / Kegiatan</span>
         </a>
         <a class="flex flex-col justify-center items-center bg-primary-color rounded-xl p-10 cursor-pointer hover:scale-105 ease-in-out transition"
-           href="/pinjam?category=matkul">
+           href="/pinjam/form?step=2&category=matkul">
             <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width="2"
                  stroke="#2E4374" class="w-32 h-32">
                 <path stroke-linecap="round" stroke-linejoin="round"
