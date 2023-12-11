@@ -2,11 +2,30 @@
 <html lang="en">
 <head>
     <?php include __DIR__ . '/../shared/head.php'; ?>
+    <style>
+        input[type="date"]:focus {
+            outline: none !important; /* Menghilangkan garis fokus bawaan */
+            box-shadow: none !important; /* Menghilangkan efek bayangan bawaan */
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            order: -1;
+            margin-right: 10px;
+            filter: invert(1);
+            color: red;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        input[type="date"]::-webkit-datetime-edit-day-field, input[type="date"]::-webkit-datetime-edit-month-field, input[type="date"]::-webkit-datetime-edit-year-field {
+            display: none;
+        }
+    </style>
 </head>
 <body class="antialiased">
-<div class="h-screen flex">
+<div class="flex">
     <?php include 'sidebar.php'; ?>
-    <div class="h-screen w-screen py-20 ml-32 px-8 flex flex-col gap-12">
+    <div class="h-screen w-screen py-12 ml-32 px-8 flex flex-col gap-4">
         <div id="header">
             <h1 class="text-4xl font-semibold mb-6">Detail Ruangan</h1>
             <hr class="border border-black">
@@ -70,15 +89,215 @@
                 </div>
                 <div class="flex justify-center items-center self-start">
                     <button type="button"
-                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color border-[3px]">
+                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color shadow-[0_4px_4px_0px_#00000025] border-[3px] hover:bg-third-color hover:text-neutral-color">
                         Pinjam Sekarang
                     </button>
                 </div>
             </div>
         </div>
+        <div>
+            <div class="border-b border-b-black mb-4">
+                <span id="detail-ruangan-jadwal-matkul-choose"
+                      class="mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color pb-1">Jadwal Mata Kuliah</span>
+                <span id="detail-ruangan-jadwal-peminjaman-choose"
+                      class="mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color pb-1">Peminjaman Acara/Kegiatan</span>
+            </div>
+            <table id="detail-ruangan-jadwal-matkul"
+                   class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
+                <tr class="bg-primary-color text-neutral-color">
+                    <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 focus:outline-none focus:shadow-none!">
+                        <div class="flex items-center relative">
+                            <input type="date" id="tanggalInput"
+                                   class="bg-primary-color text-sm w-10">
+                            <span id="tanggalFormatted"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>1</td>
+                    <td>7:00 - 7:50</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full bg-danger-color w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>2</td>
+                    <td>7:50 - 8:40</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>3</td>
+                    <td>8:40 - 9:30</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>4</td>
+                    <td>9:40 - 10:30</td>
+                    <td>Data Mining</td>
+                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
+                    <td>SIB-3B</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>5</td>
+                    <td>10:30 - 11:20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>6</td>
+                    <td>11:20 - 12:10</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>7</td>
+                    <td>12:50 - 13:40</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>8</td>
+                    <td>13:40 - 14:30</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>9</td>
+                    <td>14:30 - 15:20</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>10</td>
+                    <td>15:30 - 16:20</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>11</td>
+                    <td>16:20 - 17:10</td>
+                    <td>Desain Pemrograman Web</td>
+                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
+                    <td>TI-2F</td>
+                    <td>
+                        <div class="rounded-full w-4 h-4"></div>
+                    </td>
+                </tr>
+            </table>
+            <table id="detail-ruangan-jadwal-peminjaman"
+                   class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
+                <tr class="bg-primary-color text-neutral-color">
+                    <th colspan="6"
+                        class="rounded-t-xl text-start pt-1 px-3 py-10 focus:outline-none focus:shadow-none!">
+                    </th>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>1</td>
+                    <td>29 November 2023</td>
+                    <td>19:00 - 22:00</td>
+                    <td>Hacktoberfest</td>
+                    <td>Fahridana Ahmad Rayyansyah</td>
+                    <td>
+                        <div class="rounded-full bg-warn-color w-4 h-4"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
+<script>
+    const detailRuanganButton = ['detail-ruangan-jadwal-matkul-choose', 'detail-ruangan-jadwal-peminjaman-choose'];
+    const detailRuanganJadwal = ['detail-ruangan-jadwal-matkul', 'detail-ruangan-jadwal-peminjaman'];
+
+    detailRuanganButton.forEach((button, index) => {
+        document.getElementById(button).addEventListener('click', () => {
+            detailRuanganButton.forEach((button) => {
+                document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
+            });
+            detailRuanganJadwal.forEach((jadwal) => {
+                document.getElementById(jadwal).classList.add('hidden');
+            });
+            document.getElementById(button).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
+            document.getElementById(detailRuanganJadwal[index]).classList.remove('hidden');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        detailRuanganButton.forEach((button) => {
+            document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
+        });
+
+        document.getElementById(detailRuanganButton[0]).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
+
+        detailRuanganJadwal.forEach((jadwal) => {
+            document.getElementById(jadwal).classList.add('hidden');
+        });
+
+        document.getElementById(detailRuanganJadwal[0]).classList.remove('hidden');
+    });
+
+    function formatDate() {
+        let tanggalInput = document.getElementById("tanggalInput").value;
+
+        let tanggal = new Date(tanggalInput);
+        let options = {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+        let tanggalFormatted = tanggal.toLocaleDateString('id-ID', options);
+
+        document.getElementById("tanggalFormatted").textContent = tanggalFormatted;
+    }
+
+    document.getElementById("tanggalInput").addEventListener("change", formatDate);
+    <
+    <
+    <
+    <
+    <
+    << HEAD
+
+        document.getElementById('tanggalInput'
+    ).valueAsDate = new Date();
+    formatDate();
+</script>
 </body>
-<!-- partial -->
 <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
 </html>

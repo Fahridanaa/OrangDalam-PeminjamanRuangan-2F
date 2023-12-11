@@ -18,7 +18,7 @@ module.exports = {
                 'locked-color': 'var(--locked-color)',
             },
             fontFamily: {
-                'plus-jakarta-sans': ['Plus Jakarta Sans', 'sans-serif'],
+                'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
             },
         },
         screens: {

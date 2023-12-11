@@ -26,7 +26,6 @@ class AuthController extends Controller
 
         $data = $this->authModel->get($username);
         session_start();
-
         if ($data == NULL) {
             $this->showLoginForm();
         }

@@ -9,14 +9,10 @@
     <?php include 'sidebar.php'; ?>
     <div class="h-screen w-screen flex flex-col gap-6 items-center ml-32">
         <?php include 'stepper.php';
-        include __DIR__ . '/form/category.php';
-        //        include __DIR__ . '/form/acara.php';
-        //        include __DIR__ . '/form/matkul.php';
-        //        include __DIR__ . '/form/pilihRuang.php';
-        //        include __DIR__ . '/form/done.php';
+
+        include $contentFile;
         ?>
     </div>
 </body>
 
 </html>
-

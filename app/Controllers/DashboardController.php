@@ -1,4 +1,5 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
@@ -35,14 +36,13 @@ class DashboardController extends Controller
             $this->view('user/dashboard');
         }
     }
-  
+
     public function showPinjamPage(): void
     {
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();
         }
-        $category = $_GET['category'] ?? 'default';
 
         $this->view('user/pinjam');
     }
@@ -84,11 +84,34 @@ class DashboardController extends Controller
     public function showTest() {
         $this->view('shared/test');
     }
+  
     public function denah($lantai, $bagian, $posisi, $status = "disable") {
         $data = array();
         foreach ($this->ruang->show($lantai, $bagian, $posisi) as $item) {
             $data[$item['kode']] = $status;
-        }
+          }
         return $data;
     }
+
+    public function showRequestProfile(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        $this->view('user/profile');
+    }
+
+    // detail ruangan, tinggal href 
+    public function showRequesDetailRuangan(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        $this->view('user/detailRuangan');
+    }
+        
 }
