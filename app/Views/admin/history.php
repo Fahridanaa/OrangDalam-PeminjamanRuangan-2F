@@ -54,7 +54,7 @@ if (!isset($_GET['tab'])) {
 <body class="overflow-hidden font-jakarta">
     <div class="flex flex-row">
         <?php include 'sidebar.php'; ?>
-        <div class="min-h-screen">
+        <div class="min-h-screen w-full">
             <section class="flex flex-col items-stretch mt-4">
                 <div class="flex pb-1 mx-8 mt-10 mb-2 flex-nowrap">
                     <h4 class="pl-2 text-3xl font-bold font-jakarta">

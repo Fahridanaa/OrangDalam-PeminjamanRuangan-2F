@@ -29,7 +29,7 @@
 <body class="overflow-hidden font-jakarta" style="background: #edf2f7;">
 <div class="flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div class="min-h-screen">
+    <div class="min-h-screen w-full">
         <section class="flex flex-col items-stretch justify-start">
             <div class="flex pb-1 mx-10 my-10 border-b-2 border-black flex-nowrap">
                 <h4 class="pl-2 text-3xl font-bold">
@@ -76,7 +76,7 @@
                 </h4>
             </div>
             <div class="relative justify-center px-8 overflow-x-auto">
-                <table class="w-full text-base rtl:text-right ">
+                <table class="w-full text-base rtl:text-right">
                     <thead class="text-white bg-gray-600">
                         <tr>
                             <th scope="col" class="px-1 py-3">Peminjam</th>

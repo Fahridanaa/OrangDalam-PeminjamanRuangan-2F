@@ -29,7 +29,7 @@
 <body class="overflow-hidden font-jakarta">
     <div class="flex flex-row">
         <?php include 'sidebar.php'; ?>
-        <div class="min-h-screen">
+        <div class="min-h-screen w-full">
             <section class="flex flex-col items-stretch mt-4">
                 <div class="flex pb-3 mx-8 my-8 border-b-2 border-black flex-nowrap">
                     <h4 class="pl-2 text-3xl font-bold font-jakarta">

@@ -5,7 +5,7 @@ $isActive = function ($path) {
 
 ?>
 
-<div class="h-screen bg-third-color">
+<div class="h-screen bg-third-color w-fit">
     <div class="flex flex-col items-center h-screen px-8">
         <div class="flex flex-col justify-between my-10 rounded-md">
             <a class="rounded-lg cursor-pointer group">
