@@ -42,22 +42,19 @@
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
-                $lantai7 = array(
-                    array(
-                        array(
-                            "LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"
-                        ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
-                    ),
-                    array(
-                        array(
-                            "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"
-                        ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
-                    )
+                $lantai7Barat = array(
+                    array("LPR 1" => "danger", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "warn"),
+                    array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "warn", "LPR 7" => "warn")
                 );
 
-                foreach ($lantai7 as $areaRuangan) {
-                    echo renderAreaRuangan($areaRuangan);
-                }
+                $lantai7Timur = array(
+                    array("LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "warn"),
+                    array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "warn", "LAI" => "warn")
+                );
+
+                echo renderAreaRuangan($lantai7Barat);
+                echo renderAreaRuangan($lantai7Timur);
+
 
                 function renderAreaRuangan(array $areaRuangan): string
                 {
@@ -98,7 +95,6 @@
                 <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
                     }
-
                     return $html;
                 }
 
