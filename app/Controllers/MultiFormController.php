@@ -43,24 +43,13 @@ class MultiFormController extends Controller
                     header('Location: /pinjam/form?step=1');
                     exit();
                 }
-                if ($_GET['category'] == 'acara') {
-                    if ($_SESSION['formPinjam']['urgent']) {
-                        $message = 'Silahkan tunggu konfirmasi dari Admin';
-                    } else {
-                        $message = 'Silahkan upload surat peminjaman untuk <br> tahap selanjutnya';
-                    }
-                } else {
-                    if ($_SESSION['level'] === 'mahasiswa') {
-                        $message = 'Silahkan tunggu konfirmasi dari Ketua Kelas';
-                    } else {
-                        $message = 'Silahkan tunggu konfirmasi dari Dosen';
-                    }
-                }
                 $contentFile = __DIR__ . '/../Views/user/form/done.php';
                 break;
+            default:
+                header('Location: /pinjam');
+                exit();
         }
         include __DIR__ . '/../Views/user/multiForm.php';
-
     }
 
 //    public static function processForm1()

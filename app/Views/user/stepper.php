@@ -4,7 +4,7 @@ $isTextActive = function ($path) {
 };
 
 $isStepActive = function ($path) {
-    return ($_GET['step'] == $path) ? 'bg-third-color ' : 'bg-fourth-color ';
+    return ($_GET['step'] >= $path) ? 'bg-third-color ' : 'bg-fourth-color ';
 };
 ?>
 
