@@ -89,7 +89,7 @@ $isActive = function ($path) {
                     <img src="/img/user-picture.png" class="rounded-full w-10 h-10 my-2 xl:my-4">
                 </li>
                 <li class="flex items-center justify-center">
-                    <a class="rounded-md group cursor-pointer my-2 xl:my-4">
+                    <a class="rounded-md group cursor-pointer my-2 xl:my-4" href="/profile">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                              class="w-6 h-6 fill-fourth-color hover:fill-neutral-color">
                             <path fill-rule="evenodd"

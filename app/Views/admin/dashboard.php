@@ -2,28 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="../../../public/css/output.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="../icon/favicon.ico" />
-    <style>
-        #option select {
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-        }
-
-        #option select::-ms-expand {
-            display: none;
-        }
-
-        /* input[type="date"]::-webkit-inner-spin-button,
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            display: none;
-            -webkit-appearance: none;
-        } */
-    </style>
+    <?php include __DIR__ . '/../shared/head.php'; ?>
 </head>
 
 <body class="overflow-hidden font-jakarta" style="background: #edf2f7;">
