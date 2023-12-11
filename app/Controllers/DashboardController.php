@@ -73,6 +73,27 @@ class DashboardController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
+    public function showRequestProfile(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        $this->view('user/profile');
+    }
+
+    // detail ruangan, tinggal href 
+    public function showRequesDetailRuangan(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        $this->view('user/detailRuangan');
+    }
+
     public function showJadwalByRuangan($kodeRuang, $namaHari)
     {
         foreach ($this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari) as $value) {

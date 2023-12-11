@@ -55,7 +55,6 @@
                 echo renderAreaRuangan($lantai7Barat);
                 echo renderAreaRuangan($lantai7Timur);
 
-
                 function renderAreaRuangan(array $areaRuangan): string
                 {
                     $html = '<div class="flex flex-col gap-12 justify-between py-20">';

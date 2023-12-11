@@ -276,7 +276,6 @@
         document.getElementById(detailRuanganJadwal[0]).classList.remove('hidden');
     });
 
-
     function formatDate() {
         let tanggalInput = document.getElementById("tanggalInput").value;
 
@@ -288,11 +287,16 @@
     }
 
     document.getElementById("tanggalInput").addEventListener("change", formatDate);
+    <
+    <
+    <
+    <
+    <
+    << HEAD
 
-    document.getElementById('tanggalInput').valueAsDate = new Date();
+        document.getElementById('tanggalInput'
+    ).valueAsDate = new Date();
     formatDate();
-
-
 </script>
 </body>
 <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
