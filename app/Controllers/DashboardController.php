@@ -84,7 +84,11 @@ class DashboardController extends Controller
     public function showTest() {
         $this->view('shared/test');
     }
-    public function denah($lantai) {
-        return $this->ruang->show($lantai);
+    public function denah($lantai, $bagian, $posisi, $status = "disable") {
+        $data = array();
+        foreach ($this->ruang->show($lantai, $bagian, $posisi) as $item) {
+            $data[$item['kode']] = $status;
+        }
+        return $data;
     }
 }
