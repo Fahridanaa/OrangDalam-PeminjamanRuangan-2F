@@ -2,6 +2,8 @@
 
 namespace OrangDalam\PeminjamanRuangan\Models;
 
+use config\Database;
+
 class Jurusan
 {
     private $table = 'jurusan';
@@ -9,11 +11,11 @@ class Jurusan
 
     public function __construct()
     {
-        $this->db = new \Database();
+        $this->db = new Database();
     }
 
     public function getJurusan() {
-        $this->db->query('SELECT * FROM' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 }
