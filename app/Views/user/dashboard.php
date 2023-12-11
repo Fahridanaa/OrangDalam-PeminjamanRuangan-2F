@@ -13,7 +13,7 @@
             <h1 class="mb-6 text-4xl font-semibold">Denah Ruangan</h1>
             <hr class="border border-black">
         </div>
-        <form id="option" class="flex gap-8 py-5">
+        <form method="post" id="option" class="flex gap-8 py-5">
             <div id="dashboard-lantai-option">
                 <select name="lantai" id="lantai" class="py-4 px-16 rounded-lg border border-primary-color"
                         title="Lantai" required>

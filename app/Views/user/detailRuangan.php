@@ -25,7 +25,7 @@
 <body class="antialiased">
 <div class="flex">
     <?php include 'sidebar.php'; ?>
-    <div class="h-screen w-screen py-20 ml-32 px-8 flex flex-col gap-12">
+    <div class="h-screen w-screen py-12 ml-32 px-8 flex flex-col gap-4">
         <div id="header">
             <h1 class="text-4xl font-semibold mb-6">Detail Ruangan</h1>
             <hr class="border border-black">
@@ -89,14 +89,21 @@
                 </div>
                 <div class="flex justify-center items-center self-start">
                     <button type="button"
-                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color border-[3px] hover:bg-third-color hover:text-neutral-color">
+                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color shadow-[0_4px_4px_0px_#00000025] border-[3px] hover:bg-third-color hover:text-neutral-color">
                         Pinjam Sekarang
                     </button>
                 </div>
             </div>
         </div>
-        <div class="rounded-3xl">
-            <table class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl">
+        <div>
+            <div class="border-b border-b-black mb-4">
+                <span id="detail-ruangan-jadwal-matkul-choose"
+                      class="mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color pb-1">Jadwal Mata Kuliah</span>
+                <span id="detail-ruangan-jadwal-peminjaman-choose"
+                      class="mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color pb-1">Peminjaman Acara/Kegiatan</span>
+            </div>
+            <table id="detail-ruangan-jadwal-matkul"
+                   class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
                 <tr class="bg-primary-color text-neutral-color">
                     <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 focus:outline-none focus:shadow-none!">
                         <div class="flex items-center relative">
@@ -217,10 +224,59 @@
                     </td>
                 </tr>
             </table>
+            <table id="detail-ruangan-jadwal-peminjaman"
+                   class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
+                <tr class="bg-primary-color text-neutral-color">
+                    <th colspan="6"
+                        class="rounded-t-xl text-start pt-1 px-3 py-10 focus:outline-none focus:shadow-none!">
+                    </th>
+                </tr>
+                <tr class="border-b border-black">
+                    <td>1</td>
+                    <td>29 November 2023</td>
+                    <td>19:00 - 22:00</td>
+                    <td>Hacktoberfest</td>
+                    <td>Fahridana Ahmad Rayyansyah</td>
+                    <td>
+                        <div class="rounded-full bg-warn-color w-4 h-4"></div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 <script>
+    const detailRuanganButton = ['detail-ruangan-jadwal-matkul-choose', 'detail-ruangan-jadwal-peminjaman-choose'];
+    const detailRuanganJadwal = ['detail-ruangan-jadwal-matkul', 'detail-ruangan-jadwal-peminjaman'];
+
+    detailRuanganButton.forEach((button, index) => {
+        document.getElementById(button).addEventListener('click', () => {
+            detailRuanganButton.forEach((button) => {
+                document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
+            });
+            detailRuanganJadwal.forEach((jadwal) => {
+                document.getElementById(jadwal).classList.add('hidden');
+            });
+            document.getElementById(button).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
+            document.getElementById(detailRuanganJadwal[index]).classList.remove('hidden');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        detailRuanganButton.forEach((button) => {
+            document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
+        });
+
+        document.getElementById(detailRuanganButton[0]).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
+
+        detailRuanganJadwal.forEach((jadwal) => {
+            document.getElementById(jadwal).classList.add('hidden');
+        });
+
+        document.getElementById(detailRuanganJadwal[0]).classList.remove('hidden');
+    });
+
+
     function formatDate() {
         let tanggalInput = document.getElementById("tanggalInput").value;
 
@@ -232,6 +288,11 @@
     }
 
     document.getElementById("tanggalInput").addEventListener("change", formatDate);
+
+    document.getElementById('tanggalInput').valueAsDate = new Date();
+    formatDate();
+
+
 </script>
 </body>
 <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
