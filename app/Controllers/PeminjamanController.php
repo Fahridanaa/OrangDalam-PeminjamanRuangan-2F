@@ -23,6 +23,13 @@ class PeminjamanController extends Controller
     }
 
     public function insertAcara() {
+        $tanggalAcara = $_POST['acara-tanggal'];
+        $mulai = $_POST['acara-jam-mulai'];
+        $selesai = $_POST['acara-jam-selesai'];
+        $urgent = $_POST['acara-urgent'];
+        $keterangan = $_POST['acara-keterangan'];
 
+        $data = [];
+        $this->peminjaman->insert($data);
     }
 }
