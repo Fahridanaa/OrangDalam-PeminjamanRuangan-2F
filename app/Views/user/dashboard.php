@@ -78,7 +78,7 @@
 
                     foreach ($ruangan as $ruang => $background) {
                         $html .= '
-            <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105">
+            <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105" href="/detail?kode=$ruang">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273

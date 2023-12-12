@@ -88,10 +88,12 @@
 
                 </div>
                 <div class="flex justify-center items-center self-start">
-                    <button type="button"
-                            class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color shadow-[0_4px_4px_0px_#00000025] border-[3px] hover:bg-third-color hover:text-neutral-color">
-                        Pinjam Sekarang
-                    </button>
+                    <a href="/pinjam">
+                        <button type="button"
+                                class="h-14 px-6 py-2 w-full font-semibold rounded-lg text-primary-color border-third-color shadow-[0_4px_4px_0px_#00000025] border-[3px] hover:bg-third-color hover:text-neutral-color">
+                                Pinjam Sekarang
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

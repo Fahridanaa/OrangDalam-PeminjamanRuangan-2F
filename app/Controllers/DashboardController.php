@@ -112,6 +112,13 @@ class DashboardController extends Controller
     // detail ruangan, tinggal href 
     public function showRequesDetailRuangan(): void
     {
+
+        $kode = $_GET['kode'];
+        if (!isset($kode)) {
+            header('Location: /dashboard');
+            exit;
+        }
+
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();

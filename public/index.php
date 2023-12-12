@@ -25,11 +25,10 @@ Router::add("GET", "/pinjam", DashboardController::class, "showPinjamPage");
 Router::add("GET", "/pesan", DashboardController::class, "showInboxPage");
 Router::add("GET", "/riwayat", DashboardController::class, "showHistoryPage");
 Router::add("GET", "/konfirmasi-ruangan", DashboardController::class, "showRequestPage");
-
 Router::add("GET", "/profile", DashboardController::class, "showRequestProfile");
-Router::add("GET", "/profile", DashboardController::class, "showRequesDetailRuangan");
-Router::add("POST", "/profile", AuthController::class, "changePass");
+Router::add("GET", "/detail", DashboardController::class, "showRequesDetailRuangan");
 
+Router::add("POST", "/profile", AuthController::class, "changePass");
 Router::add("GET", "/pinjam/form", MultiFormController::class, "showForm");
 
 // admin
