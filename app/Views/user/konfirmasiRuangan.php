@@ -25,7 +25,7 @@
                     </div>
                     <div class="items-center flex gap-5">
                         <button id="cek"
-                                class="font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">
+                                class="tolak-konfirmasi-matkul-button font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">
                             Tolak Perubahan
                         </button>
                         <button class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="self-end flex gap-5">
                     <button class="text-xl flex items-center gap-3">
-                        <span>
+                        <span class="detail-matkul-button">
                         Detail Informasi
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -56,7 +56,7 @@
                 </div>
                 <div class="self-end flex gap-5">
                     <button class="text-xl flex items-center gap-3">
-                        <span>
+                        <span class="detail-matkul-button">
                         Detail Informasi
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -76,7 +76,7 @@
                 </div>
                 <div class="self-end flex gap-5">
                     <button class="text-xl flex items-center gap-3">
-                        <span>
+                        <span class="detail-matkul-button">
                         Detail Informasi
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -88,67 +88,41 @@
             </div>
         </div>
     </div>
-    <!--    <div id="tolak-perubahan-modal" class="modal hidden fixed inset-0 overflow-y-auto">-->
-    <!--        <div class="flex items-center justify-center min-h-screen">-->
-    <!--            <div class="modal-overlay absolute w-full h-full bg-gray-800 opacity-50"></div>-->
-    <!--            <div class="bg-white py-7 px-28 gap-10 shadow-lg rounded-3xl z-20 flex flex-col items-center">-->
-    <!--                <span class="font-semibold text-3xl">Alasan</span>-->
-    <!--                <form class="flex flex-col gap-12">-->
-    <!--                    <div class="flex flex-col gap-2">-->
-    <!--                        <label for="keterangan">keterangan</label>-->
-    <!--                        <textarea name="keterangan" id="keterangan" rows="5" placeholder="Keterangan Acara..."-->
-    <!--                                  class="p-2 rounded-lg border border-primary-color" required></textarea>-->
-    <!--                    </div>-->
-    <!--                    <div class="flex gap-32">-->
-    <!--                        <button type="button"-->
-    <!--                                class="bg-danger-color px-10 py-3 text-neutral-color font-semibold text-sm rounded-3xl">-->
-    <!--                            Tutup-->
-    <!--                        </button>-->
-    <!--                        <input type="submit"-->
-    <!--                               class="bg-third-color px-10 py-3 text-neutral-color cursor-pointer font-semibold text-sm rounded-3xl">-->
-    <!--                    </div>-->
-    <!--                </form>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <div id="offer-request-modal" class="modal hidden fixed inset-0 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="modal-overlay absolute w-full h-full bg-gray-800 opacity-50"></div>
-            <div class="bg-white w-1/4 py-7 px-14 gap-10 shadow-lg rounded-3xl z-20 flex flex-col">
-                <span class="font-semibold text-2xl text-center">Ingin Melakukan Request Pemindahan Mata Kuliah?</span>
-                <div class="flex flex-col gap-2">
-                    <button type="button"
-                            class="bg-third-color px-10 py-3 text-neutral-color cursor-pointer font-semibold text-sm rounded-3xl">
-                        Iya
-                    </button>
-                    <button type="button"
-                            class="bg-danger-color px-10 py-3 text-neutral-color font-semibold text-sm rounded-3xl">
-                        Tutup
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include __DIR__ . '/modals/detailMataKuliah.php'; ?>
+    <?php include __DIR__ . '/modals/tolakPindahMataKuliah.php'; ?>
+    <?php if ($_POST['keterangan']) {
+        include __DIR__ . '/modals/TawaranPermintaanPemindahanMataKuliah.php';
+    } ?>
 </div>
 <script>
-    const modal = document.querySelector('.modal');
-    const openModalBtn = document.getElementById('cek');
-    const overlay = document.querySelectorAll('.modal-overlay');
+    const modals = document.querySelectorAll('.modal');
+    const detailMatkulButton = document.querySelectorAll('.detail-matkul-button');
+    const tolakButton = document.querySelectorAll('.tolak-konfirmasi-matkul-button');
 
-    const openModal = () => modal.classList.remove('hidden');
-    const closeModal = () => modal.classList.add('hidden');
+    detailMatkulButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            modals[0].classList.remove('hidden');
+        })
+    })
 
-    openModalBtn.onclick = openModal;
-    overlay.forEach((e) => {
-        e.onclick = closeModal;
-    });
+    tolakButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            modals[1].classList.remove('hidden');
+        })
+    })
 
-    window.onclick = (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    };
+    modals.forEach((modal) => {
+        const overlay = modal.querySelector('.overlay');
+        const closeModal = modal.querySelector('.close-modal');
 
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        })
+
+        overlay.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        })
+    })
 </script>
 </body>
 </html>
