@@ -9,9 +9,9 @@ class DashboardController extends Controller
 {
     private Jadwal $jadwal;
 
-    public function __construct()
-    {
-        $this->jadwal = new Jadwal();
+    public function __construct() {
+        $middlewareInstance = $this->middleware('AuthMiddleware');
+        $middlewareInstance->handleUser();
     }
 
     private function loginCheck(): bool

@@ -4,9 +4,13 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
-use OrangDalam\PeminjamanRuangan\Models\Jadwal;
 
 class AdminDashboardController extends Controller {
+
+    public function __construct() {
+        $middlewareInstance = $this->middleware('AuthMiddleware');
+        $middlewareInstance->handleAdmin();
+    }
 
     private function loginCheck(): bool
     {
@@ -38,7 +42,8 @@ class AdminDashboardController extends Controller {
         if (!($this->loginCheck())) {
             header('Location: /login');
             exit();
-        }
+        } 
+        
 
         $this->view('admin/history');
     }
