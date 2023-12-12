@@ -14,7 +14,22 @@ class PeminjamanController extends Controller
         $this->peminjaman = new Peminjaman();
     }
 
-    public function insertAcara() {
+    public function showPinjam() {
+        return $this->peminjaman->pinjam();
+    }
 
+    public function showHistory() {
+        return $this->peminjaman->history();
+    }
+
+    public function insertAcara() {
+        $tanggalAcara = $_POST['acara-tanggal'];
+        $mulai = $_POST['acara-jam-mulai'];
+        $selesai = $_POST['acara-jam-selesai'];
+        $urgent = $_POST['acara-urgent'];
+        $keterangan = $_POST['acara-keterangan'];
+
+        $data = [];
+        $this->peminjaman->insert($data);
     }
 }

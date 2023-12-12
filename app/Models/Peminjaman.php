@@ -28,7 +28,7 @@ class Peminjaman
     }
 
     public function pinjam() {
-        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(tanggalAcara) AS tanggalAcara
+        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara
             FROM peminjaman
             INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
             WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')
@@ -37,7 +37,7 @@ class Peminjaman
     }
 
     public function history() {
-        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(tanggalAcara) AS tanggalAcara
+        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara
             FROM peminjaman
             INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
             WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')

@@ -19,7 +19,7 @@ class AuthModel {
     }
 
     public function getProfile($id) {
-        $this->db->query("SELECT mahasiswa.nama, nim, jurusan.nama, prodi.nama, telepon
+        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, prodi.nama AS prodi, telepon
             FROM user
             INNER JOIN mahasiswa ON user.nim_mhs = mahasiswa.nim
             INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
@@ -34,6 +34,6 @@ class AuthModel {
         $this->db->bind(":old", $old);
         $this->db->bind(":new", $new);
         $this->db->bind(":id", $id);
-        return $this->db->rowCount();
+        return $this->db->single();
     }
 }
