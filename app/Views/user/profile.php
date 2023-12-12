@@ -2,7 +2,14 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php
+    include __DIR__ . '/../shared/head.php';
+    use OrangDalam\PeminjamanRuangan\Models\AuthModel;
+
+    $user = new AuthModel();
+
+    $data = $user->getProfile($_SESSION['id']);
+    ?>
 </head>
 <body>
 <div id="user-profile" class="flex">
@@ -21,23 +28,23 @@
                 <div id="user-profile-data" class="flex-[3]">
                     <div id="user-profile-name" class="border-b border-black flex p-2">
                         <span>Nama</span>
-                        <span class="flex-1 text-end">Haidar Aly</span>
+                        <span class="flex-1 text-end"><?php echo $data['nama'] ?></span>
                     </div>
                     <div id="user-profile-nim" class="border-b border-black flex p-2">
                         <span>NIM</span>
-                        <span class="flex-1 text-end">2241720258</span>
+                        <span class="flex-1 text-end"><?php echo $data['nim']; ?></span>
                     </div>
                     <div id="user-profile-jurusan" class="border-b border-black flex p-2">
                         <span>Jurusan</span>
-                        <span class="flex-1 text-end">Teknologi Informasi</span>
+                        <span class="flex-1 text-end"><?php echo $data['jurusan']; ?></span>
                     </div>
                     <div id="user-profile-prodi" class="border-b border-black flex p-2">
                         <span>Prodi</span>
-                        <span class="flex-1 text-end">D4 - Teknologi Informasi</span>
+                        <span class="flex-1 text-end"><?php echo $data['prodi']; ?></span>
                     </div>
                     <div id="user-profile-tel" class="border-b border-black flex p-2">
                         <span>No. Telp</span>
-                        <span class="flex-1 text-end">08819771245</span>
+                        <span class="flex-1 text-end"><?php echo $data['telepon'];?></span>
                     </div>
                 </div>
             </div>
@@ -49,7 +56,7 @@
             </div>
             <div id="user-ganti-password-card"
                  class="self-center bg-neutral-color border-2 border[#C8C1C1] py-12 px-10 rounded-3xl w-3/4 mb-6">
-                <form class="flex flex-col gap-8">
+                <form method="POST" class="flex flex-col gap-8">
                     <div class="flex gap-2 justify-between items-center">
                         <label>Password Sekarang</label>
                         <input type="password" name="password-sekarang" id="password-sekarang"
@@ -65,7 +72,7 @@
                         <input type="password" name="konfirmasi-password-baru" id="konfirmasi-password-baru"
                                class="border border-black rounded-lg px-4 py-2 w-96" required>
                     </div>
-                    <button class="bg-third-color rounded-full px-10 py-2 text-neutral-color align-middle flex items-center self-end cursor-pointer hover:bg-primary-color">
+                    <button class="bg-third-color rounded-full px-10 py-2 text-neutral-color align-middle flex items-center self-end cursor-pointer hover:bg-primary-color" type="submit">
                         <span>Ganti</span>
                     </button>
                 </form>

@@ -50,6 +50,26 @@ class AuthController extends Controller
         }
     }
 
+    public function changePass() {
+        $now = md5($_POST['password-sekarang'] ?? '');
+        $new = md5($_POST['password-baru'] ?? '');
+        $confirm = md5($_POST['konfirmasi-password-baru'] ?? '');
+        $data = $this->authModel->get($_SESSION['username']);
+
+        if ($data['password'] === $now) {
+            if ($new === $confirm) {
+                $this->authModel->updatePass($data['id'], $now, $new);
+                header('Location: /dashboard');
+            }
+            else {
+                echo "Konfirmasi Password Salah";
+            }
+        }
+        else {
+            $this->view('user/profile');
+        }
+    }
+
     public function logout(): void
     {
         session_destroy();

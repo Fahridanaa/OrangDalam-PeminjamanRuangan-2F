@@ -1,12 +1,6 @@
 <?php
-use OrangDalam\PeminjamanRuangan\Controllers\DashboardController;
-$dashboard = new DashboardController();
+use OrangDalam\PeminjamanRuangan\Controllers\AuthController;
 
-$dashboard = new DashboardController();
+$user = new AuthController();
 
-$data = array(
-    $dashboard->denah("Lantai 5"),
-    $dashboard->denah("Lantai 6")
-);
-
-var_dump($data);
+var_dump($user->checkData());

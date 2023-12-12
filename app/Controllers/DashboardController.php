@@ -85,12 +85,15 @@ class DashboardController extends Controller
         $this->view('shared/test');
     }
   
-    public function denah($lantai, $bagian, $posisi, $status = "disable") {
+    public function denah($lantai, $bagian, $posisi) {
         $data = array();
         foreach ($this->ruang->show($lantai, $bagian, $posisi) as $item) {
-            $data[$item['kode']] = $status;
-          }
+            $data[$item['kode']] = 'disable';
+        }
         return $data;
+    }
+    public function showDenah() {
+        $this->view('user/dashboard');
     }
 
     public function showRequestProfile(): void

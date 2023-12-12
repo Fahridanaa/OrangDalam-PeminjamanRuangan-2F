@@ -16,6 +16,7 @@ Router::add("POST", "/login", AuthController::class, "processLogin");
 Router::add("GET", "/logout", AuthController::class, "logout");
 
 Router::add("GET", "/dashboard", DashboardController::class, "showDashboard");
+Router::add("POST", "/dashboard", DashboardController::class, "showDenah");
 Router::add("GET", "/pinjam", DashboardController::class, "showPinjamPage");
 Router::add("GET", "/pesan", DashboardController::class, "showInboxPage");
 Router::add("GET", "/riwayat", DashboardController::class, "showHistoryPage");
@@ -26,6 +27,7 @@ Router::add("GET", "/pinjam/form", MultiFormController::class, "showForm");
 
 Router::add("GET", "/profile", DashboardController::class, "showRequestProfile");
 Router::add("GET", "/profile", DashboardController::class, "showRequesDetailRuangan");
+Router::add("POST", "/profile", AuthController::class, "changePass");
 
 
 // admin
