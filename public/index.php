@@ -5,6 +5,7 @@ use OrangDalam\PeminjamanRuangan\Core\Router;
 use OrangDalam\PeminjamanRuangan\Controllers\AuthController;
 use OrangDalam\PeminjamanRuangan\Controllers\DashboardController;
 use OrangDalam\PeminjamanRuangan\Controllers\AdminDashboardController;
+
 use OrangDalam\PeminjamanRuangan\Controllers\MultiFormController;
 use OrangDalam\PeminjamanRuangan\Core\RouterMiddleware;
 
@@ -33,13 +34,6 @@ Router::add("GET", "/pinjam/form", MultiFormController::class, "showForm");
 Router::add("GET", "/inbox", AdminDashboardController::class, "showInbox");
 Router::add("GET", "/history", AdminDashboardController::class, "showHistory");
 Router::add("GET", "/konfirmasiPinjam", AdminDashboardController::class, "showKonfirmasiPinjamPage");
-
-
-
-
-
-
-
 
 Router::run();
 
