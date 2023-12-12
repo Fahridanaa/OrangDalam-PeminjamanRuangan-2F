@@ -1,6 +1,6 @@
 <div class="border mx-auto px-24 py-8 flex flex-col justify-between border-black rounded-3xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
     <h1 class="text-center font-semibold text-2xl">Pindah Jam Mata Kuliah</h1>
-    <form id="booking-form" class="flex flex-col gap-6" >
+    <form id="booking-form" class="flex flex-col gap-6">
         <div id="input-form" class="flex flex-col gap-2">
             <div class="flex gap-24">
                 <div class="flex flex-col gap-2">
@@ -73,7 +73,8 @@
             <input type="file" class="px-5 py-2 rounded-lg border border-primary-color" required>
         </div>
         <div id="buttons" class="flex justify-around">
-            <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer">Kembali</a>
+            <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
+               href="/pinjam/form?step=1">Kembali</a>
             <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
                     type="submit">Lanjut
             </button>

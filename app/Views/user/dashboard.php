@@ -4,7 +4,9 @@
 <head>
     <?php
     include __DIR__ . '/../shared/head.php';
+
     use OrangDalam\PeminjamanRuangan\Controllers\DashboardController;
+
     ?>
 </head>
 
@@ -26,10 +28,6 @@
                     <option value="Lantai 7">Lantai 7</option>
                     <option value="Lantai 8">Lantai 8</option>
                 </select>
-            </div>
-            <div id="dashboard-tanggal-option">
-                <input type="date" name="tanggal" id="tanggal"
-                       class="py-3 pl-8 pr-5 rounded-lg border border-primary-color" required>
             </div>
             <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color" type="submit">
                 <span class="font-bold text-sm text-neutral-color">CARI RUANGAN</span>

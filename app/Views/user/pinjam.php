@@ -39,7 +39,7 @@
                     case 'Diperlukan Surat Izin':
                         $color = 'bg-danger-color';
                         $notif = '<span class="text-danger-color text-lg font-semibold">*Upload Surat Sebelum 1 Maret 2023</span>';
-                        $buttonSurat = '<button id="upload-surat-izin" class="font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
+                        $buttonSurat = '<button class="upload-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
                         break;
                     case 'Telah Dikonfirmasi':
                         $color = 'bg-select-color';
@@ -48,7 +48,11 @@
             ?>
                 <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
                     <div class="flex w-full justify-between">
-                        <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status'];?></span>
+                      <div class="flex gap-4">
+                         <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status'];?></span>
+                        // tambahi category
+                        <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span> 
+                    </div>
                         <?= $notif ?>
                     </div>
                     <div class="flex flex-col gap-1">
@@ -57,7 +61,8 @@
                     </div>
                     <div class="self-end flex gap-5">
                         <?= $buttonSurat ?>
-                        <button class="font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
+                      // iki class e diganti antara matkul sama acara
+                        <button class="detail-matkul-button ont-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                             Detail
                             Peminjaman
                         </button>
@@ -66,49 +71,46 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div id="upload-surat-modal" class="modal hidden fixed inset-0 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen">
-            <div id="surat-modal-overlay" class="absolute w-full h-full bg-gray-800 opacity-50"></div>
-            <div class="bg-white py-7 px-28 gap-10 shadow-lg rounded-3xl z-20 flex flex-col items-center">
-                <span class="font-semibold text-3xl">Upload Surat</span>
-                <form class="flex flex-col gap-12">
-                    <div class="flex flex-col gap-2">
-                        <label for="surat">Upload Surat Peminjaman</label>
-                        <input type="file" name="surat" id="surat"
-                               class="px-5 py-2 rounded-lg border border-primary-color" required>
-                    </div>
-                    <div class="flex justify-evenly">
-                        <button type="button" id="close-surat-modal"
-                                class="bg-danger-color px-10 py-3 text-neutral-color font-semibold text-sm rounded-3xl">
-                            Tutup
-                        </button>
-                        <input type="submit"
-                               class="bg-select-color px-10 py-3 text-neutral-color cursor-pointer font-semibold text-sm rounded-3xl">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php include __DIR__ . '/../user/modals/uploadSurat.php'; ?>
+    <?php include __DIR__ . '/../user/modals/detailPeminjamanAcara.php'; ?>
+    <?php include __DIR__ . '/../user/modals/detailMataKuliah.php'; ?>
 </div>
 <script>
-    const modal = document.getElementById('upload-surat-modal');
-    const openModalBtn = document.getElementById('upload-surat-izin');
-    const closeModalBtn = document.getElementById('close-surat-modal');
-    const overlay = document.getElementById('surat-modal-overlay');
+    const modals = document.querySelectorAll('.modal');
+    const uploadSuratButton = document.querySelectorAll('.upload-surat-izin-button');
+    const detailAcaraButton = document.querySelectorAll('.detail-acara-button');
+    const detailMatkulButton = document.querySelectorAll('.detail-matkul-button');
 
-    const openModal = () => modal.classList.remove('hidden');
-    const closeModal = () => modal.classList.add('hidden');
+    uploadSuratButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            modals[0].classList.remove('hidden');
+        })
+    })
 
-    openModalBtn.onclick = openModal;
-    closeModalBtn.onclick = closeModal;
-    overlay.onclick = closeModal;
+    detailAcaraButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            modals[1].classList.remove('hidden');
+        })
+    })
 
-    window.onclick = (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    };
+    detailMatkulButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            modals[2].classList.remove('hidden');
+        })
+    })
 
+    modals.forEach((modal) => {
+        const overlay = modal.querySelector('.overlay');
+        const closeModal = modal.querySelector('.close-modal');
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        })
+
+        overlay.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        })
+    })
 </script>
 </body>
 
