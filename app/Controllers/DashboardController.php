@@ -14,6 +14,8 @@ class DashboardController extends Controller
 
     public function __construct()
     {
+        $middlewareInstance = $this->middleware('AuthMiddleware');
+        $middlewareInstance->handleUser();
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
     }
@@ -77,22 +79,23 @@ class DashboardController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
-    public function showJadwalByRuangan($kodeRuang, $namaHari) {
+    public function showJadwalByRuangan($kodeRuang, $namaHari)
+    {
         return $this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari);
     }
 
-    public function showTest() {
-        $this->view('shared/test');
-    }
-  
-    public function denah($lantai, $bagian, $posisi) {
+
+    public function denah($lantai, $bagian, $posisi)
+    {
         $data = array();
         foreach ($this->ruang->show($lantai, $bagian, $posisi) as $item) {
             $data[$item['kode']] = 'disable';
         }
         return $data;
     }
-    public function showDenah() {
+
+    public function showDenah()
+    {
         $this->view('user/dashboard');
     }
 
@@ -116,5 +119,5 @@ class DashboardController extends Controller
 
         $this->view('user/detailRuangan');
     }
-        
+
 }

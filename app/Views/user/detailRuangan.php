@@ -287,15 +287,8 @@
     }
 
     document.getElementById("tanggalInput").addEventListener("change", formatDate);
-    <
-    <
-    <
-    <
-    <
-    << HEAD
 
-        document.getElementById('tanggalInput'
-    ).valueAsDate = new Date();
+    document.getElementById('tanggalInput').valueAsDate = new Date();
     formatDate();
 </script>
 </body>

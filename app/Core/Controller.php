@@ -13,4 +13,9 @@ class Controller
         extract($data);
         include $viewPath;
     }
+
+    protected function middleware($middleware) {
+        $middlewareClass = "OrangDalam\PeminjamanRuangan\Middleware\\" . $middleware;
+        return new $middlewareClass;
+    }
 }
