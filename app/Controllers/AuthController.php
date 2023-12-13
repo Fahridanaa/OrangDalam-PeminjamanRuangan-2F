@@ -71,13 +71,14 @@ class AuthController extends Controller
         if ($data['password'] === $now) {
             if ($new === $confirm) {
                 $this->authModel->updatePass($data['id'], $now, $new);
-                header('Location: /dashboard');
+                $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Password berhasil dirubah', 'color' => 'select'];
             } else {
-                echo "Konfirmasi Password Salah";
+                $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'Konfirmasi Password Salah', 'color' => 'warn'];
             }
         } else {
-            $this->view('user/profile');
+            $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'Password Salah', 'color' => 'danger'];
         }
+        $this->view('user/profile');
     }
 
     public function logout(): void
