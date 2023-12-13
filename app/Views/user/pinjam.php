@@ -28,7 +28,7 @@
             <!--            <span class="text-xl font-medium">Belum ada Peminjaman</span>-->
             <?php
             $data = new PeminjamanController();
-            foreach ($data->showPinjam() as $item) {
+            foreach ($data->showPinjam() as $item) :
                 $status = $item['status'];
                 $color = '';
                 $notif = '';
@@ -47,96 +47,30 @@
                         $color = 'bg-select-color';
                         break;
                 }
-            }
-            ?>
-            <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-                <div class="flex w-full justify-between">
-                    <div class="flex gap-4">
-                        <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status']; ?></span>
-                        // tambahi category
-                        <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
+                ?>
+                <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
+                    <div class="flex w-full justify-between">
+                        <div class="flex gap-4">
+                            <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status']; ?></span>
+                            // tambahi category
+                            <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
+                        </div>
+                        <?= $notif ?>
                     </div>
-                    <?= $notif ?>
+                    <div class="flex flex-col gap-1">
+                        <span class="font-bold text-3xl"><?= $item['kode_ruang']; ?></span>
+                        <span class="font-normal text-xl">Digunakan Tanggal <?= $item['tanggalAcara'] ?></span>
+                    </div>
+                    <div class="self-end flex gap-5">
+                        <?= $buttonSurat ?>
+                        // iki class e diganti antara matkul sama acara
+                        <button class="detail-matkul-button ont-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
+                            Detail
+                            Peminjaman
+                        </button>
+                    </div>
                 </div>
-                <div class="flex flex-col gap-1">
-                    <span class="font-bold text-3xl"><?= $item['kode_ruang']; ?></span>
-                    <span class="font-normal text-xl">Digunakan Tanggal <?= $item['tanggalAcara'] ?></span>
-                </div>
-                <div class="self-end flex gap-5">
-                    <?= $buttonSurat ?>
-                    // iki class e diganti antara matkul sama acara
-                    <button
-                            class="detail-matkul-button ont-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                        Detail
-                        Peminjaman
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-col gap-1">
-                <span class="font-bold text-3xl">LKJ 2</span>
-                <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
-            </div>
-            <div class="self-end flex gap-5">
-                <button class="detail-matkul-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                    Detail
-                    Peminjaman
-                </button>
-            </div>
-        </div>
-        <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-            <div class="flex w-full justify-between">
-                <div class="flex gap-4">
-                    <span class="text-neutral-color px-3 py-1 bg-danger-color rounded-xl">Diperlukan Surat Izin</span>
-                    <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
-                </div>
-                <span class="text-danger-color text-lg font-semibold">*Upload Surat Sebelum 1 Maret 2023</span>
-            </div>
-            <div class="flex flex-col gap-1">
-                <span class="font-bold text-3xl">LPR 8, LIG 1</span>
-                <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
-            </div>
-            <div class="self-end flex gap-5">
-                <button
-                        class="upload-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">
-                    Upload Surat Izin
-                </button>
-                <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                    Detail
-                    Peminjaman
-                </button>
-            </div>
-        </div>
-        <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-            <div class="flex w-full gap-4">
-                <span class="text-neutral-color px-3 py-1 bg-select-color rounded-xl">Telah Dikonfirmasi</span>
-                <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
-            </div>
-            <div class="flex flex-col gap-1">
-                <span class="font-bold text-3xl">LPR 8, LIG 1</span>
-                <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
-            </div>
-            <div class="self-end flex gap-5">
-                <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                    Detail
-                    Peminjaman
-                </button>
-            </div>
-        </div>
-        <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-            <div class="flex w-full gap-4">
-                <span class="text-neutral-color px-3 py-1 bg-warn-color rounded-xl">Menunggu Konfirmasi</span>
-                <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
-            </div>
-            <div class="flex flex-col gap-1">
-                <span class="font-bold text-3xl">LPR 8, LIG 1</span>
-                <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
-            </div>
-            <div class="self-end flex gap-5">
-                <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                    Detail
-                    Peminjaman
-                </button>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
     <?php include __DIR__ . '/../user/modals/uploadSurat.php'; ?>
@@ -163,7 +97,6 @@
 
     detailMatkulButton.forEach((button) => {
         button.addEventListener('click', () => {
-            button.preventDefault();
             modals[2].classList.remove('hidden');
         })
     })

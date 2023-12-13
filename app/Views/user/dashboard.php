@@ -36,22 +36,22 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                 </svg>
-
             </button>
         </form>
         <div class="overflow-y-visible">
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
+                $lantai = $_POST['lantai'];
                 $dashboard = new DashboardController();
                 $lantai7Barat = array(
-                    $dashboard->denah("Lantai 7", "Barat", "Atas"),
-                    $dashboard->denah("Lantai 7", "Barat", "Bawah"),
+                    $dashboard->denah($lantai, "Barat", "Atas"),
+                    $dashboard->denah($lantai, "Barat", "Bawah"),
                 );
 
                 $lantai7Timur = array(
-                    $dashboard->denah("Lantai 7", "Timur", "Atas"),
-                    $dashboard->denah("Lantai 7", "Timur", "Bawah"),
+                    $dashboard->denah($lantai, "Timur", "Atas"),
+                    $dashboard->denah($lantai, "Timur", "Bawah"),
                 );
 
                 echo renderAreaRuangan($lantai7Barat);

@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php include __DIR__ . '/../shared/head.php';
+
+    use OrangDalam\PeminjamanRuangan\Controllers\PeminjamanController;
+
+    ?>
 </head>
 <body>
 <div id="History" class="h-screen flex flex-row">
@@ -14,38 +18,38 @@
         </div>
         <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
             <!--            <span class="text-xl font-medium">Belum ada Riwayat Peminjaman</span>-->
-            <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-                <div class="flex w-full gap-4">
-                    <span class="text-neutral-color px-3 py-1 bg-select-color rounded-xl">Berhasil</span>
-                    <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
+            <?php
+            $data = new PeminjamanController();
+            foreach ($data->showHistory() as $item) :
+                $status = $item['status'];
+                $color = '';
+
+                switch ($status) {
+                    case 'Peminjaman Gagal':
+                        $color = 'bg-danger-color';
+                        break;
+                    case 'Peminjaman Berhasil':
+                        $color = 'bg-select-color';
+                        break;
+                }
+                ?>
+                <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
+                    <div class="flex w-full gap-4">
+                        <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status']; ?></span>
+                        <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="font-bold text-3xl"><?= $item['kode_ruang']; ?></span>
+                        <span class="font-normal text-xl">Digunakan Tanggal <?= $item['tanggalAcara']; ?></span>
+                    </div>
+                    <div class="self-end flex gap-5">
+                        <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
+                            Detail
+                            Peminjaman
+                        </button>
+                    </div>
                 </div>
-                <div class="flex flex-col gap-1">
-                    <span class="font-bold text-3xl">LPR 8, LIG 1</span>
-                    <span class="font-normal text-xl">Digunakan Tanggal 30 Februari 2023</span>
-                </div>
-                <div class="self-end flex gap-5">
-                    <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                        Detail
-                        Peminjaman
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-                <div class="flex w-full gap-4">
-                    <span class="text-neutral-color px-3 py-1 bg-danger-color rounded-xl">Gagal</span>
-                    <span class="matkul text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Mata Kuliah</span>
-                </div>
-                <div class="flex flex-col gap-1">
-                    <span class="font-bold text-3xl">LKJ 2</span>
-                    <span class="font-normal text-xl">Digunakan Tanggal 24 Maret 2023</span>
-                </div>
-                <div class="self-end flex gap-5">
-                    <button class="detail-matkul-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                        Detail
-                        Peminjaman
-                    </button>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
     <?php include __DIR__ . '/modals/detailPeminjamanAcara.php'; ?>
