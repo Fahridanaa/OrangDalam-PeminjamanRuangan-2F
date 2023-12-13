@@ -23,26 +23,25 @@ class AuthController extends Controller
     {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
-        $_SESSION['flash_messages'] = ['type' => 'error', 'message' => 'username atau password salah'];
-
 
         $data = $this->authModel->get($username);
-        session_start();
         if ($data == NULL) {
+            $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
             $this->showLoginForm();
         } else {
             if ($data['password'] === md5($password)) {
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['level'] = $data['level'];
                 $_SESSION['id'] = $data['id'];
-                if ($data['level'] === "Mahasiswa") {
+                if ($data['level'] === "Mahasiswa" || $data['level'] === "Admin") {
                     header('Location: /dashboard');
-                } else if ($data['level'] === "Admin") {
-                    header('Location: /dashboard');
+                    exit();
                 } else {
+                    $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
                     $this->showLoginForm();
                 }
             } else {
+                $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
                 $this->showLoginForm();
             }
         }

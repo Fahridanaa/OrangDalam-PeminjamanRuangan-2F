@@ -1,11 +1,8 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Views\shared;
 
-use OrangDalam\PeminjamanRuangan\Controllers\AuthController;
-
-$flashMessage = $_SESSION['flash_messages'] ?? null;
-
-unset($_SESSION['flash_messages']);
+$flashMessage = $_SESSION['flash_message'] ?? null;
+unset($_SESSION['flash_message']);
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +58,10 @@ unset($_SESSION['flash_messages']);
                         <a href="#" class="hover:text-primary-color">Lupa Password?</a>
                     </div>
                 </form>
+                <div class="<?= $flashMessage['type'] ?> flex justify-center bg-<?= $flashMessage['color'] ?>-color mt-4 rounded-xl py-2 relative w-full">
+                    <span class="text-xl text-center"><?= $flashMessage['message'] ?></span>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
