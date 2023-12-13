@@ -19,6 +19,20 @@ class AuthController extends Controller
         $this->view('shared/login');
     }
 
+    public function showDashboard(): void
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SESSION['level'] == 'Admin') {
+            $this->view('admin/dashboard');
+        } else {
+            $this->view('user/dashboard');
+        }
+    }
+
     public function processLogin(): void
     {
         $username = $_POST['username'] ?? '';
