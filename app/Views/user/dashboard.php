@@ -29,7 +29,7 @@
                     <option value="Lantai 8">Lantai 8</option>
                 </select>
             </div>
-            <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color" type="submit">
+            <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color">
                 <span class="font-bold text-sm text-neutral-color">CARI RUANGAN</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                      stroke="currentColor" class="w-4 h-4 text-neutral-color">

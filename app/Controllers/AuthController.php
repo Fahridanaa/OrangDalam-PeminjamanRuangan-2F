@@ -39,32 +39,30 @@ class AuthController extends Controller
         $password = $_POST['password'] ?? '';
 
         $data = $this->authModel->get($username);
-        session_start();
         if ($data == NULL) {
+            $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
             $this->showLoginForm();
-        }
-        else {
+        } else {
             if ($data['password'] === md5($password)) {
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['level'] = $data['level'];
                 $_SESSION['id'] = $data['id'];
-                if ($data['level'] === "Mahasiswa") {
+                if ($data['level'] === "Mahasiswa" || $data['level'] === "Admin") {
                     header('Location: /dashboard');
-                }
-                else if ($data['level'] === "Admin") {
-                    header('Location: /dashboard');
-                }
-                else {
+                    exit();
+                } else {
+                    $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
                     $this->showLoginForm();
                 }
-            }
-            else {
+            } else {
+                $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];
                 $this->showLoginForm();
             }
         }
     }
 
-    public function changePass() {
+    public function changePass()
+    {
         $now = md5($_POST['password-sekarang'] ?? '');
         $new = md5($_POST['password-baru'] ?? '');
         $confirm = md5($_POST['konfirmasi-password-baru'] ?? '');
@@ -73,15 +71,14 @@ class AuthController extends Controller
         if ($data['password'] === $now) {
             if ($new === $confirm) {
                 $this->authModel->updatePass($data['id'], $now, $new);
-                header('Location: /dashboard');
+                $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Password berhasil dirubah', 'color' => 'select'];
+            } else {
+                $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'Konfirmasi Password Salah', 'color' => 'warn'];
             }
-            else {
-                echo "Konfirmasi Password Salah";
-            }
+        } else {
+            $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'Password Salah', 'color' => 'danger'];
         }
-        else {
-            $this->view('user/profile');
-        }
+        $this->view('user/profile');
     }
 
     public function logout(): void
