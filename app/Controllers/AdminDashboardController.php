@@ -11,10 +11,7 @@ class AdminDashboardController extends Controller {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
     }
-    private function loginCheck(): bool
-    {
-        return isset($_SESSION['username']);
-    }
+
 
     public function showKonfirmasiPinjamPage(): void
     {
