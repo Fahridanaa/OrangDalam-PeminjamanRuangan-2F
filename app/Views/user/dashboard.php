@@ -5,7 +5,7 @@
     <?php
     include __DIR__ . '/../shared/head.php';
 
-    use OrangDalam\PeminjamanRuangan\Controllers\DashboardController;
+    use OrangDalam\PeminjamanRuangan\Controllers\User\DashboardController;
 
     ?>
 </head>

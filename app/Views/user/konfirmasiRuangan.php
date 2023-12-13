@@ -90,7 +90,7 @@
     </div>
     <?php include __DIR__ . '/modals/detailMataKuliah.php'; ?>
     <?php include __DIR__ . '/modals/tolakPindahMataKuliah.php'; ?>
-    <?php if ($_POST['keterangan']) {
+    <?php if (isset($_POST['keterangan'])) {
         include __DIR__ . '/modals/TawaranPermintaanPemindahanMataKuliah.php';
     } ?>
 </div>

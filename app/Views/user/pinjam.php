@@ -9,9 +9,7 @@
 <div id="Peminjaman" class="h-screen flex flex-row">
     <?php
     include 'sidebar.php';
-
-    use OrangDalam\PeminjamanRuangan\Controllers\PeminjamanController;
-
+    use OrangDalam\PeminjamanRuangan\Controllers\User\PeminjamanController;
     ?>
     <div id="Peminjaman-content" class="h-screen w-screen px-8 py-20 flex flex-col gap-12 ml-32">
         <div id="header">

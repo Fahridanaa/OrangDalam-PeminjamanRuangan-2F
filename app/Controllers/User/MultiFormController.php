@@ -1,6 +1,6 @@
 <?php
 
-namespace OrangDalam\PeminjamanRuangan\Controllers;
+namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 
@@ -14,25 +14,25 @@ class MultiFormController extends Controller
                 if (!isset($_SESSION['formPinjam'])) {
                     $_SESSION['formPinjam'] = array();
                 }
-                $contentFile = __DIR__ . '/../Views/user/form/category.php';
+                $contentFile = __DIR__ . '/../../Views/user/form/category.php';
 //                $_SESSION['formPinjam']['category'] = self::processForm1();
                 break;
             case 2:
                 if (isset($_GET['category'])) {
                     $category = $_GET['category'];
-                $contentFile = __DIR__ . '/../Views/user/form/' . $category . '.php';
+                $contentFile = __DIR__ . '/../../Views/user/form/' . $category . '.php';
                 } else {
                     header('Location: /pinjam/form?step=1');
                     exit();
                 }
                 break;
             case 3:
-                $contentFile = __DIR__ . '/../Views/user/form/pilihRuang.php';
+                $contentFile = __DIR__ . '/../../Views/user/form/pilihRuang.php';
                 break;
             case 4:
                 if (isset($_GET['category'])) {
                     $category = $_GET['category'];
-                    $contentFile = __DIR__ . '/../Views/user/form/' . $category . 'Konfirmasi.php';
+                    $contentFile = __DIR__ . '/../../Views/user/form/' . $category . 'Konfirmasi.php';
                 } else {
                     header('Location: /pinjam/form?step=1');
                     exit();
@@ -43,13 +43,13 @@ class MultiFormController extends Controller
                     header('Location: /pinjam/form?step=1');
                     exit();
                 }
-                $contentFile = __DIR__ . '/../Views/user/form/done.php';
+                $contentFile = __DIR__ . '/../../Views/user/form/done.php';
                 break;
             default:
                 header('Location: /pinjam');
                 exit();
         }
-        include __DIR__ . '/../Views/user/multiForm.php';
+        include __DIR__ . '/../../Views/user/multiForm.php';
     }
 
 //    public static function processForm1()

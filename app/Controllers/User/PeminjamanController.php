@@ -1,6 +1,6 @@
 <?php
 
-namespace OrangDalam\PeminjamanRuangan\Controllers;
+namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\Peminjaman;

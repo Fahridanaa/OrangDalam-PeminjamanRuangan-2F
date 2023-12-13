@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
 
         if ($_SESSION['level'] == 'Admin') {
-            $this->view('admin/dashboard');
+            $this->view('admin/Admindashboard');
         } else {
             $this->view('user/dashboard');
         }
