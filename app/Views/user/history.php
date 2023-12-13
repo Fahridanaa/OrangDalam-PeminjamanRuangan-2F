@@ -3,7 +3,7 @@
 
 <head>
     <?php include __DIR__ . '/../shared/head.php';
-    use OrangDalam\PeminjamanRuangan\Controllers\PeminjamanController;
+    use OrangDalam\PeminjamanRuangan\Controllers\User\PeminjamanController;
     ?>
 </head>
 <body>
