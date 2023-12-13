@@ -1,5 +1,11 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Views\shared;
+
+use OrangDalam\PeminjamanRuangan\Controllers\AuthController;
+
+$flashMessage = $_SESSION['flash_messages'] ?? null;
+
+unset($_SESSION['flash_messages']);
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +62,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>

@@ -23,30 +23,47 @@ class AuthController extends Controller
     {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+        $_SESSION['flash_messages'] = ['type' => 'error', 'message' => 'username atau password salah'];
+
 
         $data = $this->authModel->get($username);
         session_start();
         if ($data == NULL) {
             $this->showLoginForm();
-        }
-        else {
+        } else {
             if ($data['password'] === md5($password)) {
                 $_SESSION['username'] = $data['username'];
                 $_SESSION['level'] = $data['level'];
                 $_SESSION['id'] = $data['id'];
                 if ($data['level'] === "Mahasiswa") {
                     header('Location: /dashboard');
-                }
-                else if ($data['level'] === "Admin") {
+                } else if ($data['level'] === "Admin") {
                     header('Location: /dashboard');
-                }
-                else {
+                } else {
                     $this->showLoginForm();
                 }
-            }
-            else {
+            } else {
                 $this->showLoginForm();
             }
+        }
+    }
+
+    public function changePass()
+    {
+        $now = md5($_POST['password-sekarang'] ?? '');
+        $new = md5($_POST['password-baru'] ?? '');
+        $confirm = md5($_POST['konfirmasi-password-baru'] ?? '');
+        $data = $this->authModel->get($_SESSION['username']);
+
+        if ($data['password'] === $now) {
+            if ($new === $confirm) {
+                $this->authModel->updatePass($data['id'], $now, $new);
+                header('Location: /dashboard');
+            } else {
+                echo "Konfirmasi Password Salah";
+            }
+        } else {
+            $this->view('user/profile');
         }
     }
 
