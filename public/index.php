@@ -17,9 +17,10 @@ session_start();
 Router::add("GET", "/login", AuthController::class, "showLoginForm");
 Router::add("POST", "/login", AuthController::class, "processLogin");
 Router::add("GET", "/logout", AuthController::class, "logout");
+Router::add("GET", "/dashboard",  AuthController::class, "showDashboard");
+
 
 // // user
-Router::add("GET", "/dashboard", DashboardController::class, "showDashboard");
 Router::add("POST", "/dashboard", DashboardController::class, "showDenah");
 Router::add("GET", "/pinjam", DashboardController::class, "showPinjamPage");
 Router::add("GET", "/pesan", DashboardController::class, "showInboxPage");

@@ -20,24 +20,9 @@ class DashboardController extends Controller
         $this->ruang = new Ruang();
     }
 
-    private function loginCheck(): bool
-    {
-        return isset($_SESSION['username']);
-    }
+ 
 
-    public function showDashboard(): void
-    {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-
-        if ($_SESSION['level'] == 'Admin') {
-            $this->view('admin/dashboard');
-        } else {
-            $this->view('user/dashboard');
-        }
-    }
+  
 
     public function showPinjamPage(): void
     {

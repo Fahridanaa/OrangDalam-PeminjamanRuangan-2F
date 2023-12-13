@@ -18,4 +18,9 @@ class Controller
         $middlewareClass = "OrangDalam\PeminjamanRuangan\Middleware\\" . $middleware;
         return new $middlewareClass;
     }
+
+    protected function loginCheck(): bool
+    {
+        return isset($_SESSION['username']);
+    }
 }
