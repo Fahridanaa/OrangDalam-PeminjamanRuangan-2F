@@ -7,7 +7,7 @@
                     if ($_SESSION['formPinjam']['urgent']) {
                         echo 'Silahkan tunggu konfirmasi dari Admin';
                     } else {
-                        echo 'Silahkan upload surat peminjaman untuk <br> tahap selanjutnya';
+                        echo 'Silahkan uploads surat peminjaman untuk <br> tahap selanjutnya';
                     }
                 } else {
                     if ($_SESSION['level'] === 'mahasiswa') {
