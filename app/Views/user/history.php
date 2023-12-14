@@ -41,10 +41,10 @@
                         <span class="font-normal text-xl">Digunakan Tanggal <?= $item['tanggalAcara'];?></span>
                     </div>
                     <div class="self-end flex gap-5">
-                    <button class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
+                    <a href="/riwayat?id=<?php echo $item['id']?>" class="detail-acara-button font-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
                         Detail
                         Peminjaman
-                    </button>
+                    </a>
                 </div>
                 </div>
             <?php endforeach; ?>

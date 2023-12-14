@@ -8,6 +8,7 @@ use OrangDalam\PeminjamanRuangan\Controllers\AdminDashboardController;
 
 use OrangDalam\PeminjamanRuangan\Controllers\MultiFormController;
 use OrangDalam\PeminjamanRuangan\Core\RouterMiddleware;
+use OrangDalam\PeminjamanRuangan\Controllers\PeminjamanController;
 
 
 session_start();
@@ -31,6 +32,7 @@ Router::add("GET", "/profile", DashboardController::class, "showRequesDetailRuan
 Router::add("POST", "/profile", AuthController::class, "changePass");
 
 Router::add("GET", "/pinjam/form", MultiFormController::class, "showForm");
+Router::add("POST", "/pinjam/form?step=2&category=acara", PeminjamanController::class, "insertAcara");
 
 // admin
 Router::add("GET", "/inbox", AdminDashboardController::class, "showInbox");

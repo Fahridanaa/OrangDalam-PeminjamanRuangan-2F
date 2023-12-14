@@ -17,24 +17,24 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="acara-jam-mulai">Jam Mulai</label>
-                    <input type="time" id="acara-jam-mulai" placeholder="Input jam mulai acara.."
+                    <input type="time" id="acara-jam-mulai" name="acara-jam-mulai" placeholder="Input jam mulai acara.."
                            class="px-6 py-2 rounded-lg border border-primary-color" required>
                 </div>
             </div>
             <div class="flex gap-24">
                 <div class="flex flex-col gap-2">
                     <label for="acara-tanggal">Pilih Tanggal</label>
-                    <input id="acara-tanggal" type="date" class="pr-16 pl-3 py-2 rounded-lg border border-primary-color"
+                    <input id="acara-tanggal" name="acara-tanggal" type="date" class="pr-16 pl-3 py-2 rounded-lg border border-primary-color"
                            required>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="acara-jam-selesai">Jam Selesai</label>
-                    <input type="time" id="acara-jam-selesai" placeholder="Input jam berakhir acara.."
+                    <input type="time" id="acara-jam-selesai" name="acara-jam-selesai" placeholder="Input jam berakhir acara.."
                            class="px-6 py-2 rounded-lg border border-primary-color" required>
                 </div>
             </div>
             <div class="flex gap-2 items-center">
-                <input id="acara-urgent" type="checkbox" class="w-4 h-4" required>
+                <input id="acara-urgent" name="acara-urgent" type="checkbox" class="w-4 h-4" value="true">
                 <label for="acara-urgent">Urgent</label>
             </div>
         </div>
@@ -45,17 +45,17 @@
         </div>
         <div class="flex flex-col gap-2">
             <label for="acara-surat">Upload Tanda Pengenal</label>
-            <input type="file" id="acara-surat" class="px-5 py-2 rounded-lg border border-primary-color" required>
+            <input type="file" id="acara-surat" name="acara-surat" class="px-5 py-2 rounded-lg border border-primary-color" required>
         </div>
         <div id="acara-bukti-urgent-container" class="flex flex-col gap-2">
             <label for="acara-bukti-urgent">Upload Surat Bukti Urgent</label>
-            <input type="file" id="acara-bukti-urgent" class="px-5 py-2 rounded-lg border border-primary-color"
+            <input type="file" id="acara-bukti-urgent" name="acara-bukti-urgent" class="px-5 py-2 rounded-lg border border-primary-color"
                    required>
         </div>
         <div id="buttons" class="flex justify-around">
             <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
                href="javascript:history.back()">Kembali</a>
-            <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
+            <button onclick="" class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
                     type="submit">Lanjut
             </button>
         </div>

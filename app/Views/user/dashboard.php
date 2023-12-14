@@ -44,18 +44,21 @@
                 <?php
                 $lantai = $_POST['lantai'];
                 $dashboard = new DashboardController();
-                $lantai7Barat = array(
-                    $dashboard->denah($lantai, "Barat", "Atas"),
-                    $dashboard->denah($lantai, "Barat", "Bawah"),
-                );
 
-                $lantai7Timur = array(
-                    $dashboard->denah($lantai, "Timur", "Atas"),
-                    $dashboard->denah($lantai, "Timur", "Bawah"),
-                );
+                if ($lantai != null) {
+                    $barat = array(
+                        $dashboard->denah($lantai, "Barat", "Atas"),
+                        $dashboard->denah($lantai, "Barat", "Bawah"),
+                    );
 
-                echo renderAreaRuangan($lantai7Barat);
-                echo renderAreaRuangan($lantai7Timur);
+                    $timur = array(
+                        $dashboard->denah($lantai, "Timur", "Atas"),
+                        $dashboard->denah($lantai, "Timur", "Bawah"),
+                    );
+
+                    echo renderAreaRuangan($barat);
+                    echo renderAreaRuangan($timur);
+                }
 
                 function renderAreaRuangan(array $areaRuangan): string
                 {

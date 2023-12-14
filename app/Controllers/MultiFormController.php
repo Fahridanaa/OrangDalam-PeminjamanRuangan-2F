@@ -3,9 +3,16 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
 class MultiFormController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->peminjaman = new Peminjaman();
+    }
+
     public static function showForm()
     {
         $step = $_GET['step'];
