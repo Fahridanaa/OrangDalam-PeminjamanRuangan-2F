@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php
+    include __DIR__ . '/../shared/head.php';
+    use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminKonfirmasiController;
+    ?>
 </head>
 
 <body class="overflow-hidden font-jakarta">
@@ -33,14 +36,16 @@
                         </thead>
                         <tbody>
                         <?php
-                        $dataTable = array(
+                        $pinjam = new AdminKonfirmasiController();
+                        $dataTable = $pinjam->konfirmasi();
+                        /*$dataTable = array(
                             array("Fahridana Ahmad", "LIG 1, LSI 1", "10 Desember 2023", "081001012040", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
                             array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012041", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
                             array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
                             array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
                             array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", ""),
                             // Tambahkan data lainnya jika ada
-                        );
+                        );*/
 
                         foreach ($dataTable as $data) {
                             echo "<tr>";
@@ -48,7 +53,7 @@
                                 echo "<td class=\"px-6 py-4\">$value</td>";
                             }
                             echo '<td class="px-6 py-4">';
-                            $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
+                            $tombolTerimaDitekan = false; // Ganti dengan kondisi sesuai kebutuhan
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[5]; // Kolom [File Surat Peminjaman] berada pada indeks 5
