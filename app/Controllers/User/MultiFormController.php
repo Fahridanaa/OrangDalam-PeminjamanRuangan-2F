@@ -14,7 +14,7 @@ class MultiFormController extends Controller
     private const FORM_STEP_3 = 3;
     private const FORM_STEP_4 = 4;
     private const FORM_STEP_5 = 5;
-    private $peminjaman;
+    private Peminjaman $peminjaman;
 
     public function __construct()
     {
@@ -73,6 +73,7 @@ class MultiFormController extends Controller
         $formProcessed = $this->processForm1();
 
         if ($formProcessed) {
+            $_SESSION['formPinjam']['step1Completed'] = true;
             if (!headers_sent()) {
                 header('Location: /pinjam/form?step=2');
                 exit();
@@ -119,16 +120,21 @@ class MultiFormController extends Controller
         }
 
         if ($formProcessed) {
+            $_SESSION['formPinjam']['step2Completed'] = true;
             if (!headers_sent()) {
                 header('Location: /pinjam/form?step=3');
                 exit();
             }
         }
-
     }
 
     private function processForm2Acara(): bool
     {
+        if (!isset($_SESSION['formPinjam']['step1Completed'])) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+
         if (!$this->isRequestMethodPost()) {
             header('Location: /pinjam');
             return false;
@@ -172,6 +178,11 @@ class MultiFormController extends Controller
 
     private function processForm2Matkul(): bool
     {
+        if (!isset($_SESSION['formPinjam']['step1Completed'])) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+
         if (!$this->isRequestMethodPost()) {
             header('Location: /pinjam');
             return false;
@@ -203,46 +214,108 @@ class MultiFormController extends Controller
         $formProcessed = $this->processForm3();
 
         if ($formProcessed) {
+            $_SESSION['formPinjam']['step3Completed'] = true;
             if (!headers_sent()) {
                 header('Location: /pinjam/form?step=4');
                 exit();
             }
         }
+
+        header('Location: /pinjam/form?step=3');
     }
 
     private function processForm3(): bool
     {
+        if (!isset($_SESSION['formPinjam']['step2Completed'])) {
+            header('Location: /pinjam/form?step=2');
+            exit();
+        }
         if (!$this->isRequestMethodPost()) {
             if (!headers_sent()) {
                 header('Location: /pinjam');
             }
             return false;
         }
-
         if (empty($_POST['rooms']) || !is_array($_POST['rooms'])) {
+
             $this->setFailedMessage('Ruangan harus dipilih', 'warn', 'warn');
             return false;
         }
-
+        // reset ruangan array
+        $_SESSION['formPinjam']['ruangan'] = array();
         foreach ($_POST['rooms'] as $room) {
             $_SESSION['formPinjam']['ruangan'][$room] = $this->sanitizeInput($room);
         }
-
         return true;
     }
 
     public function handleStep4()
     {
-        if (!headers_sent()) {
-            header('Location: /pinjam/form?step=5');
+        $category = $_SESSION['formPinjam']['category'];
+
+        switch ($category) {
+            case 'acara':
+                $formProcessed = $this->confirmationForm4Acara();
+                break;
+            case 'matkul':
+                $formProcessed = $this->confirmation4Matkul();
+                break;
+            default:
+                header('Location: /pinjam/form?step=1');
+                exit();
+        }
+
+        if ($formProcessed) {
+            if (!headers_sent()) {
+                header('Location: /pinjam/form?step=5');
+                exit();
+            }
+        }
+    }
+
+    private function confirmationForm4Acara()
+    {
+        if (!isset($_SESSION['formPinjam']['step3Completed'])) {
+            header('Location: /pinjam/form?step=3');
             exit();
         }
 
+        $data = [
+            'event' => $_SESSION['formPinjam']['acara-tanggal'],
+            'mulai' => $_SESSION['formPinjam']['acara-jam-mulai'],
+            'selesai' => $_SESSION['formPinjam']['acara-jam-selesai'],
+            'urgent' => basename($_FILES['acara-bukti-urgent']['name']), //nama file jare arip
+            'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
+            'status' => 'Menunggu Konfirmasi',
+            'nim' => $_SESSION['user']['nim'] ?? null,
+            'nidn' => $_SESSION['user']['nidn'] ?? null,
+            'tandaPengenal' => basename($_FILES['tanda-pengenal']['name'])
+        ];
+
+        if ($this->peminjaman->insert($data) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function confirmation4Matkul()
+    {
+        if (!isset($_SESSION['formPinjam']['step3Completed'])) {
+            header('Location: /pinjam/form?step=3');
+            exit();
+        }
+
+        $data = []; //query buat mata kuliah belum ada
+        if ($this->peminjaman->insert($data) > 0) {
+            return true;
+        }
+        return false;
     }
 
     public function handleStep5()
     {
-      
+
     }
 
 
