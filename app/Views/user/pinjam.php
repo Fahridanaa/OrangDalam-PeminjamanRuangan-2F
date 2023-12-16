@@ -28,10 +28,10 @@
             <?php
             $data = new PeminjamanController();
 
-            if ($data->showPinjam() == null) {
+            if ($data->showPinjam($_SESSION['username']) == null) {
                 echo '<span class="text-xl font-medium">Belum ada Peminjaman</span>';
             } else {
-                foreach ($data->showPinjam() as $item) :
+                foreach ($data->showPinjam($_SESSION['username']) as $item) :
                     $status = $item['status'];
                     $color = '';
                     $notif = '';

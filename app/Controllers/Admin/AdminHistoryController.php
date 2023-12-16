@@ -4,8 +4,11 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
 class AdminHistoryController extends Controller {
+
+    private Peminjaman $peminjaman;
 
     public function __construct() {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -22,6 +25,4 @@ class AdminHistoryController extends Controller {
 
         $this->view('admin/history');
     }
-
-
 }
