@@ -7,50 +7,31 @@ use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
 class MultiFormController extends Controller
 {
+    private $peminjaman;
 
     public function __construct()
     {
         $this->peminjaman = new Peminjaman();
     }
 
-    public static function showForm()
+    public function showForm()
     {
         $step = $_GET['step'];
         switch ($step) {
             case 1:
-                if (!isset($_SESSION['formPinjam'])) {
-                    $_SESSION['formPinjam'] = array();
-                }
-                $contentFile = __DIR__ . '/../../Views/user/form/category.php';
-//                $_SESSION['formPinjam']['category'] = self::processForm1();
+                $this->handleStep1();
                 break;
             case 2:
-                if (isset($_GET['category'])) {
-                    $category = $_GET['category'];
-                $contentFile = __DIR__ . '/../../Views/user/form/' . $category . '.php';
-                } else {
-                    header('Location: /pinjam/form?step=1');
-                    exit();
-                }
+                $this->handleStep2();
                 break;
             case 3:
-                $contentFile = __DIR__ . '/../../Views/user/form/pilihRuang.php';
+                $this->handleStep3();
                 break;
             case 4:
-                if (isset($_GET['category'])) {
-                    $category = $_GET['category'];
-                    $contentFile = __DIR__ . '/../../Views/user/form/' . $category . 'Konfirmasi.php';
-                } else {
-                    header('Location: /pinjam/form?step=1');
-                    exit();
-                }
+                $this->handleStep4();
                 break;
             case 5:
-                if (!isset($_GET['category'])) {
-                    header('Location: /pinjam/form?step=1');
-                    exit();
-                }
-                $contentFile = __DIR__ . '/../../Views/user/form/done.php';
+
                 break;
             default:
                 header('Location: /pinjam');
@@ -59,10 +40,70 @@ class MultiFormController extends Controller
         include __DIR__ . '/../../Views/user/multiForm.php';
     }
 
-//    public static function processForm1()
-//    {
-//        return $_GET['category'];
-//    }
+    private function handleStep1()
+    {
+        if (!isset($_SESSION['formPinjam'])) {
+            $_SESSION['formPinjam'] = array();
+        }
+
+        $selectedCategory = $this->processForm1();
+
+        if (!isset($_GET['category']) || $selectedCategory === false) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+
+        $_SESSION['formPinjam']['category'] = $selectedCategory;
+        $contentFile = __DIR__ . '/../../Views/user/form/category.php';
+    }
+
+    private function handleStep2()
+    {
+        if (!isset($_GET['category'])) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+
+        $category = $_GET['category'];
+        $contentFile = __DIR__ . '/../../Views/user/form/' . $category . '.php';
+    }
+
+    private function handleStep3()
+    {
+        $contentFile = __DIR__ . '/../../Views/user/form/pilihRuang.php';
+    }
+
+    private function handleStep4()
+    {
+        if (!isset($_GET['category'])) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+
+        $category = $_GET['category'];
+        $contentFile = __DIR__ . '/../../Views/user/form/' . $category . 'Konfirmasi.php';
+    }
+
+    private function handleStep5()
+    {
+        if (!isset($_GET['category'])) {
+            header('Location: /pinjam/form?step=1');
+            exit();
+        }
+        $contentFile = __DIR__ . '/../../Views/user/form/done.php';
+    }
+
+
+    private function processForm1()
+    {
+        $selectedCategory = $_GET['category'];
+
+        if (!in_array($selectedCategory, ['acara', 'matkul'])) {
+            return false;
+        }
+        return $selectedCategory;
+    }
+
 //
 //    public static function processForm2($category)
 //    {
