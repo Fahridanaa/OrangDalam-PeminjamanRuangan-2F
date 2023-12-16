@@ -42,7 +42,7 @@
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
-                $lantai = $_POST['lantai'];
+                $lantai = $_POST['lantai'] ?? null;
                 $dashboard = new DashboardController();
 
                 if ($lantai != null) {
