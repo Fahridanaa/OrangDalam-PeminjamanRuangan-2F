@@ -1,45 +1,46 @@
 {
-	"name": "orang-dalam/peminjaman-ruangan",
-	"description": "Projek akhir sem 3",
-	"type": "project",
-	"authors": [
-		{
-			"name": "Fahridana Ahmad Rayyansyah",
-			"email": "fahridanaaa@gmail.com"
-		},
-		{
-			"name": "Haidar Aly",
-			"email": "haidar.aly007@gmail.com"
-		},
-		{
-			"name": "Abiyyu Fiqlal Sholeh Wicaksono",
-			"email": "fiqlal0204@gmail.com"
-		},
-		{
-			"name": "Muhammad Fakhruddin Arif",
-			"email": "muhfakhruddinarif30@gmail.com"
-		},
-		{
-			"name": "Shasia Sasa Salsabyla",
-			"email": "salsabyla3008@gmail.com"
-		}
-	],
-	"scripts": {
-		"serve": "php -S localhost:8000"
-	},
-	"require": {
-		"php": ">=7.4",
-		"ext-pdo": "*"
-	},
-	"autoload": {
-		"psr-4": {
-			"OrangDalam\\PeminjamanRuangan\\": "app",
-			"config\\": "config"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"OrangDalam\\PeminjamanRuangan\\": "tests"
-		}
-	}
+  "name": "orang-dalam/peminjaman-ruangan",
+  "description": "Projek akhir sem 3",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Fahridana Ahmad Rayyansyah",
+      "email": "fahridanaaa@gmail.com"
+    },
+    {
+      "name": "Haidar Aly",
+      "email": "haidar.aly007@gmail.com"
+    },
+    {
+      "name": "Abiyyu Fiqlal Sholeh Wicaksono",
+      "email": "fiqlal0204@gmail.com"
+    },
+    {
+      "name": "Muhammad Fakhruddin Arif",
+      "email": "muhfakhruddinarif30@gmail.com"
+    },
+    {
+      "name": "Shasia Sasa Salsabyla",
+      "email": "salsabyla3008@gmail.com"
+    }
+  ],
+  "scripts": {
+    "serve": "php -S localhost:8000"
+  },
+  "require": {
+    "php": ">=7.4",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "OrangDalam\\PeminjamanRuangan\\": "app",
+      "config\\": "config"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OrangDalam\\PeminjamanRuangan\\": "tests"
+    }
+  }
 }
