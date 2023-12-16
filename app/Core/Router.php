@@ -5,33 +5,36 @@ namespace OrangDalam\PeminjamanRuangan\Core;
 class Router
 {
     private static array $routes = [];
+    private const DEFAULT_PATH = "/login";
 
     public static function add(string $method, string $path, string $controller, string $function): void
     {
-        self::$routes[] = [
-            'method' => $method,
-            'path' => $path,
-            'controller' => $controller,
-            'function' => $function
-        ];
+        self::$routes[] = new Route($method, $path, $controller, $function);
+    }
+
+    private static function matchRequestWithRoute(string $method, string $path): ?Route
+    {
+        foreach (self::$routes as $route) {
+            /** @var Route $route */
+            if ($route->path === $path && $route->method === $method) {
+                return $route;
+            }
+        }
+        return null;
     }
 
     public static function run(): void
     {
-        $path = "/login";
+        $pathInfo = $_SERVER["PATH_INFO"] ?? self::DEFAULT_PATH;
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $matchedRoute = self::matchRequestWithRoute($requestMethod, $pathInfo);
 
-        if (isset($_SERVER["PATH_INFO"])) $path = $_SERVER["PATH_INFO"];
-        $method = $_SERVER["REQUEST_METHOD"];
-
-        foreach (self::$routes as $route) {
-            if ($route['path'] == $path && $route['method'] == $method) {
-                $controller = new $route['controller'];
-                $function = $route['function'];
-                $controller->$function();
-                return;
-            }
+        if ($matchedRoute) {
+            $controller = new $matchedRoute->controller;
+            $function = $matchedRoute->function;
+            $controller->$function();
+            return;
         }
-
         http_response_code(404);
         echo "CONTROLLER NOT FOUND";
     }

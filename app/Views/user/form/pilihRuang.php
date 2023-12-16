@@ -9,56 +9,58 @@
             <span class="font-bold">Digunakan</span>
         </div>
     </div>
-    <div id="denah"
-         class="flex justify-between overflow-x-auto">
-        <?php
-        $lantai7 = array(
-            array(
+    <form id="roomSelectionForm" method="POST" action="/pinjam/form?step=3">
+        <div id="denah"
+             class="flex justify-between overflow-x-auto">
+            <?php
+            $lantai7 = array(
                 array(
-                    "LPR 1" => "locked", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "locked"
-                ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "locked", "LPR 7" => "locked")
-            ),
-            array(
+                    array(
+                        "LPR 1" => "locked", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "locked"
+                    ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "locked", "LPR 7" => "locked")
+                ),
                 array(
-                    "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "locked"
-                ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "locked", "LAI" => "locked")
-            )
-        );
+                    array(
+                        "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "locked"
+                    ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "locked", "LAI" => "locked")
+                ));
 
-        foreach ($lantai7 as $areaRuangan) {
-            echo renderAreaRuangan($areaRuangan);
-        }
+            foreach ($lantai7 as $areaRuangan) {
+                echo renderAreaRuangan($areaRuangan);
+            }
 
-        function renderAreaRuangan(array $areaRuangan): string
-        {
-            $html = '<div class="flex flex-col gap-12 justify-between py-20">';
 
-            foreach ($areaRuangan as $ruangan) {
-                $html .= '<div class="flex gap-8 px-8 flex-auto">';
-                $html .= renderRuangan($ruangan);
+            function renderAreaRuangan(array $areaRuangan): string
+            {
+                $html = '<div class="flex flex-col gap-12 justify-between py-20">';
+
+                foreach ($areaRuangan as $ruangan) {
+                    $html .= '<div class="flex gap-8 px-8 flex-auto">';
+                    $html .= renderRuangan($ruangan);
+                    $html .= '</div>';
+                }
+
                 $html .= '</div>';
+
+                return $html;
             }
 
-            $html .= '</div>';
-
-            return $html;
-        }
-
-        function locked(string $background): string
-        {
-            if ($background !== "locked") {
-                return 'cursor-pointer hover:scale-105';
+            function locked(string $background): string
+            {
+                if ($background !== "locked") {
+                    return 'cursor-pointer hover:scale-105';
+                }
+                return '';
             }
-            return '';
-        }
 
-        function renderRuangan(array $ruangan): string
-        {
-            $html = '';
+            function renderRuangan(array $ruangan): string
+            {
+                $html = '';
 
-            foreach ($ruangan as $ruang => $background) {
-                $html .= '
+                foreach ($ruangan as $ruang => $background) {
+                    $html .= '
             <a class="flex flex-col items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 ' . locked($background) . '">
+                <input type="checkbox" name="rooms[]" value="' . $ruang . '" hidden/>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273
@@ -75,20 +77,21 @@
                 </svg>
                 <nobr class="text-neutral-color font-semibold">' . $ruang . '</nobr>
             </a>';
+                }
+
+                return $html;
             }
 
-            return $html;
-        }
-
-        ?>
-    </div>
-    <div id="buttons" class="flex justify-evenly">
-        <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
-           href="javascript:history.back()">Kembali</a>
-        <button onclick="window.location.href='/pinjam/form?step=4&category=acara'" class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
-                type="submit">Lanjut
-        </button>
-    </div>
+            ?>
+        </div>
+        <div id="buttons" class="flex justify-evenly">
+            <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
+               href="javascript:history.back()">Kembali</a>
+            <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
+                    type="submit">Lanjut
+            </button>
+        </div>
+    </form>
 </div>
 <script>
     const ruangan = document.querySelectorAll('.bg-disable-color');
@@ -96,7 +99,8 @@
     ruangan.forEach((ruang) => {
         ruang.addEventListener("click", () => {
             ruang.classList.toggle('bg-disable-color');
-            ruang.classList.toggle('bg-select-color')
+            ruang.classList.toggle('bg-select-color');
+            ruang.children[0].checked = !ruang.children[0].checked;
         });
     });
 </script>

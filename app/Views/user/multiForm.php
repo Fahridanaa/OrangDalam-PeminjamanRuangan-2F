@@ -1,3 +1,9 @@
+<?php
+namespace OrangDalam\PeminjamanRuangan\Views\shared;
+
+$flashMessage = $_SESSION['flash_message'] ?? null;
+unset($_SESSION['flash_message']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +17,14 @@
         <?php include 'stepper.php';
 
         include $contentFile;
+
         ?>
+        <?php if (!is_null($flashMessage)): ?>
+            <div class="<?= $flashMessage['type'] ?> flex justify-center bg-<?= $flashMessage['color'] ?>-color mt-4 rounded-xl py-2 relative w-full">
+                <span class="text-xl text-center"><?= $flashMessage['message'] ?></span>
+            </div>
+        <?php endif; ?>
+
     </div>
 </body>
 
