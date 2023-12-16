@@ -64,15 +64,15 @@
             <div class="relative justify-center px-8 overflow-x-auto">
                 <table class="w-full text-base rtl:text-right">
                     <thead class="text-white bg-gray-600">
-                        <tr>
-                            <th scope="col" class="px-1 py-3">Peminjam</th>
-                            <th scope="col" class="px-6 py-3">Jurusan</th>
-                            <th scope="col" class="px-6 py-3">Ruangan</th>
-                            <th scope="col" class="px-6 py-3">Keterangan</th>
-                            <th scope="col" class="px-2 py-3">Tanggal Pinjam</th>
-                            <th scope="col" class="px-2 py-3">Tanggal Acara</th>
-                            <th scope="col" class="px-1 py-3">Surat Peminjaman</th>
-                        </tr>
+                    <tr>
+                        <th scope="col" class="px-1 py-3">Peminjam</th>
+                        <th scope="col" class="px-6 py-3">Jurusan</th>
+                        <th scope="col" class="px-6 py-3">Ruangan</th>
+                        <th scope="col" class="px-6 py-3">Keterangan</th>
+                        <th scope="col" class="px-2 py-3">Tanggal Pinjam</th>
+                        <th scope="col" class="px-2 py-3">Tanggal Acara</th>
+                        <th scope="col" class="px-1 py-3">Surat Peminjaman</th>
+                    </tr>
                     </thead>
                     <tbody>
                         <?php
