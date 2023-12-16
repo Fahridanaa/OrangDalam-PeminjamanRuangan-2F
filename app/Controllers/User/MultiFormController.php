@@ -7,8 +7,6 @@ use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
 class MultiFormController extends Controller
 {
-    private const FORM_CATEGORY_ACARA = 'acara';
-    private const FORM_CATEGORY_MATKUL = 'matkul';
     private const FORM_STEP_1 = 1;
     private const FORM_STEP_2 = 2;
     private const FORM_STEP_3 = 3;
@@ -44,6 +42,14 @@ class MultiFormController extends Controller
         }
     }
 
+    private function redirect($location): void
+    {
+        if (!headers_sent()) {
+            header('Location: ' . $location);
+            exit();
+        }
+    }
+
     public function handleForm()
     {
         $step = $_GET['step'];
@@ -71,16 +77,12 @@ class MultiFormController extends Controller
         }
 
         $formProcessed = $this->processForm1();
-
         if ($formProcessed) {
             $_SESSION['formPinjam']['step1Completed'] = true;
-            if (!headers_sent()) {
-                header('Location: /pinjam/form?step=2');
-                exit();
-            }
+            $this->redirect('/pinjam/form?step=2');
         }
 
-        header('Location: /pinjam/form?step=1');
+        $this->redirect('/pinjam/form?step=1');
     }
 
     private function processForm1(): bool
@@ -123,13 +125,10 @@ class MultiFormController extends Controller
 
         if ($formProcessed) {
             $_SESSION['formPinjam']['step2Completed'] = true;
-            if (!headers_sent()) {
-                header('Location: /pinjam/form?step=3');
-                exit();
-            }
+            $this->redirect('/pinjam/form?step=3');
         }
 
-        header('Location: /pinjam/form?step=2');
+        $this->redirect('/pinjam/form?step=2');
     }
 
     private function processForm2Acara(): bool
@@ -219,13 +218,11 @@ class MultiFormController extends Controller
 
         if ($formProcessed) {
             $_SESSION['formPinjam']['step3Completed'] = true;
-            if (!headers_sent()) {
-                header('Location: /pinjam/form?step=4');
-                exit();
-            }
+            $this->redirect('/pinjam/form?step=4');
         }
 
-        header('Location: /pinjam/form?step=3');
+        $this->redirect('/pinjam/form?step=3');
+
     }
 
     private function processForm3(): bool
@@ -271,13 +268,10 @@ class MultiFormController extends Controller
 
         if ($formProcessed) {
             $_SESSION['formPinjam']['step4Completed'] = true;
-            if (!headers_sent()) {
-                header('Location: /pinjam/form?step=5');
-                exit();
-            }
+            $this->redirect('/pinjam/form?step=5');
         }
 
-        header('Location: /pinjam/form?step=4');
+        $this->redirect('/pinjam/form?step=4');
     }
 
     private function confirmationForm4Acara()
