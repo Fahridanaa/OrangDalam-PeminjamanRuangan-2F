@@ -73,8 +73,10 @@ class MultiFormController extends Controller
         $formProcessed = $this->processForm1();
 
         if ($formProcessed) {
-            header('Location: /pinjam/form?step=2');
-            exit();
+            if (!headers_sent()) {
+                header('Location: /pinjam/form?step=2');
+                exit();
+            }
         }
     }
 
@@ -117,8 +119,10 @@ class MultiFormController extends Controller
         }
 
         if ($formProcessed) {
-            header('Location: /pinjam/form?step=3');
-            exit();
+            if (!headers_sent()) {
+                header('Location: /pinjam/form?step=3');
+                exit();
+            }
         }
 
     }
@@ -132,7 +136,7 @@ class MultiFormController extends Controller
 
         $requiredFields = ['lantai', 'acara-keterangan', 'acara-tanggal', 'acara-jam-mulai', 'acara-jam-selesai'];
         foreach ($requiredFields as $field) {
-            $_POST[$field] = $this->sanitizeInput($_POST[$field]);
+            $_SESSION['formPinjam'][$field] = $this->sanitizeInput($_POST[$field]);
         }
 
         if (!$this->checkRequiredFields($requiredFields)) {
@@ -174,7 +178,7 @@ class MultiFormController extends Controller
         }
         $requiredFields = ['lantai', 'matkul', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
         foreach ($requiredFields as $field) {
-            $_POST[$field] = $this->sanitizeInput($_POST[$field]);
+            $_SESSION['formPinjam'][$field] = $this->sanitizeInput($_POST[$field]);
         }
         if (!$this->checkRequiredFields($requiredFields)) {
             return false;
@@ -196,28 +200,49 @@ class MultiFormController extends Controller
 
     public function handleStep3()
     {
+        $formProcessed = $this->processForm3();
 
-        include __DIR__ . '/../../Views/user/multiForm.php';
+        if ($formProcessed) {
+            if (!headers_sent()) {
+                header('Location: /pinjam/form?step=4');
+                exit();
+            }
+        }
+    }
+
+    private function processForm3(): bool
+    {
+        if (!$this->isRequestMethodPost()) {
+            if (!headers_sent()) {
+                header('Location: /pinjam');
+            }
+            return false;
+        }
+
+        if (empty($_POST['rooms']) || !is_array($_POST['rooms'])) {
+            $this->setFailedMessage('Ruangan harus dipilih', 'warn', 'warn');
+            return false;
+        }
+
+        foreach ($_POST['rooms'] as $room) {
+            $_SESSION['formPinjam']['ruangan'][$room] = $this->sanitizeInput($room);
+        }
+
+        return true;
     }
 
     public function handleStep4()
     {
-        if (!isset($_GET['category'])) {
-            header('Location: /pinjam/form?step=1');
+        if (!headers_sent()) {
+            header('Location: /pinjam/form?step=5');
             exit();
         }
-
-        $category = $_GET['category'];
 
     }
 
     public function handleStep5()
     {
-        if (!isset($_GET['category'])) {
-            header('Location: /pinjam/form?step=1');
-            exit();
-        }
-
+      
     }
 
 
