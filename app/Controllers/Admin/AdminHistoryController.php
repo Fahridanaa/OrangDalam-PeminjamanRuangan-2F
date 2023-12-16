@@ -13,6 +13,7 @@ class AdminHistoryController extends Controller {
     public function __construct() {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
+        $this->peminjaman = new Peminjaman();
     }
 
     public function showHistory(): void
@@ -24,5 +25,35 @@ class AdminHistoryController extends Controller {
         
 
         $this->view('admin/history');
+    }
+
+    public function historyMahasiswa() {
+        $result = array();
+        foreach ($this->peminjaman->historiMahasiswa() as $item) {
+            if ($item['surat'] == null) {
+                $linkSurat = '-';
+            }
+            else {
+                $linkSurat = '<a href="/download?file=' . urlencode($item['surat']) . '">Download Surat</a>';
+            }
+            $data = array($item['nama'], $item['jurusan'], $item['ruang'], $item['keterangan'], $item['tanggalPeminjaman'], $item['tanggalAcara'], $linkSurat);
+            array_push($result, $data);
+        }
+        return $result;
+    }
+
+    public function historyDosen() {
+        $result = array();
+        foreach ($this->peminjaman->historiDosen() as $item) {
+            if ($item['surat'] == null) {
+                $linkSurat = '-';
+            }
+            else {
+                $linkSurat = '<a href="/download?file=' . urlencode($item['surat']) . '">Download Surat</a>';
+            }
+            $data = array($item['nama'], 'Teknologi Informasi', $item['ruang'], $item['keterangan'], $item['tanggalPeminjaman'], $item['tanggalAcara'], $linkSurat);
+            array_push($result, $data);
+        }
+        return $result;
     }
 }

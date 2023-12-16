@@ -87,12 +87,14 @@ class Peminjaman
         GROUP_CONCAT(ruang.kode) AS ruang,
         keterangan,
         DATE_FORMAT(tanggalPeminjaman, '%d %M %Y') AS tanggalPeminjaman,
-        DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara
+        DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara,
+        surat
         FROM peminjaman
         INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
         INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
         INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
         INNER JOIN ruang ON rp.kode_ruang = ruang.kode
+        WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')
         GROUP BY peminjaman.id DESC
         LIMIT 5");
         return $this->db->resultSet();
@@ -119,5 +121,41 @@ class Peminjaman
         $this->db->query("SELECT status FROM peminjaman WHERE id = :id");
         $this->db->bind(":id", $id);
         return $this->db->single();
+    }
+
+    public function historiMahasiswa() {
+        $this->db->query("SELECT peminjaman.id,
+        mahasiswa.nama AS nama,
+        jurusan.nama AS jurusan,
+        GROUP_CONCAT(ruang.kode) AS ruang,
+        keterangan,
+        DATE_FORMAT(tanggalPeminjaman, '%d %M %Y') AS tanggalPeminjaman,
+        DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara,
+        surat
+        FROM peminjaman
+        INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+        INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
+        INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
+        INNER JOIN ruang ON rp.kode_ruang = ruang.kode
+        WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')
+        GROUP BY peminjaman.id DESC");
+        return $this->db->resultSet();
+    }
+
+    public function historiDosen() {
+        $this->db->query("SELECT peminjaman.id,
+       dosen.nama AS nama,
+       GROUP_CONCAT(ruang.kode) AS ruang,
+       keterangan,
+       DATE_FORMAT(tanggalPeminjaman, '%d %M %Y') AS tanggalPeminjaman,
+       DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara,
+       surat
+       FROM peminjaman
+       INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+       INNER JOIN dosen ON peminjaman.nidn_dosen = dosen.nidn
+       INNER JOIN ruang ON rp.kode_ruang = ruang.kode
+       WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')
+       GROUP BY peminjaman.id DESC");
+        return $this->db->resultSet();
     }
 }

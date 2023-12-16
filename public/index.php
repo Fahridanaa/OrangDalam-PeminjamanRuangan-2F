@@ -17,6 +17,7 @@ use OrangDalam\PeminjamanRuangan\Controllers\User\PeminjamanController;
 use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminHistoryController;
 use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminInboxController;
 use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminKonfirmasiController;
+use OrangDalam\PeminjamanRuangan\Core\Controller;
 
 session_start();
 
@@ -44,7 +45,7 @@ Router::add("POST", "/pinjam/form?step=2&category=acara", PeminjamanController::
 Router::add("GET", "/inbox", AdminInboxController::class, "showInbox");
 Router::add("GET", "/history", AdminHistoryController::class, "showHistory");
 Router::add("GET", "/konfirmasiPinjam", AdminKonfirmasiController::class, "showKonfirmasiPinjamPage");
-Router::add("GET", "/download", AdminKonfirmasiController::class, "download");
+Router::add("GET", "/download", Controller::class, "download");
 
 Router::run();
 

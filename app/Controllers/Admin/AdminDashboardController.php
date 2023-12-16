@@ -31,7 +31,13 @@ class AdminDashboardController extends Controller {
     public function top() {
         $result = array();
         foreach ($this->peminjaman->top() as $item) {
-            $data = array($item['nama'], $item['jurusan'], $item['ruang'], $item['keterangan'], $item['tanggalPeminjaman'], $item['tanggalAcara']);
+            if ($item['surat'] == null) {
+                $linkSurat = 'Belum Ada Surat';
+            }
+            else {
+                $linkSurat = '<a href="/download?file=' . urlencode($item['surat']) . '">Download Surat</a>';
+            }
+            $data = array($item['nama'], $item['jurusan'], $item['ruang'], $item['keterangan'], $item['tanggalPeminjaman'], $item['tanggalAcara'], $linkSurat);
             array_push($result, $data);
         }
         return $result;
