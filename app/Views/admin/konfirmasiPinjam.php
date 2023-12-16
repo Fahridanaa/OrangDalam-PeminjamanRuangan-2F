@@ -38,22 +38,21 @@
                         <?php
                         $pinjam = new AdminKonfirmasiController();
                         $dataTable = $pinjam->konfirmasi();
-                        /*$dataTable = array(
-                            array("Fahridana Ahmad", "LIG 1, LSI 1", "10 Desember 2023", "081001012040", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012041", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", ""),
-                            // Tambahkan data lainnya jika ada
-                        );*/
 
                         foreach ($dataTable as $data) {
                             echo "<tr>";
-                            foreach ($data as $value) {
-                                echo "<td class=\"px-6 py-4 text-center\">$value</td>";
+                            for ($i = 0; $i < count($data) - 1; $i++) {
+                                echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
                             echo '<td class="px-6 py-4 flex justify-center">';
-                            $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
+
+                            $status = $pinjam->statusKonfirmasi($data[6]);
+                            if ($status['status'] == 'Telah Dikonfirmasi') {
+                                $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
+                            }
+                            else {
+                                $tombolTerimaDitekan = false; // Ganti dengan kondisi sesuai kebutuhan
+                            }
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[5]; // Kolom [File Surat Peminjaman] berada pada indeks 5

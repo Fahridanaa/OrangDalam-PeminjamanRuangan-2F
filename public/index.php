@@ -44,6 +44,7 @@ Router::add("POST", "/pinjam/form?step=2&category=acara", PeminjamanController::
 Router::add("GET", "/inbox", AdminInboxController::class, "showInbox");
 Router::add("GET", "/history", AdminHistoryController::class, "showHistory");
 Router::add("GET", "/konfirmasiPinjam", AdminKonfirmasiController::class, "showKonfirmasiPinjamPage");
+Router::add("GET", "/download", AdminKonfirmasiController::class, "download");
 
 Router::run();
 

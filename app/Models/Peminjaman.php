@@ -99,10 +99,13 @@ class Peminjaman
     }
 
     public function konfirmasi() {
-        $this->db->query("SELECT mahasiswa.nama AS nama,
+        $this->db->query("SELECT peminjaman.id AS id, 
+       mahasiswa.nama AS nama,
        GROUP_CONCAT(ruang.kode) AS ruang,
        DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara,
-       mahasiswa.telepon AS telepon
+       mahasiswa.telepon AS telepon,
+       tanda_pengenal,
+       surat
        FROM peminjaman
        INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
        INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
@@ -110,5 +113,11 @@ class Peminjaman
        WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')
        GROUP BY peminjaman.id DESC");
         return $this->db->resultSet();
+    }
+
+    public function statusKonfirmasi($id) {
+        $this->db->query("SELECT status FROM peminjaman WHERE id = :id");
+        $this->db->bind(":id", $id);
+        return $this->db->single();
     }
 }
