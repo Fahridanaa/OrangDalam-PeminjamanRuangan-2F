@@ -1,15 +1,19 @@
-<?php 
+<?php
 
 
 namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 
-class AdminInboxController extends Controller {
-
-    public function __construct() {
+class AdminInboxController extends Controller
+{
+    private Notifikasi $notifikasi;
+    public function __construct()
+    {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
+        $this->notifikasi = new Notifikasi();
     }
 
     public function showInbox(): void
@@ -18,8 +22,7 @@ class AdminInboxController extends Controller {
             header('Location: /login');
             exit();
         }
-
-        $this->view('admin/inbox');
+        $data['notif'] = $this->notifikasi->getNotifAdmin();
+        $this->view('admin/inbox', $data);
     }
-
 }

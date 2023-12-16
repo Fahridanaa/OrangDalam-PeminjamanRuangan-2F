@@ -27,6 +27,7 @@ class RequestController extends Controller
             exit();
         }
 
+        
         $this->view('user/konfirmasiRuangan');
     }
 
