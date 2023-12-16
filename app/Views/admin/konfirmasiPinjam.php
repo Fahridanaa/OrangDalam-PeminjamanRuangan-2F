@@ -50,10 +50,10 @@
                         foreach ($dataTable as $data) {
                             echo "<tr>";
                             foreach ($data as $value) {
-                                echo "<td class=\"px-6 py-4\">$value</td>";
+                                echo "<td class=\"px-6 py-4 text-center\">$value</td>";
                             }
-                            echo '<td class="px-6 py-4">';
-                            $tombolTerimaDitekan = false; // Ganti dengan kondisi sesuai kebutuhan
+                            echo '<td class="px-6 py-4 flex justify-center">';
+                            $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[5]; // Kolom [File Surat Peminjaman] berada pada indeks 5
