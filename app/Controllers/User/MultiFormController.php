@@ -79,6 +79,8 @@ class MultiFormController extends Controller
                 exit();
             }
         }
+
+        header('Location: /pinjam/form?step=1');
     }
 
     private function processForm1(): bool
@@ -126,6 +128,8 @@ class MultiFormController extends Controller
                 exit();
             }
         }
+
+        header('Location: /pinjam/form?step=2');
     }
 
     private function processForm2Acara(): bool
@@ -266,11 +270,14 @@ class MultiFormController extends Controller
         }
 
         if ($formProcessed) {
+            $_SESSION['formPinjam']['step4Completed'] = true;
             if (!headers_sent()) {
                 header('Location: /pinjam/form?step=5');
                 exit();
             }
         }
+
+        header('Location: /pinjam/form?step=4');
     }
 
     private function confirmationForm4Acara()
@@ -292,6 +299,13 @@ class MultiFormController extends Controller
             'tandaPengenal' => basename($_FILES['tanda-pengenal']['name'])
         ];
 
+        if ($_SESSION['formPinjam']['urgent']) {
+            $message = 'Silahkan tunggu konfirmasi dari Admin';
+        } else {
+            $message = 'Silahkan uploads surat peminjaman untuk <br> tahap selanjutnya';
+        }
+        $_SESSION['formPinjam']['done'] = $message;
+
         if ($this->peminjaman->insert($data) > 0) {
             return true;
         }
@@ -307,6 +321,13 @@ class MultiFormController extends Controller
         }
 
         $data = []; //query buat mata kuliah belum ada
+
+        if ($_SESSION['level'] === 'mahasiswa') {
+            $message = 'Silahkan tunggu konfirmasi dari Ketua Kelas';
+        } else {
+            $message = 'Silahkan tunggu konfirmasi dari Dosen';
+        }
+        $_SESSION['formPinjam']['done'] = $message;
         if ($this->peminjaman->insert($data) > 0) {
             return true;
         }
@@ -315,9 +336,15 @@ class MultiFormController extends Controller
 
     public function handleStep5()
     {
+        if (!isset($_SESSION['formPinjam']['step4Completed'])) {
+            header('Location: /pinjam/form?step=4');
+            exit();
+        }
 
+        unset($_SESSION['formPinjam']);
+
+        header('Location: /pinjam');
     }
-
 
     private function isRequestMethodPost(): bool
     {
