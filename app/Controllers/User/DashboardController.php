@@ -39,9 +39,6 @@ class DashboardController extends Controller
         if ($this->ruang->status($kode, $this->getDayNow()) != null) {
             return 'danger';
         }
-//        else if ($this->peminjaman->status($kode, "'Menunggu Konfirmasi', 'Diperlukan Surat Izin'") != null) {
-//            return 'warn';
-//        }
         else {
             return 'disable';
         }
