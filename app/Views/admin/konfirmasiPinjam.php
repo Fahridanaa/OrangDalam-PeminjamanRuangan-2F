@@ -38,14 +38,6 @@
                         <?php
                         $pinjam = new AdminKonfirmasiController();
                         $dataTable = $pinjam->konfirmasi();
-                        /*$dataTable = array(
-                            array("Fahridana Ahmad", "LIG 1, LSI 1", "10 Desember 2023", "081001012040", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012041", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", ""),
-                            // Tambahkan data lainnya jika ada
-                        );*/
 
                         foreach ($dataTable as $data) {
                             echo "<tr>";
