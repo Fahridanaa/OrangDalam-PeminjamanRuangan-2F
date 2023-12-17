@@ -2,20 +2,18 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php
+    include __DIR__ . '/../shared/head.php';
+    use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminHistoryController;
+    ?>
 </head>
 
 <?php
+$history = new AdminHistoryController();
 // Data peminjaman untuk mahasiswa
-$peminjamanMahasiswa = array(
-    array("Fahridana Ahmad", "Teknologi Informasi", "LIG 1, LSI 1", "Dipinjam Untuk Kegiatan Event Hacktober WRI", "20 November 2023", "10 Desember 2023", "[File Surat Peminjaman]"),
-    // Tambahkan data mahasiswa lain jika ada
-);
+$peminjamanMahasiswa = $history->historyMahasiswa();
 // Data peminjaman untuk Dosen
-$peminjamanDosen = array(
-    array("Mungki Astiningrum", "Teknologi Informasi", "LIG 3", "Dipinjam Untuk Sempro", "20 November 2023", "06 Desember 2023", "[File Surat Peminjaman]"),
-    // Tambahkan data Dosen lain jika ada
-);
+$peminjamanDosen = $history->historyDosen();
 // Menggabungkan data mahasiswa dan dosen menjadi satu array
 $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
 
@@ -83,8 +81,8 @@ if (!isset($_GET['tab'])) {
                         // Loop melalui data peminjaman semua
                         foreach ($peminjamanSemua as $data) {
                             echo "<tr>";
-                            foreach ($data as $value) {
-                                echo "<td class=\"px-6 py-4 text-center\">$value</td>";
+                            for ($i = 0; $i < count($data); $i++) {
+                                echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
                             echo "</tr>";
                         }

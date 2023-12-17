@@ -14,9 +14,9 @@ class PeminjamanController extends Controller
         $this->peminjaman = new Peminjaman();
     }
 
-    public function showPinjam()
+    public function showPinjam($nim)
     {
-        return $this->peminjaman->pinjam();
+        return $this->peminjaman->pinjam($nim);
     }
 
     public function showDetail($id)
@@ -24,9 +24,9 @@ class PeminjamanController extends Controller
         return $this->peminjaman->detailPinjam($id);
     }
 
-    public function showHistory()
+    public function showHistory($nim)
     {
-        return $this->peminjaman->history();
+        return $this->peminjaman->history($nim);
     }
 
     public function insertAcara()

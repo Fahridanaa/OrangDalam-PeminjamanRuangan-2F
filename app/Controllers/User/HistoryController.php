@@ -11,6 +11,7 @@ class HistoryController extends Controller
 {
     private Jadwal $jadwal;
     private Ruang $ruang;
+    private Peminjaman $peminjaman;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class HistoryController extends Controller
         $middlewareInstance->handleUser();
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
+        $this->peminjaman = new Peminjaman();
     }
 
     public function ShowHistoryPage(): void
@@ -29,5 +31,4 @@ class HistoryController extends Controller
 
         $this->view('user/history');
     }
-
 }
