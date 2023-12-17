@@ -25,7 +25,7 @@ class InboxController extends Controller
             exit();
         }
         
-        $data['notifikasi'] = $this->notifikasi->getNotif((int)$_SESSION['username']);
+        $data['notifikasi'] = $this->notifikasi->getNotif($_SESSION['username']);
         $this->view('user/inbox', $data);
     }
 
