@@ -14,14 +14,15 @@ class Controller
         include $viewPath;
     }
 
-    protected function middleware($middleware) {
+    protected function middleware($middleware)
+    {
         $middlewareClass = "OrangDalam\PeminjamanRuangan\Middleware\\" . $middleware;
         return new $middlewareClass;
     }
 
     protected function loginCheck(): bool
     {
-        return isset($_SESSION['username']);
+        return isset($_SESSION['user']);
     }
 
     public function download() {
