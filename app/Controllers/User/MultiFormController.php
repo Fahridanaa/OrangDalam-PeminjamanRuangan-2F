@@ -285,12 +285,12 @@ class MultiFormController extends Controller
             'event' => $_SESSION['formPinjam']['acara-tanggal'],
             'mulai' => $_SESSION['formPinjam']['acara-jam-mulai'],
             'selesai' => $_SESSION['formPinjam']['acara-jam-selesai'],
-            'urgent' => basename($_FILES['acara-bukti-urgent']['name']), //nama file jare arip
+            'urgent' => ($_FILES['acara-bukti-urgent']['name']), //nama file jare arip
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
             'status' => 'Menunggu Konfirmasi',
             'nim' => $_SESSION['user']['nim'] ?? null,
             'nidn' => $_SESSION['user']['nidn'] ?? null,
-            'tandaPengenal' => basename($_FILES['tanda-pengenal']['name'])
+            'tandaPengenal' => ($_FILES['tanda-pengenal']['name'])
         ];
 
         if ($_SESSION['formPinjam']['urgent']) {
