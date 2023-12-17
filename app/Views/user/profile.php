@@ -1,13 +1,5 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Views\user;
-
-use OrangDalam\PeminjamanRuangan\Models\AuthModel;
-
-$flashMessage = $_SESSION['flash_message'] ?? null;
-unset($_SESSION['flash_message']);
-
-$user = new AuthModel();
-$data = $user->getProfile($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -33,23 +25,23 @@ $data = $user->getProfile($_SESSION['id']);
                 <div id="user-profile-data" class="flex-[3]">
                     <div id="user-profile-name" class="border-b border-black flex p-2">
                         <span>Nama</span>
-                        <span class="flex-1 text-end"><?php echo $data['nama'] ?></span>
+                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['nama'] ?></span>
                     </div>
                     <div id="user-profile-nim" class="border-b border-black flex p-2">
                         <span>NIM</span>
-                        <span class="flex-1 text-end"><?php echo $data['nim']; ?></span>
+                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['nim']; ?></span>
                     </div>
                     <div id="user-profile-jurusan" class="border-b border-black flex p-2">
                         <span>Jurusan</span>
-                        <span class="flex-1 text-end"><?php echo $data['jurusan']; ?></span>
+                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['jurusan']; ?></span>
                     </div>
                     <div id="user-profile-prodi" class="border-b border-black flex p-2">
                         <span>Prodi</span>
-                        <span class="flex-1 text-end"><?php echo $data['prodi']; ?></span>
+                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['prodi']; ?></span>
                     </div>
                     <div id="user-profile-tel" class="border-b border-black flex p-2">
                         <span>No. Telp</span>
-                        <span class="flex-1 text-end"><?php echo $data['telepon']; ?></span>
+                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['telepon']; ?></span>
                     </div>
                 </div>
             </div>
@@ -61,10 +53,8 @@ $data = $user->getProfile($_SESSION['id']);
             </div>
             <div id="user-ganti-password-card"
                  class="self-center bg-neutral-color border-2 border[#C8C1C1] py-4 px-10 rounded-3xl w-3/4 mb-6">
-                <div class="<?= $flashMessage['type'] ?> flex bg-<?= $flashMessage['color'] ?>-color my-4 rounded-xl py-2 px-6 w-fit">
-                    <span class="text-xl"><?= $flashMessage['message'] ?></span>
-                </div>
-                <form method="POST" class="flex flex-col gap-8">
+                <?php include __DIR__ . '/../shared/flashMessage.php' ?>
+                <form method="POST" class="flex flex-col gap-8 my-4">
                     <div class="flex gap-2 justify-between items-center">
                         <label for="password-sekarang">Password Sekarang</label>
                         <input type="password" name="password-sekarang" id="password-sekarang"
