@@ -46,6 +46,7 @@ class AuthController extends Controller
             if ($data['password'] === md5($password)) {
                 $_SESSION['user'] = $this->authModel->getProfile($data['id']);
                 $_SESSION['level'] = $data['level'];
+                $_SESSION['username'] =  $username;
                 $this->showDashboard();
             } else {
                 $_SESSION['flash_message'] = ['type' => 'error', 'message' => 'username atau password salah', 'color' => 'danger'];

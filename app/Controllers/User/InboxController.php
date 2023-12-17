@@ -3,21 +3,19 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
-use OrangDalam\PeminjamanRuangan\Models\Jadwal;
-use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
-use OrangDalam\PeminjamanRuangan\Models\Ruang;
+use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
+
 
 class InboxController extends Controller
 {
-    private Jadwal $jadwal;
-    private Ruang $ruang;
 
+    private $notifikasi;
+    
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
-        $this->jadwal = new Jadwal();
-        $this->ruang = new Ruang();
+        $this->notifikasi = new Notifikasi();
     }
 
     public function showInboxPage(): void
@@ -26,8 +24,9 @@ class InboxController extends Controller
             header('Location: /login');
             exit();
         }
-
-        $this->view('user/inbox');
+        
+        $data['notifikasi'] = $this->notifikasi->getNotif((int)$_SESSION['username']);
+        $this->view('user/inbox', $data);
     }
 
 }
