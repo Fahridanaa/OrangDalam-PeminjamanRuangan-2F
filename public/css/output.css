@@ -594,10 +594,6 @@ video {
   top: 0px;
 }
 
-.top-4 {
-  top: 1rem;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -954,10 +950,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.snap-both {
-  scroll-snap-type: both var(--tw-scroll-snap-strictness);
 }
 
 .grid-cols-2 {
@@ -1336,6 +1328,9 @@ video {
   fill: var(--neutral-color);
 }
 
+.fill-primary-color {
+  fill: var(--primary-color);
+}
 
 .p-10 {
   padding: 2.5rem;
@@ -1495,11 +1490,6 @@ video {
   padding-bottom: 2rem;
 }
 
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -1554,34 +1544,6 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
-}
-
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pr-20 {
-  padding-right: 5rem;
-}
-
-.pr-28 {
-  padding-right: 7rem;
-}
-
-.pr-32 {
-  padding-right: 8rem;
-}
-
-.pr-\[120px\] {
-  padding-right: 120px;
-}
-
-.pr-\[115px\] {
-  padding-right: 115px;
-}
-
-.pr-\[102px\] {
-  padding-right: 102px;
 }
 
 .text-left {
@@ -1802,10 +1764,6 @@ video {
   transition-duration: 300ms;
 }
 
-.duration-75 {
-  transition-duration: 75ms;
-}
-
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1868,6 +1826,10 @@ video {
   background-color: rgb(22 101 52 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-neutral-color:hover {
+  background-color: var(--neutral-color);
+}
+
 .hover\:bg-primary-color:hover {
   background-color: var(--primary-color);
 }
@@ -1879,10 +1841,6 @@ video {
 
 .hover\:bg-third-color:hover {
   background-color: var(--third-color);
-}
-
-.hover\:bg-neutral-color:hover {
-  background-color: var(--neutral-color);
 }
 
 .hover\:fill-fourth-color:hover {
@@ -1926,20 +1884,8 @@ video {
   display: block;
 }
 
-.group:hover .group-hover\:bg-neutral-color {
-  background-color: var(--neutral-color);
-}
-
 .group:hover .group-hover\:fill-neutral-color {
   fill: var(--neutral-color);
-}
-
-.group:hover .group-hover\:fill-fourth-color {
-  fill: var(--fourth-color);
-}
-
-.group:hover .group-hover\:fill-third-color {
-  fill: var(--third-color);
 }
 
 .group:hover .group-hover\:fill-primary-color {
@@ -1948,10 +1894,6 @@ video {
 
 .group:hover .group-hover\:text-neutral-color {
   color: var(--neutral-color);
-}
-
-.group:hover .group-hover\:text-fourth-color {
-  color: var(--fourth-color);
 }
 
 .group:hover .group-hover\:text-primary-color {
@@ -1970,6 +1912,10 @@ video {
   .dark\:bg-green-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-primary-color {
+    background-color: var(--primary-color);
   }
 
   .dark\:bg-red-600 {

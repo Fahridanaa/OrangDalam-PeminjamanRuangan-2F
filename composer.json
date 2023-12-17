@@ -30,7 +30,8 @@
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
-    "ext-fileinfo": "*"
+    "ext-fileinfo": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
