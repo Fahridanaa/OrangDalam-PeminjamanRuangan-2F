@@ -2,20 +2,18 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '/../shared/head.php'; ?>
+    <?php
+    include __DIR__ . '/../shared/head.php';
+    use OrangDalam\PeminjamanRuangan\Controllers\Admin\AdminHistoryController;
+    ?>
 </head>
 
 <?php
+$history = new AdminHistoryController();
 // Data peminjaman untuk mahasiswa
-$peminjamanMahasiswa = array(
-    array("Fahridana Ahmad", "Teknologi Informasi", "LIG 1, LSI 1", "Dipinjam Untuk Kegiatan Event Hacktober WRI", "20 November 2023", "10 Desember 2023", "[File Surat Peminjaman]"),
-    // Tambahkan data mahasiswa lain jika ada
-);
+$peminjamanMahasiswa = $history->historyMahasiswa();
 // Data peminjaman untuk Dosen
-$peminjamanDosen = array(
-    array("Mungki Astiningrum", "Teknologi Informasi", "LIG 3", "Dipinjam Untuk Sempro", "20 November 2023", "06 Desember 2023", "[File Surat Peminjaman]"),
-    // Tambahkan data Dosen lain jika ada
-);
+$peminjamanDosen = $history->historyDosen();
 // Menggabungkan data mahasiswa dan dosen menjadi satu array
 $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
 
@@ -83,25 +81,8 @@ if (!isset($_GET['tab'])) {
                         // Loop melalui data peminjaman semua
                         foreach ($peminjamanSemua as $data) {
                             echo "<tr>";
-                            foreach ($data as $key => $value) {
-                                if ($key == 6) {
-                                    if (!empty($value)) {
-                                        $filePath = $value; 
-                                        echo "<td class=\"px-6 py-4 text-center\">
-                                        <button type=\"button\" class=\"focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2\" disabled>
-                                            <a href=\"$filePath\" class=\"download-button\" download>
-                                                <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
-                                                    <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z'></path>
-                                                </svg>  
-                                            </a>
-                                        </button>
-                                         </td>";
-                                    } else {
-                                        echo "<td class=\"px-6 py-4 text-center\"> - </td>";
-                                    }
-                                } else {
-                                    echo "<td class=\"px-6 py-4 text-center\">$value</td>";
-                                }
+                            for ($i = 0; $i < count($data); $i++) {
+                                echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
                             echo "</tr>";
                         }

@@ -38,39 +38,20 @@
                         <?php
                         $pinjam = new AdminKonfirmasiController();
                         $dataTable = $pinjam->konfirmasi();
-                        /*$dataTable = array(
-                            array("Fahridana Ahmad", "LIG 1, LSI 1", "10 Desember 2023", "081001012040", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012041", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", "[File Surat Peminjaman]"),
-                            array("Haidar Aly", "LSI 2", "11 Desember 2023", "081001012042", "[File Tanda Pengenal]", ""),
-                            // Tambahkan data lainnya jika ada
-                        );*/
 
                         foreach ($dataTable as $data) {
                             echo "<tr>";
-                            foreach ($data as $key => $value) {
-                                if ($key == 5 || $key == 4) {
-                                    if (!empty($value)) {
-                                        $filePath = $value; 
-                                        echo "<td class=\"px-6 py-4 text-center\">
-                                            <button type=\"button\" class=\"focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2\" disabled>
-                                                <a href=\"$filePath\" class=\"download-button\" download>
-                                                <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
-                                                    <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z'></path>
-                                                </svg>  
-                                                </a>
-                                            </button>
-                                         </td>";
-                                    } else {
-                                        echo "<td class=\"px-6 py-4 text-center\"> - </td>";
-                                    }
-                                } else {
-                                    echo "<td class=\"px-6 py-4 text-center\">$value</td>";
-                                }
+                            for ($i = 0; $i < count($data) - 1; $i++) {
+                                echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
                             echo '<td class="px-6 py-4 flex justify-center">';
-                            $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
+                            $status = $pinjam->statusKonfirmasi($data[6]);
+                            if ($status['status'] == 'Telah Dikonfirmasi') {
+                                $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
+                            }
+                            else {
+                                $tombolTerimaDitekan = false; // Ganti dengan kondisi sesuai kebutuhan
+                            }
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[5]; // Kolom [File Surat Peminjaman] berada pada indeks 5
