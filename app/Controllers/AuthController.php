@@ -59,7 +59,7 @@ class AuthController extends Controller
         $now = md5($_POST['password-sekarang'] ?? '');
         $new = md5($_POST['password-baru'] ?? '');
         $confirm = md5($_POST['konfirmasi-password-baru'] ?? '');
-        $data = $this->authModel->get($_SESSION['username']);
+        $data = $this->authModel->get($_SESSION['user']['nim']);
 
         if ($data['password'] === $now) {
             if ($new === $confirm) {

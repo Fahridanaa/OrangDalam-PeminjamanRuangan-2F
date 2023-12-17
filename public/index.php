@@ -1,7 +1,11 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use OrangDalam\PeminjamanRuangan\Core\Router;
+use OrangDalam\PeminjamanRuangan\Core\{
+    Router,
+    Controller
+};
+
 use OrangDalam\PeminjamanRuangan\Controllers\{
     AuthController,
     User\DashboardController,
@@ -26,6 +30,7 @@ addCoreRoutes();
 addUserRoutes();
 addFormRoutes();
 addAdminRoutes();
+
 
 Router::run();
 
@@ -64,4 +69,6 @@ function addAdminRoutes()
     Router::add("GET", "/inbox", AdminInboxController::class, "showInbox");
     Router::add("GET", "/history", AdminHistoryController::class, "showHistory");
     Router::add("GET", "/konfirmasiPinjam", AdminKonfirmasiController::class, "showKonfirmasiPinjamPage");
+    Router::add("GET", "/download", Controller::class, "download");
+
 }

@@ -1,8 +1,6 @@
 <?php
 namespace OrangDalam\PeminjamanRuangan\Views\shared;
 
-$flashMessage = $_SESSION['flash_message'] ?? null;
-unset($_SESSION['flash_message']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +13,8 @@ unset($_SESSION['flash_message']);
     <?php include 'sidebar.php'; ?>
     <div class="h-screen w-screen flex flex-col gap-6 items-center ml-32">
         <?php include 'stepper.php';
+
+        include __DIR__ . '/../shared/flashMessage.php';
 
         include $contentFile;
 
