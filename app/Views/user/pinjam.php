@@ -37,6 +37,7 @@
                     $notif = '';
                     $buttonSurat = '';
                     $deadline = $item['deadline'];
+                    $id = $item['id'];
 
                     switch ($status) {
                         case 'Menunggu Konfirmasi':
@@ -96,7 +97,8 @@
     })
 
     detailAcaraButton.forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             modals[1].classList.remove('hidden');
         })
     })
