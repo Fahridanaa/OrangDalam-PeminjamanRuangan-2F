@@ -31,6 +31,7 @@ addUserRoutes();
 addFormRoutes();
 addAdminRoutes();
 
+
 Router::run();
 
 function addCoreRoutes()
@@ -69,4 +70,5 @@ function addAdminRoutes()
     Router::add("GET", "/history", AdminHistoryController::class, "showHistory");
     Router::add("GET", "/konfirmasiPinjam", AdminKonfirmasiController::class, "showKonfirmasiPinjamPage");
     Router::add("GET", "/download", Controller::class, "download");
+
 }
