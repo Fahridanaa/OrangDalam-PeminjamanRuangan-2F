@@ -6,7 +6,7 @@ use config\Database;
 use Exception;
 use PDOException;
 
-class PinjamModels
+class PinjamModel
 {
     private Database $db;
 

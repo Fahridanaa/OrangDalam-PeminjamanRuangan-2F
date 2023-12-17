@@ -3,7 +3,7 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
-use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
+use OrangDalam\PeminjamanRuangan\Models\MultiFormModel;
 
 class MultiFormController extends Controller
 {
@@ -12,11 +12,11 @@ class MultiFormController extends Controller
     private const FORM_STEP_3 = 3;
     private const FORM_STEP_4 = 4;
     private const FORM_STEP_5 = 5;
-    private Peminjaman $peminjaman;
+    private MultiFormModel $multiFormModel;
 
     public function __construct()
     {
-        $this->peminjaman = new Peminjaman();
+        $this->multiFormModel = new MultiFormModel();
     }
 
     public function showForm()
@@ -300,7 +300,7 @@ class MultiFormController extends Controller
         }
         $_SESSION['formPinjam']['done'] = $message;
 
-        if ($this->peminjaman->insert($data) > 0) {
+        if ($this->multiFormModel->insert($data) > 0) {
             return true;
         }
 
@@ -322,7 +322,7 @@ class MultiFormController extends Controller
             $message = 'Silahkan tunggu konfirmasi dari Dosen';
         }
         $_SESSION['formPinjam']['done'] = $message;
-        if ($this->peminjaman->insert($data) > 0) {
+        if ($this->multiFormModel->insert($data) > 0) {
             return true;
         }
         return false;

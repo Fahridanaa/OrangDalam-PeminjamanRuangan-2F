@@ -5,17 +5,17 @@ namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 use config\Database;
 use Exception;
 use OrangDalam\PeminjamanRuangan\Core\Controller;
-use OrangDalam\PeminjamanRuangan\Models\PinjamModels;
+use OrangDalam\PeminjamanRuangan\Models\PinjamModel;
 
 class PinjamController extends Controller
 {
-    private PinjamModels $pinjam;
+    private PinjamModel $pinjam;
 
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
-        $this->pinjam = new PinjamModels();
+        $this->pinjam = new PinjamModel();
     }
 
     public function showPinjamPage(): void
