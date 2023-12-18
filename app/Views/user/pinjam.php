@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <?php include __DIR__ . '/../shared/head.php'; ?>
 </head>
-
 <body class="h-screen overflow-hidden">
 <div id="Peminjaman" class="h-screen flex flex-row">
     <?php
     include 'sidebar.php';
 
-    use OrangDalam\PeminjamanRuangan\Controllers\User\PeminjamanController;
+    use \OrangDalam\PeminjamanRuangan\Controllers\User\PinjamController;
 
     ?>
     <div id="Peminjaman-content" class="h-screen w-screen px-8 py-20 flex flex-col gap-12 ml-32">
@@ -26,57 +24,50 @@
         </div>
         <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
             <?php
-            $data = new PeminjamanController();
+            function displayItem($item)
+            {
+                $status = htmlspecialchars($item['status'], ENT_QUOTES, 'UTF-8');
+                $color = '';
+                $notif = '';
+                $buttonSurat = '';
+                $deadline = $item['deadline'];
+                $id = $item['id'];
+                switch ($status) {
+                    case 'Menunggu Konfirmasi':
+                        $color = 'bg-warn-color';
+                        break;
+                    case 'Diperlukan Surat Izin':
+                        $color = 'bg-danger-color';
+                        $notif = '<span class="text-danger-color text-lg font-semibold">*Upload Surat Sebelum ' . htmlentities($deadline) . '</span>';
+                        $buttonSurat = '<button data-id="' . $id . '" class="uploads-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
+                        break;
+                    case 'Telah Dikonfirmasi':
+                        $color = 'bg-select-color';
+                        break;
+                }
+                include __DIR__ . '/templates/itemTemplate.php';
+            }
 
-            if ($data->showPinjam($_SESSION['username']) == null) {
+            function getUserPeminjaman($nim): ?array
+            {
+                $pinjamController = new PinjamController();
+                try {
+                    return $pinjamController->showPinjam($nim);
+                } catch (Exception $e) {
+                    error_log($e);
+                    return null;
+                }
+            }
+
+            if (isset($_SESSION['user']['nim'])) {
+                $listPinjam = getUserPeminjaman($_SESSION['user']['nim']);
+            }
+            if ($listPinjam == null) {
                 echo '<span class="text-xl font-medium">Belum ada Peminjaman</span>';
             } else {
-                foreach ($data->showPinjam($_SESSION['username']) as $item) :
-                    $status = $item['status'];
-                    $color = '';
-                    $notif = '';
-                    $buttonSurat = '';
-                    $deadline = $item['deadline'];
-                    $id = $item['id'];
-
-                    switch ($status) {
-                        case 'Menunggu Konfirmasi':
-                            $color = 'bg-warn-color';
-                            break;
-                        case 'Diperlukan Surat Izin':
-                            $color = 'bg-danger-color';
-                            $notif = '<span class="text-danger-color text-lg font-semibold">*Upload Surat Sebelum ' . $deadline . '</span>';
-                            $buttonSurat = '<button class="uploads-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
-                            break;
-                        case 'Telah Dikonfirmasi':
-                            $color = 'bg-select-color';
-                            break;
-                    }
-                    ?>
-                    <div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-                        <div class="flex w-full justify-between">
-                            <div class="flex gap-4">
-                                <span class="text-neutral-color px-3 py-1 <?= $color ?> rounded-xl"><?= $item['status']; ?></span>
-                                <!--                        tambahi category-->
-                                <span class="acara text-neutral-color px-3 py-1 bg-locked-color rounded-xl">Acara</span>
-                            </div>
-                            <?= $notif ?>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <span class="font-bold text-3xl"><?= $item['kode_ruang']; ?></span>
-                            <span class="font-normal text-xl">Digunakan Tanggal <?= $item['tanggalAcara'] ?></span>
-                        </div>
-                        <div class="self-end flex gap-5">
-                            <?= $buttonSurat ?>
-                            <!--                      iki class e diganti antara matkul sama acara-->
-                            <a href="/pinjam?id=<?php echo $item['id'] ?>"
-                               class="detail-acara-button ont-bold text-sm px-3 py-2 bg-third-color rounded-3xl text-neutral-color hover:bg-primary-color">
-                                Detail
-                                Peminjaman
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach;
+                foreach ($listPinjam as $item) :
+                    displayItem($item);
+                endforeach;
             } ?>
         </div>
     </div>
@@ -92,6 +83,10 @@
 
     uploadSuratButton.forEach((button) => {
         button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            console.log(id);
+            const inputId = document.getElementById('id');
+            inputId.value = id;
             modals[0].classList.remove('hidden');
         })
     })
@@ -99,9 +94,24 @@
     detailAcaraButton.forEach((button) => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
+            const id = button.getAttribute('data-id');
             modals[1].classList.remove('hidden');
-        })
-    })
+            fetch('/pinjam/data?id=' + id)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('lantai-span').textContent = data.lantai;
+                    document.getElementById('ruang-span').textContent = data.ruang;
+                    document.getElementById('keterangan-span').textContent = data.keterangan;
+                    document.getElementById('tanggalAcara-span').textContent = data.tanggalAcara;
+                    document.getElementById('mulai-span').textContent = data.mulai;
+                    document.getElementById('selesai-span').textContent = data.selesai;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
 
     detailMatkulButton.forEach((button) => {
         button.addEventListener('click', () => {
