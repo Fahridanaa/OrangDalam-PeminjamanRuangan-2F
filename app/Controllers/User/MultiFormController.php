@@ -158,7 +158,7 @@ class MultiFormController extends Controller
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
-        $uploadsDir = __DIR__ . '/../../../data/uploads';
+        $uploadsDir = __DIR__ . '/../../../data/uploads/';
         $acaraDir = $uploadsDir . 'acara/';
         $tandaPengenalPath = $acaraDir . 'tanda-pengenal/' . $tandaPengenal['name'];
 
@@ -210,7 +210,7 @@ class MultiFormController extends Controller
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
 
-        $uploadsDir = __DIR__ . '/../../../data/uploads';
+        $uploadsDir = __DIR__ . '/../../../data/uploads/';
         $matkulDir = $uploadsDir . 'matkul/';
         $tandaPengenalPath = $matkulDir . 'tanda-pengenal/' . basename($tandaPengenal['name']);
         $allowedFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -384,6 +384,12 @@ class MultiFormController extends Controller
         if (!in_array($fileExtension, $allowedExtensions)) {
             $this->setFailedMessage("Invalid file type.");
             return false;
+        }
+
+        $directory = dirname($destination);
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
         }
 
         if (!move_uploaded_file($fileData['tmp_name'], $destination)) {
