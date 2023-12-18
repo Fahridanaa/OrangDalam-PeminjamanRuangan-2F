@@ -13,7 +13,7 @@ class MultiFormModel
         $this->db = new Database();
     }
 
-    public function insert($data)
+    public function insert($data, $room_ids)
     {
         $this->db->query("INSERT INTO peminjaman(tanggalPeminjaman, tanggalAcara, mulai, selesai, urgent, keterangan, status, nim_mhs, nidn_dosen, tanda_pengenal)
         VALUES (DATE(NOW()), :tanggalEvent, :mulai, :selesai, :urgent, :keterangan, :status ,:nim, :nidn, :tandaPengenal)");
@@ -27,6 +27,15 @@ class MultiFormModel
         $this->db->bind('nidn', $data['nidn']);
         $this->db->bind('tandaPengenal', $data['pengenal']);
         $this->db->execute();
+        $peminjaman_id = $this->db->lastInsertId();
+
+        foreach ($room_ids as $room_id) {
+            $this->db->query("INSERT INTO rp(id_peminjaman, kode_ruang) VALUES (:peminjaman_id, :room_id)");
+            $this->db->bind('peminjaman_id', $peminjaman_id);
+            $this->db->bind('room_id', $room_id);
+            $this->db->execute();
+        }
+
         return $this->db->rowCount();
     }
 }

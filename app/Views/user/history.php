@@ -20,7 +20,7 @@
             <!--            <span class="text-xl font-medium">Belum ada Riwayat Peminjaman</span>-->
             <?php
             $data = new PeminjamanController();
-            foreach ($data->showHistory($_SESSION['username']) as $item) :
+            foreach ($data->showHistory($_SESSION['user']['nim']) as $item) :
                 $status = $item['status'];
                 $color = '';
 

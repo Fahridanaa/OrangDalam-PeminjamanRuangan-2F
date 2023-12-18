@@ -153,6 +153,11 @@ class MultiFormController extends Controller
         }
 
         $tandaPengenal = $_FILES['tanda-pengenal'];
+        if (!$tandaPengenal) {
+            $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
+            return false;
+        }
+        $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
         $uploadsDir = __DIR__ . '/../../../uploads/';
         $acaraDir = $uploadsDir . 'acara/';
         $tandaPengenalPath = $acaraDir . 'tanda-pengenal/' . $tandaPengenal['name'];
@@ -170,6 +175,7 @@ class MultiFormController extends Controller
             }
 
             $buktiUrgent = $_FILES['acara-bukti-urgent'];
+            $_SESSION['formPinjam']['acara-bukti-urgent'] = basename($buktiUrgent['name']);
             $buktiUrgentPath = $acaraDir . 'bukti-urgent/' . $buktiUrgent['name'];
 
             if (!$this->handleUploadedFiles($buktiUrgent, $allowedFileTypes, $buktiUrgentPath)) {
@@ -202,6 +208,8 @@ class MultiFormController extends Controller
             $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
             return false;
         }
+        $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
+
         $uploadsDir = __DIR__ . '/../../../uploads/';
         $matkulDir = $uploadsDir . 'matkul/';
         $tandaPengenalPath = $matkulDir . 'tanda-pengenal/' . basename($tandaPengenal['name']);
@@ -285,13 +293,19 @@ class MultiFormController extends Controller
             'event' => $_SESSION['formPinjam']['acara-tanggal'],
             'mulai' => $_SESSION['formPinjam']['acara-jam-mulai'],
             'selesai' => $_SESSION['formPinjam']['acara-jam-selesai'],
-            'urgent' => basename($_FILES['acara-bukti-urgent']['name']), //nama file jare arip
+            'urgent' => (isset($_SESSION['formPinjam']['acara-bukti-urgent'])),
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
             'status' => 'Menunggu Konfirmasi',
             'nim' => $_SESSION['user']['nim'] ?? null,
             'nidn' => $_SESSION['user']['nidn'] ?? null,
-            'tandaPengenal' => basename($_FILES['tanda-pengenal']['name'])
+            'pengenal' => $_SESSION['formPinjam']['tanda-pengenal']
         ];
+
+        $ruanganDipilih = $_SESSION['formPinjam']['ruangan'];
+
+        $kodeRuang = array_map(function ($item) {
+            return str_replace(' ', '', $item);
+        }, $ruanganDipilih);
 
         if ($_SESSION['formPinjam']['urgent']) {
             $message = 'Silahkan tunggu konfirmasi dari Admin';
@@ -300,7 +314,7 @@ class MultiFormController extends Controller
         }
         $_SESSION['formPinjam']['done'] = $message;
 
-        if ($this->multiFormModel->insert($data) > 0) {
+        if ($this->multiFormModel->insert($data, $kodeRuang) > 0) {
             return true;
         }
 
