@@ -15,10 +15,11 @@ class Notifikasi
     }
 
     // buat nampilkan data notif
-    public function getNotif($user)
+    public function getNotif($id)
     {
         $this->db->query("SELECT jenis, keterangan, tanggal FROM notifikasi
-        WHERE nim_mhs = user OR nip_admin = user");
+        WHERE nim_mhs = :id OR nip_admin = :id");
+        $this->db->bind(':id', $id);
         return $this->db->resultSet();
     }
 
