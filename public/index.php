@@ -48,6 +48,7 @@ function addUserRoutes()
     // user
     Router::add("POST", "/dashboard", DashboardController::class, "showDenah");
     Router::add("GET", "/pinjam", PinjamController::class, "showPinjamPage");
+    Router::add("POST", "/pinjam", PinjamController::class, "handleSuratUpload");
     Router::add("GET", "/pinjam/data", PinjamController::class, "showDetail");
     Router::add("GET", "/pesan", InboxController::class, "showInboxPage");
     Router::add("GET", "/riwayat", HistoryController::class, "showHistoryPage");

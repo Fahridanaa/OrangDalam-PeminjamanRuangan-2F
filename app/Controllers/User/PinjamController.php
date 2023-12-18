@@ -63,6 +63,25 @@ class PinjamController extends Controller
         return $this->pinjam->pinjam($nim);
     }
 
+    public function handleSuratUpload()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['surat'])) {
+            $fileSurat = $_FILES['surat']['name'];
+            $id = $_POST['id'];
+
+            $targetDir = __DIR__ . '/../../../data/uploads/acara/surat/';
+            $targetFile = $targetDir . basename($fileSurat);
+
+            if (move_uploaded_file($_FILES['surat']['tmp_name'], $targetFile)) {
+                $pinjamModel = new PinjamModel();
+                $pinjamModel->uploadSurat($fileSurat, $id);
+            } else {
+                $_SESSION['flash_message'] = ['type' => 'warning', 'message' => 'Gagal untuk upload file', 'color' => 'warn'];
+            }
+            $this->showPinjamPage();
+        }
+    }
+
     private function ensureUserIsLoggedIn(): void // Extract login check to a separate method
     {
         if (!($this->loginCheck())) {

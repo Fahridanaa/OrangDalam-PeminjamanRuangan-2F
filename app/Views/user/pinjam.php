@@ -9,7 +9,6 @@
     include 'sidebar.php';
 
     use \OrangDalam\PeminjamanRuangan\Controllers\User\PinjamController;
-    use \config\Database;
 
     ?>
     <div id="Peminjaman-content" class="h-screen w-screen px-8 py-20 flex flex-col gap-12 ml-32">
@@ -40,7 +39,7 @@
                     case 'Diperlukan Surat Izin':
                         $color = 'bg-danger-color';
                         $notif = '<span class="text-danger-color text-lg font-semibold">*Upload Surat Sebelum ' . htmlentities($deadline) . '</span>';
-                        $buttonSurat = '<button class="uploads-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
+                        $buttonSurat = '<button data-id="' . $id . '" class="uploads-surat-izin-button font-bold text-sm px-3 py-2 bg-select-color rounded-3xl text-[#ffffff] hover:bg-[#27BD63]">Upload Surat Izin</button>';
                         break;
                     case 'Telah Dikonfirmasi':
                         $color = 'bg-select-color';
@@ -84,6 +83,10 @@
 
     uploadSuratButton.forEach((button) => {
         button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            console.log(id);
+            const inputId = document.getElementById('id');
+            inputId.value = id;
             modals[0].classList.remove('hidden');
         })
     })

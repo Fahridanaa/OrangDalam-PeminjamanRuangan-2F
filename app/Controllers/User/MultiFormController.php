@@ -158,7 +158,7 @@ class MultiFormController extends Controller
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
-        $uploadsDir = __DIR__ . '/../../../uploads/';
+        $uploadsDir = __DIR__ . '/../../../data/uploads';
         $acaraDir = $uploadsDir . 'acara/';
         $tandaPengenalPath = $acaraDir . 'tanda-pengenal/' . $tandaPengenal['name'];
 
@@ -210,7 +210,7 @@ class MultiFormController extends Controller
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
 
-        $uploadsDir = __DIR__ . '/../../../uploads/';
+        $uploadsDir = __DIR__ . '/../../../data/uploads';
         $matkulDir = $uploadsDir . 'matkul/';
         $tandaPengenalPath = $matkulDir . 'tanda-pengenal/' . basename($tandaPengenal['name']);
         $allowedFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -295,7 +295,7 @@ class MultiFormController extends Controller
             'selesai' => $_SESSION['formPinjam']['acara-jam-selesai'],
             'urgent' => (isset($_SESSION['formPinjam']['acara-bukti-urgent'])),
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
-            'status' => 'Menunggu Konfirmasi',
+            'status' => (isset($_SESSION['formPinjam']['acara-bukti-urgent']) ? 'Menunggu Konfirmasi' : 'Diperlukan Surat Izin'),
             'nim' => $_SESSION['user']['nim'] ?? null,
             'nidn' => $_SESSION['user']['nidn'] ?? null,
             'pengenal' => $_SESSION['formPinjam']['tanda-pengenal']

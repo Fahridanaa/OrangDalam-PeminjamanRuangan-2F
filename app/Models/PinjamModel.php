@@ -38,6 +38,19 @@ class PinjamModel
         }
     }
 
+    public function uploadSurat(string $fileSurat, int $id)
+    {
+        $this->db->query("UPDATE peminjaman SET surat = :surat, status = :status WHERE id = :id AND surat IS NULL AND status = 'Diperlukan Surat Izin'");
+        $this->db->bind(":id", $id);
+        $this->db->bind(":surat", $fileSurat);
+        $this->db->bind(":status", 'Menunggu Konfirmasi');
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @throws Exception
      */
