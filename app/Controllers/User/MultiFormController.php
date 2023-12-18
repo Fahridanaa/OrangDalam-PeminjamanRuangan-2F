@@ -4,6 +4,7 @@ namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\MultiFormModel;
+use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 
 class MultiFormController extends Controller
 {
@@ -13,10 +14,12 @@ class MultiFormController extends Controller
     private const FORM_STEP_4 = 4;
     private const FORM_STEP_5 = 5;
     private MultiFormModel $multiFormModel;
+    private $notifikasi;
 
     public function __construct()
     {
         $this->multiFormModel = new MultiFormModel();
+        $this->notifikasi = new Notifikasi();
     }
 
     public function showForm()
@@ -306,6 +309,17 @@ class MultiFormController extends Controller
         $kodeRuang = array_map(function ($item) {
             return str_replace(' ', '', $item);
         }, $ruanganDipilih);
+
+         // set notifikasi
+         $dataNotif = [
+            'jenis' => 'Konfirmasi',
+            'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
+            'tanggal' => date('Y-m-d'),  
+            'nim_mhs' =>  $_SESSION['user']['nim'] ?? null,  
+            'nip_dosen' =>  $_SESSION['user']['nidn'] ?? null
+        ];
+
+        $this->notifikasi->setNotif($dataNotif);
 
         if ($_SESSION['formPinjam']['urgent']) {
             $message = 'Silahkan tunggu konfirmasi dari Admin';

@@ -33,7 +33,7 @@ class Notifikasi
     public function setNotif($data)
     {
         $this->db->query("INSERT INTO notifikasi (jenis, keterangan, tanggal, nim_mhs, nip_dosen) 
-        VALUES ()  ");
+        VALUES (:jenis, :keterangan, :tanggal, :nim_mhs, :nip_dosen)");
         $this->db->bind('jenis', $data['jenis']);
         $this->db->bind('keterangan', $data['keterangan']);
         $this->db->bind('tanggal', $data['tanggal']);
