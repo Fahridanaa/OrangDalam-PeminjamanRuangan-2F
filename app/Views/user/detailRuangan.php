@@ -24,7 +24,15 @@
 </head>
 <body class="antialiased">
 <div class="flex">
-    <?php include 'sidebar.php'; ?>
+    <?php
+    include 'sidebar.php';
+    use OrangDalam\PeminjamanRuangan\Controllers\User\DetailRuanganController;
+    $detail = new DetailRuanganController();
+    $ruang = $_GET['kode'];
+    $i = 1;
+    date_default_timezone_set('Asia/Jakarta');
+    $waktu = date('H:i');
+    ?>
     <div class="h-screen w-screen py-12 ml-32 px-8 flex flex-col gap-4">
         <div id="header">
             <h1 class="text-4xl font-semibold mb-6">Detail Ruangan</h1>
@@ -115,116 +123,26 @@
                         </div>
                     </th>
                 </tr>
-                <tr class="border-b border-black">
-                    <td>1</td>
-                    <td>7:00 - 7:50</td>
-                    <td>Data Mining</td>
-                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
-                    <td>SIB-3B</td>
-                    <td>
-                        <div class="rounded-full bg-danger-color w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>2</td>
-                    <td>7:50 - 8:40</td>
-                    <td>Data Mining</td>
-                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
-                    <td>SIB-3B</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>3</td>
-                    <td>8:40 - 9:30</td>
-                    <td>Data Mining</td>
-                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
-                    <td>SIB-3B</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>4</td>
-                    <td>9:40 - 10:30</td>
-                    <td>Data Mining</td>
-                    <td>Rakhmat Arianto, S.ST., M.Kom., Dr</td>
-                    <td>SIB-3B</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>5</td>
-                    <td>10:30 - 11:20</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>6</td>
-                    <td>11:20 - 12:10</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>7</td>
-                    <td>12:50 - 13:40</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>8</td>
-                    <td>13:40 - 14:30</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>9</td>
-                    <td>14:30 - 15:20</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>10</td>
-                    <td>15:30 - 16:20</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
-                <tr class="border-b border-black">
-                    <td>11</td>
-                    <td>16:20 - 17:10</td>
-                    <td>Desain Pemrograman Web</td>
-                    <td>Muhammad Unggul Pamenang, S.St., M.T</td>
-                    <td>TI-2F</td>
-                    <td>
-                        <div class="rounded-full w-4 h-4"></div>
-                    </td>
-                </tr>
+                <?php
+                foreach ($detail->getJadwal($ruang, $detail->getDayNow()) as $item) {
+                    $bg = '';
+                    if ($waktu >= $item['mulai'] && $waktu <= $item['selesai']) {
+                        $bg = 'bg-danger-color';
+                    }
+
+                    echo '<tr class="border-b border-black">';
+                    echo '<td>'. $i .'</td>';
+                    echo '<td>'. $item['mulai'] .'-'. $item['selesai'] . '</td>';
+                    echo '<td>'. $item['namaMK'] .'</td>';
+                    echo '<td>'. $item['namaDosen'] .'</td>';
+                    echo '<td>'. $item['namaKelas'] .'</td>';
+                    echo '<td>';
+                    echo '<div class="rounded-full '. $bg .' w-4 h-4"></div>';
+                    echo '</td>';
+                    echo '</tr>';
+                    $i++;
+                }
+                ?>
             </table>
             <table id="detail-ruangan-jadwal-peminjaman"
                    class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">

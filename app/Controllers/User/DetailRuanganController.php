@@ -38,4 +38,7 @@ class DetailRuanganController extends Controller
         $this->view('user/detailRuangan');
     }
 
+    public function getJadwal($ruang, $hari) {
+        return $this->jadwal->getJadwalByRuangDanHari($ruang, $hari);
+    }
 }

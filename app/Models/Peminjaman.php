@@ -126,4 +126,11 @@ class Peminjaman
        GROUP BY peminjaman.id DESC");
         return $this->db->resultSet();
     }
+
+    public function updateStatus($status, $id) {
+        $this->db->query("UPDATE peminjaman SET status = :status WHERE id = :id");
+        $this->db->bind(":status", $status);
+        $this->db->bind(":id", $id);
+        return $this->db->single();
+    }
 }

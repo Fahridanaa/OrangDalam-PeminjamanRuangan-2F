@@ -27,8 +27,9 @@ class Controller
 
     public function download() {
         $file = $_GET['file'];
+        $path = $_GET['path'];
 
-        $folderPath = 'data/';
+        $folderPath = '../data/uploads/acara/' . $path .  '/';
         $fileName = $file;
         $filePath = $folderPath . $fileName;
 
@@ -46,7 +47,26 @@ class Controller
             readfile($filePath);
             exit;
         } else {
-            echo "File tidak ditemukan.";
+            echo "File Tidak Ditemukan";
         }
+    }
+
+    public function getDayNow()
+    {
+        $namaHariInggris = date('l', time());
+
+        $daftarTerjemahan = array(
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu',
+            'Sunday' => 'Minggu'
+        );
+
+        $namaHariIndonesia = $daftarTerjemahan[$namaHariInggris];
+
+        return $namaHariIndonesia;
     }
 }
