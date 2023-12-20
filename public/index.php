@@ -73,5 +73,4 @@ function addAdminRoutes()
     Router::add("GET", "/konfirmasiPinjam", AdminKonfirmasiController::class, "showKonfirmasiPinjamPage");
     Router::add("GET", "/download", Controller::class, "download");
     Router::add("POST", "/konfirmasiPinjam", AdminKonfirmasiController::class, "updateStatus");
-
 }

@@ -50,4 +50,23 @@ class Controller
             echo "File Tidak Ditemukan";
         }
     }
+
+    public function getDayNow()
+    {
+        $namaHariInggris = date('l', time());
+
+        $daftarTerjemahan = array(
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu',
+            'Sunday' => 'Minggu'
+        );
+
+        $namaHariIndonesia = $daftarTerjemahan[$namaHariInggris];
+
+        return $namaHariIndonesia;
+    }
 }
