@@ -14,7 +14,7 @@ class DetailRuanganController extends Controller
 {
     private Jadwal $jadwal;
     private Ruang $ruang;
-    private Fasilitas $detailRuang;
+    private Fasilitas $fasilitas;
     private JadwalAcara $jadwalAcara;
 
     public function __construct()
@@ -23,7 +23,7 @@ class DetailRuanganController extends Controller
         $middlewareInstance->handleUser();
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
-        $this->detailRuang = new Fasilitas();
+        $this->fasilitas = new Fasilitas();
         $this->jadwalAcara = new JadwalAcara();
     }
 
@@ -40,8 +40,11 @@ class DetailRuanganController extends Controller
             header('Location: /login');
             exit();
         }
+        // $kodeRuang = 'LAI1';
+        // Mengambil data fasilitas dari model berdasarkan kode ruangan
+        $fasilitasData = $this->fasilitas->getFasilitasByRuang($kode);
 
-        $this->view('user/detailRuangan');
+        // Mengirim data ke view
+        $this->view('user/detailRuangan', ['fasilitas' => $fasilitasData]);
     }
-
 }
