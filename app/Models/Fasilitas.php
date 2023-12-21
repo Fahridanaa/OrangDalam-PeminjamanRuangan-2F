@@ -11,7 +11,7 @@ class Fasilitas{
     }
 
     public function getFasilitasByRuang($kode) {
-        $this->db->query("SELECT ruang.kode, ruang.nama, ruang.kapasitas, fasilitas.nama, fasilitas.jumlah
+        $this->db->query("SELECT ruang.kode, ruang.nama, ruang.kapasitas, fasilitas.AC, fasilitas.Proyektor
                           FROM ruang
                           LEFT JOIN fasilitas ON ruang.kode = fasilitas.kode_ruang
                           WHERE ruang.kode = :kodeRuang");

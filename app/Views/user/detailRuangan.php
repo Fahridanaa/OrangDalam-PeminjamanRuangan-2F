@@ -55,8 +55,10 @@
                 <div class="flex flex-col w-full gap-3 px-4 md:flex-1">
                     <span class="self-start px-3 py-1 rounded-md text-neutral-color bg-danger-color">Digunakan</span>
                     <h2 class="pb-4 mb-3 text-2xl font-bold leading-tight tracking-tight border-b-2 border-black md:text-3xl">
-                        Lab
-                        Sistem Informasi 1</h2>
+                        <?php 
+                            echo $fasilitas[0]['nama'];
+                        ?>
+                    </h2>
                     <div class="flex flex-col gap-3 my-4">
                         <span class="text-lg font-semibold">Detail Ruangan:</span>
                         <div class="flex self-start justify-between p-4 rounded-lg bg-third-color text-neutral-color">
@@ -69,11 +71,7 @@
                                 <!-- Menampilkan kapasitas dari data kapasitas -->
                                 <span class="text-lg font-semibold">
                                     <?php 
-                                        // echo $kapasitas; 
-                                        echo "Data Fasilitas:<br>";
-                                        foreach ($fasilitas as $data) {
-                                            var_dump($data);
-                                        }
+                                        echo $fasilitas[0]['kapasitas'];
                                     ?> Orang
                                 </span>
                             </div>
@@ -86,13 +84,7 @@
                                 <!-- Menampilkan jumlah proyektor dari data fasilitas -->
                                 <span class="text-lg font-semibold">
                                     <?php
-                                        // echo 'Isset result: ';
-                                        // var_dump(isset($fasilitas['nama']));
-                                        // echo ($fasilitas['nama'] == 'Proyektor') ? $fasilitas['jumlah'] : 0;
-                                        echo "Data Fasilitas:<br>";
-                                        foreach ($fasilitas as $data) {
-                                            var_dump($data);
-                                        }
+                                        echo $fasilitas[0]['Proyektor'];
                                     ?> unit
                                 </span>
                             </div>
@@ -103,13 +95,7 @@
                                 <span class="text-sm">AC</span>
                                 <span class="text-lg font-semibold">
                                     <?php
-                                        // echo 'Isset result: ';
-                                        // var_dump(isset($fasilitas['nama']));
-                                        // echo ($fasilitas['nama'] == 'Proyektor') ? $fasilitas['jumlah'] : 0;
-                                        echo "Data Fasilitas:<br>";
-                                        foreach ($fasilitas as $data) {
-                                            var_dump($data);
-                                        }
+                                        echo $fasilitas[0]['AC'];
                                     ?> unit
                                 </span>
                             </div>

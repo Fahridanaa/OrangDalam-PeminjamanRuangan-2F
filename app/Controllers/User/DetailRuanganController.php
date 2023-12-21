@@ -40,11 +40,10 @@ class DetailRuanganController extends Controller
             header('Location: /login');
             exit();
         }
-        // $kodeRuang = 'LAI1';
         // Mengambil data fasilitas dari model berdasarkan kode ruangan
         $fasilitasData = $this->fasilitas->getFasilitasByRuang($kode);
 
         // Mengirim data ke view
-        $this->view('user/detailRuangan', ['fasilitas' => $fasilitasData]);
+        $this->view('user/detailRuangan', ['fasilitas' => $fasilitasData, 'kodeRuang' => $kode]);
     }
 }
