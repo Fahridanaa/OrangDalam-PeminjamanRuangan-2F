@@ -14,15 +14,14 @@ class JadwalAcara
     }
 
     public function getJadwalAcaraByRuangDanHari($kodeRuang) {
-        $this->db->query("SELECT p.tanggalAcara, p.mulai, p.selesai, p.keterangan, m.nama
+        $this->db->query("SELECT p.tanggalAcara, p.mulai, p.selesai, p.keterangan, COALESCE(m.nama, d.nama) AS nama
                           FROM peminjaman p
                           INNER JOIN rp ON rp.id_peminjaman = p.id
-                          INNER JOIN mahasiswa m ON m.nim = p.nim_mhs
+                          LEFT JOIN mahasiswa m ON m.nim = p.nim_mhs
+                          LEFT JOIN dosen d ON d.nidn = p.nidn_dosen
                           INNER JOIN ruang r ON r.kode = rp.kode_ruang
-                          WHERE r.kode = :kodeRuang");
+                          WHERE r.kode = :kodeRuang AND p.status = 'Peminjaman Berhasil'");
         $this->db->bind(":kodeRuang", $kodeRuang);
-    
         return $this->db->resultSet();
     }
-    
 }

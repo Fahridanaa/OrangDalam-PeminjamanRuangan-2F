@@ -53,10 +53,12 @@
                     </div>
                 </div>
                 <div class="flex flex-col w-full gap-3 px-4 md:flex-1">
-                    <span class="self-start px-3 py-1 rounded-md text-neutral-color bg-danger-color">Digunakan</span>
+                    <span class="self-start px-3 py-1 rounded-md text-neutral-color bg-danger-color">
+                        Digunakan
+                    </span>
                     <h2 class="pb-4 mb-3 text-2xl font-bold leading-tight tracking-tight border-b-2 border-black md:text-3xl">
-                        <?php 
-                            echo $fasilitas[0]['nama'];
+                        <?php
+                        echo $fasilitas[0]['nama'];
                         ?>
                     </h2>
                     <div class="flex flex-col gap-3 my-4">
@@ -70,8 +72,8 @@
                                 <span class="text-sm">Kapasitas</span>
                                 <!-- Menampilkan kapasitas dari data kapasitas -->
                                 <span class="text-lg font-semibold">
-                                    <?php 
-                                        echo $fasilitas[0]['kapasitas'];
+                                    <?php
+                                    echo $fasilitas[0]['kapasitas'];
                                     ?> Orang
                                 </span>
                             </div>
@@ -84,7 +86,7 @@
                                 <!-- Menampilkan jumlah proyektor dari data fasilitas -->
                                 <span class="text-lg font-semibold">
                                     <?php
-                                        echo $fasilitas[0]['Proyektor'];
+                                    echo $fasilitas[0]['Proyektor'];
                                     ?> unit
                                 </span>
                             </div>
@@ -95,7 +97,7 @@
                                 <span class="text-sm">AC</span>
                                 <span class="text-lg font-semibold">
                                     <?php
-                                        echo $fasilitas[0]['AC'];
+                                    echo $fasilitas[0]['AC'];
                                     ?> unit
                                 </span>
                             </div>
@@ -241,17 +243,32 @@
                         <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 py-10 focus:outline-none focus:shadow-none!">
                         </th>
                     </tr>
-                    <tr class="border-b border-black">
-                        <td>1</td>
-                        <td>29 November 2023</td>
-                        <td>19:00 - 22:00</td>
-                        <td>Hacktoberfest</td>
-                        <td>Fahridana Ahmad Rayyansyah</td>
-                        <td>
-                            <div class="w-4 h-4 rounded-full bg-warn-color"></div>
-                        </td>
-                    </tr>
+                    <?php
+                        echo 'Data Jadwal Acara: <br>';
+                        var_dump($jadwalAcara);
+                    ?>
+                    <?php
+                    $counter = 1;
+                    foreach ($jadwalAcara as $jadwal) {
+                        $startDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['mulai']);
+                        $endDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['selesai']);
+                        $isNow = (new DateTime() >= $startDateTime) && (new DateTime() <= $endDateTime);
+                    ?>
+                        <tr class="border-b border-black">
+                            <td><?= $counter++ ?></td>
+                            <td><?= date('d F Y', strtotime($jadwal['tanggalAcara'])) ?></td>
+                            <td><?= date('H:i', strtotime($jadwal['mulai'])) ?> - <?= date('H:i', strtotime($jadwal['selesai'])) ?></td>
+                            <td><?= $jadwal['keterangan'] ?></td>
+                            <td><?= $jadwal['nama'] ?></td>
+                            <td>
+                                <?php if ($isNow) : ?>
+                                    <div class="w-4 h-4 rounded-full bg-warn-color"></div>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </table>
+
             </div>
         </div>
     </div>

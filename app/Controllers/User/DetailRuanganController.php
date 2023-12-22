@@ -43,7 +43,13 @@ class DetailRuanganController extends Controller
         // Mengambil data fasilitas dari model berdasarkan kode ruangan
         $fasilitasData = $this->fasilitas->getFasilitasByRuang($kode);
 
+        $jadwalAcaraData = $this->jadwalAcara->getJadwalAcaraByRuangDanHari($kode);
+
         // Mengirim data ke view
-        $this->view('user/detailRuangan', ['fasilitas' => $fasilitasData, 'kodeRuang' => $kode]);
+        $this->view('user/detailRuangan', [
+            'fasilitas' => $fasilitasData, 
+            'kodeRuang' => $kode,
+            'jadwalAcara' => $jadwalAcaraData
+        ]);
     }
 }
