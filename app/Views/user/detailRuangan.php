@@ -244,10 +244,6 @@
                         </th>
                     </tr>
                     <?php
-                        echo 'Data Jadwal Acara: <br>';
-                        var_dump($jadwalAcara);
-                    ?>
-                    <?php
                     $counter = 1;
                     foreach ($jadwalAcara as $jadwal) {
                         $startDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['mulai']);
