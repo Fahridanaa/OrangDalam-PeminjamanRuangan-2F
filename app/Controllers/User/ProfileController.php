@@ -24,11 +24,7 @@ class ProfileController extends Controller
 
     public function showProfile(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-
+        $this->ensureUserIsLoggedIn();
         $this->view('user/profile');
     }
 
