@@ -5,7 +5,7 @@ $isActive = function ($path) {
 
 ?>
 
-<div class="bg-primary-color h-screen fixed z-20">
+<div class="bg-primary-color min-h-screen fixed z-20">
     <div class="flex w-32 flex-col items-center justify-between h-screen">
         <div class="mt-8 mb-2 flex flex-col justify-center items-center">
             <img src="/img/logo.png">
