@@ -20,16 +20,25 @@ class Controller
         return new $middlewareClass;
     }
 
-    protected function loginCheck(): bool
+    private function loginCheck(): bool
     {
         return isset($_SESSION['user']);
     }
 
-    public function download() {
+    protected function ensureUserIsLoggedIn(): void // Extract login check to a separate method
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+    }
+
+    public function download()
+    {
         $file = $_GET['file'];
         $path = $_GET['path'];
 
-        $folderPath = '../data/uploads/acara/' . $path .  '/';
+        $folderPath = '../data/uploads/acara/' . $path . '/';
         $fileName = $file;
         $filePath = $folderPath . $fileName;
 

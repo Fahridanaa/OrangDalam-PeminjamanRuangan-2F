@@ -30,15 +30,13 @@ class DetailRuanganController extends Controller
             exit;
         }
 
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
+        $this->ensureUserIsLoggedIn();
 
         $this->view('user/detailRuangan');
     }
 
-    public function getJadwal($ruang, $hari) {
+    public function getJadwal($ruang, $hari)
+    {
         return $this->jadwal->getJadwalByRuangDanHari($ruang, $hari);
     }
 }

@@ -21,11 +21,7 @@ class AuthController extends Controller
 
     public function showDashboard(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-
+        $this->ensureUserIsLoggedIn();
         if ($_SESSION['level'] == 'Admin') {
             $this->view('admin/Admindashboard');
         } else {
