@@ -310,9 +310,16 @@ class MultiFormController extends Controller
             return str_replace(' ', '', $item);
         }, $ruanganDipilih);
 
+        $kategori = $_SESSION['formPinjam']['category'];
+        if ($kategori== 'acara') {
+            $kategori= 'Acara/Kegiatan';
+        } else {
+            $kategori= 'Pemindahan Jadwal';
+        }
          // set notifikasi
          $dataNotif = [
-            'jenis' => 'Konfirmasi',
+            'kategori' => $kategori,
+            'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
             'tanggal' => date('Y-m-d'),  
             'nim_mhs' =>  $_SESSION['user']['nim'] ?? null,  

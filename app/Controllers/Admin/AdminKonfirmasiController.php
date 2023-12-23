@@ -4,16 +4,19 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
 class AdminKonfirmasiController extends Controller {
 
     private Peminjaman $peminjaman;
+    private Notifikasi $notifikasi;
 
     public function __construct() {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
         $this->peminjaman = new Peminjaman();
+        $this->notifikasi = new Notifikasi();
     }
 
 
@@ -55,7 +58,7 @@ class AdminKonfirmasiController extends Controller {
                                 </button>";;
             }
 
-            $data = array($item['nama'], $item['ruang'], $item['tanggalAcara'], $item['telepon'] , $linkPengenal, $linkSurat, $item['id'], $item['surat']);
+            $data = array($item['nama'], $item['ruang'], $item['tanggalAcara'], $item['telepon'] , $linkPengenal, $linkSurat, $item['id'], $item['nim_mhs'], $item['nidn_dosen']);
             array_push($result, $data);
         }
         return $result;
@@ -68,12 +71,32 @@ class AdminKonfirmasiController extends Controller {
     public function updateStatus() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = $_POST['status'];
-            $id = $_POST['id'];
-            $tolak = $_POST['ket-tolak'];
-            $batal = $_POST['ket-batal'];
+            $id = $_SESSION['data-id'];
+            $ketreangan =  $_POST['keterangan'];
+            // $kategori = $_SESSION['data-kategori'];
+            switch ($_POST['id']){
+                case 'batal-form':
+                    $status = 'Dibatalkan';
+                    break;
+                case 'tolak-form':
+                    $status = 'Ditolak';
+                    break;
+            }
+
+            $dataNotif = [
+                    'kategori' => 'Acara/Kegiatan',
+                    'status' => $status, 
+                    'keterangan' =>  $ketreangan,
+                    'tanggal' => date('Y-m-d'),  
+                    'nim_mhs' =>  $_SESSION['nim'] ?? null,  
+                    'nip_dosen' =>  $_SESSION['nidn'] ?? null
+            ];
+            
+            $this->notifikasi->setNotif($dataNotif);
+            $this->peminjaman->updateStatus($status, $id);
         }
 
-        $this->peminjaman->updateStatus($status, $id);
+
         header('Location: /konfirmasiPinjam');
     }
 }

@@ -41,7 +41,7 @@
 
                         foreach ($dataTable as $data) {
                             echo "<tr>";
-                            for ($i = 0; $i < count($data) - 2; $i++) {
+                            for ($i = 0; $i < count($data) - 3; $i++) {
                                 echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
                             echo '<td class="px-6 py-4 flex justify-center">';
@@ -55,7 +55,8 @@
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[7]; // Kolom [File Surat Peminjaman] berada pada indeks 5
-
+                            
+                                
                             // Cek apakah request sudah disetujui (button Terima ditekan)
                             $requestDisetujui = $tombolTerimaDitekan; // Ganti dengan kondisi sesuai kebutuhan
                             if (!$requestDisetujui) {
@@ -70,6 +71,7 @@
                                 echo '<button type="button" name="btn-tolak" id="btn-tolak" data-id="' . $data[6] .'" class="tolak-konfirmasi-pinjam-button focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Tolak</button>';
                             } else {
                                 // Jika request sudah disetujui, tampilkan button Batalkan
+                                
                                 echo '<button type="button" name="btn-batal" id="btn-batal" data-id="' . $data[6] .'" class="batalkan-konfirmasi-pinjam-button focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Batalkan</button>';
                             }
                             echo '</td>';

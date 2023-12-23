@@ -17,7 +17,7 @@ class Notifikasi
     // buat nampilkan data notif
     public function getNotif($id)
     {
-        $this->db->query("SELECT jenis, keterangan, tanggal FROM notifikasi
+        $this->db->query("SELECT kategori, status, keterangan, tanggal FROM notifikasi
         WHERE nim_mhs = :id OR nip_admin = :id");
         $this->db->bind(':id', $id);
         return $this->db->resultSet();
@@ -25,21 +25,21 @@ class Notifikasi
 
     public function getNotifAdmin()
     {
-        $this->db->query("SELECT jenis, keterangan, tanggal FROM notifikasi");
+        $this->db->query("SELECT kategori, status, keterangan, tanggal FROM notifikasi");
         return $this->db->resultSet();
     }
 
     // parameter & variabel e sesuaikan ae rek 
     public function setNotif($data)
     {
-        $this->db->query("INSERT INTO notifikasi (jenis, keterangan, tanggal, nim_mhs, nip_dosen) 
-        VALUES (:jenis, :keterangan, :tanggal, :nim_mhs, :nip_dosen)");
-        $this->db->bind('jenis', $data['jenis']);
+        $this->db->query("INSERT INTO notifikasi (kategori, status, keterangan, tanggal, nim_mhs, nip_dosen) 
+        VALUES (:kategori, :status, :keterangan, :tanggal, :nim_mhs, :nip_dosen)");
+        $this->db->bind('kategori', $data['kategori']);
+        $this->db->bind('status', $data['status']);
         $this->db->bind('keterangan', $data['keterangan']);
         $this->db->bind('tanggal', $data['tanggal']);
         $this->db->bind('nim_mhs', $data['nim_mhs']);
         $this->db->bind('nip_dosen', $data['nip_dosen']);
         $this->db->execute();
-        return $this->db->rowCount();
     }
 }
