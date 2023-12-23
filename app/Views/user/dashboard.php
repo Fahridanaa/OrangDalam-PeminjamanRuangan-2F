@@ -7,6 +7,11 @@
 
     use OrangDalam\PeminjamanRuangan\Controllers\User\DashboardController;
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $_SESSION['lantai'] = $_POST['lantai'] ?? null;
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    }
     ?>
 </head>
 
@@ -22,11 +27,14 @@
             <div id="dashboard-lantai-option">
                 <select name="lantai" id="lantai" class="py-4 px-16 rounded-lg border border-primary-color"
                         title="Lantai" required>
-                    <option selected disabled hidden>Lantai Ruangan</option>
-                    <option value="Lantai 5">Lantai 5</option>
-                    <option value="Lantai 6">Lantai 6</option>
-                    <option value="Lantai 7">Lantai 7</option>
-                    <option value="Lantai 8">Lantai 8</option>
+                    <option disabled hidden <?= (isset($_SESSION['lantai']) ? "" : "selected") ?>>Lantai Ruangan
+                    </option>
+                    <?php
+                    for ($i = 5; $i <= 8; $i++) {
+                        $selected = ($_SESSION['lantai'] == "Lantai $i") ? "selected" : "";
+                        echo "<option value='Lantai $i' $selected>Lantai $i</option>";
+                    }
+                    ?>
                 </select>
             </div>
             <button class="py-2 px-3 rounded-lg border bg-primary-color self-center items-center flex gap-2 hover:bg-third-color">
@@ -38,22 +46,23 @@
                 </svg>
             </button>
         </form>
-        <div class="overflow-y-visible">
+        <div class="overflow-y-visible min-w-7xl">
             <div id="denah"
                  class="bg-[#F5F5F5] flex justify-between w-full mt-8 rounded-3xl drop-shadow-xl shadow-md shadow-[#00000025] border border-secondary-color overflow-x-auto">
                 <?php
-                $lantai = $_POST['lantai'] ?? null;
                 $dashboard = new DashboardController();
 
-                if ($lantai != null) {
+                if (!isset($_SESSION['lantai'])) exit();
+
+                if ($_SESSION['lantai'] != null) {
                     $barat = array(
-                        $dashboard->denah($lantai, "Barat", "Atas"),
-                        $dashboard->denah($lantai, "Barat", "Bawah"),
+                        $dashboard->denah($_SESSION['lantai'], "Barat", "Atas"),
+                        $dashboard->denah($_SESSION['lantai'], "Barat", "Bawah"),
                     );
 
                     $timur = array(
-                        $dashboard->denah($lantai, "Timur", "Atas"),
-                        $dashboard->denah($lantai, "Timur", "Bawah"),
+                        $dashboard->denah($_SESSION['lantai'], "Timur", "Atas"),
+                        $dashboard->denah($_SESSION['lantai'], "Timur", "Bawah"),
                     );
 
                     echo renderAreaRuangan($barat);
@@ -81,7 +90,7 @@
 
                     foreach ($ruangan as $ruang => $background) {
                         $html .= '
-            <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105" href="/detail?kode='. $ruang .'">
+            <a class="flex flex-col flex-auto items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 cursor-pointer hover:scale-105" href="/detail?kode=' . $ruang . '">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273
