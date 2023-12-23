@@ -55,7 +55,7 @@
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
                             $filePeminjaman = $data[7]; // Kolom [File Surat Peminjaman] berada pada indeks 5
-                            
+                            // $_SESSION['data-id'] = $data[6];
                                 
                             // Cek apakah request sudah disetujui (button Terima ditekan)
                             $requestDisetujui = $tombolTerimaDitekan; // Ganti dengan kondisi sesuai kebutuhan
@@ -95,12 +95,21 @@
     batalkanKonfirmasiButton.forEach((button) => {
         button.addEventListener('click', () => {
             modals[0].classList.remove('hidden');
+            const id = event.currentTarget.getAttribute('data-id');
+
+             // Setel nilai data-id ke dalam input tersembunyi pada formulir modal
+            document.getElementById('index1').value = id;
         })
     })
 
     tolakKonfirmasiButton.forEach((button) => {
         button.addEventListener('click', () => {
             modals[1].classList.remove('hidden');
+            // Ambil nilai data-id dari tombol yang diklik
+            const id = event.currentTarget.getAttribute('data-id');
+
+             // Setel nilai data-id ke dalam input tersembunyi pada formulir modal
+            document.getElementById('index').value = id;
         })
     })
 
@@ -134,7 +143,7 @@
 
         xhr.open('POST', '/konfirmasiPinjam');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        var data = 'status=Telah Dikonfirmasi&id=' + id;
+        var data = 'status=Telah Dikonfirmasi&index=' + id;
         xhr.send(data);
     });
 </script>

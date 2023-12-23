@@ -71,21 +71,13 @@ class AdminKonfirmasiController extends Controller {
     public function updateStatus() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = $_POST['status'];
-            $id = $_SESSION['data-id'];
-            $ketreangan =  $_POST['keterangan'];
-            // $kategori = $_SESSION['data-kategori'];
-            switch ($_POST['id']){
-                case 'batal-form':
-                    $status = 'Dibatalkan';
-                    break;
-                case 'tolak-form':
-                    $status = 'Ditolak';
-                    break;
-            }
+            $status2 = $_POST['status2'] ?? 'Telah Dikonfirmasi';
+            $id = $_POST['index'] ?? $_POST['index1'];
+            $ketreangan =  $_POST['keterangan'] ?? 'Selamat Booking Anda Telah di Konfirmasi';
 
             $dataNotif = [
                     'kategori' => 'Acara/Kegiatan',
-                    'status' => $status, 
+                    'status' => $status2, 
                     'keterangan' =>  $ketreangan,
                     'tanggal' => date('Y-m-d'),  
                     'nim_mhs' =>  $_SESSION['nim'] ?? null,  

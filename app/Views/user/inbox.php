@@ -50,7 +50,7 @@
             ?>
             
             
-            <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
+            <!-- <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
                 <div class="flex flex-auto justify-between">
                     <div class="flex flex-col gap-1">
                         <span class="font-bold text-3xl">Konfirmasi Peminjaman Ruangan</span>
@@ -70,7 +70,7 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
                 <div class="flex flex-auto justify-between">
                     <div class="flex flex-col gap-1">
