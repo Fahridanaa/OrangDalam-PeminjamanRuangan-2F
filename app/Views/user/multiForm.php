@@ -11,7 +11,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 <body class="font-plus-jakarta-sans">
 <div id="Multi-form" class="h-screen flex">
     <?php include 'sidebar.php'; ?>
-    <div class="h-screen w-screen flex flex-col gap-6 items-center ml-32">
+    <div class="min-h-screen max-w-full flex flex-col flex-auto gap-6 items-center ml-32">
         <?php include 'stepper.php';
 
         include __DIR__ . '/../shared/flashMessage.php';
