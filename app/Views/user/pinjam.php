@@ -123,21 +123,24 @@
         })
     })
 
+    function hideModal(modal, detailAcara) {
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 150)
+        detailAcara.style.transform = '';
+        detailAcara.style.opacity = '';
+    }
+
     modals.forEach((modal) => {
         const overlay = modal.querySelector('.overlay');
         const closeModal = modal.querySelector('.close-modal');
 
         closeModal.addEventListener('click', () => {
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 150)
-            let detailAcara = document.getElementById('detailAcara');
-            detailAcara.style.transform = '';
-            detailAcara.style.opacity = '';
+            hideModal(modal, document.getElementById('detailAcara'))
         })
 
         overlay.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            hideModal(modal, document.getElementById('detailAcara'))
         })
     })
 </script>
