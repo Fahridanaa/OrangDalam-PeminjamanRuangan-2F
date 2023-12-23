@@ -81,14 +81,6 @@ class PinjamController extends Controller
             $this->showPinjamPage();
         }
     }
-
-    private function ensureUserIsLoggedIn(): void // Extract login check to a separate method
-    {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-    }
 }
 
 ?>

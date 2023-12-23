@@ -22,12 +22,7 @@ class RequestController extends Controller
 
     public function ShowRequestPage(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-
-        
+        $this->ensureUserIsLoggedIn();
         $this->view('user/konfirmasiRuangan');
     }
 

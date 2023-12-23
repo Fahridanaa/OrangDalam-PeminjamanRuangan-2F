@@ -13,9 +13,4 @@ class PeminjamanController extends Controller
     {
         $this->peminjaman = new Peminjaman();
     }
-
-    public function showHistory($nim)
-    {
-        return $this->peminjaman->history($nim);
-    }
 }
