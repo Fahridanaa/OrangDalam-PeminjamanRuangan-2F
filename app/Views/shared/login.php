@@ -8,32 +8,33 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 <head>
     <?php include 'head.php'; ?>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         #container {
             background-image: url("/img/grapol.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
         }
-
-        #gedung {
-            background-image: url("/img/gedung.png");
-        }
     </style>
 </head>
 
 <body>
+<?php include __DIR__ . '/../shared/flashMessage.php' ?>
 <div id="container"
-     class="min-h-screen bg-cover bg-no-repeat flex flex-col items-center">
-    <div class="flex flex-auto text-white rounded-3xl overflow-hidden z-10 m-8 justify-center container overflow-y-hidden">
-        <div class="flex md:hidden w-8/12 bg-no-repeat bg-center bg-cover relative items-center"
-             id="gedung">
-        </div>
-        <div class="w-4/12 md:w-full py-4 flex-1 px-8 flex bg-neutral-color flex-col">
-            <?php include __DIR__ . '/../shared/flashMessage.php' ?>
-            <div class="py-6 lg:py-3 bg-neutral-color rounded-2xl flex flex-col flex-1 justify-center">
-                <h2 class="text-text-color text-4xl font-medium mb-8 lg:mb-2 lg:text-center">Welcome Back!</h2>
-                <form method="POST" class="flex flex-col">
-                    <h1 class="font-semibold text-2xl text-text-color">Login</h1>
+     class="min-h-[100vh] relative flex items-center">
+    <div class="text-white rounded-xl overflow-hidden mx-auto flex lg:max-h-screen relative min-w-[60%] max-w-[80%]">
+        <img src="/img/gedung.png" class="hidden lg:block" alt="gedung"/>
+        <div class="py-4 px-8 bg-neutral-color flex-auto">
+            <div class="flex flex-col h-full justify-center">
+                <h2 class="text-text-color text-4xl font-medium mb-8 lg:mb-2 text-center lg:text-start">Welcome
+                    Back!</h2>
+                <form method="POST" class="">
+                    <h1 class="[font-size:_clamp(.75em,2rem,10em)] text-text-color">Login</h1>
                     <div class="pb-1 text-left flex-auto">
                         <label class="text-text-color"> NIM/NIP </label>
                         <input type="text" name="username" id="username" placeholder="Masukkan NIM/NIP..."
@@ -57,12 +58,11 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 
 </div>
-<div class="bg-black min-h-full min-w-full absolute top-0 opacity-30"></div>
+<div class="bg-black absolute top-0 -z-10 opacity-30"></div>
 </body>
 
 </html>
