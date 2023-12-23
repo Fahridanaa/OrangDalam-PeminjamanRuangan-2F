@@ -22,18 +22,6 @@ class Peminjaman
         return $this->db->single();
     }
 
-    public function history($nim)
-    {
-        $this->db->query("SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara
-            FROM peminjaman
-            INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
-            INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
-            WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')  AND mahasiswa.nim = :nim
-            GROUP BY id, status");
-        $this->db->bind(":nim", $nim);
-        return $this->db->resultSet();
-    }
-
     public function status($kode)
     {
         $this->db->query("SELECT peminjaman.id FROM peminjaman
@@ -127,7 +115,8 @@ class Peminjaman
         return $this->db->resultSet();
     }
 
-    public function updateStatus($status, $id) {
+    public function updateStatus($status, $id)
+    {
         $this->db->query("UPDATE peminjaman SET status = :status WHERE id = :id");
         $this->db->bind(":status", $status);
         $this->db->bind(":id", $id);
