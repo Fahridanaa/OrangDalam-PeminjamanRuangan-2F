@@ -26,14 +26,14 @@
                         }
                     }
                 } else {
-                    echo "<h1 class=\"mb-1 text-3xl font-semibold\">Tidak ada notifikasi</h1>";
+                    echo "<h1 class=\"mb-1 text-3xl font-semibold text-center\">Tidak ada notifikasi</h1>";
                 }
-                ?>
-        </div>
-        </section>
-    </div>
+            ?>
     </div>
     </section>
+</div>
+</div>
+</section>
 </div>
 </div>
 </body>

@@ -84,7 +84,6 @@
     uploadSuratButton.forEach((button) => {
         button.addEventListener('click', () => {
             const id = button.getAttribute('data-id');
-            console.log(id);
             const inputId = document.getElementById('id');
             inputId.value = id;
             modals[0].classList.remove('hidden');
@@ -94,8 +93,13 @@
     detailAcaraButton.forEach((button) => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
+            let detailAcara = document.getElementById('detailAcara');
             const id = button.getAttribute('data-id');
             modals[1].classList.remove('hidden');
+            setTimeout(() => {
+                detailAcara.style.transform = 'translateY(0)';
+                detailAcara.style.opacity = '1';
+            }, 50)
             fetch('/pinjam/data?id=' + id)
                 .then(response => response.json())
                 .then(data => {
@@ -119,16 +123,24 @@
         })
     })
 
+    function hideModal(modal, detailAcara) {
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 150)
+        detailAcara.style.transform = '';
+        detailAcara.style.opacity = '';
+    }
+
     modals.forEach((modal) => {
         const overlay = modal.querySelector('.overlay');
         const closeModal = modal.querySelector('.close-modal');
 
         closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            hideModal(modal, document.getElementById('detailAcara'))
         })
 
         overlay.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            hideModal(modal, document.getElementById('detailAcara'))
         })
     })
 </script>

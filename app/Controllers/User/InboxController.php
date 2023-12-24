@@ -10,7 +10,7 @@ class InboxController extends Controller
 {
 
     private $notifikasi;
-    
+
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -20,11 +20,7 @@ class InboxController extends Controller
 
     public function showInboxPage(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-        
+        $this->ensureUserIsLoggedIn();
         $data['notifikasi'] = $this->notifikasi->getNotif($_SESSION['user']['nim']);
         $this->view('user/inbox', $data);
     }

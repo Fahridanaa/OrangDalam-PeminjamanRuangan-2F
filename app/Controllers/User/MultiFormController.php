@@ -92,14 +92,14 @@ class MultiFormController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['category'])) {
-                $_SESSION['flash_message'] = "Category is required.";
+                $_SESSION['flash_message'] = "Harap mengisi kategory terlebih dahulu";
                 return false;
             }
 
             $selectedCategory = $_POST['category'];
 
             if (!in_array($selectedCategory, ['acara', 'matkul'])) {
-                $_SESSION['flash_message'] = "Invalid category.";
+                $_SESSION['flash_message'] = "Kategori tidak valid";
                 return false;
             }
 
@@ -157,7 +157,7 @@ class MultiFormController extends Controller
 
         $tandaPengenal = $_FILES['tanda-pengenal'];
         if (!$tandaPengenal) {
-            $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
+            $this->setFailedMessage('Diperlukan Tanda Pengenal.', 'warn', 'warn');
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
@@ -165,15 +165,15 @@ class MultiFormController extends Controller
         $acaraDir = $uploadsDir . 'acara/';
         $tandaPengenalPath = $acaraDir . 'tanda-pengenal/' . $tandaPengenal['name'];
 
-        $allowedFileTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
-        if (!$this->handleUploadedFiles($tandaPengenal, $allowedFileTypes, $tandaPengenalPath)) {
+        $allowedFileImagesTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!$this->handleUploadedFiles($tandaPengenal, $allowedFileImagesTypes, $tandaPengenalPath)) {
             return false;
         }
 
         $urgent = filter_input(INPUT_POST, 'acara-urgent', FILTER_VALIDATE_BOOLEAN);
         if ($urgent) {
             if (!isset($_FILES['acara-bukti-urgent'])) {
-                $this->setFailedMessage("Urgent proof file is required.");
+                $this->setFailedMessage("Dibutuhkan file bukti urgent.");
                 return false;
             }
 
@@ -181,7 +181,8 @@ class MultiFormController extends Controller
             $_SESSION['formPinjam']['acara-bukti-urgent'] = basename($buktiUrgent['name']);
             $buktiUrgentPath = $acaraDir . 'bukti-urgent/' . $buktiUrgent['name'];
 
-            if (!$this->handleUploadedFiles($buktiUrgent, $allowedFileTypes, $buktiUrgentPath)) {
+            $allowedFileDocumentsTypes = ['application/pdf'];
+            if (!$this->handleUploadedFiles($buktiUrgent, $allowedFileDocumentsTypes, $buktiUrgentPath)) {
                 return false;
             }
         }
@@ -208,7 +209,7 @@ class MultiFormController extends Controller
         }
         $tandaPengenal = $_FILES['tanda-pengenal'];
         if (!$tandaPengenal) {
-            $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
+            $this->setFailedMessage('Diperlukan Tanda Pengenal.', 'warn', 'warn');
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
@@ -321,9 +322,9 @@ class MultiFormController extends Controller
             'kategori' => $kategori,
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
-            'tanggal' => date('Y-m-d'),  
-            'nim_mhs' =>  $_SESSION['user']['nim'] ?? null,  
-            'nip_dosen' =>  $_SESSION['user']['nidn'] ?? null
+            'tanggal' => date('Y-m-d'),
+            'nim_mhs' => $_SESSION['user']['nim'] ?? null,
+            'nip_dosen' => $_SESSION['user']['nidn'] ?? null
         ];
 
         $this->notifikasi->setNotif($dataNotif);
@@ -403,7 +404,7 @@ class MultiFormController extends Controller
         $fileExtension = mime_content_type($fileData['tmp_name']);
 
         if (!in_array($fileExtension, $allowedExtensions)) {
-            $this->setFailedMessage("Invalid file type.");
+            $this->setFailedMessage("File tidak valid");
             return false;
         }
 
@@ -414,7 +415,7 @@ class MultiFormController extends Controller
         }
 
         if (!move_uploaded_file($fileData['tmp_name'], $destination)) {
-            $this->setFailedMessage("Failed to upload file.");
+            $this->setFailedMessage("Gagal untuk mengupload file");
             return false;
         }
 

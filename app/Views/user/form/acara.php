@@ -46,15 +46,23 @@
             <textarea name="acara-keterangan" id="acara-keterangan" rows="5" placeholder="Keterangan Acara..."
                       class="p-2 rounded-lg border border-primary-color" required></textarea>
         </div>
-        <div class="flex flex-col gap-2">
-            <label for="tanda-pengenal">Upload Tanda Pengenal</label>
+        <div class="flex flex-col">
+            <label for="tanda-pengenal" class="mb-2">Upload Tanda Pengenal</label>
             <input type="file" id="tanda-pengenal" name="tanda-pengenal"
                    class="px-5 py-2 rounded-lg border border-primary-color" required>
+            <section class="flex justify-between">
+                <span class="text-gray-400 text-sm">(png, jpg, jpeg)</span>
+                <span class="text-danger-color text-sm">Maks 2MB</span>
+            </section>
         </div>
-        <div id="acara-bukti-urgent-container" class="flex flex-col gap-2">
-            <label for="acara-bukti-urgent">Upload Surat Bukti Urgent</label>
+        <div id="acara-bukti-urgent-container" class="flex flex-col">
+            <label for="acara-bukti-urgent" class="mb-2">Upload Surat Bukti Urgent</label>
             <input type="file" id="acara-bukti-urgent" name="acara-bukti-urgent"
                    class="px-5 py-2 rounded-lg border border-primary-color">
+            <section class="flex justify-between">
+                <span class="text-gray-400 text-sm">(pdf)</span>
+                <span class="text-danger-color text-sm">Maks 2MB</span>
+            </section>
         </div>
         <div id="buttons" class="flex justify-around">
             <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
