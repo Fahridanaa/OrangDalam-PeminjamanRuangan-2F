@@ -60,7 +60,7 @@ class Peminjaman
        DATE_FORMAT(tanggalAcara, '%d %M %Y') AS tanggalAcara,
        mahasiswa.telepon AS telepon,
        tanda_pengenal,
-       surat
+       surat, nim_mhs, nidn_dosen
        FROM peminjaman
        INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
        INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
@@ -120,6 +120,6 @@ class Peminjaman
         $this->db->query("UPDATE peminjaman SET status = :status WHERE id = :id");
         $this->db->bind(":status", $status);
         $this->db->bind(":id", $id);
-        return $this->db->single();
+        $this->db->execute();
     }
 }
