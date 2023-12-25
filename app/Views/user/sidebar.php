@@ -8,7 +8,7 @@ $isActive = function ($path) {
 <div class="bg-primary-color min-h-screen fixed z-20">
     <div class="flex w-32 flex-col items-center justify-between h-screen">
         <div class="mt-8 mb-2 flex flex-col justify-center items-center">
-            <img src="/img/logo.png">
+            <img src="/public/img/logo.png">
         </div>
         <div>
             <ul class="flex flex-col justify-between rounded-md h-full">
@@ -86,7 +86,7 @@ $isActive = function ($path) {
         <div>
             <ul class="flex flex-col justify-around rounded-md h-full">
                 <li class="flex items-center justify-center">
-                    <img src="/img/user-picture.png" class="rounded-full w-10 h-10 my-2 xl:my-4">
+                    <img src="/public/img/user-picture.png" class="rounded-full w-10 h-10 my-2 xl:my-4">
                 </li>
                 <li class="flex items-center justify-center">
                     <a class="rounded-md group cursor-pointer my-2 xl:my-4" href="/profile">
