@@ -9,6 +9,7 @@ use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 class AdminInboxController extends Controller
 {
     private Notifikasi $notifikasi;
+
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -18,10 +19,7 @@ class AdminInboxController extends Controller
 
     public function showInbox(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
+        $this->ensureUserIsLoggedIn();
         $data['notif'] = $this->notifikasi->getNotifAdmin();
         $this->view('admin/inbox', $data);
     }
