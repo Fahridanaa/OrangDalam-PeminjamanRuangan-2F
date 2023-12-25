@@ -95,7 +95,7 @@ class RequestController extends Controller
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
             if ($dayNumber > 1 && $dayNumber < 6) {
-                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
+                if ($mulai >= $waktuMulai && $selesai <= $waktuSelesai) {
                     $result = 1;
                 } else {
                     $result = $this->peminjaman->statusAcara($data);
