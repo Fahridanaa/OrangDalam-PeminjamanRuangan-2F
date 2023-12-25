@@ -235,6 +235,7 @@ class MultiFormController extends Controller
             $this->redirect('/pinjam/form?step=4');
         }
 
+        if (isset($_POST['rooms'])) unset($_POST['rooms']);
         $this->redirect('/pinjam/form?step=3');
 
     }
@@ -251,16 +252,17 @@ class MultiFormController extends Controller
             }
             return false;
         }
-        if (empty($_POST['rooms']) || !is_array($_POST['rooms'])) {
 
+        if (empty($_POST['rooms']) || !is_array($_POST['rooms'])) {
             $this->setFailedMessage('Ruangan harus dipilih', 'warn', 'warn');
             return false;
         }
-        // reset ruangan array
-        $_SESSION['formPinjam']['ruangan'] = array();
+
+        unset($_SESSION['formPinjam']['ruangan']);
         foreach ($_POST['rooms'] as $room) {
             $_SESSION['formPinjam']['ruangan'][$room] = $this->sanitizeInput($room);
         }
+        unset($_POST['rooms']);
         return true;
     }
 
@@ -314,13 +316,13 @@ class MultiFormController extends Controller
         }, $ruanganDipilih);
 
         $kategori = $_SESSION['formPinjam']['category'];
-        if ($kategori== 'acara') {
-            $kategori= 'Acara/Kegiatan';
+        if ($kategori == 'acara') {
+            $kategori = 'Acara/Kegiatan';
         } else {
-            $kategori= 'Pemindahan Jadwal';
+            $kategori = 'Pemindahan Jadwal';
         }
-         // set notifikasi
-         $dataNotif = [
+        // set notifikasi
+        $dataNotif = [
             'kategori' => $kategori,
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],

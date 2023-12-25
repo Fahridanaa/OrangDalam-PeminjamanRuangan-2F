@@ -56,6 +56,7 @@ function addUserRoutes()
     Router::add("GET", "/konfirmasi-ruangan", RequestController::class, "showRequestPage");
     Router::add("GET", "/profile", ProfileController::class, "showProfile");
     Router::add("GET", "/detail", DetailRuanganController::class, "showDetailRuangan");
+    Router::add("POST", "/detail", DetailRuanganController::class, "getJadwal");
     Router::add("POST", "/profile", AuthController::class, "changePass");
 }
 

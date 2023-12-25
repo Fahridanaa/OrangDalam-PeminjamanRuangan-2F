@@ -1,9 +1,11 @@
 <?php
+
 namespace OrangDalam\PeminjamanRuangan\Models;
 
 use config\Database;
 
-class AuthModel {
+class AuthModel
+{
     private $table = "user";
     private $db;
 
@@ -12,14 +14,16 @@ class AuthModel {
         $this->db = new Database();
     }
 
-    public function get($username) {
+    public function get($username)
+    {
         $this->db->query("SELECT id, username, password, level FROM " . $this->table . " WHERE username = :user");
         $this->db->bind(":user", $username);
         return $this->db->single();
     }
 
-    public function getProfile($id) {
-        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, prodi.nama AS prodi, telepon
+    public function getProfile($id)
+    {
+        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan,mahasiswa.ketua AS ketua, prodi.nama AS prodi, telepon
             FROM user
             INNER JOIN mahasiswa ON user.nim_mhs = mahasiswa.nim
             INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
@@ -29,7 +33,8 @@ class AuthModel {
         return $this->db->single();
     }
 
-    public function updatePass($id, $old, $new) {
+    public function updatePass($id, $old, $new)
+    {
         $this->db->query("UPDATE user SET password= :new WHERE password= :old AND id= :id");
         $this->db->bind(":old", $old);
         $this->db->bind(":new", $new);
