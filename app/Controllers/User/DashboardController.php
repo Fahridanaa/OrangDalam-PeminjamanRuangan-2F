@@ -10,12 +10,14 @@ use OrangDalam\PeminjamanRuangan\Models\Ruang;
 class DashboardController extends Controller
 {
     private Ruang $ruang;
+    private Peminjaman $peminjaman;
 
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
         $this->ruang = new Ruang();
+        $this->peminjaman = new Peminjaman();
     }
 
     public function denah($lantai, $bagian, $posisi)
@@ -29,9 +31,13 @@ class DashboardController extends Controller
 
     public function status($kode)
     {
-        if ($this->ruang->status($kode, $this->getDayNow()) != null) {
+        if ($this->ruang->status($kode, $this->getDayNow(time())) != null) {
             return 'danger';
-        } else {
+        }
+        elseif ($this->peminjaman->status($kode) != null) {
+            return 'warn';
+        }
+        else {
             return 'disable';
         }
     }

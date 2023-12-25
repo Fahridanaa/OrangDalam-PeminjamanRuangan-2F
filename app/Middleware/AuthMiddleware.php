@@ -7,7 +7,7 @@ class AuthMiddleware {
 
     public function handleUser() {
         // Logika middleware
-        if (!isset($_SESSION['level']) || ($_SESSION['level'] !== 'Mahasiswa' && $_SESSION['level'] !== 'Dosen')) {
+        if (!isset($_SESSION['level']) || ($_SESSION['level'] !== 'Mahasiswa' && $_SESSION['level'] !== 'DosenPengampu')) {
             header("Location: /login");
             exit;
         }
