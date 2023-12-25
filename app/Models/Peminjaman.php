@@ -31,6 +31,27 @@ class Peminjaman
         return $this->db->single();
     }
 
+    public function use($kode)
+    {
+        $this->db->query("SELECT peminjaman.id FROM peminjaman
+        INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+        WHERE kode_ruang = :kode AND TIME(NOW()) BETWEEN mulai AND selesai AND tanggalAcara = DATE(NOW()) AND status IN('Telah Dikonfirmasi')");
+        $this->db->bind(":kode", $kode);
+        return $this->db->single();
+    }
+
+    public function statusAcara($data)
+    {
+        $this->db->query("SELECT peminjaman.id, status FROM peminjaman
+        INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+        WHERE kode_ruang = :ruang AND :mulai BETWEEN mulai AND selesai AND tanggalAcara = :tanggal AND status IN('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')");
+        $this->db->bind(":ruang", $data['ruang']);
+        $this->db->bind(":mulai", $data['mulai']);
+        $this->db->bind(":tanggal", $data['tanggal']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
     public function top()
     {
         $this->db->query("SELECT peminjaman.id,

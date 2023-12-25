@@ -16,6 +16,8 @@ class RequestController extends Controller
     private Jadwal $jadwal;
     private Ruang  $ruang;
 
+    private Peminjaman $peminjaman;
+
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -24,6 +26,7 @@ class RequestController extends Controller
         $this->matkul = new Matkul();
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
+        $this->peminjaman = new Peminjaman();
     }
 
     public function ShowRequestPage(): void
@@ -77,7 +80,41 @@ class RequestController extends Controller
 
     public function status($kode)
     {
-        if ($this->ruang->status($kode, $this->getDayNow(strtotime($_SESSION['formPinjam']['tanggal-matkul']))) != null) {
+        $result = 0;
+        $data = [];
+        $waktuMulai = '07:00';
+        $waktuSelesai = '17:10';
+        if ($_SESSION['formPinjam']['category'] == 'acara') {
+            $time = $_SESSION['formPinjam']['acara-tanggal'];
+            $mulai = $_SESSION['formPinjam']['acara-jam-mulai'];
+            $selesai = $_SESSION['formPinjam']['acara-jam-selesai'];
+            $tanggal = $_SESSION['formPinjam']['acara-tanggal'];
+            $dayNumber = date('N', strtotime($time));
+            $data['ruang'] = $kode;
+            $data['mulai'] = $mulai;
+            $data['tanggal'] = $tanggal;
+            if ($dayNumber > 1 && $dayNumber < 7) {
+                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
+                    $result = 1;
+                }
+                else {
+                    $result = $this->peminjaman->statusAcara($data);
+                }
+            }
+            else {
+                $result = $this->peminjaman->statusAcara($data);
+            }
+        }
+        elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+            $time = $_SESSION['formPinjam']['tanggal-matkul'];
+            $data['hari'] = $this->getDayNow(strtotime($time));
+            $data['ruang'] = $kode;
+            $data['mulai'] = (int)$_SESSION['formPinjam']['jam-selesai-matkul'];
+            $data['selesai'] = (int)$_SESSION['formPinjam']['jam-mulai-matkul'];
+            $result = $this->ruang->statusSelectRuang($data);
+        }
+
+        if ($result > 0) {
             return 'locked';
         }
         else {

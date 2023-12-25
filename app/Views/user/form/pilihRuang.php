@@ -55,11 +55,18 @@
             function renderRuangan(array $ruangan): string
             {
                 $html = '';
+                $type = '';
+                if ($_SESSION['formPinjam']['category'] == 'acara') {
+                    $type = 'checkbox';
+                }
+                elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+                    $type = 'radio';
+                }
 
                 foreach ($ruangan as $ruang => $background) {
                     $html .= '
             <a class="flex flex-col items-center justify-center bg-' . $background . '-color rounded-xl py-5 px-7 ' . locked($background) . '">
-                <input type="checkbox" name="rooms[]" value="' . $ruang . '" hidden/>
+                <input type="' . $type . '" name="rooms[]" value="' . $ruang . '" hidden/>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.8438 33.4062H32.1875V6.59375C32.1875 5.94728 31.9307 5.3273 31.4736 4.87018C31.0165 4.41306
                         30.3965 4.15625 29.75 4.15625H10.25C9.60353 4.15625 8.98355 4.41306 8.52643 4.87018C8.06931 5.3273
@@ -92,11 +99,27 @@
         </div>
     </form>
 </div>
+<?php
+$toggleScript = '';
+if ($_SESSION['formPinjam']['category'] == 'matkul') {
+    $toggleScript = '
+        if (lastClick) {
+            lastClick.classList.remove(\'bg-select-color\');
+            lastClick.classList.add(\'bg-disable-color\');
+            lastClick.children[0].checked = false;
+        }
+        lastClick = ruang;
+    ';
+}
+?>
 <script>
+    let lastClick = null;
     const ruangan = document.querySelectorAll('.bg-disable-color');
 
     ruangan.forEach((ruang) => {
+
         ruang.addEventListener("click", () => {
+            <?php echo $toggleScript; ?>
             ruang.classList.toggle('bg-disable-color');
             ruang.classList.toggle('bg-select-color');
             ruang.children[0].checked = !ruang.children[0].checked;
