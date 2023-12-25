@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
@@ -6,11 +6,13 @@ namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
-class AdminHistoryController extends Controller {
+class AdminHistoryController extends Controller
+{
 
     private Peminjaman $peminjaman;
 
-    public function __construct() {
+    public function __construct()
+    {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
         $this->peminjaman = new Peminjaman();
@@ -18,22 +20,17 @@ class AdminHistoryController extends Controller {
 
     public function showHistory(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        } 
-        
-
+        $this->ensureUserIsLoggedIn();
         $this->view('admin/history');
     }
 
-    public function historyMahasiswa() {
+    public function historyMahasiswa()
+    {
         $result = array();
         foreach ($this->peminjaman->historiMahasiswa() as $item) {
             if ($item['surat'] == null) {
                 $linkSurat = "-";
-            }
-            else {
+            } else {
                 $linkSurat = "<button type='button' class='focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2' disabled>
                                     <a href='/download?file=" . urlencode($item['surat']) . "&path=surat' class='download-button' download>
                                         <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
@@ -48,13 +45,13 @@ class AdminHistoryController extends Controller {
         return $result;
     }
 
-    public function historyDosen() {
+    public function historyDosen()
+    {
         $result = array();
         foreach ($this->peminjaman->historiDosen() as $item) {
             if ($item['surat'] == null) {
                 $linkSurat = "-";
-            }
-            else {
+            } else {
                 $linkSurat = "<button type='button' class='focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2' disabled>
                                     <a href='/download?file=" . urlencode($item['surat']) . "' class='download-button' download>
                                         <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>

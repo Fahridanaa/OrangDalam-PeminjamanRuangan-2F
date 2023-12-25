@@ -9,7 +9,6 @@ use OrangDalam\PeminjamanRuangan\Models\Ruang;
 
 class DashboardController extends Controller
 {
-    private Jadwal $jadwal;
     private Ruang $ruang;
     private Peminjaman $peminjaman;
 
@@ -17,14 +16,8 @@ class DashboardController extends Controller
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
-        $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
         $this->peminjaman = new Peminjaman();
-    }
-
-    public function showJadwalByRuangan($kodeRuang, $namaHari)
-    {
-        return $this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari);
     }
 
     public function denah($lantai, $bagian, $posisi)
