@@ -126,22 +126,53 @@
                     </th>
                 </tr>
                 <?php
-                foreach ($detail->getJadwal($ruang, $detail->getDayNow()) as $item) {
+                $times = [
+                    ['07:00', '07:50'],
+                    ['07:50', '08:40'],
+                    ['08:40', '09:30'],
+                    ['09:40', '10:30'],
+                    ['10:30', '11:20'],
+                    ['11:20', '12:10'],
+                    ['12:50', '13:40'],
+                    ['13:40', '14:30'],
+                    ['14:30', '15:20'],
+                    ['15:30', '16:20'],
+                    ['16:20', '17:10']
+                ];
+
+                $jadwalHariIni = $detail->getJadwal($ruang, $detail->getDayNow());
+
+                foreach ($times as $time) {
                     $bg = '';
-                    if ($waktu >= $item['mulai'] && $waktu <= $item['selesai']) {
+                    if ($waktu >= $time[0] && $waktu <= $time[1]) {
                         $bg = 'bg-danger-color';
                     }
 
                     echo '<tr class="border-b border-black">';
                     echo '<td>' . $i . '</td>';
-                    echo '<td>' . $item['mulai'] . '-' . $item['selesai'] . '</td>';
-                    echo '<td>' . $item['namaMK'] . '</td>';
-                    echo '<td>' . $item['namaDosen'] . '</td>';
-                    echo '<td>' . $item['namaKelas'] . '</td>';
-                    echo '<td>';
-                    echo '<div class="rounded-full ' . $bg . ' w-4 h-4"></div>';
-                    echo '</td>';
+                    echo '<td>' . $time[0] . '-' . $time[1] . '</td>';
+
+                    $jadwalMatkul = null;
+                    foreach ($jadwalHariIni as $jadwal) {
+                        if ($jadwal['mulai'] <= $time[0] && $jadwal['selesai'] >= $time[1]) {
+                            $jadwalMatkul = $jadwal;
+                            break;
+                        }
+                    }
+
+                    if ($jadwalMatkul) {
+                        echo '<td>' . $jadwalMatkul['namaMK'] . '</td>';
+                        echo '<td>' . $jadwalMatkul['namaDosen'] . '</td>';
+                        echo '<td>' . $jadwalMatkul['namaKelas'] . '</td>';
+                    } else {
+                        echo '<td></td>';
+                        echo '<td></td>';
+                        echo '<td></td>';
+                    }
+
+                    echo '<td><div class="rounded-full ' . $bg . ' w-4 h-4"></div></td>';
                     echo '</tr>';
+
                     $i++;
                 }
                 ?>
