@@ -33,7 +33,6 @@
     use OrangDalam\PeminjamanRuangan\Controllers\User\DetailRuanganController;
 
     $detail = new DetailRuanganController();
-    $ruang = $_GET['kode'];
     $i = 1;
     date_default_timezone_set('Asia/Jakarta');
     $waktu = date('H:i');
@@ -66,7 +65,7 @@
                 </div>
             </div>
             <div class="md:flex-1 px-4 gap-3 flex flex-col w-full">
-                <span class="text-neutral-color px-3 py-1 bg-danger-color rounded-md self-start">Digunakan</span>
+                <?= $detail->status() ?>
                 <h2 class="mb-3 leading-tight tracking-tight border-b-2 border-black pb-4 font-bold text-2xl md:text-3xl">
                     <?php
                     echo $fasilitas[0]['nama'] ?? '';
@@ -133,7 +132,8 @@
                     <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 focus:outline-none focus:shadow-none!">
                         <div class="flex items-center relative">
                             <input type="date" id="tanggalInput"
-                                   class="bg-primary-color text-sm w-10">
+                                   name="tanggalPilih"
+                                   class="bg-primary-color text-sm w-10" hidden>
                             <span id="tanggalFormatted"></span>
                         </div>
                     </th>
@@ -153,7 +153,8 @@
                     ['16:20', '17:10']
                 ];
 
-                $jadwalHariIni = $detail->getJadwal($ruang, $detail->getDayNow(time()));
+
+                $jadwalHariIni = $detail->getJadwal();
 
                 foreach ($times as $time) {
                     $bg = '';
