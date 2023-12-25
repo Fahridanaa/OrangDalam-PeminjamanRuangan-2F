@@ -29,15 +29,13 @@ class DashboardController extends Controller
         return $data;
     }
 
-    public function status($kode)
+    public function status($kode): string
     {
         if ($this->ruang->status($kode, $this->getDayNow(time())) != null) {
             return 'danger';
-        }
-        elseif ($this->peminjaman->status($kode) != null) {
+        } elseif ($this->peminjaman->status($kode) != null) {
             return 'warn';
-        }
-        else {
+        } else {
             return 'disable';
         }
     }
