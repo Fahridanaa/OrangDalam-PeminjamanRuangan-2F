@@ -46,20 +46,20 @@
             <div class="px-4">
                 <div x-data="{ image: 1 }" class="flex flex-col gap-4">
                     <div class="flex">
-                        <img src="/img/ruang/lt8/rt13/1.jpg" class="rounded-xl max-w-2xl w-full"
+                        <img src="/public/img/ruang/lt8/rt13/1.jpg" class="rounded-xl max-w-2xl w-full"
                              x-show="image === 1">
-                        <img src="/img/ruang/lt8/rt13/2.jpg" class="rounded-xl max-w-2xl w-full"
+                        <img src="/public/img/ruang/lt8/rt13/2.jpg" class="rounded-xl max-w-2xl w-full"
                              x-show="image === 2">
-                        <img src="/img/ruang/lt8/rt13/3.jpg" class="rounded-xl max-w-2xl w-full"
+                        <img src="/public/img/ruang/lt8/rt13/3.jpg" class="rounded-xl max-w-2xl w-full"
                              x-show="image === 3">
                     </div>
 
                     <div class="flex -mx-2 mb-4 justify-between">
-                        <img src="/img/ruang/lt8/rt13/1.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                        <img src="/public/img/ruang/lt8/rt13/1.jpg" class="rounded-lg max-w-xs max-h-[112px]"
                              x-on:click="image = 1">
-                        <img src="/img/ruang/lt8/rt13/2.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                        <img src="/public/img/ruang/lt8/rt13/2.jpg" class="rounded-lg max-w-xs max-h-[112px]"
                              x-on:click=" image=2">
-                        <img src="/img/ruang/lt8/rt13/3.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                        <img src="/public/img/ruang/lt8/rt13/3.jpg" class="rounded-lg max-w-xs max-h-[112px]"
                              x-on:click="image = 3">
                     </div>
                 </div>

@@ -21,7 +21,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\user;
             <div id="user-profile-card"
                  class="flex justify-evenly items-center bg-neutral-color border-2 border[#C8C1C1] py-4 px-8 mx-auto gap-4 rounded-3xl min-w-[512px]">
                 <div id="user-profile-pic" class="flex-[1] flex justify-center min-w-[12rem]">
-                    <img src="/img/user-picture.png" alt="user-profile-pic" class="rounded-full">
+                    <img src="/public/img/user-picture.png" alt="user-profile-pic" class="rounded-full">
                 </div>
                 <div id="user-profile-data" class="flex-[3]">
                     <div id="user-profile-name" class="border-b border-black flex p-2">

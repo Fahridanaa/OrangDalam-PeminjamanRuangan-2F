@@ -66,7 +66,7 @@
         </div>
         <div id="buttons" class="flex justify-around">
             <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
-               href="javascript:history.back()">Kembali</a>
+               href="/pinjam/form?step=1">Kembali</a>
             <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
                     type="submit">Lanjut
             </button>

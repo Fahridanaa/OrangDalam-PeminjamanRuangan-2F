@@ -1282,6 +1282,10 @@ video {
   background-color: var(--neutral-color);
 }
 
+.bg-noFocus-color {
+  background-color: var(--noFocus-color);
+}
+
 .bg-primary-color {
   background-color: var(--primary-color);
 }
@@ -1311,10 +1315,6 @@ video {
 .bg-yellow-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
-}
-
-.bg-noFocus-color {
-  background-color: var(--noFocus-color);
 }
 
 .fill-fourth-color {

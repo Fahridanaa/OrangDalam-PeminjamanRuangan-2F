@@ -13,8 +13,11 @@
         <div id="denah"
              class="flex justify-between overflow-x-auto">
             <?php
+
             use OrangDalam\PeminjamanRuangan\Controllers\User\RequestController;
+
             $data = new RequestController();
+
             if ($_SESSION['formPinjam']['lantai'] != null) {
                 $barat = array(
                     $data->denah($_SESSION['formPinjam']['lantai'], "Barat", "Atas"),
@@ -58,8 +61,7 @@
                 $type = '';
                 if ($_SESSION['formPinjam']['category'] == 'acara') {
                     $type = 'checkbox';
-                }
-                elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+                } elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
                     $type = 'radio';
                 }
 
@@ -92,7 +94,7 @@
         </div>
         <div id="buttons" class="flex justify-evenly">
             <a class="py-2 px-6 bg-danger-color text-neutral-color rounded-3xl cursor-pointer"
-               href="javascript:history.back()">Kembali</a>
+               href="/pinjam/form?step=2">Kembali</a>
             <button class="py-2 px-8 bg-third-color text-neutral-color rounded-3xl cursor-pointer"
                     type="submit">Lanjut
             </button>
@@ -113,6 +115,14 @@ if ($_SESSION['formPinjam']['category'] == 'matkul') {
 }
 ?>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let checkboxes = document.querySelectorAll('.bg-disable-color input[type=checkbox]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+            console.log(checkbox.checked);
+        });
+    });
+
     let lastClick = null;
     const ruangan = document.querySelectorAll('.bg-disable-color');
 
@@ -125,4 +135,5 @@ if ($_SESSION['formPinjam']['category'] == 'matkul') {
             ruang.children[0].checked = !ruang.children[0].checked;
         });
     });
+
 </script>
