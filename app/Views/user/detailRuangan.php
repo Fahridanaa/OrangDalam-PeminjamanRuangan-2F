@@ -6,9 +6,7 @@
     <style>
         input[type="date"]:focus {
             outline: none !important;
-            /* Menghilangkan garis fokus bawaan */
             box-shadow: none !important;
-            /* Menghilangkan efek bayangan bawaan */
         }
 
         input[type="date"]::-webkit-calendar-picker-indicator {
@@ -49,22 +47,31 @@
             <div class="px-4">
                 <div x-data="{ image: 1 }" class="flex flex-col gap-4">
                     <div class="flex">
-                            <img src="/img/ruang/lt8/rt13/1.jpg" class="max-w-2xl rounded-xl md:w-full" x-show="image === 1">
-                            <img src="/img/ruang/lt8/rt13/2.jpg" class="max-w-2xl rounded-xl md:w-full" x-show="image === 2">
-                            <img src="/img/ruang/lt8/rt13/3.jpg" class="max-w-2xl rounded-xl md:w-full" x-show="image === 3">
-                     </div>
-                     <div class="flex justify-between mb-4 -mx-2">
-                            <img src="/img/ruang/lt8/rt13/1.jpg" class="rounded-lg max-w-xs max-h-[112px]" x-on:click="image = 1">
-                            <img src="/img/ruang/lt8/rt13/2.jpg" class="rounded-lg max-w-xs max-h-[112px]" x-on:click=" image=2">
-                            <img src="/img/ruang/lt8/rt13/3.jpg" class="rounded-lg max-w-xs max-h-[112px]" x-on:click="image = 3">
+                        <img src="/img/ruang/lt8/rt13/1.jpg" class="rounded-xl max-w-2xl w-full"
+                             x-show="image === 1">
+                        <img src="/img/ruang/lt8/rt13/2.jpg" class="rounded-xl max-w-2xl w-full"
+                             x-show="image === 2">
+                        <img src="/img/ruang/lt8/rt13/3.jpg" class="rounded-xl max-w-2xl w-full"
+                             x-show="image === 3">
                     </div>
+
+                    <div class="flex -mx-2 mb-4 justify-between">
+                        <img src="/img/ruang/lt8/rt13/1.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                             x-on:click="image = 1">
+                        <img src="/img/ruang/lt8/rt13/2.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                             x-on:click=" image=2">
+                        <img src="/img/ruang/lt8/rt13/3.jpg" class="rounded-lg max-w-xs max-h-[112px]"
+                             x-on:click="image = 3">
+                    </div>
+                </div>
+            </div>
             <div class="md:flex-1 px-4 gap-3 flex flex-col w-full">
                 <span class="text-neutral-color px-3 py-1 bg-danger-color rounded-md self-start">Digunakan</span>
                 <h2 class="mb-3 leading-tight tracking-tight border-b-2 border-black pb-4 font-bold text-2xl md:text-3xl">
                     <?php
-                        echo $fasilitas[0]['nama'];
-                        ?>
-              </h2>
+                    echo $fasilitas[0]['nama'] ?? '';
+                    ?>
+                </h2>
                 <div class="flex flex-col my-4 gap-3">
                     <span class="text-lg font-semibold">Detail Ruangan:</span>
                     <div class="flex bg-third-color rounded-lg justify-between p-4 text-neutral-color min-w-fit max-w-sm">
@@ -75,8 +82,9 @@
                             </svg>
                             <span class="text-sm">Kapasitas</span>
                             <nobr class="text-lg font-semibold"><?php
-                                    echo $fasilitas[0]['kapasitas'];
-                                    ?> Orang</nobr>
+                                echo $fasilitas[0]['kapasitas'] ?? '';
+                                ?> Orang
+                            </nobr>
                         </div>
                         <div class="flex flex-col justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff"
@@ -85,8 +93,9 @@
                             </svg>
                             <span class="text-sm">Proyektor</span>
                             <nobr class="text-lg font-semibold"><?php
-                                    echo $fasilitas[0]['Proyektor'];
-                                    ?> unit</nobr>
+                                echo $fasilitas[0]['Proyektor'] ?? '';
+                                ?> unit
+                            </nobr>
                         </div>
                         <div class="flex flex-col justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff"
@@ -95,8 +104,9 @@
                             </svg>
                             <span class="text-sm">AC</span>
                             <nobr class="text-lg font-semibold"><?php
-                                    echo $fasilitas[0]['AC'];
-                                    ?> unit</nobr>
+                                echo $fasilitas[0]['AC'] ?? '';
+                                ?> unit
+                            </nobr>
                         </div>
                     </div>
                 </div>
@@ -109,12 +119,15 @@
                     </a>
                 </div>
             </div>
-            <div>
-                <div class="mb-4 border-b border-b-black">
-                    <span id="detail-ruangan-jadwal-matkul-choose" class="pb-1 mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color">Jadwal Mata Kuliah</span>
-                    <span id="detail-ruangan-jadwal-peminjaman-choose" class="pb-1 mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color">Peminjaman Acara/Kegiatan</span>
-                </div>
-               <table id="detail-ruangan-jadwal-matkul"
+        </div>
+        <div>
+            <div class="mb-4 border-b border-b-black">
+                    <span id="detail-ruangan-jadwal-matkul-choose"
+                          class="pb-1 mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color">Jadwal Mata Kuliah</span>
+                <span id="detail-ruangan-jadwal-peminjaman-choose"
+                      class="pb-1 mx-2 cursor-pointer hover:text-primary-color hover:border-b-2 hover:border-b-primary-color">Peminjaman Acara/Kegiatan</span>
+            </div>
+            <table id="detail-ruangan-jadwal-matkul"
                    class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
                 <tr class="bg-primary-color text-neutral-color">
                     <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 focus:outline-none focus:shadow-none!">
@@ -177,87 +190,94 @@
                 }
                 ?>
             </table>
-                <table id="detail-ruangan-jadwal-peminjaman" class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
-                    <tr class="bg-primary-color text-neutral-color">
-                        <th colspan="6" class="rounded-t-xl text-start pt-1 px-3 py-10 focus:outline-none focus:shadow-none!">
-                        </th>
-                    </tr>
-                    <?php
-                    $counter = 1;
-                    foreach ($jadwalAcara as $jadwal) {
-                        $startDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['mulai']);
-                        $endDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['selesai']);
-                        $isNow = (new DateTime() >= $startDateTime) && (new DateTime() <= $endDateTime);
+            <table id="detail-ruangan-jadwal-peminjaman"
+                   class="w-full text-center mb-12 shadow-[-5px_-5px_4px_0px_#00000025] rounded-xl hidden">
+                <tr class="bg-primary-color text-neutral-color">
+                    <th colspan="6"
+                        class="rounded-t-xl text-start pt-1 px-3 py-10 focus:outline-none focus:shadow-none!">
+                    </th>
+                </tr>
+                <?php
+                $counter = 1;
+                foreach ($jadwalAcara as $jadwal) {
+                    $startDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['mulai']);
+                    $endDateTime = new DateTime($jadwal['tanggalAcara'] . ' ' . $jadwal['selesai']);
+                    $isNow = (new DateTime() >= $startDateTime) && (new DateTime() <= $endDateTime);
                     ?>
-                        <tr class="border-b border-black">
-                            <td><?= $counter++ ?></td>
-                            <td><?= date('d F Y', strtotime($jadwal['tanggalAcara'])) ?></td>
-                            <td><?= date('H:i', strtotime($jadwal['mulai'])) ?> - <?= date('H:i', strtotime($jadwal['selesai'])) ?></td>
-                            <td><?= $jadwal['keterangan'] ?></td>
-                            <td><?= $jadwal['nama'] ?></td>
-                            <td>
-                                <?php if ($isNow) : ?>
-                                    <div class="w-4 h-4 rounded-full bg-warn-color"></div>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </table>
+                    <tr class="border-b border-black">
+                        <td><?= $counter++ ?></td>
+                        <td><?= date('d F Y', strtotime($jadwal['tanggalAcara'])) ?></td>
+                        <td><?= date('H:i', strtotime($jadwal['mulai'])) ?>
+                            - <?= date('H:i', strtotime($jadwal['selesai'])) ?></td>
+                        <td><?= $jadwal['keterangan'] ?></td>
+                        <td><?= $jadwal['nama'] ?></td>
+                        <td>
+                            <?php if ($isNow) : ?>
+                                <div class="w-4 h-4 rounded-full bg-warn-color"></div>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php }
+                if ($counter == 1) {
+                    echo '<td>Tidak ada Peminjaman</td>';
+                }
+                ?>
+            </table>
 
-            </div>
         </div>
     </div>
-    <script>
-        const detailRuanganButton = ['detail-ruangan-jadwal-matkul-choose', 'detail-ruangan-jadwal-peminjaman-choose'];
-        const detailRuanganJadwal = ['detail-ruangan-jadwal-matkul', 'detail-ruangan-jadwal-peminjaman'];
+</div>
+<script>
+    const detailRuanganButton = ['detail-ruangan-jadwal-matkul-choose', 'detail-ruangan-jadwal-peminjaman-choose'];
+    const detailRuanganJadwal = ['detail-ruangan-jadwal-matkul', 'detail-ruangan-jadwal-peminjaman'];
 
-        detailRuanganButton.forEach((button, index) => {
-            document.getElementById(button).addEventListener('click', () => {
-                detailRuanganButton.forEach((button) => {
-                    document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
-                });
-                detailRuanganJadwal.forEach((jadwal) => {
-                    document.getElementById(jadwal).classList.add('hidden');
-                });
-                document.getElementById(button).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
-                document.getElementById(detailRuanganJadwal[index]).classList.remove('hidden');
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
+    detailRuanganButton.forEach((button, index) => {
+        document.getElementById(button).addEventListener('click', () => {
             detailRuanganButton.forEach((button) => {
                 document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
             });
-
-            document.getElementById(detailRuanganButton[0]).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
-
             detailRuanganJadwal.forEach((jadwal) => {
                 document.getElementById(jadwal).classList.add('hidden');
             });
+            document.getElementById(button).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
+            document.getElementById(detailRuanganJadwal[index]).classList.remove('hidden');
+        });
+    });
 
-            document.getElementById(detailRuanganJadwal[0]).classList.remove('hidden');
+    document.addEventListener('DOMContentLoaded', () => {
+        detailRuanganButton.forEach((button) => {
+            document.getElementById(button).classList.remove('border-b-primary-color', 'text-primary-color', 'border-b-2');
         });
 
-        function formatDate() {
-            let tanggalInput = document.getElementById("tanggalInput").value;
+        document.getElementById(detailRuanganButton[0]).classList.add('border-b-primary-color', 'text-primary-color', 'border-b-2');
 
-            let tanggal = new Date(tanggalInput);
-            let options = {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            };
-            let tanggalFormatted = tanggal.toLocaleDateString('id-ID', options);
+        detailRuanganJadwal.forEach((jadwal) => {
+            document.getElementById(jadwal).classList.add('hidden');
+        });
 
-            document.getElementById("tanggalFormatted").textContent = tanggalFormatted;
-        }
+        document.getElementById(detailRuanganJadwal[0]).classList.remove('hidden');
+    });
 
-        document.getElementById("tanggalInput").addEventListener("change", formatDate);
+    function formatDate() {
+        let tanggalInput = document.getElementById("tanggalInput").value;
 
-        document.getElementById('tanggalInput').valueAsDate = new Date();
-        formatDate();
-    </script>
+        let tanggal = new Date(tanggalInput);
+        let options = {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        };
+        let tanggalFormatted = tanggal.toLocaleDateString('id-ID', options);
+
+        document.getElementById("tanggalFormatted").textContent = tanggalFormatted;
+    }
+
+    document.getElementById("tanggalInput").addEventListener("change", formatDate);
+
+    document.getElementById('tanggalInput').valueAsDate = new Date();
+    formatDate();
+</script>
 </body>
 <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
 
