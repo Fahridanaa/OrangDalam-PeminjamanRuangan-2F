@@ -18,6 +18,8 @@ class RequestController extends Controller
 
     private Peminjaman $peminjaman;
 
+    private Peminjaman $peminjaman;
+
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -94,16 +96,20 @@ class RequestController extends Controller
             $data['ruang'] = $kode;
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
-            if ($dayNumber > 1 && $dayNumber < 6) {
-                if ($mulai >= $waktuMulai && $selesai <= $waktuSelesai) {
+            if ($dayNumber > 1 && $dayNumber < 7) {
+                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
                     $result = 1;
-                } else {
+                }
+                else {
                     $result = $this->peminjaman->statusAcara($data);
                 }
-            } else {
+            }
+            else {
                 $result = $this->peminjaman->statusAcara($data);
             }
-        } elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+        }
+        elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+
             $time = $_SESSION['formPinjam']['tanggal-matkul'];
             $data['hari'] = $this->getDayNow(strtotime($time));
             $data['ruang'] = $kode;
