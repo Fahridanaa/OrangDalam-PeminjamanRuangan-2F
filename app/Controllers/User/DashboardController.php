@@ -9,20 +9,13 @@ use OrangDalam\PeminjamanRuangan\Models\Ruang;
 
 class DashboardController extends Controller
 {
-    private Jadwal $jadwal;
     private Ruang $ruang;
 
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
-        $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
-    }
-
-    public function showJadwalByRuangan($kodeRuang, $namaHari)
-    {
-        return $this->jadwal->getJadwalByRuangDanHari($kodeRuang, $namaHari);
     }
 
     public function denah($lantai, $bagian, $posisi)
@@ -38,8 +31,7 @@ class DashboardController extends Controller
     {
         if ($this->ruang->status($kode, $this->getDayNow()) != null) {
             return 'danger';
-        }
-        else {
+        } else {
             return 'disable';
         }
     }

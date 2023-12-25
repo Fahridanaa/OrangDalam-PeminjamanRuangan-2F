@@ -9,15 +9,10 @@ use OrangDalam\PeminjamanRuangan\Models\Ruang;
 
 class RequestController extends Controller
 {
-    private Jadwal $jadwal;
-    private Ruang $ruang;
-
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
-        $this->jadwal = new Jadwal();
-        $this->ruang = new Ruang();
     }
 
     public function ShowRequestPage(): void
