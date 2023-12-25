@@ -364,15 +364,29 @@ class MultiFormController extends Controller
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'matkul' => $_SESSION['formPinjam']['matkul'],
             'dosen' => $_SESSION['formPinjam']['dosen-pengampu'],
+            'status' => "Perlu Konfirmasi",
+            'tanda_pengenal' => $_SESSION['formPinjam']['tanda-pengenal'],
             'mulai' => $_SESSION['formPinjam']['jam-mulai-matkul'],
             'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul']
 
         ]; //query buat mata kuliah belum ada
 
+        // set notifikasi
+        $dataNotif = [
+            'kategori' => 'Pemindahan Jadwal',
+            'status' => 'Menunggu Konfirmasi',
+            'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
+            'tanggal' => date('Y-m-d'),
+            'nim_mhs' => $_SESSION['user']['nim'] ?? null,
+            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']
+        ];
+
+        $this->notifikasi->setNotif($dataNotif);
+
         if ($_SESSION['level'] === 'mahasiswa') {
             $message = 'Silahkan tunggu konfirmasi dari Ketua Kelas';
         } else {
-            $message = 'Silahkan tunggu konfirmasi dari DosenPengampu';
+            $message = 'Silahkan tunggu konfirmasi dari Dosen Pengampu';
         }
         $_SESSION['formPinjam']['done'] = $message;
         if ($this->multiFormModel->addRequest($data) > 0) {

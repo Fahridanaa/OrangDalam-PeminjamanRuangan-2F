@@ -41,13 +41,15 @@ class MultiFormModel
 
     public function addRequest($data)
     {
-        $this->db->query("INSERT INTO request(nim, ruang, keterangan, matkul, dosenPengampu, mulai, selesai)
-        VALUES (:nim, :ruang, :keterangan, :matkul, :dosen, :mulai, :selesai)");
+        $this->db->query("INSERT INTO request(nim, ruang, keterangan, matkul, dosenPengampu, status, tanda_pengenal, mulai, selesai)
+        VALUES (:nim, :ruang, :keterangan, :matkul, :dosen, :status, :pengenal, :mulai, :selesai)");
         $this->db->bind(":nim", $data['nim']);
         $this->db->bind(":ruang", $data['ruang']);
         $this->db->bind(":keterangan", $data['keterangan']);
         $this->db->bind(":matkul", $data['matkul']);
         $this->db->bind(":dosen", $data['dosen']);
+        $this->db->bind(":status", $data['status']);
+        $this->db->bind(":pengenal", $data['tanda_pengenal']);
         $this->db->bind(":mulai", $data['mulai']);
         $this->db->bind(":selesai", $data['selesai']);
         $this->db->execute();
