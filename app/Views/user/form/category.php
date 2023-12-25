@@ -15,8 +15,8 @@
         </form>
         <form action="/pinjam/form?step=1" method="POST">
             <button type="submit" name="category" value="matkul"
-                    class="flex flex-col justify-center items-center bg-noFocus-color rounded-xl p-10 cursor-not-allowed"
-                    disabled>
+                    class="flex flex-col justify-center items-center bg-<?= ($_SESSION['user']['ketua'] != null) ? 'noFocus' : 'primary' ?>-color rounded-xl p-10 cursor-not-allowed"
+                <?= ($_SESSION['user']['ketua'] != null) ? 'disabled' : '' ?>>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width="2"
                      stroke="#666666" class="w-32 h-32">
                     <path stroke-linecap="round" stroke-linejoin="round"

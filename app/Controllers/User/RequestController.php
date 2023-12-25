@@ -14,7 +14,7 @@ class RequestController extends Controller
     private DosenPengampu $dosenPengampu;
     private Matkul $matkul;
     private Jadwal $jadwal;
-    private Ruang  $ruang;
+    private Ruang $ruang;
 
     private Peminjaman $peminjaman;
 
@@ -39,6 +39,7 @@ class RequestController extends Controller
     {
         return $this->dosenPengampu->dosen();
     }
+
     public function getMatkul()
     {
         return $this->matkul->read();
@@ -93,19 +94,16 @@ class RequestController extends Controller
             $data['ruang'] = $kode;
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
-            if ($dayNumber > 1 && $dayNumber < 7) {
+            if ($dayNumber > 1 && $dayNumber < 6) {
                 if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
                     $result = 1;
-                }
-                else {
+                } else {
                     $result = $this->peminjaman->statusAcara($data);
                 }
-            }
-            else {
+            } else {
                 $result = $this->peminjaman->statusAcara($data);
             }
-        }
-        elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+        } elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
             $time = $_SESSION['formPinjam']['tanggal-matkul'];
             $data['hari'] = $this->getDayNow(strtotime($time));
             $data['ruang'] = $kode;
@@ -116,8 +114,7 @@ class RequestController extends Controller
 
         if ($result > 0) {
             return 'locked';
-        }
-        else {
+        } else {
             return 'disable';
         }
     }
