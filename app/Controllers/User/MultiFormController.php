@@ -3,6 +3,8 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\DosenPengampu;
+use OrangDalam\PeminjamanRuangan\Models\Matkul;
 use OrangDalam\PeminjamanRuangan\Models\MultiFormModel;
 use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 
@@ -92,14 +94,14 @@ class MultiFormController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['category'])) {
-                $_SESSION['flash_message'] = "Category is required.";
+                $_SESSION['flash_message'] = "Harap mengisi kategory terlebih dahulu";
                 return false;
             }
 
             $selectedCategory = $_POST['category'];
 
             if (!in_array($selectedCategory, ['acara', 'matkul'])) {
-                $_SESSION['flash_message'] = "Invalid category.";
+                $_SESSION['flash_message'] = "Kategori tidak valid";
                 return false;
             }
 
@@ -157,7 +159,7 @@ class MultiFormController extends Controller
 
         $tandaPengenal = $_FILES['tanda-pengenal'];
         if (!$tandaPengenal) {
-            $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
+            $this->setFailedMessage('Diperlukan Tanda Pengenal.', 'warn', 'warn');
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
@@ -165,15 +167,15 @@ class MultiFormController extends Controller
         $acaraDir = $uploadsDir . 'acara/';
         $tandaPengenalPath = $acaraDir . 'tanda-pengenal/' . $tandaPengenal['name'];
 
-        $allowedFileTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
-        if (!$this->handleUploadedFiles($tandaPengenal, $allowedFileTypes, $tandaPengenalPath)) {
+        $allowedFileImagesTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!$this->handleUploadedFiles($tandaPengenal, $allowedFileImagesTypes, $tandaPengenalPath)) {
             return false;
         }
 
         $urgent = filter_input(INPUT_POST, 'acara-urgent', FILTER_VALIDATE_BOOLEAN);
         if ($urgent) {
             if (!isset($_FILES['acara-bukti-urgent'])) {
-                $this->setFailedMessage("Urgent proof file is required.");
+                $this->setFailedMessage("Dibutuhkan file bukti urgent.");
                 return false;
             }
 
@@ -181,7 +183,8 @@ class MultiFormController extends Controller
             $_SESSION['formPinjam']['acara-bukti-urgent'] = basename($buktiUrgent['name']);
             $buktiUrgentPath = $acaraDir . 'bukti-urgent/' . $buktiUrgent['name'];
 
-            if (!$this->handleUploadedFiles($buktiUrgent, $allowedFileTypes, $buktiUrgentPath)) {
+            $allowedFileDocumentsTypes = ['application/pdf'];
+            if (!$this->handleUploadedFiles($buktiUrgent, $allowedFileDocumentsTypes, $buktiUrgentPath)) {
                 return false;
             }
         }
@@ -199,7 +202,7 @@ class MultiFormController extends Controller
             header('Location: /pinjam');
             return false;
         }
-        $requiredFields = ['lantai', 'matkul', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
+        $requiredFields = ['lantai', 'matkul', 'dosen-pengampu', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
         foreach ($requiredFields as $field) {
             $_SESSION['formPinjam'][$field] = $this->sanitizeInput($_POST[$field]);
         }
@@ -208,7 +211,7 @@ class MultiFormController extends Controller
         }
         $tandaPengenal = $_FILES['tanda-pengenal'];
         if (!$tandaPengenal) {
-            $this->setFailedMessage('Tanda Pengenal is required.', 'warn', 'warn');
+            $this->setFailedMessage('Diperlukan Tanda Pengenal.', 'warn', 'warn');
             return false;
         }
         $_SESSION['formPinjam']['tanda-pengenal'] = basename($tandaPengenal['name']);
@@ -310,13 +313,20 @@ class MultiFormController extends Controller
             return str_replace(' ', '', $item);
         }, $ruanganDipilih);
 
+        $kategori = $_SESSION['formPinjam']['category'];
+        if ($kategori== 'acara') {
+            $kategori= 'Acara/Kegiatan';
+        } else {
+            $kategori= 'Pemindahan Jadwal';
+        }
          // set notifikasi
          $dataNotif = [
-            'jenis' => 'Konfirmasi',
+            'kategori' => $kategori,
+            'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
-            'tanggal' => date('Y-m-d'),  
-            'nim_mhs' =>  $_SESSION['user']['nim'] ?? null,  
-            'nip_dosen' =>  $_SESSION['user']['nidn'] ?? null
+            'tanggal' => date('Y-m-d'),
+            'nim_mhs' => $_SESSION['user']['nim'] ?? null,
+            'nip_dosen' => $_SESSION['user']['nidn'] ?? null
         ];
 
         $this->notifikasi->setNotif($dataNotif);
@@ -342,15 +352,30 @@ class MultiFormController extends Controller
             exit();
         }
 
-        $data = []; //query buat mata kuliah belum ada
+        $ruanganDipilih = $_SESSION['formPinjam']['ruangan'];
+
+        $kodeRuang = array_map(function ($item) {
+            return str_replace(' ', '', $item);
+        }, $ruanganDipilih);
+
+        $data = [
+            'nim' => $_SESSION['user']['nim'] ?? null,
+            'ruang' => current($kodeRuang),
+            'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
+            'matkul' => $_SESSION['formPinjam']['matkul'],
+            'dosen' => $_SESSION['formPinjam']['dosen-pengampu'],
+            'mulai' => $_SESSION['formPinjam']['jam-mulai-matkul'],
+            'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul']
+
+        ]; //query buat mata kuliah belum ada
 
         if ($_SESSION['level'] === 'mahasiswa') {
             $message = 'Silahkan tunggu konfirmasi dari Ketua Kelas';
         } else {
-            $message = 'Silahkan tunggu konfirmasi dari Dosen';
+            $message = 'Silahkan tunggu konfirmasi dari DosenPengampu';
         }
         $_SESSION['formPinjam']['done'] = $message;
-        if ($this->multiFormModel->insert($data) > 0) {
+        if ($this->multiFormModel->addRequest($data) > 0) {
             return true;
         }
         return false;
@@ -396,7 +421,7 @@ class MultiFormController extends Controller
         $fileExtension = mime_content_type($fileData['tmp_name']);
 
         if (!in_array($fileExtension, $allowedExtensions)) {
-            $this->setFailedMessage("Invalid file type.");
+            $this->setFailedMessage("File tidak valid");
             return false;
         }
 
@@ -407,7 +432,7 @@ class MultiFormController extends Controller
         }
 
         if (!move_uploaded_file($fileData['tmp_name'], $destination)) {
-            $this->setFailedMessage("Failed to upload file.");
+            $this->setFailedMessage("Gagal untuk mengupload file");
             return false;
         }
 

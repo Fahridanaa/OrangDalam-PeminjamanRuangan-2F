@@ -11,6 +11,7 @@ class DashboardController extends Controller
 {
     private Jadwal $jadwal;
     private Ruang $ruang;
+    private Peminjaman $peminjaman;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $middlewareInstance->handleUser();
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
+        $this->peminjaman = new Peminjaman();
     }
 
     public function showJadwalByRuangan($kodeRuang, $namaHari)
@@ -36,31 +38,15 @@ class DashboardController extends Controller
 
     public function status($kode)
     {
-        if ($this->ruang->status($kode, $this->getDayNow()) != null) {
+        if ($this->ruang->status($kode, $this->getDayNow(time())) != null) {
             return 'danger';
+        }
+        elseif ($this->peminjaman->status($kode) != null) {
+            return 'warn';
         }
         else {
             return 'disable';
         }
-    }
-
-    private function getDayNow()
-    {
-        $namaHariInggris = date('l', time());
-
-        $daftarTerjemahan = array(
-            'Monday' => 'Senin',
-            'Tuesday' => 'Selasa',
-            'Wednesday' => 'Rabu',
-            'Thursday' => 'Kamis',
-            'Friday' => 'Jumat',
-            'Saturday' => 'Sabtu',
-            'Sunday' => 'Minggu'
-        );
-
-        $namaHariIndonesia = $daftarTerjemahan[$namaHariInggris];
-
-        return $namaHariIndonesia;
     }
 
     public function showDenah()

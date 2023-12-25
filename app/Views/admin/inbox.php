@@ -18,20 +18,22 @@
                 <?php
                 if (!empty($data['notif'])) {
                     foreach ($data['notif'] as $notif) {
-                        echo "<div class=\"flex flex-col px-4 py-4 mx-8 border-b-2 border-black justify-items-stretch\">";
-                        echo "<h1 class=\"mb-1 text-3xl font-bold\">{$notif['jenis']}</h1>";
-                        echo "<h2 class=\"text-xl font-medium\">{$notif['keterangan']}</h2>";
-                        echo "</div>";
+                        if ($notif['kategori'] == 'Acara/Kegiatan' && $notif['status'] == 'Menunggu Konfirmasi' ) {
+                            echo "<div class=\"flex flex-col px-4 py-4 mx-8 border-b-2 border-black justify-items-stretch\">";
+                            echo "<h1 class=\"mb-1 text-3xl font-bold\">{$notif['kategori']}</h1>";
+                            echo "<h2 class=\"text-xl font-medium\">{$notif['keterangan']}</h2>";
+                            echo "</div>";
+                        }
                     }
                 } else {
-                    echo "<h1 class=\"mb-1 text-3xl font-semibold\">Tidak ada notifikasi</h1>";
+                    echo "<h1 class=\"mb-1 text-3xl font-semibold text-center\">Tidak ada notifikasi</h1>";
                 }
-                ?>
-        </div>
-        </section>
-    </div>
+            ?>
     </div>
     </section>
+</div>
+</div>
+</section>
 </div>
 </div>
 </body>

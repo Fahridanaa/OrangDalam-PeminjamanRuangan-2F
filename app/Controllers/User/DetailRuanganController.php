@@ -36,20 +36,22 @@ class DetailRuanganController extends Controller
             exit;
         }
 
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
+        $this->ensureUserIsLoggedIn();
+      
         // Mengambil data fasilitas dari model berdasarkan kode ruangan
         $fasilitasData = $this->fasilitas->getFasilitasByRuang($kode);
-
         $jadwalAcaraData = $this->jadwalAcara->getJadwalAcaraByRuangDanHari($kode);
-
+      
         // Mengirim data ke view
         $this->view('user/detailRuangan', [
             'fasilitas' => $fasilitasData, 
             'kodeRuang' => $kode,
             'jadwalAcara' => $jadwalAcaraData
         ]);
+    }
+  
+    public function getJadwal($ruang, $hari)
+    {
+        return $this->jadwal->getJadwalByRuangDanHari($ruang, $hari);
     }
 }

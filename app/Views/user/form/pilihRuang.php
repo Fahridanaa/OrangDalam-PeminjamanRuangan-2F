@@ -13,22 +13,21 @@
         <div id="denah"
              class="flex justify-between overflow-x-auto">
             <?php
-            $lantai7 = array(
-                array(
-                    array(
-                        "LPR 1" => "locked", "LPR 3" => "disable", "LPR 5" => "disable", "LKJ 1" => "locked"
-                    ), array("LPR 2" => "disable", "LPR 4" => "disable", "LPR 6" => "locked", "LPR 7" => "locked")
-                ),
-                array(
-                    array(
-                        "LKJ 2" => "disable", "LKJ 3" => "disable", "RT 8" => "disable", "LERP" => "locked"
-                    ), array("LPR 8" => "disable", "LIG 1" => "disable", "LIG 2" => "locked", "LAI" => "locked")
-                ));
+            use OrangDalam\PeminjamanRuangan\Controllers\User\RequestController;
+            $data = new RequestController();
+            if ($_SESSION['formPinjam']['lantai'] != null) {
+                $barat = array(
+                    $data->denah($_SESSION['formPinjam']['lantai'], "Barat", "Atas"),
+                    $data->denah($_SESSION['formPinjam']['lantai'], "Barat", "Bawah")
+                );
+                $timur = array(
+                    $data->denah($_SESSION['formPinjam']['lantai'], "Timur", "Atas"),
+                    $data->denah($_SESSION['formPinjam']['lantai'], "Timur", "Bawah")
+                );
 
-            foreach ($lantai7 as $areaRuangan) {
-                echo renderAreaRuangan($areaRuangan);
+                echo renderAreaRuangan($barat);
+                echo renderAreaRuangan($timur);
             }
-
 
             function renderAreaRuangan(array $areaRuangan): string
             {

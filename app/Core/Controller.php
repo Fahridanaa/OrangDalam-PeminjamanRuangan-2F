@@ -20,15 +20,25 @@ class Controller
         return new $middlewareClass;
     }
 
-    protected function loginCheck(): bool
+    private function loginCheck(): bool
     {
         return isset($_SESSION['user']);
     }
 
-    public function download() {
-        $file = $_GET['file'];
+    protected function ensureUserIsLoggedIn(): void // Extract login check to a separate method
+    {
+        if (!($this->loginCheck())) {
+            header('Location: /login');
+            exit();
+        }
+    }
 
-        $folderPath = 'data/';
+    public function download()
+    {
+        $file = $_GET['file'];
+        $path = $_GET['path'];
+
+        $folderPath = '../data/uploads/acara/' . $path . '/';
         $fileName = $file;
         $filePath = $folderPath . $fileName;
 
@@ -46,7 +56,26 @@ class Controller
             readfile($filePath);
             exit;
         } else {
-            echo "File tidak ditemukan.";
+            echo "File Tidak Ditemukan";
         }
+    }
+
+    public function getDayNow($date)
+    {
+        $namaHariInggris = date('l', $date);
+
+        $daftarTerjemahan = array(
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu',
+            'Sunday' => 'Minggu'
+        );
+
+        $namaHariIndonesia = $daftarTerjemahan[$namaHariInggris];
+
+        return $namaHariIndonesia;
     }
 }
