@@ -60,9 +60,9 @@ class Controller
         }
     }
 
-    public function getDayNow()
+    public function getDayNow($date)
     {
-        $namaHariInggris = date('l', time());
+        $namaHariInggris = date('l', $date);
 
         $daftarTerjemahan = array(
             'Monday' => 'Senin',

@@ -33,8 +33,4 @@ class Ruang
         $this->db->bind(":hari",$hari);
         return $this->db->single();
     }
-
-    public function print() {
-
-    }
 }

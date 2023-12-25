@@ -33,4 +33,11 @@ class Jadwal
        $this->db->bind(":kode", $kodeRuang);
        return $this->db->resultSet();
     }
+
+    public function getJPByKode($kode)
+    {
+        $this->db->query("SELECT TIME_FORMAT(mulai, '%H:%i') AS mulai, TIME_FORMAT(selesai, '%H:%i') AS selesai FROM jp WHERE kode = :kode");
+        $this->db->bind(":kode", $kode);
+        return $this->db->single();
+    }
 }
