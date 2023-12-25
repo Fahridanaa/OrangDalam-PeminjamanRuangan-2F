@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace OrangDalam\PeminjamanRuangan\Controllers\Admin;
@@ -7,12 +7,14 @@ use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 
-class AdminKonfirmasiController extends Controller {
+class AdminKonfirmasiController extends Controller
+{
 
     private Peminjaman $peminjaman;
     private Notifikasi $notifikasi;
 
-    public function __construct() {
+    public function __construct()
+    {
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleAdmin();
         $this->peminjaman = new Peminjaman();
@@ -22,21 +24,17 @@ class AdminKonfirmasiController extends Controller {
 
     public function showKonfirmasiPinjamPage(): void
     {
-        if (!($this->loginCheck())) {
-            header('Location: /login');
-            exit();
-        }
-
+        $this->ensureUserIsLoggedIn();
         $this->view('admin/konfirmasiPinjam');
     }
 
-    public function konfirmasi()  {
+    public function konfirmasi()
+    {
         $result = array();
         foreach ($this->peminjaman->konfirmasi() as $item) {
             if ($item['tanda_pengenal'] == null) {
                 $linkPengenal = "-";
-            }
-            else {
+            } else {
                 $linkPengenal = "<button type='button' class='focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2' disabled>
                                     <a href='/download?file=" . urlencode($item['tanda_pengenal']) . "&path=tanda-pengenal' class='download-button' download>
                                         <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
@@ -47,8 +45,7 @@ class AdminKonfirmasiController extends Controller {
             }
             if ($item['surat'] == null) {
                 $linkSurat = "-";
-            }
-            else {
+            } else {
                 $linkSurat = "<button type='button' class='focus:outline-none text-white bg-primary-color dark:bg-primary-color cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2' disabled>
                                     <a href='/download?file=" . urlencode($item['surat']) . "&path=surat' class='download-button' download>
                                         <svg class='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'>
@@ -58,32 +55,34 @@ class AdminKonfirmasiController extends Controller {
                                 </button>";;
             }
 
-            $data = array($item['nama'], $item['ruang'], $item['tanggalAcara'], $item['telepon'] , $linkPengenal, $linkSurat, $item['id'], $item['nim_mhs'], $item['nidn_dosen']);
+            $data = array($item['nama'], $item['ruang'], $item['tanggalAcara'], $item['telepon'], $linkPengenal, $linkSurat, $item['id'], $item['nim_mhs'], $item['nidn_dosen']);
             array_push($result, $data);
         }
         return $result;
     }
 
-    public function statusKonfirmasi($id) {
+    public function statusKonfirmasi($id)
+    {
         return $this->peminjaman->statusKonfirmasi($id);
     }
 
-    public function updateStatus() {
+    public function updateStatus()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = $_POST['status'];
             $status2 = $_POST['status2'] ?? 'Telah Dikonfirmasi';
             $id = $_POST['index'] ?? $_POST['index1'];
-            $ketreangan =  $_POST['keterangan'] ?? 'Selamat Booking Anda Telah di Konfirmasi';
+            $ketreangan = $_POST['keterangan'] ?? 'Selamat Booking Anda Telah di Konfirmasi';
 
             $dataNotif = [
-                    'kategori' => 'Acara/Kegiatan',
-                    'status' => $status2, 
-                    'keterangan' =>  $ketreangan,
-                    'tanggal' => date('Y-m-d'),  
-                    'nim_mhs' =>  $_SESSION['nim'] ?? null,  
-                    'nip_dosen' =>  $_SESSION['nidn'] ?? null
+                'kategori' => 'Acara/Kegiatan',
+                'status' => $status2,
+                'keterangan' => $ketreangan,
+                'tanggal' => date('Y-m-d'),
+                'nim_mhs' => $_SESSION['nim'] ?? null,
+                'nip_dosen' => $_SESSION['nidn'] ?? null
             ];
-            
+
             $this->notifikasi->setNotif($dataNotif);
             $this->peminjaman->updateStatus($status, $id);
         }

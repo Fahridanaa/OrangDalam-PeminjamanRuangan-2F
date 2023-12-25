@@ -13,7 +13,6 @@ use OrangDalam\PeminjamanRuangan\Models\Fasilitas;
 class DetailRuanganController extends Controller
 {
     private Jadwal $jadwal;
-    private Ruang $ruang;
     private Fasilitas $fasilitas;
     private JadwalAcara $jadwalAcara;
 
@@ -22,7 +21,6 @@ class DetailRuanganController extends Controller
         $middlewareInstance = $this->middleware('AuthMiddleware');
         $middlewareInstance->handleUser();
         $this->jadwal = new Jadwal();
-        $this->ruang = new Ruang();
         $this->fasilitas = new Fasilitas();
         $this->jadwalAcara = new JadwalAcara();
     }

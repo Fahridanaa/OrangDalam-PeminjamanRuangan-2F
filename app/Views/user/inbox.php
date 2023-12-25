@@ -13,20 +13,20 @@
             <hr class="border border-black">
         </div>
         <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
-            <?php 
-                if (!empty($data['notifikasi'])) {
-                    foreach ($data['notifikasi'] as $notif) {
-                        if ($notif['status'] != 'Menunggu Konfirmasi') {
-                            echo '
+            <?php
+            if (!empty($data['notifikasi'])) {
+                foreach ($data['notifikasi'] as $notif) {
+                    if ($notif['status'] != 'Menunggu Konfirmasi') {
+                        echo '
                                 <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
                                     <div class="flex flex-auto justify-between">
                                         <div class="flex flex-col gap-1">
-                                            <span class="font-bold text-3xl">'.$notif['kategori'].'</span>
-                                            <span class="font-normal text-xl text-select-color">'.$notif['status'].'</span>
-                                            <span class="hidden text-sm text-noFocus-color mt-3">'.$notif['keterangan'].'</span>
+                                            <span class="font-bold text-3xl">' . $notif['kategori'] . '</span>
+                                            <span class="font-normal text-xl text-' . (($notif['status'] == 'Telah Dikonfirmasi') ? 'select' : 'danger') . '-color">' . $notif['status'] . '</span>
+                                            <span class="hidden text-sm text-noFocus-color mt-3">' . $notif['keterangan'] . '</span>
                                         </div>
                                         <div>
-                                            <span class="font-semibold">'.$notif['tanggal'].'</span>
+                                            <span class="font-semibold">' . $notif['tanggal'] . '</span>
                                         </div>
                                     </div>
                                     <div class="mt-4 mr-4">
@@ -40,11 +40,11 @@
                                     </div>
                                 </div>        
                             ';
-                        }
                     }
-                } else {
-                    echo "<h1 class=\"mb-1 text-3xl font-semibold text-center\">Tidak ada notifikasi</h1>";
                 }
+            } else {
+                echo "<h1 class=\"mb-1 text-3xl font-semibold text-center\">Tidak ada notifikasi</h1>";
+            }
             ?>
         </div>
     </div>

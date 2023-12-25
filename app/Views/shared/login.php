@@ -28,7 +28,7 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 <div id="container"
      class="min-h-[100vh] relative flex items-center">
     <div class="text-white rounded-xl overflow-hidden mx-auto flex lg:max-h-screen relative min-w-[60%] max-w-[80%]">
-        <img src="/img/gedung.png" class="hidden lg:block" alt="gedung"/>
+        <img src="/img/gedung.png" class="hidden lg:block max-w-[50%]" alt="gedung"/>
         <div class="py-4 px-8 bg-neutral-color flex-auto">
             <div class="flex flex-col h-full justify-center">
                 <h2 class="text-text-color text-4xl font-medium mb-8 lg:mb-2 text-center lg:text-start">Welcome

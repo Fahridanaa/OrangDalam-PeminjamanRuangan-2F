@@ -4,6 +4,7 @@
     <?php include __DIR__ . '/../shared/head.php'; ?>
 </head>
 <body class="h-screen overflow-hidden">
+<?php include __DIR__ . '/../shared/flashMessage.php'; ?>
 <div id="Peminjaman" class="h-screen flex flex-row">
     <?php
     include 'sidebar.php';
@@ -82,11 +83,17 @@
     const detailMatkulButton = document.querySelectorAll('.detail-matkul-button');
 
     uploadSuratButton.forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            let uploadSurat = document.getElementById('uploadSuratModal');
             const id = button.getAttribute('data-id');
             const inputId = document.getElementById('id');
             inputId.value = id;
             modals[0].classList.remove('hidden');
+            setTimeout(() => {
+                uploadSurat.style.transform = 'translateY(0)';
+                uploadSurat.style.opacity = '1';
+            }, 50)
         })
     })
 
@@ -118,17 +125,23 @@
 
 
     detailMatkulButton.forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            let detailMatkul = document.getElementById('detailMatkul');
             modals[2].classList.remove('hidden');
+            setTimeout(() => {
+                detailMatkul.style.transform = 'translateY(0)';
+                detailMatkul.style.opacity = '1';
+            }, 50)
         })
     })
 
-    function hideModal(modal, detailAcara) {
+    function hideModal(modal) {
         setTimeout(() => {
             modal.classList.add('hidden');
         }, 150)
-        detailAcara.style.transform = '';
-        detailAcara.style.opacity = '';
+        modal.children[1].children[0].style.transform = '';
+        modal.children[1].children[0].style.opacity = '';
     }
 
     modals.forEach((modal) => {
@@ -136,11 +149,11 @@
         const closeModal = modal.querySelector('.close-modal');
 
         closeModal.addEventListener('click', () => {
-            hideModal(modal, document.getElementById('detailAcara'))
+            hideModal(modal)
         })
 
         overlay.addEventListener('click', () => {
-            hideModal(modal, document.getElementById('detailAcara'))
+            hideModal(modal)
         })
     })
 </script>
