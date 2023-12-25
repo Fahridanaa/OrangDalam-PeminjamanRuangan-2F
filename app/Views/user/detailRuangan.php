@@ -126,7 +126,7 @@
                     </th>
                 </tr>
                 <?php
-                foreach ($detail->getJadwal($ruang, $detail->getDayNow()) as $item) {
+                foreach ($detail->getJadwal($ruang, $detail->getDayNow(time())) as $item) {
                     $bg = '';
                     if ($waktu >= $item['mulai'] && $waktu <= $item['selesai']) {
                         $bg = 'bg-danger-color';

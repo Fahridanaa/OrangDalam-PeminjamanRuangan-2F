@@ -3,6 +3,8 @@
 namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
+use OrangDalam\PeminjamanRuangan\Models\DosenPengampu;
+use OrangDalam\PeminjamanRuangan\Models\Matkul;
 use OrangDalam\PeminjamanRuangan\Models\MultiFormModel;
 use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 
@@ -200,7 +202,7 @@ class MultiFormController extends Controller
             header('Location: /pinjam');
             return false;
         }
-        $requiredFields = ['lantai', 'matkul', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
+        $requiredFields = ['lantai', 'matkul', 'dosen-pengampu', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
         foreach ($requiredFields as $field) {
             $_SESSION['formPinjam'][$field] = $this->sanitizeInput($_POST[$field]);
         }
@@ -350,15 +352,30 @@ class MultiFormController extends Controller
             exit();
         }
 
-        $data = []; //query buat mata kuliah belum ada
+        $ruanganDipilih = $_SESSION['formPinjam']['ruangan'];
+
+        $kodeRuang = array_map(function ($item) {
+            return str_replace(' ', '', $item);
+        }, $ruanganDipilih);
+
+        $data = [
+            'nim' => $_SESSION['user']['nim'] ?? null,
+            'ruang' => current($kodeRuang),
+            'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
+            'matkul' => $_SESSION['formPinjam']['matkul'],
+            'dosen' => $_SESSION['formPinjam']['dosen-pengampu'],
+            'mulai' => $_SESSION['formPinjam']['jam-mulai-matkul'],
+            'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul']
+
+        ]; //query buat mata kuliah belum ada
 
         if ($_SESSION['level'] === 'mahasiswa') {
             $message = 'Silahkan tunggu konfirmasi dari Ketua Kelas';
         } else {
-            $message = 'Silahkan tunggu konfirmasi dari Dosen';
+            $message = 'Silahkan tunggu konfirmasi dari DosenPengampu';
         }
         $_SESSION['formPinjam']['done'] = $message;
-        if ($this->multiFormModel->insert($data) > 0) {
+        if ($this->multiFormModel->addRequest($data) > 0) {
             return true;
         }
         return false;

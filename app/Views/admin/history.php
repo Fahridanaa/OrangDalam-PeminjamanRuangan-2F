@@ -12,7 +12,7 @@
 $history = new AdminHistoryController();
 // Data peminjaman untuk mahasiswa
 $peminjamanMahasiswa = $history->historyMahasiswa();
-// Data peminjaman untuk Dosen
+// Data peminjaman untuk DosenPengampu
 $peminjamanDosen = $history->historyDosen();
 // Menggabungkan data mahasiswa dan dosen menjadi satu array
 $peminjamanSemua = array_merge($peminjamanMahasiswa, $peminjamanDosen);
@@ -136,7 +136,7 @@ if (!isset($_GET['tab'])) {
                         </thead>
                         <tbody>
                         <?php
-                        // Loop melalui data peminjaman Dosen
+                        // Loop melalui data peminjaman DosenPengampu
                         foreach ($peminjamanDosen as $data) {
                             echo "<tr>";
                             foreach ($data as $value) {
