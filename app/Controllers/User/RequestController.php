@@ -132,4 +132,22 @@ class RequestController extends Controller
         }
         return $bg;
     }
+
+    public function getRequest($nidn)
+    {
+        return $this->peminjaman->request($nidn);
+    }
+
+    public function updateStatus()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $status = $_POST['status'];
+            $_SESSION['status'] = $status;
+            $id = $_POST['index'] ?? $_POST['idx'];
+            $keterangan = $_POST['keterangan'] ?? 'Selamat Request Anda Diterima';
+
+            $this->peminjaman->updateRequest($status, $id);
+        }
+        header('Location: /konfirmasi-ruangan');
+    }
 }
