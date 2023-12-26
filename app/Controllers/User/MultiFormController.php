@@ -218,12 +218,13 @@ class MultiFormController extends Controller
 
         if ($_SESSION['level'] == 'Dosen') {
             $kelas = $this->sanitizeInput($_POST['kelas']);
-            $nidn = ['user']['nidn'];
+            $nidn = $_SESSION['user']['nidn'];
         } else {
             $_SESSION['formPinjam']['dosen-pengampu'] = $this->jadwal->getDosenByKodeKelasMatkul($_SESSION['formPinjam']['matkul'], $_SESSION['user']['kelas']);
             $nidn = $_SESSION['formPinjam']['dosen-pengampu']['nidn'];
             $kelas = $_SESSION['user']['kelas'];
         }
+        $_SESSION['formPinjam']['kelas'] = $kelas;
         $matkul = $_SESSION['formPinjam']['matkul'];
 
         $_SESSION['formPinjam']['idJadwal'] = $this->jadwal->getJadwalByKodeMatkulKelasNidn($matkul, $kelas, $nidn);
@@ -380,7 +381,7 @@ class MultiFormController extends Controller
         }, $ruanganDipilih);
 
         $data = [
-            'nim' => $_SESSION['user']['nim'] ?? null,
+            'nim' => $_SESSION['user']['nim'] ?? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'],
             'ruang' => current($kodeRuang),
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'status' => "Perlu Konfirmasi",
@@ -401,8 +402,8 @@ class MultiFormController extends Controller
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'tanggal' => date('Y-m-d'),
-            'nim_mhs' => $_SESSION['user']['nim'] ?? null,
-            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']['nidn']
+            'nim_mhs' => $_SESSION['user']['nim'] ?? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'],
+            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']['nidn'] ?? $_SESSION['user']['nidn']
         ];
 
         $this->notifikasi->setNotif($dataNotif);

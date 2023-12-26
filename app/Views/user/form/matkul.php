@@ -35,17 +35,19 @@ $request = new RequestController();
                     <option selected disabled hidden>Nama Mata Kuliah</option>
                     <?php
                     foreach ($request->getJadwal() as $item) {
+                        if (($itemBefore['kode_matkul'] ?? '') == $item['kode_matkul']) continue;
                         echo '<option value="' . $item['kode_matkul'] . '">' . $item['namaMK'] . '</option>';
+                        $itemBefore = $item;
                     }
                     ?>
                 </select>
             </div>
             <?php
-            if (isset($_SESSION['level']) && $_SESSION['level'] == 'dosen') :
+            if (isset($_SESSION['level']) && $_SESSION['level'] == 'Dosen') :
                 ?>
                 <div class="flex flex-col gap-2">
-                    <label for="dosen-pengampu">Kelas</label>
-                    <select name="dosen-pengampu" id="dosen-pengampu"
+                    <label for="kelas">Kelas</label>
+                    <select name="kelas" id="kelas"
                             class="pr-24 pl-8 py-3 rounded-lg border border-primary-color" required>
                         <option selected disabled hidden>Pilih Kelas</option>
                         <?php
