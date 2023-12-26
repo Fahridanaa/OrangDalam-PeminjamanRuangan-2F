@@ -67,7 +67,7 @@
                 $listPinjam = getUserPeminjaman($_SESSION['user']['nidn']);
             }
             if ($listPinjam == null) {
-                echo '<span class="text-xl font-medium">Belum ada Peminjaman</span>';
+                echo '<span class="text-3xl font-semibold text-center">Belum ada Peminjaman</span>';
             } else {
                 foreach ($listPinjam as $item) :
                     displayItem($item);

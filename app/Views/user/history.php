@@ -56,7 +56,7 @@
             }
 
             if ($listHistory == null) {
-                echo '<span class="text-xl font-medium">Belum ada Riwayat Peminjaman</span>';
+                echo '<span class="text-3xl font-semibold text-center">Belum ada Riwayat Peminjaman</span>';
             } else {
                 foreach ($listHistory as $item) :
                     displayItem($item);

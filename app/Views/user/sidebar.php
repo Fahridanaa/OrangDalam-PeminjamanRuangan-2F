@@ -8,7 +8,7 @@ $isActive = function ($path) {
 <div class="bg-primary-color min-h-screen fixed z-20">
     <div class="flex w-32 flex-col items-center justify-between h-screen">
         <div class="mt-8 mb-2 flex flex-col justify-center items-center">
-            <img src="/img/logo.png">
+            <img src="/public/img/logo.png">
         </div>
         <div>
             <ul class="flex flex-col justify-between rounded-md h-full">
@@ -67,8 +67,9 @@ $isActive = function ($path) {
                     </a>
                 </li>
                 <li class="flex items-center justify-center">
-                    <a class="flex items-center justify-center rounded-md flex-col group group cursor-pointer my-2 xl:my-4"
-                       href="/konfirmasi-ruangan">
+                    <?php $isKetuaKelas = $_SESSION['user']['ketua'] == null ?>
+                    <a class="flex items-center justify-center rounded-md flex-col cursor-<?= $isKetuaKelas ? 'pointer group' : 'not-allowed' ?> my-2 xl:my-4"
+                        <?= $isKetuaKelas ? 'href="/konfirmasi-ruangan"' : '' ?>>
                         <?php
                         $activeClass = $isActive('/konfirmasi-ruangan');
 

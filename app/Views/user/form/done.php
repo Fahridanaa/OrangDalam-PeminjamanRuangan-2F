@@ -8,7 +8,7 @@
 
         </div>
         <form action="/pinjam/form?step=5" method="POST" class="flex justify-center">
-            <button class="text-center text-neutral-color bg-third-color px-16 py-2 rounded-3xl" href="">Selesai
+            <button class="text-center text-neutral-color bg-third-color px-16 py-2 rounded-3xl">Selesai
             </button>
         </form>
     </div>

@@ -14,7 +14,11 @@ class RequestController extends Controller
     private DosenPengampu $dosenPengampu;
     private Matkul $matkul;
     private Jadwal $jadwal;
-    private Ruang  $ruang;
+    private Ruang $ruang;
+
+    private Peminjaman $peminjaman;
+
+    private Peminjaman $peminjaman;
 
     private Peminjaman $peminjaman;
 
@@ -39,6 +43,7 @@ class RequestController extends Controller
     {
         return $this->dosenPengampu->dosen();
     }
+
     public function getMatkul()
     {
         return $this->matkul->read();
@@ -87,14 +92,14 @@ class RequestController extends Controller
         if ($_SESSION['formPinjam']['category'] == 'acara') {
             $time = $_SESSION['formPinjam']['acara-tanggal'];
             $mulai = $_SESSION['formPinjam']['acara-jam-mulai'];
-//            $selesai = $_SESSION['formPinjam']['acara-jam-selesai'];
+            $selesai = $_SESSION['formPinjam']['acara-jam-selesai'];
             $tanggal = $_SESSION['formPinjam']['acara-tanggal'];
             $dayNumber = date('N', strtotime($time));
             $data['ruang'] = $kode;
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
             if ($dayNumber > 1 && $dayNumber < 6) {
-                if ($mulai >= $waktuMulai && $mulai <= $waktuSelesai) {
+                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
                     $result = 1;
                 }
                 else {
