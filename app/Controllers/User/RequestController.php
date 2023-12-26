@@ -35,14 +35,15 @@ class RequestController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
-    public function getDosen()
+    public function getJadwal()
     {
-        return $this->dosenPengampu->dosen();
-    }
-
-    public function getMatkul()
-    {
-        return $this->matkul->read();
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            return $this->jadwal->getJadwalByKodeKelas($_SESSION['user']['kelas']);
+        }
+        if ($_SESSION['level'] == 'Dosen') {
+            return $this->jadwal->getJadwalByDosen($_SESSION['user']['username']);
+        }
+        return null;
     }
 
     public function getjp()

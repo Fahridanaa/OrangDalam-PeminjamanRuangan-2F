@@ -67,9 +67,17 @@ $isActive = function ($path) {
                     </a>
                 </li>
                 <li class="flex items-center justify-center">
-                    <?php $isKetuaKelas = $_SESSION['user']['ketua'] == null ?>
-                    <a class="flex items-center justify-center rounded-md flex-col cursor-<?= $isKetuaKelas ? 'pointer group' : 'not-allowed' ?> my-2 xl:my-4"
-                        <?= $isKetuaKelas ? 'href="/konfirmasi-ruangan"' : '' ?>>
+                    <?php
+                    if (isset($_SESSION['user']['ketua'])) {
+                        $isRequest = $_SESSION['user']['ketua'] == null;
+                    }
+
+                    if (($_SESSION['level'] == 'Dosen')) {
+                        $isRequest = true;
+                    }
+                    ?>
+                    <a class="flex items-center justify-center rounded-md flex-col cursor-<?= $isRequest ? 'pointer group' : 'not-allowed' ?> my-2 xl:my-4"
+                        <?= $isRequest ? 'href="/konfirmasi-ruangan"' : '' ?>>
                         <?php
                         $activeClass = $isActive('/konfirmasi-ruangan');
 
