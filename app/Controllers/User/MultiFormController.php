@@ -4,6 +4,7 @@ namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\DosenPengampu;
+use OrangDalam\PeminjamanRuangan\Models\Jadwal;
 use OrangDalam\PeminjamanRuangan\Models\Matkul;
 use OrangDalam\PeminjamanRuangan\Models\MultiFormModel;
 use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
@@ -17,11 +18,15 @@ class MultiFormController extends Controller
     private const FORM_STEP_5 = 5;
     private MultiFormModel $multiFormModel;
     private $notifikasi;
+    private Jadwal $jadwal;
+    private RequestController $requestController;
 
     public function __construct()
     {
         $this->multiFormModel = new MultiFormModel();
         $this->notifikasi = new Notifikasi();
+        $this->jadwal = new Jadwal();
+        $this->requestController = new RequestController();
     }
 
     public function showForm()
@@ -202,13 +207,27 @@ class MultiFormController extends Controller
             header('Location: /pinjam');
             return false;
         }
-        $requiredFields = ['lantai', 'matkul', 'dosen-pengampu', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
+        $requiredFields = ['lantai', 'matkul', 'tanggal-matkul', 'jam-mulai-matkul', 'jam-selesai-matkul', 'matkul-keterangan'];
         foreach ($requiredFields as $field) {
             $_SESSION['formPinjam'][$field] = $this->sanitizeInput($_POST[$field]);
         }
         if (!$this->checkRequiredFields($requiredFields)) {
             return false;
         }
+
+
+        if ($_SESSION['level'] == 'Dosen') {
+            $kelas = $this->sanitizeInput($_POST['kelas']);
+            $nidn = ['user']['nidn'];
+        } else {
+            $_SESSION['formPinjam']['dosen-pengampu'] = $this->jadwal->getDosenByKodeKelasMatkul($_SESSION['formPinjam']['matkul'], $_SESSION['user']['kelas']);
+            $nidn = $_SESSION['formPinjam']['dosen-pengampu']['nidn'];
+            $kelas = $_SESSION['user']['kelas'];
+        }
+        $matkul = $_SESSION['formPinjam']['matkul'];
+
+        $_SESSION['formPinjam']['idJadwal'] = $this->jadwal->getJadwalByKodeMatkulKelasNidn($matkul, $kelas, $nidn);
+
         $tandaPengenal = $_FILES['tanda-pengenal'];
         if (!$tandaPengenal) {
             $this->setFailedMessage('Diperlukan Tanda Pengenal.', 'warn', 'warn');
@@ -364,14 +383,17 @@ class MultiFormController extends Controller
             'nim' => $_SESSION['user']['nim'] ?? null,
             'ruang' => current($kodeRuang),
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
-            'matkul' => $_SESSION['formPinjam']['matkul'],
-            'dosen' => $_SESSION['formPinjam']['dosen-pengampu'],
             'status' => "Perlu Konfirmasi",
             'tanda_pengenal' => $_SESSION['formPinjam']['tanda-pengenal'],
             'mulai' => $_SESSION['formPinjam']['jam-mulai-matkul'],
-            'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul']
-
-        ]; //query buat mata kuliah belum ada
+            'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul'],
+            'tanggal' => $_SESSION['formPinjam']['tanggal-matkul'],
+            'jadwal_kelas' => $_SESSION['formPinjam']['idJadwal']['kodeJadwal'],
+            'mulai_lama' => $_SESSION['formPinjam']['idJadwal']['mulai'],
+            'selesai_lama' => $_SESSION['formPinjam']['idJadwal']['selesai'],
+            'hari_lama' => $_SESSION['formPinjam']['idJadwal']['idHari'],
+            'ruang_lama' => $_SESSION['formPinjam']['idJadwal']['ruang']
+        ];
 
         // set notifikasi
         $dataNotif = [
@@ -380,7 +402,7 @@ class MultiFormController extends Controller
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'tanggal' => date('Y-m-d'),
             'nim_mhs' => $_SESSION['user']['nim'] ?? null,
-            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']
+            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']['nidn']
         ];
 
         $this->notifikasi->setNotif($dataNotif);

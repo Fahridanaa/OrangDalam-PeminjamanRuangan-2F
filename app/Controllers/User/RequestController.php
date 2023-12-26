@@ -15,11 +15,6 @@ class RequestController extends Controller
     private Matkul $matkul;
     private Jadwal $jadwal;
     private Ruang $ruang;
-
-    private Peminjaman $peminjaman;
-
-    private Peminjaman $peminjaman;
-
     private Peminjaman $peminjaman;
 
     public function __construct()
@@ -39,14 +34,15 @@ class RequestController extends Controller
         $this->view('user/konfirmasiRuangan');
     }
 
-    public function getDosen()
+    public function getJadwal()
     {
-        return $this->dosenPengampu->dosen();
-    }
-
-    public function getMatkul()
-    {
-        return $this->matkul->read();
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            return $this->jadwal->getJadwalByKodeKelas($_SESSION['user']['kelas']);
+        }
+        if ($_SESSION['level'] == 'Dosen') {
+            return $this->jadwal->getJadwalByDosen($_SESSION['user']['username']);
+        }
+        return null;
     }
 
     public function getjp()
@@ -99,18 +95,15 @@ class RequestController extends Controller
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
             if ($dayNumber > 1 && $dayNumber < 6) {
-                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
+                if ($mulai >= $waktuMulai && $selesai <= $waktuSelesai) {
                     $result = 1;
-                }
-                else {
+                } else {
                     $result = $this->peminjaman->statusAcara($data);
                 }
-            }
-            else {
+            } else {
                 $result = $this->peminjaman->statusAcara($data);
             }
-        }
-        elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
+        } elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
             $time = $_SESSION['formPinjam']['tanggal-matkul'];
             $data['hari'] = $this->getDayNow(strtotime($time));
             $data['ruang'] = $kode;

@@ -1,11 +1,13 @@
-<?php 
+<?php
 
 namespace OrangDalam\PeminjamanRuangan\Middleware;
 
 
-class AuthMiddleware {
+class AuthMiddleware
+{
 
-    public function handleUser() {
+    public function handleUser()
+    {
         // Logika middleware
         if (!isset($_SESSION['level']) || ($_SESSION['level'] !== 'Mahasiswa' && $_SESSION['level'] !== 'Dosen')) {
             header("Location: /login");
@@ -15,7 +17,8 @@ class AuthMiddleware {
 
     }
 
-    public function handleAdmin() {
+    public function handleAdmin()
+    {
         // Logika middleware
         if (!isset($_SESSION['level']) || ($_SESSION['level'] !== 'Admin')) {
             header("Location: /login");

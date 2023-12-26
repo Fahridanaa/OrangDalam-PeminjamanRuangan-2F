@@ -34,24 +34,30 @@ $request = new RequestController();
                         class="pr-16 pl-8 py-3 rounded-lg border border-primary-color" required>
                     <option selected disabled hidden>Nama Mata Kuliah</option>
                     <?php
-                    foreach ($request->getMatkul() as $item) {
-                        echo '<option value="' . $item['kode'] . '">' . $item['nama'] . '</option>';
+                    foreach ($request->getJadwal() as $item) {
+                        echo '<option value="' . $item['kode_matkul'] . '">' . $item['namaMK'] . '</option>';
                     }
                     ?>
                 </select>
             </div>
-            <div class="flex flex-col gap-2">
-                <label for="dosen-pengampu">Dosen</label>
-                <select name="dosen-pengampu" id="dosen-pengampu"
-                        class="pr-24 pl-8 py-3 rounded-lg border border-primary-color" required>
-                    <option selected disabled hidden>Nama Dosen</option>
-                    <?php
-                    foreach ($request->getDosen() as $item) {
-                        echo '<option value="' . $item['nidn'] . '">' . $item['nama'] . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
+            <?php
+            if (isset($_SESSION['level']) && $_SESSION['level'] == 'dosen') :
+                ?>
+                <div class="flex flex-col gap-2">
+                    <label for="dosen-pengampu">Kelas</label>
+                    <select name="dosen-pengampu" id="dosen-pengampu"
+                            class="pr-24 pl-8 py-3 rounded-lg border border-primary-color" required>
+                        <option selected disabled hidden>Pilih Kelas</option>
+                        <?php
+                        foreach ($request->getJadwal() as $item) {
+                            echo '<option value="' . $item['kode_kelas'] . '">' . $item['namaKelas'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            <?php
+            endif;
+            ?>
             <div class="flex gap-24">
                 <div class="flex flex-col gap-2">
                     <label for="jam-mulai-matkul">Jam Mulai</label>

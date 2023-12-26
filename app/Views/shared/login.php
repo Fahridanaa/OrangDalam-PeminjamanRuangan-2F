@@ -66,3 +66,5 @@ namespace OrangDalam\PeminjamanRuangan\Views\shared;
 </body>
 
 </html>
+
+

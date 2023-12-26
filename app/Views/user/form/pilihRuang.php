@@ -134,4 +134,5 @@ if ($_SESSION['formPinjam']['category'] == 'matkul') {
             ruang.children[0].checked = !ruang.children[0].checked;
         });
     });
+
 </script>
