@@ -21,27 +21,45 @@ namespace OrangDalam\PeminjamanRuangan\Views\user;
             <div id="user-profile-card"
                  class="flex justify-evenly items-center bg-neutral-color border-2 border[#C8C1C1] py-4 px-8 mx-auto gap-4 rounded-3xl min-w-[512px]">
                 <div id="user-profile-pic" class="flex-[1] flex justify-center min-w-[12rem]">
-                    <img src="/public/img/user-picture.png" alt="user-profile-pic" class="rounded-full">
+                    <?php
+                    if ($_SESSION['user']['profile'] == null) {
+                        $profile = "/img/no-profile.jpg";
+                    }
+                    else {
+                        $profile = "/img/user-picture.png";
+                    }
+                    ?>
+                    <img src="<?php echo $profile;?>" alt="user-profile-pic" class="rounded-full">
                 </div>
                 <div id="user-profile-data" class="flex-[3]">
                     <div id="user-profile-name" class="border-b border-black flex p-2">
                         <span>Nama</span>
                         <span class="flex-1 text-end"><?php echo $_SESSION['user']['nama'] ?></span>
                     </div>
-                    <div id="user-profile-nim" class="border-b border-black flex p-2">
-                        <span>NIM</span>
-                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['nim']; ?></span>
-                    </div>
-                    <div id="user-profile-jurusan" class="border-b border-black flex p-2">
-                        <span>Jurusan</span>
-                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['jurusan']; ?></span>
-                    </div>
-                    <div id="user-profile-prodi" class="border-b border-black flex p-2">
-                        <span>Prodi</span>
-                        <span class="flex-1 text-end"><?php echo $_SESSION['user']['prodi']; ?></span>
-                    </div>
+                    <?php
+                    if ($_SESSION['level'] == 'Mahasiswa') {
+                        echo '<div id="user-profile-nim" class="border-b border-black flex p-2">
+                            <span>NIM</span>
+                            <span class="flex-1 text-end">'. $_SESSION['user']['nim'] . '</span>
+                        </div>
+                        <div id="user-profile-jurusan" class="border-b border-black flex p-2">
+                            <span>Jurusan</span>
+                            <span class="flex-1 text-end">' . $_SESSION['user']['jurusan'] . '</span>
+                        </div>
+                        <div id="user-profile-prodi" class="border-b border-black flex p-2">
+                            <span>Prodi</span>
+                            <span class="flex-1 text-end">' . $_SESSION['user']['prodi'] . '</span>
+                        </div>';
+                    }
+                    else {
+                        echo '<div id="user-profile-nidn" class="border-b border-black flex p-2">
+                                    <span>NIDN</span>
+                                    <span class="flex-1 text-end">'. $_SESSION['user']['nidn'] . '</span>
+                              </div>';
+                    }
+                    ?>
                     <div id="user-profile-tel" class="border-b border-black flex p-2">
-                        <span>No. Telp</span>
+                        <span>Nomor Telepon</span>
                         <span class="flex-1 text-end"><?php echo $_SESSION['user']['telepon']; ?></span>
                     </div>
                 </div>

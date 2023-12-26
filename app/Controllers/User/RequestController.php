@@ -20,6 +20,8 @@ class RequestController extends Controller
 
     private Peminjaman $peminjaman;
 
+    private Peminjaman $peminjaman;
+
     public function __construct()
     {
         $middlewareInstance = $this->middleware('AuthMiddleware');
@@ -96,7 +98,7 @@ class RequestController extends Controller
             $data['ruang'] = $kode;
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
-            if ($dayNumber > 1 && $dayNumber < 7) {
+            if ($dayNumber > 1 && $dayNumber < 6) {
                 if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
                     $result = 1;
                 }
@@ -109,7 +111,6 @@ class RequestController extends Controller
             }
         }
         elseif ($_SESSION['formPinjam']['category'] == 'matkul') {
-
             $time = $_SESSION['formPinjam']['tanggal-matkul'];
             $data['hari'] = $this->getDayNow(strtotime($time));
             $data['ruang'] = $kode;
@@ -118,10 +119,20 @@ class RequestController extends Controller
             $result = $this->ruang->statusSelectRuang($data);
         }
 
+        $bg = '';
+
         if ($result > 0) {
-            return 'locked';
-        } else {
-            return 'disable';
+            $bg =  'locked';
         }
+        else {
+            /*if (isset($_SESSION['formPinjam']['ruangan'][$kode])) {
+                $bg = 'select';
+            }
+            else {
+                $bg = 'disable';
+            }*/
+            $bg = 'disable';
+        }
+        return $bg;
     }
 }

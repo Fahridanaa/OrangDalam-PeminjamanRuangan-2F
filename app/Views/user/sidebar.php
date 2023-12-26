@@ -87,7 +87,15 @@ $isActive = function ($path) {
         <div>
             <ul class="flex flex-col justify-around rounded-md h-full">
                 <li class="flex items-center justify-center">
-                    <img src="/public/img/user-picture.png" class="rounded-full w-10 h-10 my-2 xl:my-4">
+                    <?php
+                    if ($_SESSION['user']['profile'] == null) {
+                        $profile = "/img/no-profile.jpg";
+                    }
+                    else {
+                        $profile = "/img/user-picture.png";
+                    }
+                    ?>
+                    <img src="<?php echo $profile;?>" class="rounded-full w-10 h-10 my-2 xl:my-4">
                 </li>
                 <li class="flex items-center justify-center">
                     <a class="rounded-md group cursor-pointer my-2 xl:my-4" href="/profile">
