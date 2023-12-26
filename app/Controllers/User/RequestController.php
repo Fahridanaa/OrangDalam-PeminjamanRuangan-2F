@@ -15,7 +15,6 @@ class RequestController extends Controller
     private Matkul $matkul;
     private Jadwal $jadwal;
     private Ruang $ruang;
-
     private Peminjaman $peminjaman;
 
     public function __construct()
@@ -113,10 +112,20 @@ class RequestController extends Controller
             $result = $this->ruang->statusSelectRuang($data);
         }
 
+        $bg = '';
+
         if ($result > 0) {
-            return 'locked';
-        } else {
-            return 'disable';
+            $bg =  'locked';
         }
+        else {
+            /*if (isset($_SESSION['formPinjam']['ruangan'][$kode])) {
+                $bg = 'select';
+            }
+            else {
+                $bg = 'disable';
+            }*/
+            $bg = 'disable';
+        }
+        return $bg;
     }
 }

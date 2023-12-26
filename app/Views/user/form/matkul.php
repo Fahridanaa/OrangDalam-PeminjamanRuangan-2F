@@ -34,7 +34,6 @@ $request = new RequestController();
                         class="pr-16 pl-8 py-3 rounded-lg border border-primary-color" required>
                     <option selected disabled hidden>Nama Mata Kuliah</option>
                     <?php
-                    echo $_SESSION['level'];
                     foreach ($request->getJadwal() as $item) {
                         echo '<option value="' . $item['kode_matkul'] . '">' . $item['namaMK'] . '</option>';
                     }

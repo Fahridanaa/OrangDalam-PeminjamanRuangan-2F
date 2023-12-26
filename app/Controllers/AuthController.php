@@ -42,9 +42,10 @@ class AuthController extends Controller
             if ($data['password'] === md5($password)) {
                 $_SESSION['level'] = $data['level'];
                 if ($_SESSION['level'] == 'Mahasiswa') {
-                    $_SESSION['user'] = $this->authModel->getProfileMahasiswa($data['id']);
-                } else {
-                    $_SESSION['user'] = $this->authModel->getProfileDosen($data['id']);
+                    $_SESSION['user'] = $this->authModel->getProfileMhs($data['id']);
+                }
+                elseif ($_SESSION['level'] == 'Dosen') {
+                    $_SESSION['user'] = $this->authModel->getProfileDsn($data['id']);
                 }
                 header('Location: /dashboard');
 

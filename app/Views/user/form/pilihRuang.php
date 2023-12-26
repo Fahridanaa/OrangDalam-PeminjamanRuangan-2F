@@ -119,7 +119,6 @@ if ($_SESSION['formPinjam']['category'] == 'matkul') {
         let checkboxes = document.querySelectorAll('.bg-disable-color input[type=checkbox]');
         checkboxes.forEach((checkbox) => {
             checkbox.checked = false;
-            console.log(checkbox.checked);
         });
     });
 

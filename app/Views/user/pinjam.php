@@ -60,8 +60,11 @@
                 }
             }
 
-            if (isset($_SESSION['user']['nim'])) {
+            if ($_SESSION['level'] == 'Mahasiswa') {
                 $listPinjam = getUserPeminjaman($_SESSION['user']['nim']);
+            }
+            elseif ($_SESSION['level'] == 'Dosen') {
+                $listPinjam = getUserPeminjaman($_SESSION['user']['nidn']);
             }
             if ($listPinjam == null) {
                 echo '<span class="text-3xl font-semibold text-center">Belum ada Peminjaman</span>';

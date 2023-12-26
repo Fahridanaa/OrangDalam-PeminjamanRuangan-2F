@@ -21,30 +21,27 @@ class AuthModel
         return $this->db->single();
     }
 
-    public function getProfileMahasiswa($id)
-    {
-        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, mahasiswa.ketua AS ketua, prodi.nama AS prodi, mahasiswa.kode_kelas AS kelas, telepon
-        FROM user
-        INNER JOIN mahasiswa ON user.nim_mhs = mahasiswa.nim
-        INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
-        INNER JOIN prodi ON mahasiswa.kode_prodi = prodi.kode
-        WHERE id = :id");
+    public function getProfileMhs($id) {
+        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, prodi.nama AS prodi, telepon, profile
+            FROM user
+            INNER JOIN mahasiswa ON user.nim_mhs = mahasiswa.nim
+            INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
+            INNER JOIN prodi ON mahasiswa.kode_prodi = prodi.kode
+            WHERE id = :id");
         $this->db->bind(":id", $id);
         return $this->db->single();
     }
 
-    public function getProfileDosen($id)
+    public function getProfileDsn($id)
     {
-        $this->db->query("SELECT dosen.nama AS nama, nidn, dosen.telepon AS telepon
-        FROM user
+        $this->db->query("SELECT nama, nidn, telepon, profile FROM user
         INNER JOIN dosen ON user.nip_dosen = dosen.nidn
         WHERE id = :id");
         $this->db->bind(":id", $id);
         return $this->db->single();
     }
 
-    public function updatePass($id, $old, $new)
-    {
+    public function updatePass($id, $old, $new) {
         $this->db->query("UPDATE user SET password= :new WHERE password= :old AND id= :id");
         $this->db->bind(":old", $old);
         $this->db->bind(":new", $new);

@@ -21,7 +21,13 @@ class InboxController extends Controller
     public function showInboxPage(): void
     {
         $this->ensureUserIsLoggedIn();
-        $data['notifikasi'] = $this->notifikasi->getNotif($_SESSION['user']['nim']);
+        $data = [];
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            $data['notifikasi'] = $this->notifikasi->getNotif($_SESSION['user']['nim']);
+        }
+        elseif ($_SESSION['level'] == 'Dosen') {
+            $data['notifikasi'] = $this->notifikasi->getNotif($_SESSION['user']['nidn']);
+        }
         $this->view('user/inbox', $data);
     }
 
