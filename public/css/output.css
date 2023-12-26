@@ -1282,10 +1282,6 @@ video {
   background-color: var(--neutral-color);
 }
 
-.bg-noFocus-color {
-  background-color: var(--noFocus-color);
-}
-
 .bg-primary-color {
   background-color: var(--primary-color);
 }

@@ -22,7 +22,7 @@ class AuthModel
     }
 
     public function getProfileMhs($id) {
-        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, prodi.nama AS prodi, telepon, profile
+        $this->db->query("SELECT mahasiswa.nama AS nama, nim, jurusan.nama AS jurusan, prodi.nama AS prodi, telepon, mahasiswa.kode_kelas AS kelas, profile
             FROM user
             INNER JOIN mahasiswa ON user.nim_mhs = mahasiswa.nim
             INNER JOIN jurusan ON mahasiswa.kode_jurusan = jurusan.kode
