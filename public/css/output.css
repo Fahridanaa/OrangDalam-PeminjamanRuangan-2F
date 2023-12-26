@@ -1313,6 +1313,10 @@ video {
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
 
+.bg-noFocus-color {
+  background-color: var(--noFocus-color);
+}
+
 .fill-fourth-color {
   fill: var(--fourth-color);
 }

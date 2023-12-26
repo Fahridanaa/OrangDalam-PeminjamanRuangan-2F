@@ -69,14 +69,13 @@ $isActive = function ($path) {
                 <li class="flex items-center justify-center">
                     <?php
                     $isRequest = false;
-                    if (isset($_SESSION['user']['ketua'])) {
+                    if (($_SESSION['level'] == 'Mahasiswa')) {
                         $isRequest = $_SESSION['user']['ketua'] == null;
                     }
 
                     if (($_SESSION['level'] == 'Dosen')) {
                         $isRequest = true;
                     }
-
                     ?>
                     <a class="flex items-center justify-center rounded-md flex-col cursor-<?= $isRequest ? 'pointer group' : 'not-allowed' ?> my-2 xl:my-4"
                         <?= $isRequest ? 'href="/konfirmasi-ruangan"' : '' ?>>

@@ -40,7 +40,7 @@ class RequestController extends Controller
             return $this->jadwal->getJadwalByKodeKelas($_SESSION['user']['kelas']);
         }
         if ($_SESSION['level'] == 'Dosen') {
-            return $this->jadwal->getJadwalByDosen($_SESSION['user']['username']);
+            return $this->jadwal->getJadwalByDosen($_SESSION['user']['nidn']);
         }
         return null;
     }
@@ -63,6 +63,10 @@ class RequestController extends Controller
     public function getMatkulByKode($kode)
     {
         return $this->matkul->matkulByKode($kode);
+    }
+
+    public function getKelasByKode($kode) {
+        return $this->jadwal->getKelasByKode($kode);
     }
 
     public function getDay($date)
