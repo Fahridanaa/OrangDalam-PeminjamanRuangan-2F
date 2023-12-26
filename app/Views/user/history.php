@@ -37,19 +37,22 @@
                 include __DIR__ . '/templates/itemTemplate.php';
             }
 
-            function getUserHistory($nim): ?array
+            function getUserHistory($nomor): ?array
             {
                 $data = new HistoryController();
                 try {
-                    return $data->showHistory($nim);
+                    return $data->showHistory($nomor);
                 } catch (Exception $e) {
                     error_log($e);
                     return null;
                 }
             }
 
-            if (isset($_SESSION['user']['nim'])) {
+            if ($_SESSION['level'] == 'Mahasiswa') {
                 $listHistory = getUserHistory($_SESSION['user']['nim']);
+            }
+            elseif ($_SESSION['level'] == 'Dosen') {
+                $listHistory = getUserHistory($_SESSION['user']['nidn']);
             }
 
             if ($listHistory == null) {

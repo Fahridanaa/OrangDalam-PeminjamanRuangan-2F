@@ -54,11 +54,18 @@ class PinjamModel
     /**
      * @throws Exception
      */
-    public function pinjam(int $nim): array
+    public function pinjam(int $nomor): array
     {
-        $sql = $this->getPinjamQuery();
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            $sql = $this->getPinjamMhs();
+            $bind = ":nim";
+        }
+        else {
+            $sql = $this->getPinjamDsn();
+            $bind = ":nidn";
+        }
         $this->db->query($sql);
-        $this->db->bind(":nim", $nim);
+        $this->db->bind($bind, $nomor);
 
         try {
             return $this->db->resultSet();
@@ -79,13 +86,22 @@ class PinjamModel
             GROUP BY peminjaman.id, mahasiswa.nama, jurusan.nama, telepon, lantai, keterangan, tanggalAcara, tanggalPeminjaman, mulai, selesai";
     }
 
-    private function getPinjamQuery(): string
+    private function getPinjamMhs(): string
     {
         return "SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara, DATE_FORMAT(DATE_ADD(tanggalPeminjaman, INTERVAL TIMESTAMPDIFF(DAY, tanggalPeminjaman, tanggalAcara) / 2 DAY), '%d %M %Y') AS deadline
             FROM peminjaman
             INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
             INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
             WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi')  AND mahasiswa.nim = :nim
+            GROUP BY id, status";
+    }
+    private function getPinjamDsn() : string
+    {
+        return "SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara, DATE_FORMAT(DATE_ADD(tanggalPeminjaman, INTERVAL TIMESTAMPDIFF(DAY, tanggalPeminjaman, tanggalAcara) / 2 DAY), '%d %M %Y') AS deadline
+            FROM peminjaman
+            INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+            INNER JOIN dosen ON peminjaman.nidn_dosen = dosen.nidn
+            WHERE status IN ('Menunggu Konfirmasi', 'Diperlukan Surat Izin', 'Telah Dikonfirmasi') AND dosen.nidn = :nidn
             GROUP BY id, status";
     }
 }

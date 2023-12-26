@@ -18,11 +18,18 @@ class HistoryModel
     /**
      * @throws Exception
      */
-    public function history($nim)
+    public function history($nomor)
     {
-        $sql = $this->getHistoryQuery();
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            $sql = $this->getHistoryMhs();
+            $bind = ":nim";
+        }
+        else {
+            $sql = $this->getHistoryDsn();
+            $bind = ":nidn";
+        }
         $this->db->query($sql);
-        $this->db->bind(":nim", $nim);
+        $this->db->bind($bind, $nomor);
         try {
             return $this->db->resultSet();
         } catch (PDOException $e) {
@@ -30,13 +37,23 @@ class HistoryModel
         }
     }
 
-    private function getHistoryQuery(): string
+    private function getHistoryMhs(): string
     {
         return "SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara
             FROM peminjaman
             INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
             INNER JOIN mahasiswa ON peminjaman.nim_mhs = mahasiswa.nim
             WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal')  AND mahasiswa.nim = :nim
+            GROUP BY id, status";
+    }
+
+    private function getHistoryDsn() : string
+    {
+        return "SELECT id, GROUP_CONCAT(kode_ruang) AS kode_ruang, status, MIN(DATE_FORMAT(tanggalAcara, '%d %M %Y')) AS tanggalAcara
+            FROM peminjaman
+            INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+            INNER JOIN dosen ON peminjaman.nidn_dosen = dosen.nidn
+            WHERE status IN ('Peminjaman Berhasil', 'Peminjaman Gagal') AND dosen.nidn = :nidn
             GROUP BY id, status";
     }
 }

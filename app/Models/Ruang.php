@@ -43,7 +43,7 @@ class Ruang
         INNER JOIN jp selesai ON jadwal.selesai = selesai.kode
         INNER JOIN hari ON jadwal.id_hari = hari.id
         WHERE hari.nama = :hari AND ruang.kode = :ruang
-        AND NOT (selesai.kode <= :selesai OR mulai.kode >= :mulai)");
+        AND NOT (selesai.kode < :selesai OR mulai.kode > :mulai)");
         $this->db->bind(":hari", $data['hari']);
         $this->db->bind(":ruang", $data['ruang']);
         $this->db->bind(":mulai", $data['mulai']);

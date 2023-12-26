@@ -87,14 +87,14 @@ class RequestController extends Controller
         if ($_SESSION['formPinjam']['category'] == 'acara') {
             $time = $_SESSION['formPinjam']['acara-tanggal'];
             $mulai = $_SESSION['formPinjam']['acara-jam-mulai'];
-            $selesai = $_SESSION['formPinjam']['acara-jam-selesai'];
+//            $selesai = $_SESSION['formPinjam']['acara-jam-selesai'];
             $tanggal = $_SESSION['formPinjam']['acara-tanggal'];
             $dayNumber = date('N', strtotime($time));
             $data['ruang'] = $kode;
             $data['mulai'] = $mulai;
             $data['tanggal'] = $tanggal;
-            if ($dayNumber > 1 && $dayNumber < 7) {
-                if ($mulai >= $waktuMulai || $selesai <= $waktuSelesai) {
+            if ($dayNumber > 1 && $dayNumber < 6) {
+                if ($mulai >= $waktuMulai && $mulai <= $waktuSelesai) {
                     $result = 1;
                 }
                 else {
@@ -114,11 +114,20 @@ class RequestController extends Controller
             $result = $this->ruang->statusSelectRuang($data);
         }
 
+        $bg = '';
+
         if ($result > 0) {
-            return 'locked';
+            $bg =  'locked';
         }
         else {
-            return 'disable';
+            /*if (isset($_SESSION['formPinjam']['ruangan'][$kode])) {
+                $bg = 'select';
+            }
+            else {
+                $bg = 'disable';
+            }*/
+            $bg = 'disable';
         }
+        return $bg;
     }
 }

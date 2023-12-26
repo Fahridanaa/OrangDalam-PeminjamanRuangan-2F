@@ -117,7 +117,6 @@ if ($_SESSION['formPinjam']['category'] == 'matkul') {
     const ruangan = document.querySelectorAll('.bg-disable-color');
 
     ruangan.forEach((ruang) => {
-
         ruang.addEventListener("click", () => {
             <?php echo $toggleScript; ?>
             ruang.classList.toggle('bg-disable-color');
