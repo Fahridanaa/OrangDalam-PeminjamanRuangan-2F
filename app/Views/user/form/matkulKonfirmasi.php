@@ -17,19 +17,28 @@ $hari = $data->getDay(strtotime($_SESSION['formPinjam']['tanggal-matkul']))
                     <span class="text-xl"><?php echo $_SESSION['user']['nama'] ?? ''; ?></span>
                 </div>
 
-                <div class="flex flex-col mb-4">
-                    <label class="font-bold text-xl">Jurusan</label>
-                    <span class="text-xl"><?php echo $_SESSION['user']['jurusan'] ?? ''; ?></span>
-                </div>
+                <?php
+                if ($_SESSION['level'] == 'Mahasiswa') :
+                    ?>
+                    <div class="flex flex-col mb-4">
+                        <label class="font-bold text-xl">Jurusan</label>
+                        <span class="text-xl"><?php echo $_SESSION['user']['jurusan'] ?? ''; ?></span>
+                    </div>
+                <?php
+                endif;
+                ?>
 
-                <div class="flex flex-col mb-4">
+
+                <div class="flex flex-col mb-4 <?= $_SESSION['level'] == 'Dosen' ? 'col-span-2' : '' ?>">
                     <label class="font-bold text-xl">No Telepon</label>
                     <span class="text-xl"><?php echo $_SESSION['user']['telepon'] ?? ''; ?></span>
                 </div>
 
                 <div class="flex flex-col mb-4">
                     <label class="font-bold text-xl">Lantai</label>
-                    <span class="text-xl"><?php echo $_SESSION['formPinjam']['lantai'] ?? ''; ?></span>
+                    <span class="text-xl"><?php
+                        echo $_SESSION['formPinjam']['lantai'] ?? ''; ?>
+                    </span>
                 </div>
 
                 <div class="flex flex-col mb-4">
@@ -38,7 +47,7 @@ $hari = $data->getDay(strtotime($_SESSION['formPinjam']['tanggal-matkul']))
                             echo $_SESSION['formPinjam']['ruangan'][$ruang] ?? '';
                             echo ', ';
                         } ?>
-        </span>
+                    </span>
                 </div>
 
                 <div class="flex flex-col mb-4 col-span-2">
@@ -56,10 +65,27 @@ $hari = $data->getDay(strtotime($_SESSION['formPinjam']['tanggal-matkul']))
                     <span class="text-xl"><?php echo $data->getMatkulByKode($_SESSION['formPinjam']['matkul'])['nama']; ?></span>
                 </div>
 
-                <div class="flex flex-col mb-4">
-                    <label class="font-bold text-xl">Dosen Pengampu</label>
-                    <span class="text-xl"><?php echo $data->getDosenByNidn($_SESSION['formPinjam']['dosen-pengampu']['nidn'])['nama']; ?></span>
-                </div>
+                <?php
+                if ($_SESSION['level'] == 'Dosen') :
+                    ?>
+                    <div class="flex flex-col mb-4">
+                        <label class="font-bold text-xl">Kelas</label>
+                        <span class="text-xl"><?php echo $data->getKelasByKode($_SESSION['formPinjam']['kelas'])['nama']; ?></span>
+                    </div>
+                <?php
+                endif;
+                ?>
+
+                <?php
+                if ($_SESSION['level'] == 'Mahasiswa') :
+                    ?>
+                    <div class="flex flex-col mb-4">
+                        <label class="font-bold text-xl">Dosen Pengampu</label>
+                        <span class="text-xl"><?php echo $data->getDosenByNidn($_SESSION['formPinjam']['dosen-pengampu']['nidn'])['nama']; ?></span>
+                    </div>
+                <?php
+                endif;
+                ?>
 
                 <div class="flex flex-col mb-4">
                     <label class="font-bold text-xl">Jam Mulai Matkul</label>

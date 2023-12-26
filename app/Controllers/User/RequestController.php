@@ -40,7 +40,7 @@ class RequestController extends Controller
             return $this->jadwal->getJadwalByKodeKelas($_SESSION['user']['kelas']);
         }
         if ($_SESSION['level'] == 'Dosen') {
-            return $this->jadwal->getJadwalByDosen($_SESSION['user']['username']);
+            return $this->jadwal->getJadwalByDosen($_SESSION['user']['nidn']);
         }
         return null;
     }
@@ -63,6 +63,10 @@ class RequestController extends Controller
     public function getMatkulByKode($kode)
     {
         return $this->matkul->matkulByKode($kode);
+    }
+
+    public function getKelasByKode($kode) {
+        return $this->jadwal->getKelasByKode($kode);
     }
 
     public function getDay($date)
@@ -127,5 +131,23 @@ class RequestController extends Controller
             $bg = 'disable';
         }
         return $bg;
+    }
+
+    public function getRequest($nidn)
+    {
+        return $this->peminjaman->request($nidn);
+    }
+
+    public function updateStatus()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $status = $_POST['status'];
+            $_SESSION['status'] = $status;
+            $id = $_POST['index'] ?? $_POST['idx'];
+            $keterangan = $_POST['keterangan'] ?? 'Selamat Request Anda Diterima';
+
+            $this->peminjaman->updateRequest($status, $id);
+        }
+        header('Location: /konfirmasi-ruangan');
     }
 }

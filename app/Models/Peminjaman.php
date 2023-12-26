@@ -3,6 +3,8 @@
 namespace OrangDalam\PeminjamanRuangan\Models;
 
 use config\Database;
+use Exception;
+use PDOException;
 
 class Peminjaman
 {
@@ -139,6 +141,32 @@ class Peminjaman
     public function updateStatus($status, $id)
     {
         $this->db->query("UPDATE peminjaman SET status = :status WHERE id = :id");
+        $this->db->bind(":status", $status);
+        $this->db->bind(":id", $id);
+        $this->db->execute();
+    }
+
+    private function getRequestDsn() : string
+    {
+        return "SELECT id, status, matkul.nama AS matkul, ruang.nama AS ruang  FROM request
+            INNER JOIN jadwal ON jadwal.kode = request.jadwal_kelas
+            INNER JOIN dosen ON dosen.nidn = jadwal.nidn_dosen
+            INNER JOIN ruang ON request.ruang = ruang.kode
+            INNER JOIN matkul ON jadwal.kode_matkul = matkul.kode
+            WHERE dosen.nidn = :nidn";
+    }
+
+    public function request($nidn) : array
+    {
+        $sql = $this->getRequestDsn();
+        $this->db->query($sql);
+        $this->db->bind(":nidn", $nidn);
+        return $this->db->resultSet();
+    }
+
+    public function updateRequest($status, $id)
+    {
+        $this->db->query("UPDATE `request` SET `status` = :status WHERE `request`.`id` = :id");
         $this->db->bind(":status", $status);
         $this->db->bind(":id", $id);
         $this->db->execute();
