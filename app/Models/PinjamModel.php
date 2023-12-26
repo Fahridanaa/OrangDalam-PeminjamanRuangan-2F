@@ -20,7 +20,12 @@ class PinjamModel
      */
     public function detailPinjam(int $id): array
     {
-        $sql = $this->getDetailPinjamQuery();
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            $sql = $this->getDetailMhs();
+        }
+        else {
+            $sql = $this->getDetailDsn();
+        }
         $this->db->query($sql);
         $this->db->bind(":id", $id);
 
@@ -74,7 +79,7 @@ class PinjamModel
         }
     }
 
-    private function getDetailPinjamQuery(): string
+    private function getDetailMhs(): string
     {
         return "SELECT mahasiswa.nama AS nama, jurusan.nama AS jurusan, telepon, lantai, GROUP_CONCAT(ruang.kode) AS ruang, keterangan, tanggalAcara, tanggalPeminjaman, mulai, selesai
             FROM peminjaman
@@ -84,6 +89,17 @@ class PinjamModel
             INNER JOIN ruang ON rp.kode_ruang = ruang.kode
             WHERE peminjaman.id = :id
             GROUP BY peminjaman.id, mahasiswa.nama, jurusan.nama, telepon, lantai, keterangan, tanggalAcara, tanggalPeminjaman, mulai, selesai";
+    }
+
+    private function getDetailDsn() : string
+    {
+        return "SELECT dosen.nama AS nama, telepon, lantai, GROUP_CONCAT(ruang.kode) AS ruang, keterangan, tanggalAcara, tanggalPeminjaman, mulai, selesai
+                FROM peminjaman
+                INNER JOIN rp ON peminjaman.id = rp.id_peminjaman
+                INNER JOIN dosen ON peminjaman.nidn_dosen = dosen.nidn
+                INNER JOIN ruang ON rp.kode_ruang = ruang.kode
+                WHERE peminjaman.id = :id
+                GROUP BY peminjaman.id, dosen.nama, telepon, lantai, keterangan, tanggalAcara, tanggalPeminjaman, mulai, selesai;";
     }
 
     private function getPinjamMhs(): string
