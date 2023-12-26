@@ -14,7 +14,8 @@
             </button>
         </form>
         <?php
-        if (isset($_SESSION['user']['ketua'])) {
+        $isRequest = false;
+        if (($_SESSION['level'] == 'Mahasiswa')) {
             $isRequest = $_SESSION['user']['ketua'] == null;
         }
 
@@ -25,7 +26,7 @@
         <form action="/pinjam/form?step=1" method="POST">
             <button type="submit" name="category" value="matkul"
                     class="flex flex-col justify-center items-center bg-<?= $isRequest ? 'primary' : 'noFocus' ?>-color rounded-xl p-10 cursor-<?= $isRequest ? 'pointer hover:scale-105 ease-in-out transition' : 'not-allowed' ?>"
-                <?= ($isRequest) ? 'disabled' : '' ?>>
+                <?= ($isRequest) ? '' : 'disabled' ?>>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" stroke-width="2"
                      stroke="<?= $isRequest ? '#2E4374' : '#666666' ?>" class="w-32 h-32">
                     <path stroke-linecap="round" stroke-linejoin="round"

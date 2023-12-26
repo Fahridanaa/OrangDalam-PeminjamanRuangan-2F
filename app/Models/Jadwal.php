@@ -126,10 +126,17 @@ class Jadwal
         return $this->db->single();
     }
 
-    public function getIdHariByName($namaHari)
+    public function getKelasByKode($kode)
     {
-        $this->db->query("SELECT id, nama FROM hari WHERE nama = :nama");
-        $this->db->bind(':nama', $namaHari);
+        $this->db->query("SELECT nama FROM kelas WHERE kode = :kode");
+        $this->db->bind(":kode", $kode);
+        return $this->db->single();
+    }
+
+    public function getKetuaKelas($kode_kelas)
+    {
+        $this->db->query("SELECT * FROM mahasiswa WHERE kode_kelas = :kode_kelas AND ketua IS NULL");
+        $this->db->bind(":kode_kelas", $kode_kelas);
         return $this->db->single();
     }
 }
