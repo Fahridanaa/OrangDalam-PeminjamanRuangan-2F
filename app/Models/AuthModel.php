@@ -41,6 +41,14 @@ class AuthModel
         return $this->db->single();
     }
 
+    public function getProfileAdmin($id) {
+        $this->db->query("SELECT nama, nip, telepon FROM user
+        INNER JOIN admin ON user.nip_admin = admin.nip
+        WHERE id = :id");
+        $this->db->bind(":id", $id);
+        return $this->db->single();
+    }
+
     public function updatePass($id, $old, $new) {
         $this->db->query("UPDATE user SET password= :new WHERE password= :old AND id= :id");
         $this->db->bind(":old", $old);
