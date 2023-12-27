@@ -15,7 +15,7 @@ function renderDetailMatkulModal(): string
                  id="detailMatkul">
                 <div>
                     <h1 class="modal-content font-semibold text-center text-2xl mb-8 mx-auto">Detail Request</h1>
-                    <div class="grid grid-cols-2 gap-x-8">
+                    <div class="grid grid-cols-2 gap-2">
                         <div class="flex flex-col">
                             <span class="font-bold text-xl">Lantai</span>
                             <span class="text-xl" id="lantai-matkul"></span>
@@ -28,7 +28,7 @@ function renderDetailMatkulModal(): string
                             <span class="font-bold text-xl">Keterangan</span>
                             <span class="text-xl" id="keterangan-matkul"></span>
                         </div>
-                        <div class="flex flex-col mb-4 col-span-2">
+                        <div class="flex flex-col col-span-2">
                             <label class="font-bold text-xl">Tanggal</label>
                             <span class="text-xl" id="tanggal-matkul"></span>
                         </div>
@@ -56,15 +56,13 @@ function renderDetailMatkulModal(): string
                         <?php
                         endif;
                         ?>
-                        <div class="flex justify-between col-span-2">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-xl">Jam Mulai</span>
-                                <span class="text-xl" id="mulai-matkul"></span>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-bold text-xl">Jam Selesai</span>
-                                <span class="text-xl" id="selesai-matkul"></span>
-                            </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-xl">Jam Mulai</span>
+                            <span class="text-xl" id="mulai-matkul"></span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-xl">Jam Selesai</span>
+                            <span class="text-xl" id="selesai-matkul"></span>
                         </div>
                     </div>
                 </div>
