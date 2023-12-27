@@ -154,6 +154,39 @@ class Peminjaman
                 INNER JOIN ruang ON request.ruang = ruang.kode WHERE meminta = :nomor OR menerima = :nomor";
     }
 
+    private function getRequestDetails() : string
+    {
+        return "SELECT 
+                ruang.lantai AS lantai, 
+                dosen.nama AS dosen, 
+                mahasiswa.nama AS ketua_kelas,
+                kelas.nama AS kelas, 
+                ruang.nama AS ruang, 
+                request.keterangan AS keterangan, 
+                request.tanggal AS tanggal, 
+                matkul.nama AS matkul, 
+                jp.mulai AS mulai, 
+                jp.selesai AS selesai
+            FROM request
+            INNER JOIN jadwal ON request.jadwal_kelas = jadwal.kode
+            INNER JOIN ruang ON request.ruang = ruang.kode
+            INNER JOIN jp ON request.mulai = jp.kode
+            INNER JOIN jp ON request.selesai = jp.kode
+            INNER JOIN dosen ON jadwal.nidn_dosen = dosen.nidn
+            INNER JOIN mahasiswa ON jadwal.kode_kelas = mahasiswa.kode_kelas AND mahasiswa.ketua_kelas IS NULL
+            INNER JOIN kelas ON jadwal.kode_kelas = kelas.kode
+            INNER JOIN matkul ON jadwal.kode_matkul = matkul.kode
+            WHERE request.id = :id";
+    }
+
+    public function detailMatkul($id) : array
+    {
+        $sql = $this->getRequestDetails();
+        $this->db->query($sql);
+        $this->db->bind(":id", $id);
+        return $this->db->resultSet();
+    }
+
     public function request($nomor) : array
     {
         $sql = $this->getRequestDsn();

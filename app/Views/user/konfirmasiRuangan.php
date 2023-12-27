@@ -62,7 +62,7 @@
                         . $btn .
                       '</div>
                             <div class="self-end flex gap-5">
-                                <button class="text-xl flex items-center gap-3">
+                                <button class="text-xl flex items-center gap-3" data-id=' . $item['id'] .'>
                                     <span class="detail-matkul-button">Detail Informasi</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -88,9 +88,38 @@
     const tolakButton = document.querySelectorAll('.tolak-konfirmasi-matkul-button');
 
     detailMatkulButton.forEach((button) => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            let detailAcara = document.getElementById('detailMatkul');
+            const id = button.getAttribute('data-id');
             modals[0].classList.remove('hidden');
-        })
+            setTimeout(() => {
+                detailAcara.style.transform = 'translateY(0)';
+                detailAcara.style.opacity = '1';
+            }, 50)
+            $kelasMatkul = document.getElementById('kelas-matkul');
+            $dosenMatkul = document.getElementById('dosen-matkul');
+            fetch('/konfirmasi-ruangan/data?id=' + id)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('lantai-matkul').textContent = data.lantai;
+                    document.getElementById('ruang-matkul').textContent = data.ruang;
+                    document.getElementById('keterangan-matkul').textContent = data.keterangan;
+                    document.getElementById('tanggal-matkul').textContent = data.tanggalAcara;
+                    document.getElementById('matkul').textContent = data.matkul;
+                    if($kelasMatkul != null) {
+                        $kelasMatkul.textContent = data.kelas;
+                    }
+                    if($dosenMatkul != null) {
+                        $dosenMatkul.textContent = data.dosen;
+                    }
+                    document.getElementById('mulai-matkul').textContent = data.mulai;
+                    document.getElementById('selesai-matkul').textContent = data.selesai;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
     })
 
     tolakButton.forEach((button) => {
@@ -101,16 +130,24 @@
         })
     })
 
+    function hideModal(modal) {
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 150)
+        modal.children[1].children[0].style.transform = '';
+        modal.children[1].children[0].style.opacity = '';
+    }
+
     modals.forEach((modal) => {
         const overlay = modal.querySelector('.overlay');
         const closeModal = modal.querySelector('.close-modal');
 
         closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            hideModal(modal);
         })
 
         overlay.addEventListener('click', () => {
-            modal.classList.add('hidden');
+            hideModal(modal);
         })
     })
 
