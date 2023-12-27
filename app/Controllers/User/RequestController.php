@@ -2,6 +2,7 @@
 
 namespace OrangDalam\PeminjamanRuangan\Controllers\User;
 
+use Exception;
 use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\DosenPengampu;
 use OrangDalam\PeminjamanRuangan\Models\Jadwal;
@@ -32,6 +33,32 @@ class RequestController extends Controller
     {
         $this->ensureUserIsLoggedIn();
         $this->view('user/konfirmasiRuangan');
+    }
+
+    public function showDetailMatkul(): void
+    {
+        try {
+            $this->ensureUserIsLoggedIn();
+
+            $id = $_GET['id'] ?? null;
+            if ($id === null) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Id not provided']);
+                exit;
+            }
+
+            $id = (int)$id;
+            $data = $this->peminjaman->detailMatkul($id);
+
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit;
+        } catch (Exception $e) {
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => $e->getMessage()]);
+            exit;
+        }
     }
 
     public function getJadwal()
