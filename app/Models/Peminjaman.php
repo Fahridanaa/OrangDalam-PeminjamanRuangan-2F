@@ -148,19 +148,17 @@ class Peminjaman
 
     private function getRequestDsn() : string
     {
-        return "SELECT id, status, matkul.nama AS matkul, ruang.nama AS ruang  FROM request
-            INNER JOIN jadwal ON jadwal.kode = request.jadwal_kelas
-            INNER JOIN dosen ON dosen.nidn = jadwal.nidn_dosen
-            INNER JOIN ruang ON request.ruang = ruang.kode
-            INNER JOIN matkul ON jadwal.kode_matkul = matkul.kode
-            WHERE dosen.nidn = :nidn";
+        return "SELECT id, meminta, menerima, status, matkul.nama AS matkul, ruang.nama AS ruang FROM request
+                INNER JOIN jadwal ON jadwal.kode = request.jadwal_kelas
+                INNER JOIN matkul ON jadwal.kode_matkul = matkul.kode
+                INNER JOIN ruang ON request.ruang = ruang.kode WHERE meminta = :nomor OR menerima = :nomor";
     }
 
-    public function request($nidn) : array
+    public function request($nomor) : array
     {
         $sql = $this->getRequestDsn();
         $this->db->query($sql);
-        $this->db->bind(":nidn", $nidn);
+        $this->db->bind(":nomor", $nomor);
         return $this->db->resultSet();
     }
 
