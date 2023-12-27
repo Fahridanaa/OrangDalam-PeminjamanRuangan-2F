@@ -23,10 +23,10 @@ namespace OrangDalam\PeminjamanRuangan\Views\user;
                 <div id="user-profile-pic" class="flex-[1] flex justify-center min-w-[12rem]">
                     <?php
                     if ($_SESSION['user']['profile'] == null) {
-                        $profile = "/img/no-profile.jpg";
+                        $profile = "data/profile/no-profile.jpg";
                     }
                     else {
-                        $profile = "/img/user-picture.png";
+                        $profile = "data/profile/" . $_SESSION['user']['profile'];
                     }
                     ?>
                     <img src="<?php echo $profile;?>" alt="user-profile-pic" class="rounded-full">

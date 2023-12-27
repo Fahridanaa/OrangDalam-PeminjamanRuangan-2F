@@ -146,7 +146,7 @@ class Peminjaman
         $this->db->execute();
     }
 
-    private function getRequestDsn() : string
+    private function getRequest() : string
     {
         return "SELECT id, meminta, menerima, status, matkul.nama AS matkul, ruang.nama AS ruang FROM request
                 INNER JOIN jadwal ON jadwal.kode = request.jadwal_kelas
@@ -188,7 +188,7 @@ class Peminjaman
 
     public function request($nomor) : array
     {
-        $sql = $this->getRequestDsn();
+        $sql = $this->getRequest();
         $this->db->query($sql);
         $this->db->bind(":nomor", $nomor);
         return $this->db->resultSet();
@@ -200,5 +200,12 @@ class Peminjaman
         $this->db->bind(":status", $status);
         $this->db->bind(":id", $id);
         $this->db->execute();
+    }
+
+    public function req($id)
+    {
+        $this->db->query("SELECT status, jadwal_kelas, ruang, mulai, selesai, DAYOFWEEK(tanggal) - 1 AS hari, ruang_lama, mulai_lama, selesai_lama, hari_lama FROM request WHERE id = :id");
+        $this->db->bind(":id", $id);
+        return $this->db->single();
     }
 }

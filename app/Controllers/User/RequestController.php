@@ -174,6 +174,28 @@ class RequestController extends Controller
             $keterangan = $_POST['keterangan'] ?? 'Selamat Request Anda Diterima';
 
             $this->peminjaman->updateRequest($status, $id);
+
+            $data = $this->peminjaman->req($id);
+            if ($data['status'] == 'Terkonfirmasi') {
+                $value = [
+                    'ruang' => $data['ruang'],
+                    'hari' => $data['hari'],
+                    'mulai'=> $data['mulai'],
+                    'selesai' => $data['selesai'],
+                    'jadwal' => $data['jadwal_kelas']
+                ];
+                $this->jadwal->update($value);
+            }
+            elseif ($data['status'] == 'Selesai') {
+                $value = [
+                    'ruang' => $data['ruang_lama'],
+                    'hari' => $data['hari_lama'],
+                    'mulai'=> $data['mulai_lama'],
+                    'selesai' => $data['selesai_lama'],
+                    'jadwal' => $data['jadwal_kelas']
+                ];
+                $this->jadwal->update($value);
+            }
         }
         header('Location: /konfirmasi-ruangan');
     }
