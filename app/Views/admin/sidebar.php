@@ -10,7 +10,7 @@ $isActive = function ($path) {
         <div class="flex flex-col justify-between my-10 rounded-md">
             <div class="rounded-lg group flex flex-col items-center gap-2">
                 <img class="rounded-full w-32 h-32 group-hover:opacity-50"
-                     src="/img/user-picture.png" alt="profile">
+                     src="data/profile/no-profile.jpg" alt="profile">
                 <div class="flex flex-col gap-1">
                     <h2 class="text-xl font-medium text-center text-neutral-color">
                         Selamat Datang
