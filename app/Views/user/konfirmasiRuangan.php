@@ -18,23 +18,31 @@
         </div>
         <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
             <?php
+
             if ($_SESSION['level'] == 'Dosen') {
-                $data = $req->getRequest($_SESSION['user']['nidn']);
+                $data = $_SESSION['user']['nidn'];
+            }
+            else {
+                $data = $_SESSION['user']['nim'];
             }
 
-            if ($data == null) {
+            $dataReq = $req->getRequest($data);
+
+            if ($dataReq == null) {
                 echo '<span class="text-xl font-medium">Belum ada Permintaan</span>';
             }
             else {
-                foreach ($data as $item) {
+                foreach ($dataReq as $item) {
                     $btn = '';
                     $color = '';
                     if ($item['status'] == 'Perlu Konfirmasi') {
                         $color = 'warn';
-                        $btn = '<div class="items-center flex gap-5">
+                        if ($item['menerima'] == $data) {
+                            $btn = '<div class="items-center flex gap-5">
                                     <button id="cek" data-id="' . $item['id'] . '" class="tolak-konfirmasi-matkul-button font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">Tolak Perubahan</button>
                                     <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Konfirmasi</button>
                                 </div>';
+                        }
                     }
                     elseif ($item['status'] == 'Terkonfirmasi') {
                         $color = 'select';
