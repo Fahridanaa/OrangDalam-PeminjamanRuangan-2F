@@ -18,7 +18,6 @@
         </div>
         <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
             <?php
-
             if ($_SESSION['level'] == 'Dosen') {
                 $data = $_SESSION['user']['nidn'];
             }
