@@ -380,14 +380,25 @@ class MultiFormController extends Controller
             return str_replace(' ', '', $item);
         }, $ruanganDipilih);
 
+
+        if ($_SESSION['level'] == 'Mahasiswa') {
+            $request = $_SESSION['user']['nim'];
+            $receive = $_SESSION['formPinjam']['dosen-pengampu']['nidn'];
+        }
+        else {
+            $request = $_SESSION['user']['nidn'];
+            $receive = $_SESSION['formPinjam']['kelas']['nim'];
+        }
+
         $data = [
-            'nim' => $_SESSION['user']['nim'] ?? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'],
+            'meminta' => $request,
+            'menerima' => $receive,
             'ruang' => current($kodeRuang),
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'status' => "Perlu Konfirmasi",
-            'tanda_pengenal' => $_SESSION['formPinjam']['tanda-pengenal'],
-            'mulai' => $_SESSION['formPinjam']['jam-mulai-matkul'],
-            'selesai' => $_SESSION['formPinjam']['jam-selesai-matkul'],
+            'pengenal' => $_SESSION['formPinjam']['tanda-pengenal'],
+            'mulai' => (int)$_SESSION['formPinjam']['jam-mulai-matkul'],
+            'selesai' => (int)$_SESSION['formPinjam']['jam-selesai-matkul'],
             'tanggal' => $_SESSION['formPinjam']['tanggal-matkul'],
             'jadwal_kelas' => $_SESSION['formPinjam']['idJadwal']['kodeJadwal'],
             'mulai_lama' => $_SESSION['formPinjam']['idJadwal']['mulai'],
