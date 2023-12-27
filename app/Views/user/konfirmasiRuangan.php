@@ -39,16 +39,16 @@
                         if ($item['menerima'] == $data) {
                             $btn = '<div class="flex items-center gap-5">
                                     <button id="cek" data-id="' . $item['id'] . '" class="tolak-konfirmasi-matkul-button font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">Tolak Perubahan</button>
-                                    <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Konfirmasi</button>
+                                    <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="btn-confirm-class font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Konfirmasi</button>
                                 </div>';
                         }
                     }
-                    elseif ($item['status'] == 'Terkonfirmasi') {
+                    elseif ($item['status'] == 'Terkonfirmasi' || $item['status'] == 'Selesai') {
                         $color = 'select';
-                        if ($item['menerima'] == $data) {
+                        if ($item['status'] == 'Terkonfirmasi') {
                             $btn = '<div class="flex items-center gap-5">
-                                    <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Selesai</button>
-                                </div>';
+                                   <button type="submit" name="btn-selesai" id="btn-selesai" data-id="' . $item['id'] . '" class="btn-selesai-class font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Selesai</button>
+                               </div>';
                         }
                     }
                     elseif ($item['status'] == 'Dibatalkan') {
@@ -157,8 +157,7 @@
         })
     })
 
-    document.getElementById('btn-confirm').addEventListener('click', function () {
-        var id = this.getAttribute('data-id');
+    function updateStatus(status, id) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -173,8 +172,19 @@
         };
         xhr.open('POST', '/konfirmasi-ruangan');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        var data = 'status=Terkonfirmasi&index=' + id;
+        var data = 'status=' + status + '&index=' + id;
         xhr.send(data);
+    }
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('btn-selesai-class')) {
+            var id = event.target.getAttribute('data-id');
+            updateStatus('Selesai', id);
+        }
+
+        if (event.target.classList.contains('btn-confirm-class')) {
+            var id = event.target.getAttribute('data-id');
+            updateStatus('Terkonfirmasi', id);
+        }
     });
 </script>
 </body>

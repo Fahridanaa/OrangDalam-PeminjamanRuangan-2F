@@ -98,10 +98,10 @@ $isActive = function ($path) {
                 <li class="flex items-center justify-center">
                     <?php
                     if ($_SESSION['user']['profile'] == null) {
-                        $profile = "/img/no-profile.jpg";
+                        $profile = "data/profile/no-profile.jpg";
                     }
                     else {
-                        $profile = "/img/user-picture.png";
+                        $profile = "data/profile/" . $_SESSION['user']['profile'];
                     }
                     ?>
                     <img src="<?php echo $profile;?>" class="rounded-full w-10 h-10 my-2 xl:my-4">

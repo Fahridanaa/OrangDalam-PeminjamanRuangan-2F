@@ -139,4 +139,19 @@ class Jadwal
         $this->db->bind(":kode_kelas", $kode_kelas);
         return $this->db->single();
     }
+
+    public function update($data)
+    {
+        $this->db->query("UPDATE jadwal SET kode_ruang = :ruang,
+                  id_hari = :hari,
+                  mulai = :mulai,
+                  selesai = :selesai
+            WHERE kode = :jadwal");
+        $this->db->bind(":ruang", $data['ruang']);
+        $this->db->bind(":hari", $data['hari']);
+        $this->db->bind(":mulai", $data['mulai']);
+        $this->db->bind(":selesai", $data['selesai']);
+        $this->db->bind(":jadwal", $data['jadwal']);
+        $this->db->execute();
+    }
 }
