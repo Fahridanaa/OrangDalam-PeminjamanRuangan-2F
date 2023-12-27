@@ -14,8 +14,7 @@ function renderDetailMatkulModal(): string
             <div class="animate-show-modal flex flex-col px-24 py-12 mx-auto bg-white border border-black rounded-xl shadow-[0_4px_4px_0px_#00000025] z-20 opacity-0 -translate-y-5"
                  id="detailMatkul">
                 <div>
-                    <h1 class="modal-content font-semibold text-center text-2xl mb-8 mx-auto">Detail Booking
-                        Ruangan</h1>
+                    <h1 class="modal-content font-semibold text-center text-2xl mb-8 mx-auto">Detail Request</h1>
                     <div class="grid grid-cols-2 gap-x-8">
                         <div class="flex flex-col">
                             <span class="font-bold text-xl">Lantai</span>

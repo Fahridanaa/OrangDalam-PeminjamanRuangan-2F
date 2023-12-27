@@ -171,9 +171,8 @@ class Peminjaman
             INNER JOIN jadwal ON request.jadwal_kelas = jadwal.kode
             INNER JOIN ruang ON request.ruang = ruang.kode
             INNER JOIN jp ON request.mulai = jp.kode
-            INNER JOIN jp ON request.selesai = jp.kode
             INNER JOIN dosen ON jadwal.nidn_dosen = dosen.nidn
-            INNER JOIN mahasiswa ON jadwal.kode_kelas = mahasiswa.kode_kelas AND mahasiswa.ketua_kelas IS NULL
+            INNER JOIN mahasiswa ON jadwal.kode_kelas = mahasiswa.kode_kelas AND mahasiswa.ketua IS NULL
             INNER JOIN kelas ON jadwal.kode_kelas = kelas.kode
             INNER JOIN matkul ON jadwal.kode_matkul = matkul.kode
             WHERE request.id = :id";
