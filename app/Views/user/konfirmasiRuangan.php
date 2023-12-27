@@ -5,18 +5,18 @@
     <?php include __DIR__ . '/../shared/head.php'; ?>
 </head>
 <body>
-<div id="Konfirmasi" class="h-screen flex flex-row">
+<div id="Konfirmasi" class="flex flex-row h-screen">
     <?php
     include 'sidebar.php';
     use OrangDalam\PeminjamanRuangan\Controllers\User\RequestController;
     $req = new RequestController();
     ?>
-    <div id="Konfirmasi-content" class="h-screen w-screen py-20 px-8 flex flex-col gap-12 ml-32">
+    <div id="Konfirmasi-content" class="flex flex-col w-screen h-screen gap-12 px-8 py-20 ml-32">
         <div id="header">
-            <h1 class="text-4xl font-semibold mb-6">Konfirmasi Ruangan Mata Kuliah</h1>
+            <h1 class="mb-6 text-4xl font-semibold">Konfirmasi Ruangan Mata Kuliah</h1>
             <hr class="border border-black">
         </div>
-        <div class="flex-auto flex flex-col gap-3 overflow-y-auto">
+        <div class="flex flex-col flex-auto gap-3 overflow-y-auto">
             <?php
             if ($_SESSION['level'] == 'Dosen') {
                 $data = $_SESSION['user']['nidn'];
@@ -37,7 +37,7 @@
                     if ($item['status'] == 'Perlu Konfirmasi') {
                         $color = 'warn';
                         if ($item['menerima'] == $data) {
-                            $btn = '<div class="items-center flex gap-5">
+                            $btn = '<div class="flex items-center gap-5">
                                     <button id="cek" data-id="' . $item['id'] . '" class="tolak-konfirmasi-matkul-button font-bold text-sm px-6 py-2 bg-danger-color rounded-3xl text-[#ffffff] hover:bg-[#A52F15]">Tolak Perubahan</button>
                                     <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Konfirmasi</button>
                                 </div>';
@@ -45,19 +45,24 @@
                     }
                     elseif ($item['status'] == 'Terkonfirmasi') {
                         $color = 'select';
+                        if ($item['menerima'] == $data) {
+                            $btn = '<div class="flex items-center gap-5">
+                                    <button type="submit" name="btn-confirm" id="btn-confirm" data-id="' . $item['id'] . '" class="font-bold text-sm px-10 py-2 bg-select-color rounded-3xl text-neutral-color hover:bg-[#27BD63]">Selesai</button>
+                                </div>';
+                        }
                     }
                     elseif ($item['status'] == 'Dibatalkan') {
                         $color = 'danger';
                     }
 
                     echo '<div class="flex flex-col border-2 border-[#7B7777] items-start p-5 rounded-xl gap-4 shadow-[0_4px_4px_0px_#00000025]">
-                        <div class="flex w-full justify-between">
-                            <span class="text-neutral-color px-3 py-1 bg-' . $color . '-color rounded-xl">'. $item['status'] . '</span>
+                        <div class="flex justify-between w-full">
+                            <span class="px-3 py-1 text-neutral-color bg-' . $color . '-color rounded-xl">'. $item['status'] . '</span>
                         </div>
-                        <div class="flex w-full justify-between">
+                        <div class="flex justify-between w-full">
                         <div class="flex flex-col gap-1">
-                            <span class="font-bold text-3xl">' . $item['matkul'] . '</span>
-                            <span class="font-normal text-xl">' . $item['ruang'] . '</span>
+                            <span class="text-3xl font-bold">' . $item['matkul'] . '</span>
+                            <span class="text-xl font-normal">' . $item['ruang'] . '</span>
                         </div>'
                         . $btn .
                       '</div>
@@ -103,7 +108,6 @@
                 .then(response => response.json())
                 .then(item => {
                     const data = item[0];
-                    console.log(data);
                     document.getElementById('lantai-matkul').textContent = data.lantai;
                     document.getElementById('ruang-matkul').textContent = data.ruang;
                     document.getElementById('keterangan-matkul').textContent = data.keterangan;
