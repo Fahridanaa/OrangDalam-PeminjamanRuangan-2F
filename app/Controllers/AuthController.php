@@ -46,6 +46,8 @@ class AuthController extends Controller
                 }
                 elseif ($_SESSION['level'] == 'Dosen') {
                     $_SESSION['user'] = $this->authModel->getProfileDsn($data['id']);
+                } else {
+                    $_SESSION['user'] = $this->authModel->getProfileAdmin($data['id']);
                 }
                 header('Location: /dashboard');
 
