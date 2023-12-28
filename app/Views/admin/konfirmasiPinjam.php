@@ -71,7 +71,9 @@
                             }
 
                             // Cek apakah kolom [File Surat Peminjaman] memiliki value
-                            $filePeminjaman = $data[7]; // Kolom [File Surat Peminjaman] berada pada indeks 5
+                            $filePeminjaman = $data[7];
+                            // $_SESSION['nim'] = null;
+                            // $_SESSION['nidn'] = null; // Kolom [File Surat Peminjaman] berada pada indeks 5
                             // $_SESSION['data-id'] = $data[6];
                                 
                             // Cek apakah request sudah disetujui (button Terima ditekan)

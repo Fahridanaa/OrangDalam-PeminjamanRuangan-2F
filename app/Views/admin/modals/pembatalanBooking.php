@@ -1,6 +1,4 @@
 <?php 
-    $_SESSION['nim'] = null;
-    $_SESSION['nidn'] = null;
 
     if (isset($data[7])) {
         $_SESSION['nim'] = $data[7];

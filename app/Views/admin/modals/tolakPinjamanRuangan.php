@@ -1,7 +1,6 @@
 <?php 
 // Inisialisasi variabel session dengan nilai default null
-$_SESSION['nim'] = null;
-$_SESSION['nidn'] = null;
+
 
 // Setel nilai dari data jika tersedia
 if (isset($data[7])) {

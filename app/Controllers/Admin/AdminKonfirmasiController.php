@@ -74,13 +74,15 @@ class AdminKonfirmasiController extends Controller
             $id = $_POST['index'] ?? $_POST['index1'];
             $ketreangan = $_POST['keterangan'] ?? 'Selamat Booking Anda Telah di Konfirmasi';
 
+            $nomor = $this->peminjaman->getNimNidn($id);
+
             $dataNotif = [
                 'kategori' => 'Acara/Kegiatan',
                 'status' => $status2,
                 'keterangan' => $ketreangan,
-                'tanggal' => date('Y-m-d'),
-                'nim_mhs' => $_SESSION['nim'] ?? null,
-                'nip_dosen' => $_SESSION['nidn'] ?? null
+                'tanggal' => date('Y-m-d H:i:s'),
+                'nim_mhs' => $nomor['nim'] ?? null,
+                'nip_dosen' => $nomor['nidn'] ?? null
             ];
 
             $this->notifikasi->setNotif($dataNotif);

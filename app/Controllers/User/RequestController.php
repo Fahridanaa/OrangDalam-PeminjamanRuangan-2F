@@ -179,7 +179,6 @@ class RequestController extends Controller
             $this->peminjaman->updateRequest($status, $id);
 
             $data = $this->peminjaman->req($id);
-          
             $sts = $status;
             if ($sts == 'Terkonfirmasi') {
                 $sts = 'Telah Dikonfirmasi';
@@ -188,7 +187,7 @@ class RequestController extends Controller
                 'kategori' => 'Pemindahan Jadwal',
                 'status' => $sts,
                 'keterangan' => $keterangan,
-                'tanggal' => date('Y-m-d'),
+                'tanggal' => date('Y-m-d H:i:s'),
                 'nim_mhs' => ($_SESSION['level'] == 'Dosen') ? $data['meminta'] : null,
                 'nip_dosen' => ($_SESSION['level'] == 'Mahasiswa') ?$data['meminta'] : null
             ];
@@ -205,6 +204,7 @@ class RequestController extends Controller
                     'selesai' => $data['selesai'],
                     'jadwal' => $data['jadwal_kelas']
                 ];
+        
                 $this->jadwal->update($value);
             }
             elseif ($data['status'] == 'Selesai') {
@@ -217,6 +217,8 @@ class RequestController extends Controller
                 ];
                 $this->jadwal->update($value);
             }
+
+
         }
         header('Location: /konfirmasi-ruangan');
     }
