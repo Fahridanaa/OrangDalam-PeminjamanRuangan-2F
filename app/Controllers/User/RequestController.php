@@ -187,7 +187,7 @@ class RequestController extends Controller
                 'kategori' => 'Pemindahan Jadwal',
                 'status' => $sts,
                 'keterangan' => $keterangan,
-                'tanggal' => date('Y-m-d'),
+                'tanggal' => date('Y-m-d H:i:s'),
                 'nim_mhs' => ($_SESSION['level'] == 'Dosen') ? $data['meminta'] : null,
                 'nip_dosen' => ($_SESSION['level'] == 'Mahasiswa') ?$data['meminta'] : null
             ];

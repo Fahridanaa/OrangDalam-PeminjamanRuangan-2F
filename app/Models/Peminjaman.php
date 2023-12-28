@@ -208,4 +208,10 @@ class Peminjaman
         $this->db->bind(":id", $id);
         return $this->db->single();
     }
+
+    public function getNimNidn($id){
+        $this->db->query("SELECT nim_mhs AS nim, nidn_dosen AS nidn FROM peminjaman WHERE id = :id");
+        $this->db->bind(":id", $id);
+        return $this->db->single();
+    }
 }

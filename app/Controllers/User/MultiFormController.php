@@ -346,7 +346,7 @@ class MultiFormController extends Controller
             'kategori' => $kategori,
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['acara-keterangan'],
-            'tanggal' => date('Y-m-d'),
+            'tanggal' => date('Y-m-d H:i:s'),
             'nim_mhs' => $_SESSION['user']['nim'] ?? null,
             'nip_dosen' => $_SESSION['user']['nidn'] ?? null
         ];
@@ -413,7 +413,7 @@ class MultiFormController extends Controller
             'kategori' => 'Pemindahan Jadwal',
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
-            'tanggal' => date('Y-m-d'),
+            'tanggal' => date('Y-m-d H:i:s'),
             'nim_mhs' => ($_SESSION['level'] == 'Dosen') ? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'] : null,
             'nip_dosen' => ($_SESSION['level'] == 'Mahasiswa') ? $_SESSION['formPinjam']['dosen-pengampu']['nidn'] : null
         ];
