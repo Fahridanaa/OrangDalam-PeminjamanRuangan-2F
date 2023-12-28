@@ -7,6 +7,7 @@ use OrangDalam\PeminjamanRuangan\Core\Controller;
 use OrangDalam\PeminjamanRuangan\Models\DosenPengampu;
 use OrangDalam\PeminjamanRuangan\Models\Jadwal;
 use OrangDalam\PeminjamanRuangan\Models\Matkul;
+use OrangDalam\PeminjamanRuangan\Models\Notifikasi;
 use OrangDalam\PeminjamanRuangan\Models\Peminjaman;
 use OrangDalam\PeminjamanRuangan\Models\Ruang;
 
@@ -17,6 +18,7 @@ class RequestController extends Controller
     private Jadwal $jadwal;
     private Ruang $ruang;
     private Peminjaman $peminjaman;
+    private Notifikasi $notifikasi;
 
     public function __construct()
     {
@@ -27,6 +29,7 @@ class RequestController extends Controller
         $this->jadwal = new Jadwal();
         $this->ruang = new Ruang();
         $this->peminjaman = new Peminjaman();
+        $this->notifikasi = new Notifikasi();
     }
 
     public function ShowRequestPage(): void
@@ -176,6 +179,22 @@ class RequestController extends Controller
             $this->peminjaman->updateRequest($status, $id);
 
             $data = $this->peminjaman->req($id);
+            $sts = $status;
+            if ($sts == 'Terkonfirmasi') {
+                $sts = 'Telah Dikonfirmasi';
+            }
+            $dataNotif = [
+                'kategori' => 'Pemindahan Jadwal',
+                'status' => $sts,
+                'keterangan' => $keterangan,
+                'tanggal' => date('Y-m-d'),
+                'nim_mhs' => ($_SESSION['level'] == 'Dosen') ? $data['meminta'] : null,
+                'nip_dosen' => ($_SESSION['level'] == 'Mahasiswa') ?$data['meminta'] : null
+            ];
+    
+            $this->notifikasi->setNotif($dataNotif);
+
+            $data = $this->peminjaman->req($id);
             if ($data['status'] == 'Terkonfirmasi') {
                 $value = [
                     'ruang' => $data['ruang'],
@@ -184,6 +203,7 @@ class RequestController extends Controller
                     'selesai' => $data['selesai'],
                     'jadwal' => $data['jadwal_kelas']
                 ];
+        
                 $this->jadwal->update($value);
             }
             elseif ($data['status'] == 'Selesai') {
@@ -196,6 +216,8 @@ class RequestController extends Controller
                 ];
                 $this->jadwal->update($value);
             }
+
+
         }
         header('Location: /konfirmasi-ruangan');
     }
