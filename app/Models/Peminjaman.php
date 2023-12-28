@@ -204,7 +204,7 @@ class Peminjaman
 
     public function req($id)
     {
-        $this->db->query("SELECT status, jadwal_kelas, ruang, mulai, selesai, DAYOFWEEK(tanggal) - 1 AS hari, ruang_lama, mulai_lama, selesai_lama, hari_lama FROM request WHERE id = :id");
+        $this->db->query("SELECT meminta, menerima, status, jadwal_kelas, ruang, mulai, selesai, DAYOFWEEK(tanggal) - 1 AS hari, ruang_lama, mulai_lama, selesai_lama, hari_lama FROM request WHERE id = :id");
         $this->db->bind(":id", $id);
         return $this->db->single();
     }

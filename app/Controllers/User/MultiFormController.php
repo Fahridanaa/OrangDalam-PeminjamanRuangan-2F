@@ -408,13 +408,14 @@ class MultiFormController extends Controller
         ];
 
         // set notifikasi
+        
         $dataNotif = [
             'kategori' => 'Pemindahan Jadwal',
             'status' => 'Menunggu Konfirmasi',
             'keterangan' => $_SESSION['formPinjam']['matkul-keterangan'],
             'tanggal' => date('Y-m-d'),
-            'nim_mhs' => $_SESSION['user']['nim'] ?? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'],
-            'nip_dosen' => $_SESSION['formPinjam']['dosen-pengampu']['nidn'] ?? $_SESSION['user']['nidn']
+            'nim_mhs' => ($_SESSION['level'] == 'Dosen') ? $this->jadwal->getKetuaKelas($_SESSION['formPinjam']['kelas'])['nim'] : null,
+            'nip_dosen' => ($_SESSION['level'] == 'Mahasiswa') ? $_SESSION['formPinjam']['dosen-pengampu']['nidn'] : null
         ];
 
         $this->notifikasi->setNotif($dataNotif);

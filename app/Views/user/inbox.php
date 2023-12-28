@@ -16,30 +16,56 @@
             <?php
             if (!empty($data['notifikasi'])) {
                 foreach ($data['notifikasi'] as $notif) {
-                    if ($notif['status'] != 'Menunggu Konfirmasi') {
+                    if ($notif['kategori'] == 'Acara/Kegiatan') {
+                        if ($notif['status'] != 'Menunggu Konfirmasi') {
+                            echo '
+                                    <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
+                                        <div class="flex flex-auto justify-between">
+                                            <div class="flex flex-col gap-1">
+                                                <span class="font-bold text-3xl">' . $notif['kategori'] . '</span>
+                                                <span class="font-normal text-xl text-' . (($notif['status'] == 'Telah Dikonfirmasi') ? 'select' : 'danger') . '-color">' . $notif['status'] . '</span>
+                                                <span class="hidden text-sm text-noFocus-color mt-3">' . $notif['keterangan'] . '</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold">' . $notif['tanggal'] . '</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 mr-4">
+                                            <button class="inbox-btn transform transition ease-in-out duration-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor" class="w-10 h-10">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>        
+                                ';
+                        }
+                    } else {
                         echo '
-                                <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
-                                    <div class="flex flex-auto justify-between">
-                                        <div class="flex flex-col gap-1">
-                                            <span class="font-bold text-3xl">' . $notif['kategori'] . '</span>
-                                            <span class="font-normal text-xl text-' . (($notif['status'] == 'Telah Dikonfirmasi') ? 'select' : 'danger') . '-color">' . $notif['status'] . '</span>
-                                            <span class="hidden text-sm text-noFocus-color mt-3">' . $notif['keterangan'] . '</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-semibold">' . $notif['tanggal'] . '</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 mr-4">
-                                        <button class="inbox-btn transform transition ease-in-out duration-300">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor" class="w-10 h-10">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>        
-                            ';
+                        <div class="flex border-2 border-[#7B7777] items-start p-5 rounded-xl gap-3 shadow-[0_4px_4px_0px_#00000025]">
+                            <div class="flex flex-auto justify-between">
+                                <div class="flex flex-col gap-1">
+                                    <span class="font-bold text-3xl">' . $notif['kategori'] . '</span>
+                                    <span class="font-normal text-xl text-' . (($notif['status'] == 'Telah Dikonfirmasi') ? 'select' : 'danger') . '-color">' . $notif['status'] . '</span>
+                                    <span class="hidden text-sm text-noFocus-color mt-3">' . $notif['keterangan'] . '</span>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">' . $notif['tanggal'] . '</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 mr-4">
+                                <button class="inbox-btn transform transition ease-in-out duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor" class="w-10 h-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>        
+                    ';
                     }
                 }
             } else {
