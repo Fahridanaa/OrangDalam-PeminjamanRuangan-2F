@@ -9,6 +9,9 @@ Projek Akhir PBO - Orang Dalam Peminjaman Ruangan 2F
 4. 2241720030 - Muhammad Fakhruddin Arif [fakhruddinarif](https://github.com/fakhruddinarif)
 5. 2241720029 - Shasia Sasa Salsabyla [sbylash](https://github.com/sbylash)
 
+### Dokumentasi
+[Notion](https://good-begonia-203.notion.site/Orang-Dalam-c0fb0edc723e43b78320d31bf1e6bcb2)
+
 ### Prasyarat
 
 Sebelum menggunakan projek ini, diperlukanya:
