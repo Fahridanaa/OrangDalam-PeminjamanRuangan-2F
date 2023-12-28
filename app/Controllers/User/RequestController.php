@@ -179,6 +179,7 @@ class RequestController extends Controller
             $this->peminjaman->updateRequest($status, $id);
 
             $data = $this->peminjaman->req($id);
+          
             $sts = $status;
             if ($sts == 'Terkonfirmasi') {
                 $sts = 'Telah Dikonfirmasi';
@@ -195,6 +196,7 @@ class RequestController extends Controller
             $this->notifikasi->setNotif($dataNotif);
 
             $data = $this->peminjaman->req($id);
+
             if ($data['status'] == 'Terkonfirmasi') {
                 $value = [
                     'ruang' => $data['ruang'],
@@ -203,7 +205,6 @@ class RequestController extends Controller
                     'selesai' => $data['selesai'],
                     'jadwal' => $data['jadwal_kelas']
                 ];
-        
                 $this->jadwal->update($value);
             }
             elseif ($data['status'] == 'Selesai') {
@@ -216,8 +217,6 @@ class RequestController extends Controller
                 ];
                 $this->jadwal->update($value);
             }
-
-
         }
         header('Location: /konfirmasi-ruangan');
     }
