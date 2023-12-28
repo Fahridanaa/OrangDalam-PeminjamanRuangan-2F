@@ -38,7 +38,7 @@ class Controller
         $file = $_GET['file'];
         $path = $_GET['path'];
 
-        $folderPath = '../data/uploads/acara/' . $path . '/';
+        $folderPath = 'data/uploads/acara/' . $path . '/';
         $fileName = $file;
         $filePath = $folderPath . $fileName;
 

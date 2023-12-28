@@ -195,6 +195,7 @@ class RequestController extends Controller
             $this->notifikasi->setNotif($dataNotif);
 
             $data = $this->peminjaman->req($id);
+
             if ($data['status'] == 'Terkonfirmasi') {
                 $value = [
                     'ruang' => $data['ruang'],

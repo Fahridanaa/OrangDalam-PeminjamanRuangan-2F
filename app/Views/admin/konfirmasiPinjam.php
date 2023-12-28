@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    /* Tambahkan gaya CSS berikut pada bagian head atau dalam file CSS terpisah */
+    tbody {
+        min-height: 200px; /* Sesuaikan dengan tinggi maksimum yang diinginkan */
+        max-height: 80vh;
+        overflow-y: auto;
+        display: block;
+    }
+
+    /* Optional: Gaya tambahan untuk menetapkan lebar header agar sesuai dengan konten dalam tabel */
+    thead {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+</style>
+
 <head>
     <?php
     include __DIR__ . '/../shared/head.php';
@@ -11,7 +28,7 @@
 <body class="overflow-hidden font-jakarta">
 <div class="flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div class="min-h-screen w-full">
+    <div class="w-full min-h-screen">
         <section class="flex flex-col items-stretch mt-4">
             <div class="flex pb-3 mx-8 my-8 border-b-2 border-black flex-nowrap">
                 <h4 class="pl-2 text-3xl font-bold font-jakarta">
@@ -22,7 +39,7 @@
             <div id="default-tab-content">
                 <div class="relative justify-center px-8 overflow-x-auto" id="semua" role="tabpanel"
                      aria-labelledby="semua-tab">
-                    <table class="w-full text-base rtl:text-right font-jakarta">
+                    <table class="w-full overflow-y-auto text-base rtl:text-right font-jakarta">
                         <thead class="text-white bg-gray-600">
                         <tr>
                             <th scope="col" class="px-6 py-3">Peminjam</th>
@@ -44,7 +61,7 @@
                             for ($i = 0; $i < count($data) - 3; $i++) {
                                 echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
                             }
-                            echo '<td class="px-6 py-4 flex justify-center">';
+                            echo '<td class="flex justify-center px-6 py-4">';
                             $status = $pinjam->statusKonfirmasi($data[6]);
                             if ($status['status'] == 'Telah Dikonfirmasi') {
                                 $tombolTerimaDitekan = true; // Ganti dengan kondisi sesuai kebutuhan
