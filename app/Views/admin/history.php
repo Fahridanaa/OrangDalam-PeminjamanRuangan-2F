@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    /* Tambahkan gaya CSS berikut pada bagian head atau dalam file CSS terpisah */
+    tbody {
+        min-height: 200px; /* Sesuaikan dengan tinggi maksimum yang diinginkan */
+        max-height: 80vh;
+        overflow-y: auto;
+        display: block;
+    }
+
+    /* Optional: Gaya tambahan untuk menetapkan lebar header agar sesuai dengan konten dalam tabel */
+    thead {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+</style>
+
 <head>
     <?php
     include __DIR__ . '/../shared/head.php';
@@ -31,7 +48,7 @@ if (!isset($_GET['tab'])) {
 <body class="overflow-hidden font-jakarta">
 <div class="flex flex-row">
     <?php include 'sidebar.php'; ?>
-    <div class="min-h-screen w-full">
+    <div class="w-full min-h-screen">
         <section class="flex flex-col items-stretch mt-4">
             <div class="flex pb-1 mx-8 mt-10 mb-2 flex-nowrap">
                 <h4 class="pl-2 text-3xl font-bold font-jakarta">
@@ -63,7 +80,7 @@ if (!isset($_GET['tab'])) {
             <div id="default-tab-content" class="px-10">
                 <div class="tab-content" id="semua" role="tabpanel" aria-labelledby="semua-tab"
                      style="display: <?php echo $tabSemua ? 'block' : 'none'; ?>">
-                    <table class="w-full text-base rtl:text-right font-jakarta">
+                    <table class="w-full overflow-y-auto text-base rtl:text-right font-jakarta">
                         <!-- Isikan kode untuk menampilkan semua riwayat data peminjaman -->
                         <thead class="text-white bg-gray-600">
                         <tr>
@@ -77,16 +94,16 @@ if (!isset($_GET['tab'])) {
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        // Loop melalui data peminjaman semua
-                        foreach ($peminjamanSemua as $data) {
-                            echo "<tr>";
-                            for ($i = 0; $i < count($data); $i++) {
-                                echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
-                            }
-                            echo "</tr>";
-                        }
-                        ?>
+                            <?php
+                                // Loop melalui data peminjaman semua
+                                foreach ($peminjamanSemua as $data) {
+                                    echo "<tr>";
+                                    for ($i = 0; $i < count($data); $i++) {
+                                        echo "<td class=\"px-6 py-4 text-center\">$data[$i]</td>";
+                                    }
+                                    echo "</tr>";   
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
