@@ -2,6 +2,13 @@
 
 Projek Akhir PBO - Orang Dalam Peminjaman Ruangan 2F
 
+### Anggota
+1. 2241720158 - Fahridana Ahmad Rayyansyah [Fahridanaa](https://github.com/Fahridanaa)
+2. 2241720014 - Abiyyu Fiqlal Sholeh Wicaksono [Fikuraru72](https://github.com/Fikuraru72)
+3. 2241720258 - Haidar Aly [Haidarly2](https://github.com/Haidarly2)
+4. 2241720030 - Muhammad Fakhruddin Arif [fakhruddinarif](https://github.com/fakhruddinarif)
+5. 2241720029 - Shasia Sasa Salsabyla [sbylash](https://github.com/sbylash)
+
 ### Prasyarat
 
 Sebelum menggunakan projek ini, diperlukanya:
